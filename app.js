@@ -944,27 +944,57 @@
       stageLabel = "На техотделе (без исп.)";
     } else if (task.status_code === "opened") {
       stageLabel = "Ожидание реакции";
+    } else if (task.status_code === "work") {
+      stageLabel = "В очереди у исп.";
     } else if (task.status_code === "resend") {
-      stageLabel = "Делегирована";
+      stageLabel = "Ожидание приёма (Делегирована)";
     } else if (task.status_code === "delayed") {
       stageLabel = "В отложенных";
+    } else if (task.status_code === "restart") {
+      stageLabel = "Ожидание доработки";
+    } else if (task.status_code === "working") {
+      stageLabel = task.timer_paused ? "В работе (на паузе)" : "В активной работе";
     }
 
-    var baseWorkSec = parseInt(task.tracked_work_seconds, 10) || 0;
+    var byEmp = {};
+    if (task.work_by_employee && typeof task.work_by_employee === "object") {
+      Object.keys(task.work_by_employee).forEach(function (k) {
+        byEmp[String(k)] = parseInt(task.work_by_employee[k], 10) || 0;
+      });
+    }
+    var savedTotalSec = parseInt(task.tracked_work_seconds, 10) || 0;
+    if (savedTotalSec > 0 && Object.keys(byEmp).length === 0) {
+      var initOwner = String(task.work_owner_id || task.assignee_id || currentEmp.id);
+      byEmp[initOwner] = savedTotalSec;
+    }
+
     var isActiveWorkStatus = task.status_code === "working";
     var isPaused = isActiveWorkStatus && Boolean(task.timer_paused);
     var isTicking = isActiveWorkStatus && !isPaused;
+    var activeOwnerId = String(task.work_owner_id || task.assignee_id || currentEmp.id);
+
     if (isTicking) {
       var startMs = parseTaskDateMs(task.work_started_at || task.updated_iso || task.created_iso || task.created_at);
       if (startMs > 0 && nowMs > startMs) {
-        baseWorkSec += Math.floor((nowMs - startMs) / 1000);
+        var liveDelta = Math.floor((nowMs - startMs) / 1000);
+        byEmp[activeOwnerId] = (byEmp[activeOwnerId] || 0) + liveDelta;
       }
     }
+
+    var totalWorkSec = 0;
+    Object.keys(byEmp).forEach(function (k) {
+      totalWorkSec += byEmp[k] || 0;
+    });
+    var currentAssigneeId = String(task.assignee_id || currentEmp.id);
+    var ownWorkSec = byEmp[currentAssigneeId] || 0;
 
     return {
       sysSec: sysSec,
       stageLabel: stageLabel,
-      workSec: baseWorkSec,
+      workSec: isTicking || isPaused ? ownWorkSec : totalWorkSec,
+      ownWorkSec: ownWorkSec,
+      totalWorkSec: totalWorkSec,
+      byEmp: byEmp,
       isTicking: isTicking,
       isPaused: isPaused,
       spentMins: parseInt(task.spent_minutes, 10) || 0
@@ -1486,12 +1516,12 @@
     modalBodyEl.appendChild(list);
   }
 
-  // --- Модальное окно «⏱ История таймера и этапов» (вместо бывшей кнопки «Открыть в боте») ---
+  // --- Модальное окно «⏱ История таймера и этапов» (разбивка времени по каждому исполнителю при передачах) ---
   function openTaskTimerHistoryModal(task) {
     openActionModal("⏱ Таймер и этапы · #" + task.id);
     var tStats = getTaskTimingStats(task);
-    var waitSec = Math.max(0, tStats.sysSec - tStats.workSec);
-    var timerMins = Math.round(tStats.workSec / 60);
+    var waitSec = Math.max(0, tStats.sysSec - tStats.totalWorkSec);
+    var timerMins = Math.round(tStats.totalWorkSec / 60);
     var diffMins = (tStats.spentMins || 0) - timerMins;
     var diffStr =
       diffMins === 0
@@ -1503,9 +1533,14 @@
     var summaryCard = el("div", "glass-card");
     var rows = [
       ["В системе (с момента создания)", formatDurationSec(tStats.sysSec, false)],
-      ["Ожидание / на техотделе", formatDurationSec(waitSec, false)],
-      ["Реальная работа по таймеру", formatDurationSec(tStats.workSec, true) + (tStats.isTicking ? " (идёт ⏱)" : "")],
-      ["Списано исполнителем", formatMinutes(tStats.spentMins) + " (" + diffStr + ")"],
+      ["Ожидание / без активного таймера", formatDurationSec(waitSec, false)],
+      [
+        "Личный таймер (" + (task.assignee_name || currentEmp.short) + ")",
+        formatDurationSec(tStats.ownWorkSec, true) +
+          (tStats.isTicking ? " (идёт ⏱)" : tStats.isPaused ? " (пауза ⏸)" : "")
+      ],
+      ["Общий таймер всех исполнителей", formatDurationSec(tStats.totalWorkSec, true)],
+      ["Списано суммарно", formatMinutes(tStats.spentMins) + " (" + diffStr + ")"],
       ["Текущий этап", tStats.stageLabel + " · «" + (task.status_name || "Открыта") + "»"]
     ];
     rows.forEach(function (pair) {
@@ -1515,6 +1550,65 @@
       summaryCard.appendChild(r);
     });
     modalBodyEl.appendChild(summaryCard);
+
+    // Секция: Разделение таймера по исполнителям (при передаче заявки)
+    var empTitle = el("div", "form-label", "👥 Разделение времени по исполнителям:");
+    modalBodyEl.appendChild(empTitle);
+
+    var empBox = el("div", "glass-card");
+    var chain = Array.isArray(task.delegation_chain) ? task.delegation_chain : [];
+    if (chain.length > 0) {
+      var chainParts = chain.map(function (c) {
+        return c.from_short + ": " + formatDurationSec(c.from_sec, true);
+      });
+      var curAss = getEmployeeById(task.assignee_id) || currentEmp;
+      chainParts.push(
+        curAss.short +
+          ": " +
+          formatDurationSec(tStats.ownWorkSec, true) +
+          (tStats.isTicking ? " ⏱" : "")
+      );
+      var chainBanner = el("div", "task-desc-body", "🔀 Цепочка передач: " + chainParts.join(" → передал → "));
+      chainBanner.style.marginBottom = "8px";
+      chainBanner.style.fontWeight = "600";
+      empBox.appendChild(chainBanner);
+    }
+
+    var empIdsShown = {};
+    Object.keys(tStats.byEmp || {}).forEach(function (eid) {
+      empIdsShown[String(eid)] = true;
+    });
+    if (task.assignee_id) {
+      empIdsShown[String(task.assignee_id)] = true;
+    }
+    var spentMap = task.spent_by_employee || {};
+    Object.keys(empIdsShown).forEach(function (eid) {
+      var empObj = getEmployeeById(eid);
+      var eName = empObj ? empObj.short : "ID " + eid;
+      var secVal = (tStats.byEmp && tStats.byEmp[eid]) || 0;
+      var spentVal = parseInt(spentMap[eid], 10) || 0;
+      var isCurrentOwner = String(task.assignee_id) === String(eid);
+      var stateTag = isCurrentOwner
+        ? tStats.isTicking
+          ? " · активен ⏱"
+          : tStats.isPaused
+          ? " · на паузе ⏸"
+          : " · текущий исп."
+        : " · передал дальше";
+      var er = el("div", "stat-row");
+      er.appendChild(el("span", "", "👤 " + eName + stateTag));
+      er.appendChild(
+        el(
+          "strong",
+          "",
+          "Таймер: " +
+            formatDurationSec(secVal, true) +
+            (spentVal > 0 ? " · Списано: " + formatMinutes(spentVal) : "")
+        )
+      );
+      empBox.appendChild(er);
+    });
+    modalBodyEl.appendChild(empBox);
 
     var histTitle = el("div", "form-label", "Хронология этапов заявки:");
     modalBodyEl.appendChild(histTitle);
@@ -1527,7 +1621,7 @@
       var emp = getEmployeeById(task.assignee_id);
       baseSteps.push({
         time: task.updated_at || task.created_at || "Назначена",
-        label: "👤 Назначен исполнитель: " + (emp ? emp.short : "ID " + task.assignee_id)
+        label: "👤 Исполнитель: " + (emp ? emp.short : "ID " + task.assignee_id)
       });
     }
     var customHist = Array.isArray(task.status_history) ? task.status_history : [];
@@ -1591,6 +1685,12 @@
       var startMs = parseTaskDateMs(task.work_started_at || task.updated_iso);
       if (startMs > 0) {
         var deltaSec = Math.max(0, Math.floor((Date.now() - startMs) / 1000));
+        var ownerId = String(task.work_owner_id || task.assignee_id || currentEmp.id);
+        task.work_by_employee = task.work_by_employee && typeof task.work_by_employee === "object" ? task.work_by_employee : {};
+        if ((parseInt(task.tracked_work_seconds, 10) || 0) > 0 && Object.keys(task.work_by_employee).length === 0) {
+          task.work_by_employee[ownerId] = parseInt(task.tracked_work_seconds, 10) || 0;
+        }
+        task.work_by_employee[ownerId] = (parseInt(task.work_by_employee[ownerId], 10) || 0) + deltaSec;
         task.tracked_work_seconds = (parseInt(task.tracked_work_seconds, 10) || 0) + deltaSec;
       }
       task.work_started_at = "";
@@ -1600,25 +1700,27 @@
   function toggleTaskPauseResume(task) {
     hapticImpact("medium");
     var st = getTaskTimingStats(task);
+    var ownerEmp = getEmployeeById(task.assignee_id) || currentEmp;
     task.status_history = Array.isArray(task.status_history) ? task.status_history : [];
     if (st.isTicking) {
       stopTaskWorkTimerIfRunning(task);
       task.timer_paused = true;
       task.status_history.push({
         time: new Date().toTimeString().slice(0, 8),
-        label: "⏸ Таймер поставлен на паузу (" + formatDurationSec(st.workSec, true) + ")"
+        label: "⏸ Пауза таймера (" + ownerEmp.short + ": " + formatDurationSec(st.ownWorkSec, true) + ")"
       });
       showToast("⏸ Таймер по заявке #" + task.id + " на паузе");
     } else {
       task.timer_paused = false;
+      task.work_owner_id = String(task.assignee_id || currentEmp.id);
       task.work_started_at = new Date().toISOString();
       task.status_code = "working";
       task.status_name = "Выполняю";
       task.status_history.push({
         time: new Date().toTimeString().slice(0, 8),
-        label: "▶ Таймер продолжен (" + task.status_name + ")"
+        label: "▶ Старт / продолжение таймера (" + ownerEmp.short + ")"
       });
-      showToast("▶ Таймер по заявке #" + task.id + " продолжен");
+      showToast("▶ Таймер по заявке #" + task.id + " запущен");
     }
     saveState();
     renderTasksView();
@@ -1626,15 +1728,34 @@
   }
 
   function applyQuickStatus(task, code, label) {
+    var ownerEmp = getEmployeeById(task.assignee_id) || currentEmp;
+    task.status_history = Array.isArray(task.status_history) ? task.status_history : [];
     if (code === "working") {
       if (task.status_code !== "working" || task.timer_paused || !task.work_started_at) {
         task.work_started_at = new Date().toISOString();
+        task.work_owner_id = String(task.assignee_id || currentEmp.id);
       }
       task.timer_paused = false;
+      task.status_history.push({
+        time: new Date().toTimeString().slice(0, 8),
+        label: "🔧 Статус «Выполняю» — запущен таймер (" + ownerEmp.short + ")"
+      });
     } else {
+      var prevStats = getTaskTimingStats(task);
       stopTaskWorkTimerIfRunning(task);
       task.timer_paused = false;
       task.work_started_at = "";
+      task.status_history.push({
+        time: new Date().toTimeString().slice(0, 8),
+        label:
+          "📌 Статус «" +
+          label +
+          "» — таймер остановлен (" +
+          ownerEmp.short +
+          ": " +
+          formatDurationSec(prevStats.ownWorkSec, true) +
+          ")"
+      });
     }
     task.status_code = code;
     task.status_name = label;
@@ -1648,9 +1769,13 @@
   function closeOneClick15(task) {
     hapticNotify("success");
     stopTaskWorkTimerIfRunning(task);
+    task.timer_paused = false;
     task.status_code = "completed";
     task.status_name = "Решена";
     task.spent_minutes = (parseInt(task.spent_minutes, 10) || 0) + 15;
+    task.spent_by_employee = task.spent_by_employee || {};
+    var myId = String(currentEmp.id);
+    task.spent_by_employee[myId] = (parseInt(task.spent_by_employee[myId], 10) || 0) + 15;
     task.comments = task.comments || [];
     task.comments.push({
       author: currentEmp.short,
@@ -1659,18 +1784,43 @@
     });
     saveState();
     renderTasksView();
+    updateBellBadge();
     showToast("⚡ Заявка #" + task.id + " закрыта (+15 мин)");
   }
 
   function takeTaskToSelf(task) {
     hapticNotify("success");
+    var prevEmp = getEmployeeById(task.assignee_id);
+    var prevStats = getTaskTimingStats(task);
+    stopTaskWorkTimerIfRunning(task);
+    if (prevEmp && String(prevEmp.id) !== String(currentEmp.id)) {
+      var prevSec = (prevStats.byEmp && prevStats.byEmp[String(prevEmp.id)]) || 0;
+      task.delegation_chain = Array.isArray(task.delegation_chain) ? task.delegation_chain : [];
+      task.delegation_chain.push({
+        from_id: String(prevEmp.id),
+        from_short: prevEmp.short,
+        from_sec: prevSec,
+        to_id: String(currentEmp.id),
+        to_short: currentEmp.short,
+        time: new Date().toTimeString().slice(0, 8)
+      });
+    }
     task.assignee_id = String(currentEmp.id);
+    task.assignee_name = currentEmp.short;
+    task.work_owner_id = String(currentEmp.id);
+    task.timer_paused = false;
     task.work_started_at = new Date().toISOString();
     task.status_code = "working";
     task.status_name = "Выполняю";
+    task.status_history = Array.isArray(task.status_history) ? task.status_history : [];
+    task.status_history.push({
+      time: new Date().toTimeString().slice(0, 8),
+      label: "↩️ Забрал в работу: " + currentEmp.short + " (запущен личный таймер)"
+    });
     saveState();
     closeActionModal();
     renderTasksView();
+    updateBellBadge();
     showToast("↩️ Заявка #" + task.id + " переведена на вас (" + currentEmp.short + ")");
   }
 
@@ -1827,8 +1977,8 @@
   function openSpentTimeCalculatorModal(task) {
     openActionModal("Решить и списать время · #" + task.id);
     var tStats = getTaskTimingStats(task);
-    var timerMins = Math.max(1, Math.round(tStats.workSec / 60));
-    var addedMins = tStats.workSec >= 60 ? timerMins : 15;
+    var timerMins = Math.max(1, Math.round(tStats.ownWorkSec / 60));
+    var addedMins = tStats.ownWorkSec >= 60 ? timerMins : 15;
     var billingFlag = task.billing_flag || "none";
 
     var statsCompare = el(
@@ -1836,15 +1986,15 @@
       "task-timer-strip",
       "⏳ В системе: " +
         formatDurationSec(tStats.sysSec, false) +
-        " · ⏱ По таймеру работы: " +
-        formatDurationSec(tStats.workSec, true) +
-        " (" +
-        timerMins +
-        " мин)"
+        " · ⏱ Ваш таймер: " +
+        formatDurationSec(tStats.ownWorkSec, true) +
+        (tStats.totalWorkSec !== tStats.ownWorkSec
+          ? " · Все исп.: " + formatDurationSec(tStats.totalWorkSec, true)
+          : "")
     );
     modalBodyEl.appendChild(statsCompare);
 
-    var display = el("div", "calc-display", "К списанию исполнителем: " + formatMinutes(addedMins));
+    var display = el("div", "calc-display", "К списанию (" + currentEmp.short + "): " + formatMinutes(addedMins));
     modalBodyEl.appendChild(display);
 
     var billingRow = el("div", "segmented-row");
@@ -1884,7 +2034,7 @@
         btn.addEventListener("click", function () {
           hapticImpact("light");
           addedMins = Math.max(0, addedMins + d);
-          display.textContent = "К списанию исполнителем: " + formatMinutes(addedMins);
+          display.textContent = "К списанию (" + currentEmp.short + "): " + formatMinutes(addedMins);
         });
         grid.appendChild(btn);
       });
@@ -1904,9 +2054,13 @@
     btnOk.addEventListener("click", function () {
       hapticNotify("success");
       stopTaskWorkTimerIfRunning(task);
+      task.timer_paused = false;
       task.status_code = "completed";
       task.status_name = "Решена";
       task.spent_minutes = (parseInt(task.spent_minutes, 10) || 0) + addedMins;
+      task.spent_by_employee = task.spent_by_employee || {};
+      var myId = String(currentEmp.id);
+      task.spent_by_employee[myId] = (parseInt(task.spent_by_employee[myId], 10) || 0) + addedMins;
       task.billing_flag = billingFlag;
       var cText = safeText(commentInput.value, 400);
       task.comments = task.comments || [];
@@ -1916,14 +2070,15 @@
         text:
           "Решена (списано: +" +
           formatMinutes(addedMins) +
-          ", по таймеру: " +
-          formatDurationSec(tStats.workSec, false) +
+          ", личный таймер: " +
+          formatDurationSec(tStats.ownWorkSec, true) +
           ")" +
           (cText ? ": " + cText : "")
       });
       saveState();
       closeActionModal();
       renderTasksView();
+      updateBellBadge();
       showToast("Заявка #" + task.id + " решена (+" + formatMinutes(addedMins) + ")");
     });
     modalBodyEl.appendChild(btnOk);
@@ -1947,7 +2102,11 @@
       b.type = "button";
       b.addEventListener("click", function () {
         hapticNotify("success");
+        var prevStats = getTaskTimingStats(task);
+        var prevEmp = getEmployeeById(task.assignee_id) || currentEmp;
         stopTaskWorkTimerIfRunning(task);
+        task.timer_paused = false;
+        task.work_started_at = "";
         task.status_code = "delayed";
         task.status_name = "Отложена";
         task.deadline = sl.deadline;
@@ -1955,17 +2114,33 @@
         task.due_bucket = sl.bucket;
         if (sl.addMins > 0) {
           task.spent_minutes = (parseInt(task.spent_minutes, 10) || 0) + sl.addMins;
+          task.spent_by_employee = task.spent_by_employee || {};
+          task.spent_by_employee[String(prevEmp.id)] =
+            (parseInt(task.spent_by_employee[String(prevEmp.id)], 10) || 0) + sl.addMins;
         }
+        task.status_history = Array.isArray(task.status_history) ? task.status_history : [];
+        task.status_history.push({
+          time: new Date().toTimeString().slice(0, 8),
+          label:
+            "⏳ Отложена (" +
+            sl.deadline +
+            ") · таймер стоп (" +
+            prevEmp.short +
+            ": " +
+            formatDurationSec(prevStats.ownWorkSec, true) +
+            ")"
+        });
         saveState();
         closeActionModal();
         renderTasksView();
+        updateBellBadge();
         showToast("Заявка #" + task.id + " отложена (" + sl.deadline + ")");
       });
       modalBodyEl.appendChild(b);
     });
   }
 
-  // 3. Модальное окно «Передать / Делегировать» (останавливает таймер текущего сотрудника и переводит в статус «Делегирована»)
+  // 3. Модальное окно «Передать / Делегировать» (фиксирует время предыдущего исполнителя, останавливает таймер и переводит в «Делегирована»)
   function openDelegateModal(task) {
     openActionModal("Передать заявку #" + task.id);
     var keepControl = true;
@@ -1988,11 +2163,29 @@
       b.type = "button";
       b.addEventListener("click", function () {
         hapticNotify("success");
+        var prevEmp = getEmployeeById(task.assignee_id) || currentEmp;
+        var prevStats = getTaskTimingStats(task);
+        var prevSec = (prevStats.byEmp && prevStats.byEmp[String(prevEmp.id)]) || prevStats.ownWorkSec || 0;
+
         stopTaskWorkTimerIfRunning(task);
         task.timer_paused = false;
         task.work_started_at = "";
+
+        if (String(prevEmp.id) !== String(emp.id)) {
+          task.delegation_chain = Array.isArray(task.delegation_chain) ? task.delegation_chain : [];
+          task.delegation_chain.push({
+            from_id: String(prevEmp.id),
+            from_short: prevEmp.short,
+            from_sec: prevSec,
+            to_id: String(emp.id),
+            to_short: emp.short,
+            time: new Date().toTimeString().slice(0, 8)
+          });
+        }
+
         task.assignee_id = String(emp.id);
         task.assignee_name = emp.short;
+        task.work_owner_id = String(emp.id);
         task.status_code = "resend";
         task.status_name = "Делегирована";
         task.updated_iso = new Date().toISOString();
@@ -2002,22 +2195,24 @@
             task.control_by.push(String(currentEmp.id));
           }
         }
+        var chainSummary =
+          prevEmp.short + ": " + formatDurationSec(prevSec, true) + " → передал → " + emp.short;
         task.status_history = Array.isArray(task.status_history) ? task.status_history : [];
         task.status_history.push({
           time: new Date().toTimeString().slice(0, 8),
-          label: "📤 Делегирована → " + emp.short + " (таймер остановлен)"
+          label: "📤 " + chainSummary + " (Делегирована, таймер стоп)"
         });
         task.comments = task.comments || [];
         task.comments.push({
           author: currentEmp.short,
           time: new Date().toTimeString().slice(0, 5),
-          text: "Делегирована сотруднику " + emp.short + " (таймер остановлен)"
+          text: "Делегирована: " + chainSummary + " (таймер остановлен)"
         });
         saveState();
         closeActionModal();
         renderTasksView();
         updateBellBadge();
-        showToast("Заявка #" + task.id + " делегирована → " + emp.short + " (таймер стоп)");
+        showToast("📤 " + chainSummary);
       });
       grid.appendChild(b);
     });
@@ -2750,14 +2945,18 @@
     breakdownEl.textContent = "";
     myOwn.forEach(function (t) {
       var ts = getTaskTimingStats(t);
-      var timerMins = Math.max(0, Math.round(ts.execSec / 60));
+      var timerMins = Math.max(0, Math.round(ts.ownWorkSec / 60));
       var r = el("div", "stat-row");
       r.appendChild(el("span", "", "#" + t.id + " · " + t.company_name + " (" + t.status_name + ")"));
       r.appendChild(
         el(
           "strong",
           "",
-          "⏱ Таймер: " + formatMinutes(timerMins) + " · Списано: " + formatMinutes(t.spent_minutes || 0)
+          "⏱ Таймер: " +
+            formatDurationSec(ts.ownWorkSec, true) +
+            (ts.totalWorkSec > ts.ownWorkSec ? " (всего " + formatMinutes(Math.round(ts.totalWorkSec / 60)) + ")" : "") +
+            " · Списано: " +
+            formatMinutes(t.spent_minutes || 0)
         )
       );
       breakdownEl.appendChild(r);
@@ -2768,9 +2967,23 @@
     DATA.employees.forEach(function (emp) {
       var empTasks = state.tasks.filter(function (t) { return isOwnTaskForUser(t, emp.id); });
       var mins = empTasks.reduce(function (a, t) { return a + (parseInt(t.spent_minutes, 10) || 0); }, 0);
+      var empTimerSec = state.tasks.reduce(function (accSec, t) {
+        var ts = getTaskTimingStats(t);
+        return accSec + ((ts.byEmp && ts.byEmp[String(emp.id)]) || 0);
+      }, 0);
       var row = el("div", "stat-row");
       row.appendChild(el("span", "", emp.short + " (" + emp.dept + ")"));
-      row.appendChild(el("strong", "", empTasks.length + " заяв. · " + formatMinutes(mins)));
+      row.appendChild(
+        el(
+          "strong",
+          "",
+          empTasks.length +
+            " заяв. · ⏱ " +
+            formatDurationSec(empTimerSec, false) +
+            " · Списано: " +
+            formatMinutes(mins)
+        )
+      );
       allListEl.appendChild(row);
     });
 
