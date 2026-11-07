@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="referrer" content="no-referrer" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'none'; script-src 'self' https://telegram.org; style-src 'self'; img-src 'self' data:; connect-src 'none'; font-src 'none'; object-src 'none'; media-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none';"
+  />
+  <title>Mini App</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Экран 1: Страница входа -->
+    <div id="screen-login" class="card screen active">
+      <div class="badge-dev">🚧 В разработке</div>
+      <div class="logo-circle">🛠</div>
+      <h1>Рабочий кабинет</h1>
+      <p class="subtitle">Мини-приложение в Telegram</p>
+
+      <div class="user-box">
+        <div id="user-avatar" class="avatar">TG</div>
+        <div class="user-meta">
+          <div class="user-label">Профиль Telegram</div>
+          <div id="user-name" class="user-name">Гость</div>
+          <div id="user-sub" class="user-sub">Ожидание данных Telegram WebApp</div>
+        </div>
+      </div>
+
+      <button id="btn-login" type="button" class="btn btn-primary">
+        Войти
+      </button>
+      <div class="footer-note">Статус: в разработке</div>
+    </div>
+
+    <!-- Экран 2: Заглушка «В разработке» -->
+    <div id="screen-dev" class="card screen">
+      <div class="badge-dev">🚧 В разработке</div>
+      <div class="logo-circle">⏳</div>
+      <h1>В разработке</h1>
+      <p class="subtitle">
+        Вы вошли как <strong id="logged-user-name">Пользователь</strong>.<br />
+        Функционал мини-приложения сейчас находится в разработке. Пока используйте кнопки в чате бота.
+      </p>
+
+      <div class="dev-list">
+        <div class="dev-item">
+          <span>📋 Список моих задач</span>
+          <span class="dev-tag">В разработке</span>
+        </div>
+        <div class="dev-item">
+          <span>➕ Создание новой задачи</span>
+          <span class="dev-tag">В разработке</span>
+        </div>
+        <div class="dev-item">
+          <span>🔍 Поиск и фильтры</span>
+          <span class="dev-tag">В разработке</span>
+        </div>
+      </div>
+
+      <button id="btn-close" type="button" class="btn btn-primary">
+        Вернуться в чат
+      </button>
+      <button id="btn-back" type="button" class="btn btn-secondary">
+        ← На страницу входа
+      </button>
+    </div>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
