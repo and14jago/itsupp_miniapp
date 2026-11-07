@@ -13,7 +13,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <link rel="stylesheet" href="./styles.css?v=20261108-04" />
+  <link rel="stylesheet" href="./styles.css?v=20261108-05" />
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
@@ -139,6 +139,10 @@
               <button type="button" class="theme-btn" data-theme-mode="dark" title="Ночь">🌙</button>
               <button type="button" class="theme-btn active" data-theme-mode="auto" title="Авто">Авто</button>
             </div>
+            <button id="btn-top-bell" type="button" class="top-circle-btn bell-btn" title="Оповещения по задачам с таймером" aria-label="Оповещения">
+              <span>🔔</span>
+              <span id="bell-badge" class="bell-badge hidden">0</span>
+            </button>
             <button id="btn-top-more" type="button" class="top-circle-btn" title="Меню действий" aria-label="Меню">⋯</button>
             <button id="btn-top-close" type="button" class="top-circle-btn" title="Закрыть приложение" aria-label="Закрыть">✕</button>
             <!-- Скрытые прокси-кнопки для сохранения обратной совместимости обработчиков -->
@@ -596,7 +600,7 @@
     <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
   </div>
 
-  <script src="./data.js?v=20261108-04"></script>
-  <script src="./app.js?v=20261108-04"></script>
+  <script src="./data.js?v=20261108-05"></script>
+  <script src="./app.js?v=20261108-05"></script>
 </body>
 </html>

@@ -159,6 +159,27 @@ html, body {
   background: var(--bg-elevated);
 }
 
+.bell-btn {
+  position: relative;
+}
+
+.bell-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: #e53935;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 16px;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(229, 57, 53, 0.45);
+}
+
 .theme-switcher {
   display: inline-flex;
   align-items: center;

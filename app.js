@@ -15,7 +15,7 @@
     for (var i = 0; i < links.length; i++) {
       var href = links[i].getAttribute("href") || "";
       if (href.indexOf("styles.css") !== -1) {
-        links[i].setAttribute("href", "./styles.css?v=20261108-04&_t=" + Date.now());
+        links[i].setAttribute("href", "./styles.css?v=20261108-05&_t=" + Date.now());
       }
     }
   }
@@ -27,7 +27,7 @@
   });
 
   var DATA = window.ITSUPP_DATA || { companies: [], employees: [], initialTasks: [] };
-  var STORAGE_KEY_STATE = "itsupp_miniapp_state_v4";
+  var STORAGE_KEY_STATE = "itsupp_miniapp_state_v5";
   var STORAGE_KEY_PIN = "itsupp_miniapp_pin_v2";
   var STORAGE_KEY_BIO = "itsupp_miniapp_bio_prefs_v2";
   var STORAGE_KEY_THEME = "itsupp_miniapp_theme_v1";
@@ -887,7 +887,7 @@
 
   var STATUS_META = {
     opened: { label: "Открыта", cls: "status-opened" },
-    resend: { label: "Передана", cls: "status-resend" },
+    resend: { label: "Делегирована", cls: "status-resend" },
     work: { label: "Принял", cls: "status-work" },
     working: { label: "Выполняю", cls: "status-working" },
     delayed: { label: "Отложена", cls: "status-delayed" },
@@ -944,12 +944,16 @@
       stageLabel = "На техотделе (без исп.)";
     } else if (task.status_code === "opened") {
       stageLabel = "Ожидание реакции";
+    } else if (task.status_code === "resend") {
+      stageLabel = "Делегирована";
     } else if (task.status_code === "delayed") {
       stageLabel = "В отложенных";
     }
 
     var baseWorkSec = parseInt(task.tracked_work_seconds, 10) || 0;
-    var isTicking = task.status_code === "working" || task.status_code === "work";
+    var isActiveWorkStatus = task.status_code === "working";
+    var isPaused = isActiveWorkStatus && Boolean(task.timer_paused);
+    var isTicking = isActiveWorkStatus && !isPaused;
     if (isTicking) {
       var startMs = parseTaskDateMs(task.work_started_at || task.updated_iso || task.created_iso || task.created_at);
       if (startMs > 0 && nowMs > startMs) {
@@ -962,6 +966,7 @@
       stageLabel: stageLabel,
       workSec: baseWorkSec,
       isTicking: isTicking,
+      isPaused: isPaused,
       spentMins: parseInt(task.spent_minutes, 10) || 0
     };
   }
@@ -1184,7 +1189,11 @@
     var workSpan = el(
       "span",
       "timer-pill-work" + (tStats.isTicking ? " ticking" : ""),
-      (tStats.isTicking ? "⏱ Таймер: " + formatDurationSec(tStats.workSec, true) : "⏱ В работе: " + formatDurationSec(tStats.workSec, false)) +
+      (tStats.isTicking
+        ? "⏱ Таймер: " + formatDurationSec(tStats.workSec, true)
+        : tStats.isPaused
+        ? "⏸ Пауза: " + formatDurationSec(tStats.workSec, true)
+        : "⏱ В работе: " + formatDurationSec(tStats.workSec, false)) +
         " · Списано: " + formatMinutes(tStats.spentMins)
     );
     workSpan.setAttribute("data-timer-task-id", String(task.id));
@@ -1248,7 +1257,7 @@
     }
 
     if (role === "own") {
-      if (task.status_code === "opened") {
+      if (task.status_code === "opened" || task.status_code === "resend") {
         primaryBar.appendChild(
           makeActionBtn("Принял", "btn-work", function () {
             handleCardAction(task, "work");
@@ -1259,7 +1268,7 @@
             handleCardAction(task, "working");
           })
         );
-      } else if (task.status_code === "work") {
+      } else if (task.status_code === "work" || task.status_code === "delayed" || task.status_code === "restart") {
         primaryBar.appendChild(
           makeActionBtn("Выполняю ⏱", "btn-solve", function () {
             handleCardAction(task, "working");
@@ -1277,9 +1286,13 @@
           })
         );
         primaryBar.appendChild(
-          makeActionBtn("Отложить", "btn-warn", function () {
-            handleCardAction(task, "delayed");
-          })
+          makeActionBtn(
+            tStats.isTicking ? "⏸ Пауза" : "▶ Продолжить",
+            tStats.isTicking ? "btn-warn" : "btn-work",
+            function () {
+              toggleTaskPauseResume(task);
+            }
+          )
         );
       }
       moreGrid.appendChild(
@@ -1385,8 +1398,27 @@
     }
   });
 
-  // Живое обновление секундомера на карточках в статусах «Выполняю» / «Принял»
+  // Живое обновление секундомера на карточках в статусе «Выполняю» + почасовые напоминания в колокольчик 🔔
   setInterval(function () {
+    var hasHourlyChanges = false;
+    for (var m = 0; m < state.tasks.length; m++) {
+      var tk = state.tasks[m];
+      var tst = getTaskTimingStats(tk);
+      if (tst.isTicking && String(tk.assignee_id) === String(currentEmp.id)) {
+        var hoursDone = Math.floor(tst.workSec / 3600);
+        var lastNotifiedHour = parseInt(tk.last_bell_hour, 10) || 0;
+        if (hoursDone >= 1 && hoursDone > lastNotifiedHour) {
+          tk.last_bell_hour = hoursDone;
+          hasHourlyChanges = true;
+          showToast("🔔 Напоминание (" + hoursDone + " ч): в работе задача #" + tk.id);
+        }
+      }
+    }
+    if (hasHourlyChanges) {
+      saveState();
+      updateBellBadge();
+    }
+
     if (activeView !== "tasks") return;
     var nodes = document.querySelectorAll("[data-timer-task-id]");
     for (var i = 0; i < nodes.length; i++) {
@@ -1403,6 +1435,8 @@
         nodes[i].textContent =
           (st.isTicking
             ? "⏱ Таймер: " + formatDurationSec(st.workSec, true)
+            : st.isPaused
+            ? "⏸ Пауза: " + formatDurationSec(st.workSec, true)
             : "⏱ В работе: " + formatDurationSec(st.workSec, false)) +
           " · Списано: " + formatMinutes(st.spentMins);
       }
@@ -1509,28 +1543,12 @@
     var toggleTimerBtn = el(
       "button",
       "btn-primary-full",
-      tStats.isTicking ? "⏸ Поставить таймер на паузу (Принял)" : "▶ Запустить живой таймер (Выполняю)"
+      tStats.isTicking ? "⏸ Поставить таймер на паузу" : "▶ Продолжить таймер (Выполняю)"
     );
     toggleTimerBtn.type = "button";
     toggleTimerBtn.addEventListener("click", function () {
-      hapticNotify("success");
-      if (tStats.isTicking) {
-        stopTaskWorkTimerIfRunning(task);
-        task.status_code = "work";
-        task.status_name = "Принял";
-      } else {
-        task.work_started_at = new Date().toISOString();
-        task.status_code = "working";
-        task.status_name = "Выполняю";
-      }
-      task.status_history = Array.isArray(task.status_history) ? task.status_history : [];
-      task.status_history.push({
-        time: new Date().toTimeString().slice(0, 8),
-        label: (tStats.isTicking ? "⏸ Пауза таймера → " : "▶ Старт таймера → ") + task.status_name
-      });
-      saveState();
       closeActionModal();
-      renderTasksView();
+      toggleTaskPauseResume(task);
     });
     modalBodyEl.appendChild(toggleTimerBtn);
   }
@@ -1563,13 +1581,13 @@
       return;
     }
     if (actionCode === "asya1c") {
-      applyQuickStatus(task, "asya1c", "Отклонена");
+      openRejectTaskModal(task);
       return;
     }
   }
 
   function stopTaskWorkTimerIfRunning(task) {
-    if (task.status_code === "working" || task.status_code === "work") {
+    if (task.status_code === "working" && !task.timer_paused) {
       var startMs = parseTaskDateMs(task.work_started_at || task.updated_iso);
       if (startMs > 0) {
         var deltaSec = Math.max(0, Math.floor((Date.now() - startMs) / 1000));
@@ -1579,19 +1597,51 @@
     }
   }
 
+  function toggleTaskPauseResume(task) {
+    hapticImpact("medium");
+    var st = getTaskTimingStats(task);
+    task.status_history = Array.isArray(task.status_history) ? task.status_history : [];
+    if (st.isTicking) {
+      stopTaskWorkTimerIfRunning(task);
+      task.timer_paused = true;
+      task.status_history.push({
+        time: new Date().toTimeString().slice(0, 8),
+        label: "⏸ Таймер поставлен на паузу (" + formatDurationSec(st.workSec, true) + ")"
+      });
+      showToast("⏸ Таймер по заявке #" + task.id + " на паузе");
+    } else {
+      task.timer_paused = false;
+      task.work_started_at = new Date().toISOString();
+      task.status_code = "working";
+      task.status_name = "Выполняю";
+      task.status_history.push({
+        time: new Date().toTimeString().slice(0, 8),
+        label: "▶ Таймер продолжен (" + task.status_name + ")"
+      });
+      showToast("▶ Таймер по заявке #" + task.id + " продолжен");
+    }
+    saveState();
+    renderTasksView();
+    updateBellBadge();
+  }
+
   function applyQuickStatus(task, code, label) {
-    if (code === "working" || code === "work") {
-      if (task.status_code !== "working" && task.status_code !== "work") {
+    if (code === "working") {
+      if (task.status_code !== "working" || task.timer_paused || !task.work_started_at) {
         task.work_started_at = new Date().toISOString();
       }
+      task.timer_paused = false;
     } else {
       stopTaskWorkTimerIfRunning(task);
+      task.timer_paused = false;
+      task.work_started_at = "";
     }
     task.status_code = code;
     task.status_name = label;
     task.updated_iso = new Date().toISOString();
     saveState();
     renderTasksView();
+    updateBellBadge();
     showToast("Заявка #" + task.id + " → «" + label + "»");
   }
 
@@ -1915,7 +1965,7 @@
     });
   }
 
-  // 3. Модальное окно «Передать / Делегировать»
+  // 3. Модальное окно «Передать / Делегировать» (останавливает таймер текущего сотрудника и переводит в статус «Делегирована»)
   function openDelegateModal(task) {
     openActionModal("Передать заявку #" + task.id);
     var keepControl = true;
@@ -1938,28 +1988,304 @@
       b.type = "button";
       b.addEventListener("click", function () {
         hapticNotify("success");
+        stopTaskWorkTimerIfRunning(task);
+        task.timer_paused = false;
+        task.work_started_at = "";
         task.assignee_id = String(emp.id);
         task.assignee_name = emp.short;
+        task.status_code = "resend";
+        task.status_name = "Делегирована";
+        task.updated_iso = new Date().toISOString();
         if (keepControl) {
           task.control_by = task.control_by || [];
           if (task.control_by.indexOf(String(currentEmp.id)) === -1 && String(emp.id) !== String(currentEmp.id)) {
             task.control_by.push(String(currentEmp.id));
           }
         }
+        task.status_history = Array.isArray(task.status_history) ? task.status_history : [];
+        task.status_history.push({
+          time: new Date().toTimeString().slice(0, 8),
+          label: "📤 Делегирована → " + emp.short + " (таймер остановлен)"
+        });
         task.comments = task.comments || [];
         task.comments.push({
           author: currentEmp.short,
           time: new Date().toTimeString().slice(0, 5),
-          text: "Передана сотруднику " + emp.short
+          text: "Делегирована сотруднику " + emp.short + " (таймер остановлен)"
         });
         saveState();
         closeActionModal();
         renderTasksView();
-        showToast("Заявка #" + task.id + " передана → " + emp.short);
+        updateBellBadge();
+        showToast("Заявка #" + task.id + " делегирована → " + emp.short + " (таймер стоп)");
       });
       grid.appendChild(b);
     });
     modalBodyEl.appendChild(grid);
+  }
+
+  // 3b. Модальное окно «Отклонить заявку» (Ответственный уже выбран + причины как на портале + ЧС спамера в почте)
+  function extractEmailFromTask(task) {
+    var combined = String(task.title || "") + " " + String(task.description || "");
+    var m = combined.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
+    if (m && m[0]) return m[0].toLowerCase();
+    return "";
+  }
+
+  function openRejectTaskModal(task) {
+    openActionModal("🚫 Отклонить заявку #" + task.id);
+
+    // 1. Ответственный — тот, кто в системе (уже выбран)
+    var respLabel = el("div", "form-label", "Ответственный за отклонение (выбран в системе):");
+    modalBodyEl.appendChild(respLabel);
+
+    var respBadge = el(
+      "div",
+      "glass-card",
+      "👤 " + currentEmp.name + " (" + currentEmp.short + " · ID " + currentEmp.id + ") — выбран автоматически"
+    );
+    respBadge.style.fontWeight = "700";
+    respBadge.style.color = "var(--accent)";
+    modalBodyEl.appendChild(respBadge);
+
+    // 2. Причины отклонения на кнопках (как на портале и в боте)
+    var reasonLabel = el("div", "form-label", "Причина отклонения (как на портале):");
+    modalBodyEl.appendChild(reasonLabel);
+
+    var portalReasons = [
+      { code: "spam", text: "🚫 Спам / рассылка / не заявка" },
+      { code: "dup", text: "🔁 Дубликат заявки" },
+      { code: "other", text: "🏢 Не в эту службу" },
+      { code: "scope", text: "📋 Вне зоны поддержки" },
+      { code: "info", text: "💬 Только консультация" },
+      { code: "err", text: "❌ Ошибочное обращение / автоответ" }
+    ];
+    var selectedReason = portalReasons[0].text;
+    var reasonInput = el("textarea", "form-textarea");
+    reasonInput.rows = 2;
+    reasonInput.value = selectedReason;
+    reasonInput.placeholder = "Укажите или выберите причину отклонения…";
+
+    var reasonsGrid = el("div", "assignee-grid");
+    function renderReasonButtons() {
+      reasonsGrid.textContent = "";
+      portalReasons.forEach(function (pr) {
+        var b = el(
+          "button",
+          "assignee-btn" + (selectedReason === pr.text ? " active" : ""),
+          pr.text
+        );
+        b.type = "button";
+        b.addEventListener("click", function () {
+          hapticImpact("light");
+          selectedReason = pr.text;
+          reasonInput.value = pr.text;
+          renderReasonButtons();
+        });
+        reasonsGrid.appendChild(b);
+      });
+    }
+    renderReasonButtons();
+    modalBodyEl.appendChild(reasonsGrid);
+    modalBodyEl.appendChild(reasonInput);
+
+    // 3. Почтовый антиспам-блок (для заявок с почты — заблокировать спамера / домен в ЧС в почте)
+    var detectedEmail = extractEmailFromTask(task);
+    var isEmailTask =
+      Boolean(detectedEmail) ||
+      !task.company_id ||
+      task.company_name === "Без компании" ||
+      /mail|почт|уведомлен|unsubscribe|visibility|expired|idea/i.test(task.title + " " + task.description);
+
+    var mailSectionTitle = el(
+      "div",
+      "form-label",
+      isEmailTask
+        ? "📧 Заявка с почты — блокировка спамера в ЧС почтового сервера:"
+        : "📧 Почтовый фильтр / ЧС отправителя (если заявка с почты):"
+    );
+    modalBodyEl.appendChild(mailSectionTitle);
+
+    var emailInput = el("input", "form-input");
+    emailInput.type = "text";
+    emailInput.value = detectedEmail || "spam-sender@external-mail.com";
+    emailInput.placeholder = "Email или домен спамера для ЧС в почте…";
+    modalBodyEl.appendChild(emailInput);
+
+    function executeReject(blacklistMode) {
+      hapticNotify("success");
+      stopTaskWorkTimerIfRunning(task);
+      task.timer_paused = false;
+      task.work_started_at = "";
+      task.assignee_id = String(currentEmp.id);
+      task.assignee_name = currentEmp.short;
+      task.status_code = "asya1c";
+      task.status_name = "Отклонена";
+      task.spent_minutes = (parseInt(task.spent_minutes, 10) || 0) + 1;
+      var targetMail = safeText(emailInput.value, 120);
+      var domainPart = targetMail.indexOf("@") !== -1 ? "@" + targetMail.split("@")[1] : targetMail;
+      var reasonTxt = safeText(reasonInput.value, 300) || selectedReason;
+      var blNote = "";
+      if (blacklistMode === "sender") {
+        blNote = " · 🔥 Отправитель «" + targetMail + "» добавлен в ЧС почты";
+        state.mailBlacklist = state.mailBlacklist || [];
+        state.mailBlacklist.push({ target: targetMail, by: currentEmp.short, at: new Date().toISOString() });
+      } else if (blacklistMode === "domain") {
+        blNote = " · 🛑 Домен «" + domainPart + "» добавлен в ЧС почты";
+        state.mailBlacklist = state.mailBlacklist || [];
+        state.mailBlacklist.push({ target: domainPart, by: currentEmp.short, at: new Date().toISOString() });
+      }
+      task.comments = task.comments || [];
+      task.comments.push({
+        author: currentEmp.short,
+        time: new Date().toTimeString().slice(0, 5),
+        text: "Отклонена (" + reasonTxt + ")" + blNote
+      });
+      saveState();
+      closeActionModal();
+      renderTasksView();
+      updateBellBadge();
+      showToast(
+        blacklistMode
+          ? "🔥 Заявка #" + task.id + " отклонена + спамер в ЧС почты!"
+          : "🚫 Заявка #" + task.id + " отклонена (" + currentEmp.short + ")"
+      );
+    }
+
+    var btnBlacklistSender = el(
+      "button",
+      "btn-danger-full",
+      "🔥 Отклонить + Ебнуть спамера в ЧС в почте"
+    );
+    btnBlacklistSender.type = "button";
+    btnBlacklistSender.addEventListener("click", function () {
+      executeReject("sender");
+    });
+    modalBodyEl.appendChild(btnBlacklistSender);
+
+    var btnBlacklistDomain = el(
+      "button",
+      "btn-secondary-full",
+      "🛑 Отклонить + Весь домен отправителя в ЧС почты"
+    );
+    btnBlacklistDomain.type = "button";
+    btnBlacklistDomain.style.marginTop = "8px";
+    btnBlacklistDomain.addEventListener("click", function () {
+      executeReject("domain");
+    });
+    modalBodyEl.appendChild(btnBlacklistDomain);
+
+    var btnRejectSimple = el(
+      "button",
+      "btn-primary-full",
+      "✓ Просто отклонить заявку (ответственный: " + currentEmp.short + ")"
+    );
+    btnRejectSimple.type = "button";
+    btnRejectSimple.style.marginTop = "8px";
+    btnRejectSimple.addEventListener("click", function () {
+      executeReject("");
+    });
+    modalBodyEl.appendChild(btnRejectSimple);
+  }
+
+  // 3c. Колокольчик 🔔 в правом верхнем углу — почасовые напоминания о запущенном таймере и переход к задаче
+  function getActiveRunningTasksForBell() {
+    var running = [];
+    for (var i = 0; i < state.tasks.length; i++) {
+      var t = state.tasks[i];
+      if (t.status_code === "completed" || t.status_code === "closed" || t.status_code === "asya1c") continue;
+      var st = getTaskTimingStats(t);
+      if (st.isTicking || st.isPaused) {
+        running.push({ task: t, stats: st, hours: Math.floor(st.workSec / 3600) });
+      }
+    }
+    return running;
+  }
+
+  function updateBellBadge() {
+    var badge = document.getElementById("bell-badge");
+    if (!badge) return;
+    var list = getActiveRunningTasksForBell();
+    var count = list.length;
+    badge.textContent = String(count);
+    badge.classList.toggle("hidden", count === 0);
+  }
+
+  function openBellNotificationsModal() {
+    hapticImpact("light");
+    openActionModal("🔔 Таймеры и напоминания (каждый час)");
+    var list = getActiveRunningTasksForBell();
+
+    modalBodyEl.appendChild(
+      el(
+        "p",
+        "section-desc",
+        "Система каждый час проверяет запущенные таймеры: если вы забыли остановить время или закрыть заявку, здесь появляется напоминание с быстрым переходом к задаче."
+      )
+    );
+
+    if (list.length === 0) {
+      modalBodyEl.appendChild(
+        el("div", "glass-card", "✅ Сейчас нет запущенных таймеров. Все задачи под контролем!")
+      );
+      return;
+    }
+
+    list.forEach(function (item) {
+      var t = item.task;
+      var st = item.stats;
+      var card = el("div", "glass-card");
+      card.style.marginBottom = "10px";
+
+      var titleRow = el(
+        "div",
+        "task-title",
+        (st.isTicking ? "⏰ В работе: " : "⏸ На паузе: ") + "#" + t.id + " — " + t.title
+      );
+      card.appendChild(titleRow);
+
+      var subInfo = el(
+        "div",
+        "section-desc",
+        "Исполнитель: " +
+          (t.assignee_name || currentEmp.short) +
+          " · Таймер: " +
+          formatDurationSec(st.workSec, true) +
+          (item.hours >= 1 ? " (⚠️ идёт уже более " + item.hours + " ч!)" : " (напоминание каждый час)")
+      );
+      card.appendChild(subInfo);
+
+      var btnRow = el("div", "assignee-grid");
+
+      var btnJump = el("button", "btn-primary-full", "📍 Перейти к задаче #" + t.id);
+      btnJump.type = "button";
+      btnJump.addEventListener("click", function () {
+        closeActionModal();
+        switchView("tasks");
+        activeScope = "all";
+        activeStatusFilter = "all";
+        searchInput.value = String(t.id);
+        searchQuery = String(t.id);
+        searchClear.classList.remove("hidden");
+        renderTasksView();
+      });
+      btnRow.appendChild(btnJump);
+
+      var btnPause = el(
+        "button",
+        "btn-secondary-full",
+        st.isTicking ? "⏸ Пауза таймера" : "▶ Продолжить"
+      );
+      btnPause.type = "button";
+      btnPause.addEventListener("click", function () {
+        toggleTaskPauseResume(t);
+        openBellNotificationsModal();
+      });
+      btnRow.appendChild(btnPause);
+
+      card.appendChild(btnRow);
+      modalBodyEl.appendChild(card);
+    });
   }
 
   // 4. Подтверждение «Забрать чужую задачу»
@@ -2610,11 +2936,16 @@
   var btnLoginMore = document.getElementById("btn-login-more");
   if (btnLoginMore) btnLoginMore.addEventListener("click", openTopMoreModal);
 
+  var btnTopBell = document.getElementById("btn-top-bell");
+  if (btnTopBell) btnTopBell.addEventListener("click", openBellNotificationsModal);
+
   var btnTopMore = document.getElementById("btn-top-more");
   if (btnTopMore) btnTopMore.addEventListener("click", openTopMoreModal);
 
   var btnTopClose = document.getElementById("btn-top-close");
   if (btnTopClose) btnTopClose.addEventListener("click", closeMiniApp);
+
+  updateBellBadge();
 
   document.getElementById("btn-top-refresh").addEventListener("click", function () {
     hapticImpact("medium");
