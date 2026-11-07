@@ -945,16 +945,22 @@ html, body {
   color: var(--muted);
 }
 
+.status-popover-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
 .status-badge {
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 600;
-  padding: 4px 10px;
+  padding: 5px 11px;
   border-radius: 999px;
   border: 1px solid rgba(0, 0, 0, 0.08);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   line-height: 1.15;
   color: var(--text);
   transition: transform 0.1s ease, filter 0.12s ease;
@@ -964,16 +970,79 @@ html, body {
   transform: scale(0.95);
 }
 
-/* Цвета статусов заявок точно как в Okdesk (мягкая заливка кнопки без перекраски текста) */
-.status-opened { background: rgba(255, 133, 34, 0.24); border-color: rgba(255, 133, 34, 0.55); color: var(--text); }
-.status-delayed { background: rgba(255, 201, 38, 0.28); border-color: rgba(255, 201, 38, 0.65); color: var(--text); }
-.status-work { background: rgba(96, 92, 184, 0.24); border-color: rgba(96, 92, 184, 0.55); color: var(--text); }
-.status-resend { background: rgba(240, 134, 118, 0.26); border-color: rgba(240, 134, 118, 0.58); color: var(--text); }
-.status-restart { background: rgba(106, 105, 115, 0.24); border-color: rgba(106, 105, 115, 0.55); color: var(--text); }
-.status-working { background: rgba(92, 184, 155, 0.26); border-color: rgba(92, 184, 155, 0.60); color: var(--text); }
-.status-completed { background: rgba(92, 184, 92, 0.26); border-color: rgba(92, 184, 92, 0.60); color: var(--text); }
-.status-asya1c { background: rgba(50, 155, 173, 0.25); border-color: rgba(50, 155, 173, 0.58); color: var(--text); }
-.status-closed { background: rgba(142, 158, 179, 0.26); border-color: rgba(142, 158, 179, 0.58); color: var(--text); }
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.status-opened .status-dot { background: #ff8522; }
+.status-delayed .status-dot { background: #e59400; }
+.status-work .status-dot { background: #605cb8; }
+.status-resend .status-dot { background: #f08676; }
+.status-restart .status-dot { background: #6a6973; }
+.status-working .status-dot { background: #2d9d78; }
+.status-completed .status-dot { background: #3b9e3b; }
+.status-asya1c .status-dot { background: #e5484d; }
+.status-closed .status-dot { background: #8e9eb3; }
+
+/* Выпадающее меню статусов прямо на карточке (как в Okdesk) */
+.status-inline-popover {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 80;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 168px;
+}
+
+.status-inline-pill {
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 6px 13px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: transform 0.1s ease, filter 0.12s ease;
+}
+
+.status-inline-pill:active {
+  transform: scale(0.96);
+}
+
+/* Цвета статусов заявок точно как в Okdesk */
+.status-opened { background: rgba(255, 133, 34, 0.18); border-color: rgba(255, 133, 34, 0.45); color: #c85a00; }
+.status-delayed { background: rgba(255, 201, 38, 0.22); border-color: rgba(255, 201, 38, 0.55); color: #b57300; }
+.status-work { background: rgba(96, 92, 184, 0.16); border-color: rgba(96, 92, 184, 0.42); color: #4c489e; }
+.status-resend { background: rgba(240, 134, 118, 0.20); border-color: rgba(240, 134, 118, 0.48); color: #c54836; }
+.status-restart { background: rgba(106, 105, 115, 0.18); border-color: rgba(106, 105, 115, 0.45); color: var(--text); }
+.status-working { background: rgba(92, 184, 155, 0.20); border-color: rgba(92, 184, 155, 0.48); color: #1f7a5c; }
+.status-completed { background: rgba(92, 184, 92, 0.20); border-color: rgba(92, 184, 92, 0.48); color: #257925; }
+.status-asya1c { background: rgba(229, 72, 77, 0.16); border-color: rgba(229, 72, 77, 0.42); color: #c92a2f; }
+.status-closed { background: rgba(142, 158, 179, 0.20); border-color: rgba(142, 158, 179, 0.48); color: var(--text-secondary); }
+
+html[data-theme="dark"] .status-opened { color: #ffaa5b; }
+html[data-theme="dark"] .status-delayed { color: #ffd454; }
+html[data-theme="dark"] .status-work { color: #a5a1ff; }
+html[data-theme="dark"] .status-resend { color: #ff9e8f; }
+html[data-theme="dark"] .status-working { color: #6ee7c2; }
+html[data-theme="dark"] .status-completed { color: #7ee27e; }
+html[data-theme="dark"] .status-asya1c { color: #ff8589; }
 
 .task-title {
   font-size: 14.5px;

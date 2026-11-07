@@ -347,8 +347,10 @@
 
   function openAvatarMenuPopover() {
     hapticImpact("light");
-    if (avatarMenuModal) {
-      avatarMenuModal.classList.remove("hidden");
+    var inp = document.getElementById("login-avatar-input");
+    if (inp) {
+      inp.value = "";
+      inp.click();
     }
   }
 
@@ -1057,14 +1059,54 @@
     topRow.appendChild(idGroup);
 
     var stMeta = STATUS_META[task.status_code] || { label: task.status_name || "Открыта", cls: "status-opened" };
-    var statusBtn = el("button", "status-badge " + stMeta.cls, stMeta.label + " ▾");
+    var statusWrap = el("div", "status-popover-wrap");
+    var statusBtn = el("button", "status-badge " + stMeta.cls);
     statusBtn.type = "button";
     statusBtn.title = "Нажмите для смены статуса заявки";
-    statusBtn.addEventListener("click", function () {
-      hapticImpact("light");
-      openStatusTransitionModal(task);
+    statusBtn.appendChild(el("span", "status-dot"));
+    statusBtn.appendChild(el("span", "", stMeta.label + " ▾"));
+
+    var inlinePopover = el("div", "status-inline-popover hidden");
+    var allowedTargets = OKDESK_TRANSITIONS[task.status_code] || ["work", "working", "delayed", "completed", "asya1c"];
+    var ACTION_LABELS = {
+      work: "Принял",
+      working: "Выполняю",
+      delayed: "Отложить",
+      resend: "Передать",
+      completed: "Решена",
+      asya1c: "Отклонить",
+      restart: "На доработку"
+    };
+    allowedTargets.forEach(function (targetCode) {
+      var m = STATUS_META[targetCode] || { label: targetCode, cls: "status-opened" };
+      var pill = el("button", "status-inline-pill " + m.cls);
+      pill.type = "button";
+      pill.appendChild(el("span", "status-dot"));
+      pill.appendChild(el("span", "", ACTION_LABELS[targetCode] || m.label));
+      pill.addEventListener("click", function (ev) {
+        ev.stopPropagation();
+        inlinePopover.classList.add("hidden");
+        handleCardAction(task, targetCode);
+      });
+      inlinePopover.appendChild(pill);
     });
-    topRow.appendChild(statusBtn);
+
+    statusBtn.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      hapticImpact("light");
+      var wasHidden = inlinePopover.classList.contains("hidden");
+      var allOpen = document.querySelectorAll(".status-inline-popover:not(.hidden)");
+      for (var p = 0; p < allOpen.length; p++) {
+        allOpen[p].classList.add("hidden");
+      }
+      if (wasHidden) {
+        inlinePopover.classList.remove("hidden");
+      }
+    });
+
+    statusWrap.appendChild(statusBtn);
+    statusWrap.appendChild(inlinePopover);
+    topRow.appendChild(statusWrap);
     card.appendChild(topRow);
 
     // 2. Заголовок и свёрнутое описание (раскрывается по нажатию)
@@ -1298,6 +1340,13 @@
     card.appendChild(moreGrid);
     return card;
   }
+
+  document.addEventListener("click", function () {
+    var allOpen = document.querySelectorAll(".status-inline-popover:not(.hidden)");
+    for (var p = 0; p < allOpen.length; p++) {
+      allOpen[p].classList.add("hidden");
+    }
+  });
 
   // Живое обновление секундомера на карточках в статусах «Выполняю» / «Принял»
   setInterval(function () {
@@ -2480,18 +2529,16 @@
     });
     stack.appendChild(btnPhoto);
 
-    if (getSavedAvatar()) {
-      var btnResetPhoto = el("button", "btn-secondary-full", "🗑 Вернуть стандартный круг (" + getLoginInitials() + ")");
-      btnResetPhoto.type = "button";
-      btnResetPhoto.addEventListener("click", function () {
-        setSavedAvatar("");
-        setupLoginProfileUI();
-        renderHeader();
-        closeActionModal();
-        showToast("Восстановлен стандартный значок " + getLoginInitials());
-      });
-      stack.appendChild(btnResetPhoto);
-    }
+    var btnSetCorpLogo = el("button", "btn-secondary-full", "🛡️ Установить корпоративное лого");
+    btnSetCorpLogo.type = "button";
+    btnSetCorpLogo.addEventListener("click", function () {
+      setSavedAvatar(SERVIS_PRO_LOGO_URL);
+      setupLoginProfileUI();
+      renderHeader();
+      closeActionModal();
+      showToast("✓ Корпоративное лого установлено");
+    });
+    stack.appendChild(btnSetCorpLogo);
 
     var btnRef = el("button", "btn-secondary-full", "🔄 Обновить задачи (" + state.tasks.length + ")");
     btnRef.type = "button";
