@@ -1259,8 +1259,18 @@
     }
 
     moreGrid.appendChild(
+      makeActionBtn("💬 Написать заявителю", "", function () {
+        openCommentModal(task, true);
+      })
+    );
+    moreGrid.appendChild(
       makeActionBtn("Комментарий 📎", "", function () {
-        openCommentModal(task);
+        openCommentModal(task, false);
+      })
+    );
+    moreGrid.appendChild(
+      makeActionBtn("⏱ История таймера и этапов", "", function () {
+        openTaskTimerHistoryModal(task);
       })
     );
     moreGrid.appendChild(
@@ -1354,6 +1364,89 @@
     });
 
     modalBodyEl.appendChild(list);
+  }
+
+  // --- Модальное окно «⏱ История таймера и этапов» (вместо бывшей кнопки «Открыть в боте») ---
+  function openTaskTimerHistoryModal(task) {
+    openActionModal("⏱ Таймер и этапы · #" + task.id);
+    var tStats = getTaskTimingStats(task);
+    var waitSec = Math.max(0, tStats.sysSec - tStats.workSec);
+    var timerMins = Math.round(tStats.workSec / 60);
+    var diffMins = (tStats.spentMins || 0) - timerMins;
+    var diffStr =
+      diffMins === 0
+        ? "совпадает с таймером"
+        : diffMins > 0
+        ? "+" + formatMinutes(diffMins) + " сверх таймера"
+        : "-" + formatMinutes(Math.abs(diffMins)) + " меньше таймера";
+
+    var summaryCard = el("div", "glass-card");
+    var rows = [
+      ["В системе (с момента создания)", formatDurationSec(tStats.sysSec, false)],
+      ["Ожидание / на техотделе", formatDurationSec(waitSec, false)],
+      ["Реальная работа по таймеру", formatDurationSec(tStats.workSec, true) + (tStats.isTicking ? " (идёт ⏱)" : "")],
+      ["Списано исполнителем", formatMinutes(tStats.spentMins) + " (" + diffStr + ")"],
+      ["Текущий этап", tStats.stageLabel + " · «" + (task.status_name || "Открыта") + "»"]
+    ];
+    rows.forEach(function (pair) {
+      var r = el("div", "stat-row");
+      r.appendChild(el("span", "", pair[0]));
+      r.appendChild(el("strong", "", pair[1]));
+      summaryCard.appendChild(r);
+    });
+    modalBodyEl.appendChild(summaryCard);
+
+    var histTitle = el("div", "form-label", "Хронология этапов заявки:");
+    modalBodyEl.appendChild(histTitle);
+
+    var histBox = el("div", "glass-card");
+    var baseSteps = [
+      { time: task.created_at || "При создании", label: "📥 Заявка зарегистрирована в системе (На техотделе)" }
+    ];
+    if (task.assignee_id) {
+      var emp = getEmployeeById(task.assignee_id);
+      baseSteps.push({
+        time: task.updated_at || task.created_at || "Назначена",
+        label: "👤 Назначен исполнитель: " + (emp ? emp.short : "ID " + task.assignee_id)
+      });
+    }
+    var customHist = Array.isArray(task.status_history) ? task.status_history : [];
+    var allSteps = baseSteps.concat(customHist);
+    allSteps.forEach(function (step) {
+      var r = el("div", "stat-row");
+      r.appendChild(el("span", "", step.time));
+      r.appendChild(el("strong", "", step.label));
+      histBox.appendChild(r);
+    });
+    modalBodyEl.appendChild(histBox);
+
+    var toggleTimerBtn = el(
+      "button",
+      "btn-primary-full",
+      tStats.isTicking ? "⏸ Поставить таймер на паузу (Принял)" : "▶ Запустить живой таймер (Выполняю)"
+    );
+    toggleTimerBtn.type = "button";
+    toggleTimerBtn.addEventListener("click", function () {
+      hapticNotify("success");
+      if (tStats.isTicking) {
+        stopTaskWorkTimerIfRunning(task);
+        task.status_code = "work";
+        task.status_name = "Принял";
+      } else {
+        task.work_started_at = new Date().toISOString();
+        task.status_code = "working";
+        task.status_name = "Выполняю";
+      }
+      task.status_history = Array.isArray(task.status_history) ? task.status_history : [];
+      task.status_history.push({
+        time: new Date().toTimeString().slice(0, 8),
+        label: (tStats.isTicking ? "⏸ Пауза таймера → " : "▶ Старт таймера → ") + task.status_name
+      });
+      saveState();
+      closeActionModal();
+      renderTasksView();
+    });
+    modalBodyEl.appendChild(toggleTimerBtn);
   }
 
   // --- Обработчики действий по карточке ---
@@ -1807,14 +1900,50 @@
     modalBodyEl.appendChild(btnNo);
   }
 
-  // 5. Модальное окно «Комментарий» (крупное поле + скрепочка для файлов/фото/видео/документов + корпоративная зелёная кнопка)
-  function openCommentModal(task) {
-    openActionModal("Комментарий к #" + task.id);
+  // 5. Модальное окно «Комментарий / Написать заявителю» (публичный ответ клиенту или внутренний комментарий + скрепочка 📎)
+  function openCommentModal(task, defaultPublic) {
+    var isPublic = Boolean(defaultPublic);
+    openActionModal((isPublic ? "💬 Ответ заявителю · #" : "Комментарий к #") + task.id);
+
+    var modeRow = el("div", "segmented-row");
+    function renderModeSwitch() {
+      modeRow.textContent = "";
+      var btnClient = el(
+        "button",
+        "seg-btn" + (isPublic ? " active" : ""),
+        "🌐 Заявителю (" + safeText(task.company_name || "Клиент", 22) + ")"
+      );
+      btnClient.type = "button";
+      btnClient.addEventListener("click", function () {
+        isPublic = true;
+        renderModeSwitch();
+        updateModalLabels();
+      });
+
+      var btnInternal = el(
+        "button",
+        "seg-btn" + (!isPublic ? " active" : ""),
+        "🔒 Внутренний (только ИТ)"
+      );
+      btnInternal.type = "button";
+      btnInternal.addEventListener("click", function () {
+        isPublic = false;
+        renderModeSwitch();
+        updateModalLabels();
+      });
+
+      modeRow.appendChild(btnClient);
+      modeRow.appendChild(btnInternal);
+    }
+    renderModeSwitch();
+    modalBodyEl.appendChild(modeRow);
+
     if (Array.isArray(task.comments) && task.comments.length > 0) {
       var list = el("div", "task-comments-box");
       task.comments.forEach(function (c) {
         var line = el("div", "comment-line");
-        line.appendChild(el("span", "comment-author", c.author + " (" + c.time + "): "));
+        var badge = c.is_public ? "🌐 [Клиенту] " : "🔒 ";
+        line.appendChild(el("span", "comment-author", badge + c.author + " (" + c.time + "): "));
         line.appendChild(el("span", "", c.text));
         if (Array.isArray(c.attachments) && c.attachments.length > 0) {
           line.appendChild(el("span", "meta-lbl", " [📎 " + c.attachments.join(", ") + "]"));
@@ -1824,10 +1953,32 @@
       modalBodyEl.appendChild(list);
     }
 
+    var quickChipsBox = el("div", "attach-chips");
+    modalBodyEl.appendChild(quickChipsBox);
+
     var input = el("textarea", "form-textarea");
     input.rows = 5;
-    input.placeholder = "Введите текст комментария к заявке…";
     modalBodyEl.appendChild(input);
+
+    function updateModeQuickReplies() {
+      quickChipsBox.textContent = "";
+      if (!isPublic) return;
+      var templates = [
+        "Добрый день! Заявка принята в работу, скоро подключимся.",
+        "Пришлите, пожалуйста, ID и пароль AnyDesk / RustDesk для подключения.",
+        "Работы выполнены. Проверьте, пожалуйста, всё ли работает корректно?"
+      ];
+      templates.forEach(function (tpl) {
+        var chip = el("button", "btn-comment-attach", "⚡ " + tpl.slice(0, 38) + "…");
+        chip.type = "button";
+        chip.addEventListener("click", function () {
+          hapticImpact("light");
+          input.value = tpl;
+          input.focus();
+        });
+        quickChipsBox.appendChild(chip);
+      });
+    }
 
     var attachedFiles = [];
     var fileInput = document.createElement("input");
@@ -1866,12 +2017,23 @@
       });
     });
 
-    var btnSend = el("button", "btn-primary-full", "Отправить комментарий");
+    var btnSend = el("button", "btn-primary-full", "");
     btnSend.type = "button";
+
+    function updateModalLabels() {
+      modalTitleEl.textContent = (isPublic ? "💬 Ответ заявителю · #" : "Комментарий к #") + task.id;
+      input.placeholder = isPublic
+        ? "Напишите сообщение заявителю (" + (task.company_name || "клиенту") + ") — уйдёт в Okdesk / Telegram / Email…"
+        : "Введите внутренний комментарий для сотрудников ИТ…";
+      btnSend.textContent = isPublic ? "📨 Отправить сообщение заявителю" : "Отправить внутренний комментарий";
+      updateModeQuickReplies();
+    }
+    updateModalLabels();
+
     btnSend.addEventListener("click", function () {
       var txt = safeText(input.value, 1000);
       if (!txt && attachedFiles.length === 0) {
-        showToast("Введите текст комментария или прикрепите файл");
+        showToast("Введите текст сообщения или прикрепите файл");
         return;
       }
       hapticNotify("success");
@@ -1880,12 +2042,17 @@
         author: currentEmp.short,
         time: new Date().toTimeString().slice(0, 5),
         text: txt || "Приложены файлы к заявке",
+        is_public: isPublic,
         attachments: attachedFiles.slice()
       });
       saveState();
       closeActionModal();
       renderTasksView();
-      showToast("Комментарий добавлен в #" + task.id);
+      showToast(
+        isPublic
+          ? "📨 Сообщение отправлено заявителю по заявке #" + task.id
+          : "Комментарий добавлен в #" + task.id
+      );
     });
     modalBodyEl.appendChild(btnSend);
   }
