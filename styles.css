@@ -197,8 +197,10 @@ html, body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 14px 18px 22px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px 20px;
   background: var(--login-bg);
 }
 
@@ -207,6 +209,7 @@ html, body {
   align-items: center;
   justify-content: space-between;
   gap: 6px;
+  width: 100%;
 }
 
 .sber-Brand {
@@ -244,7 +247,7 @@ html, body {
 
 .sber-profile-block {
   text-align: center;
-  margin-top: 4px;
+  margin-top: 2px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -252,8 +255,8 @@ html, body {
 
 .sber-avatar-wrap {
   position: relative;
-  width: 96px;
-  height: 96px;
+  width: 144px;
+  height: 144px;
   margin: 0 auto 10px;
   padding: 0;
   border: none;
@@ -267,24 +270,24 @@ html, body {
 }
 
 .sber-avatar {
-  width: 96px;
-  height: 96px;
+  width: 144px;
+  height: 144px;
   border-radius: 50%;
   background: linear-gradient(135deg, #21A038, #15803D);
   color: #ffffff;
-  font-size: 32px;
+  font-size: 46px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 22px var(--sber-green-glow);
+  box-shadow: 0 10px 26px var(--sber-green-glow);
   overflow: hidden;
   position: relative;
 }
 
 .sber-avatar.has-custom-img {
   background: var(--card-bg);
-  border: 2px solid var(--border);
+  border: 2.5px solid var(--border);
 }
 
 .avatar-custom-img {
@@ -297,14 +300,14 @@ html, body {
 
 .sber-avatar-badge {
   position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 28px;
-  height: 28px;
+  right: 4px;
+  bottom: 4px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: var(--sber-green);
   color: #ffffff;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 800;
   display: flex;
   align-items: center;
@@ -337,7 +340,7 @@ html, body {
 }
 
 .sber-user-name {
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 700;
   margin-top: 2px;
   color: var(--text);
@@ -351,7 +354,7 @@ html, body {
 
 .sber-pin-section {
   text-align: center;
-  margin: 10px 0 6px;
+  margin: 2px 0 4px;
 }
 
 .sber-pin-label {
