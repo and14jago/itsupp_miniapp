@@ -9,12 +9,30 @@
     } catch (_e) {}
   }
 
+  // Принудительный сброс кэша CSS в iOS Telegram WKWebView при открытии и возврате в окно
+  function refreshLiveStylesheet() {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+    for (var i = 0; i < links.length; i++) {
+      var href = links[i].getAttribute("href") || "";
+      if (href.indexOf("styles.css") !== -1) {
+        links[i].setAttribute("href", "./styles.css?v=20261108-03&_t=" + Date.now());
+      }
+    }
+  }
+  refreshLiveStylesheet();
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") {
+      refreshLiveStylesheet();
+    }
+  });
+
   var DATA = window.ITSUPP_DATA || { companies: [], employees: [], initialTasks: [] };
   var STORAGE_KEY_STATE = "itsupp_miniapp_state_v4";
   var STORAGE_KEY_PIN = "itsupp_miniapp_pin_v2";
   var STORAGE_KEY_BIO = "itsupp_miniapp_bio_prefs_v2";
   var STORAGE_KEY_THEME = "itsupp_miniapp_theme_v1";
   var STORAGE_KEY_AVATAR = "itsupp_miniapp_custom_avatar_v1";
+  var STORAGE_KEY_USER_PHOTO = "itsupp_miniapp_user_photo_v1";
   var STORAGE_KEY_AVATAR_TOUCHED = "itsupp_miniapp_avatar_touched_v1";
   var STORAGE_KEY_LOGO_MIGRATED = "itsupp_miniapp_emblem_only_v2";
   var SERVIS_PRO_LOGO_URL = "./logo.png?v=2";
@@ -238,11 +256,14 @@
     dept: "Руководство / ИТ"
   };
 
-  // Обновление кэшированного URL логотипа до чистого круга без текста
+  // Обновление кэшированного URL логотипа до чистого круга без текста и сохранение личного фото в отдельный слот
   try {
     var prevSaved = localStorage.getItem(STORAGE_KEY_AVATAR) || "";
     if (prevSaved.indexOf("./logo.png") === 0 && prevSaved !== SERVIS_PRO_LOGO_URL) {
       localStorage.setItem(STORAGE_KEY_AVATAR, SERVIS_PRO_LOGO_URL);
+    }
+    if (prevSaved.indexOf("data:image/") === 0 && !localStorage.getItem(STORAGE_KEY_USER_PHOTO)) {
+      localStorage.setItem(STORAGE_KEY_USER_PHOTO, prevSaved);
     }
   } catch (_e) {}
 
@@ -265,7 +286,11 @@
   function setSavedAvatar(dataUrl) {
     try {
       if (dataUrl) {
-        localStorage.setItem(STORAGE_KEY_AVATAR, String(dataUrl));
+        var s = String(dataUrl);
+        localStorage.setItem(STORAGE_KEY_AVATAR, s);
+        if (s.indexOf("data:image/") === 0) {
+          localStorage.setItem(STORAGE_KEY_USER_PHOTO, s);
+        }
         localStorage.setItem(STORAGE_KEY_AVATAR_TOUCHED, "1");
         localStorage.setItem(STORAGE_KEY_LOGO_MIGRATED, "1");
       } else {
@@ -349,10 +374,8 @@
 
   function openAvatarMenuPopover() {
     hapticImpact("light");
-    var inp = document.getElementById("login-avatar-input");
-    if (inp) {
-      inp.value = "";
-      inp.click();
+    if (avatarMenuModal) {
+      avatarMenuModal.classList.remove("hidden");
     }
   }
 
@@ -431,6 +454,17 @@
   if (btnSrcGallery) {
     btnSrcGallery.addEventListener("click", function () {
       closeAvatarMenuPopover();
+      var savedUserPhoto = "";
+      try {
+        savedUserPhoto = localStorage.getItem(STORAGE_KEY_USER_PHOTO) || "";
+      } catch (_e) {}
+      if (getSavedAvatar() === SERVIS_PRO_LOGO_URL && savedUserPhoto) {
+        setSavedAvatar(savedUserPhoto);
+        setupLoginProfileUI();
+        renderHeader();
+        hapticNotify("success");
+        return;
+      }
       var inp = document.getElementById("login-avatar-input");
       if (inp) {
         inp.value = "";
