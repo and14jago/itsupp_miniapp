@@ -13,7 +13,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <link rel="stylesheet" href="./styles.css?v=20261107-13" />
+  <link rel="stylesheet" href="./styles.css?v=20261107-14" />
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
@@ -69,7 +69,7 @@
             <span class="pin-dot"></span>
             <span class="pin-dot"></span>
           </div>
-          <div id="pin-hint" class="sber-pin-hint">Доступен быстрый вход по Face ID / Touch ID</div>
+          <button type="button" id="pin-hint" class="sber-pin-hint">Сменить пользователя</button>
         </div>
 
         <div class="sber-keypad" role="group" aria-label="Клавиатура ввода кода">
@@ -82,7 +82,11 @@
           <button type="button" class="key-btn" data-digit="7"><span class="key-num">7</span><span class="key-abc">PQRS</span></button>
           <button type="button" class="key-btn" data-digit="8"><span class="key-num">8</span><span class="key-abc">TUV</span></button>
           <button type="button" class="key-btn" data-digit="9"><span class="key-num">9</span><span class="key-abc">WXYZ</span></button>
-          <button type="button" id="btn-pin-reset" class="key-btn key-bio" aria-label="Face ID / Touch ID">
+          <button type="button" id="btn-pin-reset" class="key-btn key-back-btn" aria-label="Стереть">
+            <span id="icon-key-back" class="key-back-glyph">⌫</span>
+          </button>
+          <button type="button" class="key-btn" data-digit="0"><span class="key-num">0</span></button>
+          <button type="button" id="btn-key-right" class="key-btn key-bio" aria-label="Face ID / Touch ID">
             <svg id="icon-key-bio" class="bio-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
               <path d="M4 8V6a2 2 0 0 1 2-2h2" />
               <path d="M4 16v2a2 2 0 0 0 2 2h2" />
@@ -93,10 +97,6 @@
               <path d="M12 9.5v3.5h-1" />
               <path d="M9.5 15.5c1.3 1.2 3.7 1.2 5 0" />
             </svg>
-          </button>
-          <button type="button" class="key-btn" data-digit="0"><span class="key-num">0</span></button>
-          <button type="button" id="btn-key-right" class="key-btn key-back-btn" aria-label="Стереть">
-            <span id="icon-key-back" class="key-back-glyph">⌫</span>
           </button>
         </div>
 
@@ -597,7 +597,7 @@
     <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
   </div>
 
-  <script src="./data.js?v=20261107-13"></script>
-  <script src="./app.js?v=20261107-13"></script>
+  <script src="./data.js?v=20261107-14"></script>
+  <script src="./app.js?v=20261107-14"></script>
 </body>
 </html>

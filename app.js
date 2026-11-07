@@ -308,6 +308,8 @@
     return "MS";
   }
 
+  var userSwitchedManually = false;
+
   function setupLoginProfileUI() {
     var nameEl = document.getElementById("user-name");
     var subEl = document.getElementById("user-sub");
@@ -316,7 +318,7 @@
     var editBadgeEl = document.getElementById("avatar-edit-badge");
     var initials = getLoginInitials();
 
-    if (tgUser && typeof tgUser === "object") {
+    if (!userSwitchedManually && tgUser && typeof tgUser === "object") {
       var first = safeText(tgUser.first_name, 64);
       var last = safeText(tgUser.last_name, 64);
       var uid = safeText(tgUser.id, 24);
@@ -329,7 +331,7 @@
         ? matchedEmp.dept + " • Okdesk ID " + matchedEmp.id
         : (uname ? "@" + uname + " • ID " + uid : "Telegram ID: " + uid);
     } else {
-      greetEl.textContent = timeGreeting() + ", Михаил!";
+      greetEl.textContent = timeGreeting() + "!";
       nameEl.textContent = currentEmp.name;
       subEl.textContent = currentEmp.dept + " • Okdesk ID " + currentEmp.id;
     }
@@ -539,13 +541,13 @@
     var hintEl = document.getElementById("pin-hint");
     if (pinChangeMode) {
       promptEl.textContent = "Придумайте новый 5-значный код доступа";
-      hintEl.textContent = "Код сохранится для быстрого входа как в Сбере";
+      hintEl.textContent = "Сменить пользователя";
     } else if (!saved) {
       promptEl.textContent = "Придумайте 5-значный код или войдите по " + bioTypeLabel;
-      hintEl.textContent = "Первый ввод сохранит ваш персональный 5-значный код";
+      hintEl.textContent = "Сменить пользователя";
     } else {
       promptEl.textContent = "Введите 5-значный код или войдите по " + bioTypeLabel;
-      hintEl.textContent = "Доступен быстрый вход по " + bioTypeLabel;
+      hintEl.textContent = "Сменить пользователя";
     }
   }
 
@@ -673,7 +675,7 @@
     });
   }
 
-  document.getElementById("btn-key-right").addEventListener("click", function () {
+  document.getElementById("btn-pin-reset").addEventListener("click", function () {
     if (pinBuffer.length > 0) {
       hapticImpact("light");
       pinBuffer = pinBuffer.slice(0, -1);
@@ -683,9 +685,17 @@
     }
   });
 
-  document.getElementById("btn-pin-reset").addEventListener("click", function () {
+  document.getElementById("btn-key-right").addEventListener("click", function () {
     triggerBiometricLogin();
   });
+
+  var pinHintBtn = document.getElementById("pin-hint");
+  if (pinHintBtn) {
+    pinHintBtn.addEventListener("click", function () {
+      hapticImpact("light");
+      openSwitchEmployeeModal();
+    });
+  }
 
   document.getElementById("btn-bio-login").addEventListener("click", function () {
     triggerBiometricLogin();
@@ -2127,10 +2137,11 @@
       b.addEventListener("click", function () {
         hapticImpact("light");
         currentEmp = emp;
+        userSwitchedManually = true;
         createDraft.assigneeId = emp.id;
+        setupLoginProfileUI();
         closeActionModal();
         renderAllAppViews();
-        showToast("Активен профиль: " + emp.name + " (ID " + emp.id + ")");
       });
       grid.appendChild(b);
     });
