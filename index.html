@@ -27,9 +27,9 @@
           </div>
           <div class="top-bar-right">
             <div class="theme-switcher" role="group" aria-label="Тема оформления">
-              <button type="button" class="theme-btn" data-theme-mode="light" title="Дневная тема">☀️ День</button>
-              <button type="button" class="theme-btn" data-theme-mode="dark" title="Ночная тема">🌙 Ночь</button>
-              <button type="button" class="theme-btn active" data-theme-mode="auto" title="Авто (как в системе)">Авто</button>
+              <button type="button" class="theme-btn" data-theme-mode="light" title="Дневная тема">☀️</button>
+              <button type="button" class="theme-btn" data-theme-mode="dark" title="Ночная тема">🌙</button>
+              <button type="button" class="theme-btn active" data-theme-mode="auto" title="Авто">Авто</button>
             </div>
             <button id="btn-login-close" type="button" class="sber-link-btn">Закрыть</button>
           </div>
@@ -106,22 +106,27 @@
          ЭКРАН 2: ОСНОВНОЙ ИНТЕРФЕЙС БОТА @itsupp_task_bot В MINI APP
          ========================================================= -->
     <section id="screen-app" class="screen" aria-label="Рабочий кабинет ITSUPP">
-      <!-- Верхняя панель сотрудника и быстрых статусов -->
+      <!-- Компактная двухрядная шапка: 100% влезает на любой экран без скроллбаров -->
       <header class="app-header">
         <div class="header-top">
           <button id="btn-switch-emp" type="button" class="emp-chip" title="Сменить профиль сотрудника">
             <span id="app-emp-avatar" class="emp-chip-avatar">МС</span>
             <span class="emp-chip-info">
               <span id="app-emp-name" class="emp-chip-name">Стрелкин М.</span>
-              <span id="app-emp-role" class="emp-chip-sub">Администратор · ID 1</span>
+              <span id="app-emp-role" class="emp-chip-sub">Админ · ID 1</span>
             </span>
             <span class="emp-chip-caret">▾</span>
           </button>
 
           <div class="header-actions">
+            <div class="theme-switcher" role="group" aria-label="Тема оформления">
+              <button type="button" class="theme-btn" data-theme-mode="light" title="День">☀️</button>
+              <button type="button" class="theme-btn" data-theme-mode="dark" title="Ночь">🌙</button>
+              <button type="button" class="theme-btn active" data-theme-mode="auto" title="Авто">Авто</button>
+            </div>
             <button id="btn-top-refresh" type="button" class="icon-btn" title="Обновить задачи">🔄</button>
-            <button id="btn-top-bot" type="button" class="icon-btn" title="Вернуться в чат бота">💬</button>
-            <button id="btn-top-lock" type="button" class="icon-btn" title="Заблокировать экран">🔒</button>
+            <button id="btn-top-bot" type="button" class="icon-btn" title="В чат бота">💬</button>
+            <button id="btn-top-lock" type="button" class="icon-btn" title="Заблокировать">🔒</button>
           </div>
         </div>
 
@@ -131,90 +136,59 @@
             <span id="strip-fresh-text">Оповещение: ВКЛ</span>
           </button>
           <button id="btn-strip-duty" type="button" class="status-pill">
-            <span>👨‍✈️</span>
             <span id="strip-duty-text">Дежурный: Быков М. В.</span>
           </button>
-          <div class="theme-switcher strip-theme-switcher" role="group" aria-label="Тема оформления">
-            <button type="button" class="theme-btn" data-theme-mode="light" title="Дневная тема">☀️</button>
-            <button type="button" class="theme-btn" data-theme-mode="dark" title="Ночная тема">🌙</button>
-            <button type="button" class="theme-btn active" data-theme-mode="auto" title="Авто">Авто</button>
-          </div>
         </div>
       </header>
-
-      <!-- Компактная полоса команд бота (свёрнута по умолчанию для лёгкости первого экрана) -->
-      <div class="bot-menu-panel">
-        <div class="bot-menu-header">
-          <span class="bot-menu-title">Быстрые команды @itsupp_task_bot</span>
-          <button id="btn-toggle-bot-kb" type="button" class="bot-menu-collapse">Развернуть ▾</button>
-        </div>
-        <div id="bot-menu-grid" class="bot-menu-grid hidden">
-          <div class="bot-kb-row">
-            <button type="button" class="bot-kb-btn" data-menu-cmd="mytasks">📋 Мои задачи</button>
-            <button type="button" class="bot-kb-btn bot-kb-accent" data-menu-cmd="create_task">➕ Создать задачу</button>
-          </div>
-          <div class="bot-kb-row">
-            <button type="button" class="bot-kb-btn" data-menu-cmd="refresh_tasks">🔄 Обновить задачи</button>
-            <button type="button" class="bot-kb-btn" data-menu-cmd="search">🔎 Поиск</button>
-          </div>
-          <div class="bot-kb-row">
-            <button type="button" id="btn-kb-fresh" class="bot-kb-btn bot-kb-wide" data-menu-cmd="fresh_toggle">
-              🔔 Оповещение о новых задачах: ВКЛ
-            </button>
-          </div>
-          <div class="bot-kb-row">
-            <button type="button" class="bot-kb-btn" data-menu-cmd="ai500">🎙 AI 500</button>
-            <button type="button" class="bot-kb-btn" data-menu-cmd="more">⋯ Ещё</button>
-          </div>
-        </div>
-      </div>
 
       <!-- Контентные вкладки -->
       <main class="app-main">
         <!-- ВКЛАДКА 1: ЗАДАЧИ И ПОИСК -->
         <div id="view-tasks" class="app-view active">
-          <!-- Поиск -->
+          <!-- Поиск (Enter закрывает клавиатуру) -->
           <div id="search-box-wrap" class="search-bar-wrap">
             <span class="search-icon">🔎</span>
             <input
               id="task-search-input"
               type="search"
+              enterkeyhint="search"
               class="search-input"
-              placeholder="Поиск по #номеру, клиенту, объекту, тексту…"
+              placeholder="Поиск по #номеру, клиенту, объекту…"
               autocomplete="off"
             />
             <button id="btn-search-clear" type="button" class="search-clear hidden">✕</button>
           </div>
 
-          <!-- Фильтры разделов (Мои / На контроле / На сегодня / Просроченные / Все) -->
+          <!-- Фильтры разделов: «Все» слева, все 5 кнопок гарантированно влезают в экран -->
           <div class="scope-tabs" role="tablist">
-            <button type="button" class="scope-tab active" data-scope="mine">
+            <button type="button" class="scope-tab active" data-scope="all">
+              Все <span id="cnt-all" class="scope-badge">0</span>
+            </button>
+            <button type="button" class="scope-tab" data-scope="mine">
               Мои <span id="cnt-mine" class="scope-badge">0</span>
             </button>
             <button type="button" class="scope-tab" data-scope="control">
-              Контроль <span id="cnt-control" class="scope-badge">0</span>
+              Контр. <span id="cnt-control" class="scope-badge">0</span>
             </button>
             <button type="button" class="scope-tab" data-scope="today">
-              Сегодня <span id="cnt-today" class="scope-badge">0</span>
+              Сегод. <span id="cnt-today" class="scope-badge">0</span>
             </button>
             <button type="button" class="scope-tab" data-scope="overdue">
-              Просрочено <span id="cnt-overdue" class="scope-badge badge-danger">0</span>
-            </button>
-            <button type="button" class="scope-tab" data-scope="all">
-              Все <span id="cnt-all" class="scope-badge">0</span>
+              Срок <span id="cnt-overdue" class="scope-badge badge-danger">0</span>
             </button>
           </div>
 
-          <!-- Фильтр по статусу -->
+          <!-- Фильтр по статусу: «Все» слева -->
           <div class="status-filter-row">
-            <button type="button" class="status-chip active" data-status="active">Активные</button>
-            <button type="button" class="status-chip" data-status="opened">Открытые</button>
-            <button type="button" class="status-chip" data-status="working">В работе</button>
-            <button type="button" class="status-chip" data-status="delayed">Отложенные</button>
-            <button type="button" class="status-chip" data-status="completed">Решённые</button>
+            <button type="button" class="status-chip active" data-status="all">Все</button>
+            <button type="button" class="status-chip" data-status="active">Актив.</button>
+            <button type="button" class="status-chip" data-status="opened">Открыт.</button>
+            <button type="button" class="status-chip" data-status="working">В раб.</button>
+            <button type="button" class="status-chip" data-status="delayed">Отлож.</button>
+            <button type="button" class="status-chip" data-status="completed">Решены</button>
           </div>
 
-          <!-- Список карточек задач -->
+          <!-- Список карточек задач (в хронологическом порядке: сверху новые) -->
           <div id="tasks-list" class="tasks-list"></div>
         </div>
 
@@ -252,6 +226,7 @@
                 <input
                   id="create-client-search"
                   type="search"
+                  enterkeyhint="search"
                   class="form-input"
                   placeholder="Название клиента или ID…"
                   autocomplete="off"
@@ -267,6 +242,7 @@
                 <input
                   id="create-entity-input"
                   type="text"
+                  enterkeyhint="done"
                   class="form-input"
                   placeholder="Например: Ресепшен 1 этаж / Сервер 1С"
                 />
@@ -443,6 +419,33 @@
               <button type="button" class="more-action-btn" data-more-cmd="duty" id="btn-more-duty">Дежурный: Быков М. В.</button>
               <button type="button" class="more-action-btn warn" data-more-cmd="wipe">Очистить кэш задач</button>
               <button type="button" class="more-action-btn danger" data-more-cmd="selfdestruct">Самоуничтожение</button>
+            </div>
+          </div>
+
+          <!-- Клавиатура команд бота -->
+          <div class="section-card">
+            <div class="bot-menu-header">
+              <span class="bot-menu-title">Клавиатура команд @itsupp_task_bot</span>
+              <button id="btn-toggle-bot-kb" type="button" class="bot-menu-collapse">Развернуть ▾</button>
+            </div>
+            <div id="bot-menu-grid" class="bot-menu-grid hidden">
+              <div class="bot-kb-row">
+                <button type="button" class="bot-kb-btn" data-menu-cmd="mytasks">📋 Мои задачи</button>
+                <button type="button" class="bot-kb-btn bot-kb-accent" data-menu-cmd="create_task">➕ Создать задачу</button>
+              </div>
+              <div class="bot-kb-row">
+                <button type="button" class="bot-kb-btn" data-menu-cmd="refresh_tasks">🔄 Обновить задачи</button>
+                <button type="button" class="bot-kb-btn" data-menu-cmd="search">🔎 Поиск</button>
+              </div>
+              <div class="bot-kb-row">
+                <button type="button" id="btn-kb-fresh" class="bot-kb-btn bot-kb-wide" data-menu-cmd="fresh_toggle">
+                  🔔 Оповещение о новых задачах: ВКЛ
+                </button>
+              </div>
+              <div class="bot-kb-row">
+                <button type="button" class="bot-kb-btn" data-menu-cmd="ai500">🎙 AI 500</button>
+                <button type="button" class="bot-kb-btn" data-menu-cmd="more">⋯ Ещё</button>
+              </div>
             </div>
           </div>
 

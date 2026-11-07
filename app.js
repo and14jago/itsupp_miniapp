@@ -510,8 +510,8 @@
   // ЭКРАН 2: ЛОГИКА БОТА @itsupp_task_bot В MINI APP
   // =========================================================
   var activeView = "tasks";
-  var activeScope = "mine";
-  var activeStatusFilter = "active";
+  var activeScope = "all";
+  var activeStatusFilter = "all";
   var searchQuery = "";
   var botMenuExpanded = false;
 
@@ -705,31 +705,41 @@
     listEl.textContent = "";
 
     var rawList = filterTasksByScope(activeScope);
-    var filtered = rawList.filter(function (t) {
-      if (activeStatusFilter === "active") {
-        if (isTerminalStatus(t.status_code)) return false;
-      } else if (activeStatusFilter === "working") {
-        if (t.status_code !== "working" && t.status_code !== "work") return false;
-      } else if (t.status_code !== activeStatusFilter) {
-        return false;
-      }
-      if (searchQuery) {
-        var q = searchQuery.toLowerCase();
-        var assignee = getEmployeeById(t.assignee_id);
-        var hay = [
-          t.id,
-          t.title,
-          t.description,
-          t.company_name,
-          t.entity_name,
-          assignee ? assignee.name : ""
-        ]
-          .join(" ")
-          .toLowerCase();
-        if (hay.indexOf(q) === -1) return false;
-      }
-      return true;
-    });
+    var filtered = rawList
+      .filter(function (t) {
+        if (activeStatusFilter === "all") {
+          // показывать все статусы
+        } else if (activeStatusFilter === "active") {
+          if (isTerminalStatus(t.status_code)) return false;
+        } else if (activeStatusFilter === "working") {
+          if (t.status_code !== "working" && t.status_code !== "work") return false;
+        } else if (t.status_code !== activeStatusFilter) {
+          return false;
+        }
+        if (searchQuery) {
+          var q = searchQuery.toLowerCase();
+          var assignee = getEmployeeById(t.assignee_id);
+          var hay = [
+            t.id,
+            t.title,
+            t.description,
+            t.company_name,
+            t.entity_name,
+            assignee ? assignee.name : ""
+          ]
+            .join(" ")
+            .toLowerCase();
+          if (hay.indexOf(q) === -1) return false;
+        }
+        return true;
+      })
+      .slice()
+      .sort(function (a, b) {
+        var ca = String(a.created_at || "");
+        var cb = String(b.created_at || "");
+        if (ca !== cb) return cb.localeCompare(ca);
+        return (parseInt(b.id, 10) || 0) - (parseInt(a.id, 10) || 0);
+      });
 
     if (filtered.length === 0) {
       var emptyCard = el("div", "section-card");
@@ -795,6 +805,7 @@
 
     var metaGrid = el("div", "task-meta-grid");
     var items = [
+      ["Создана", task.created_at || "—"],
       ["Клиент", task.company_name || "—"],
       ["Объект", task.entity_name || "Без объекта"],
       ["Исполнитель", assigneeEmp ? assigneeEmp.short : "ID " + task.assignee_id],
@@ -1807,9 +1818,26 @@
     });
   }
 
-  // Поиск по задачам
+  // Поиск по задачам (Enter закрывает экранную клавиатуру)
+  function bindDismissKeyboardOnEnter(inputEl) {
+    if (!inputEl) return;
+    inputEl.addEventListener("keydown", function (ev) {
+      if (ev.key === "Enter" || ev.keyCode === 13) {
+        ev.preventDefault();
+        inputEl.blur();
+      }
+    });
+    inputEl.addEventListener("search", function () {
+      inputEl.blur();
+    });
+  }
+
   var searchInput = document.getElementById("task-search-input");
   var searchClear = document.getElementById("btn-search-clear");
+  bindDismissKeyboardOnEnter(searchInput);
+  bindDismissKeyboardOnEnter(document.getElementById("create-client-search"));
+  bindDismissKeyboardOnEnter(document.getElementById("create-entity-input"));
+
   searchInput.addEventListener("input", function () {
     searchQuery = safeText(searchInput.value, 80);
     searchClear.classList.toggle("hidden", !searchQuery);
@@ -1819,6 +1847,7 @@
     searchInput.value = "";
     searchQuery = "";
     searchClear.classList.add("hidden");
+    searchInput.blur();
     renderTasksView();
   });
 
