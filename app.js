@@ -16,8 +16,8 @@
   var STORAGE_KEY_THEME = "itsupp_miniapp_theme_v1";
   var STORAGE_KEY_AVATAR = "itsupp_miniapp_custom_avatar_v1";
   var STORAGE_KEY_AVATAR_TOUCHED = "itsupp_miniapp_avatar_touched_v1";
-  var STORAGE_KEY_LOGO_MIGRATED = "itsupp_miniapp_servis_pro_logo_v1";
-  var SERVIS_PRO_LOGO_URL = "./logo.png";
+  var STORAGE_KEY_LOGO_MIGRATED = "itsupp_miniapp_emblem_only_v2";
+  var SERVIS_PRO_LOGO_URL = "./logo.png?v=2";
 
   function safeText(val, maxLen) {
     var s = String(val == null ? "" : val).replace(/[\u0000-\u001F\u007F]/g, "").trim();
@@ -247,13 +247,11 @@
     dept: "Руководство / ИТ"
   };
 
-  // Авто-замена старого сгенерированного логотипа на фирменный логотип СЕРВИС-ПРО
+  // Обновление кэшированного URL логотипа до чистого круга без текста
   try {
-    if (!localStorage.getItem(STORAGE_KEY_LOGO_MIGRATED)) {
-      if (localStorage.getItem(STORAGE_KEY_AVATAR_TOUCHED)) {
-        localStorage.setItem(STORAGE_KEY_AVATAR, SERVIS_PRO_LOGO_URL);
-      }
-      localStorage.setItem(STORAGE_KEY_LOGO_MIGRATED, "1");
+    var prevSaved = localStorage.getItem(STORAGE_KEY_AVATAR) || "";
+    if (prevSaved.indexOf("./logo.png") === 0 && prevSaved !== SERVIS_PRO_LOGO_URL) {
+      localStorage.setItem(STORAGE_KEY_AVATAR, SERVIS_PRO_LOGO_URL);
     }
   } catch (_e) {}
 
@@ -301,7 +299,7 @@
       var img = document.createElement("img");
       img.className = "avatar-custom-img";
       img.src = customImg;
-      img.alt = fallbackInitials || "СЕРВИС-ПРО";
+      img.alt = fallbackInitials || "Logo";
       targetEl.appendChild(img);
     } else {
       targetEl.classList.remove("has-custom-img");
@@ -478,7 +476,7 @@
       setupLoginProfileUI();
       renderHeader();
       hapticNotify("success");
-      showToast("✓ Установлено лого СЕРВИС-ПРО");
+      showToast("✓ Лого установлено");
     });
   }
 
