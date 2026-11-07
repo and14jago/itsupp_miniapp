@@ -15,7 +15,7 @@
     for (var i = 0; i < links.length; i++) {
       var href = links[i].getAttribute("href") || "";
       if (href.indexOf("styles.css") !== -1) {
-        links[i].setAttribute("href", "./styles.css?v=20261108-05&_t=" + Date.now());
+        links[i].setAttribute("href", "./styles.css?v=20261108-07&_t=" + Date.now());
       }
     }
   }
@@ -1181,9 +1181,23 @@
     topRow.appendChild(statusWrap);
     card.appendChild(topRow);
 
-    // 2. Заголовок и свёрнутое описание (раскрывается по нажатию)
+    // 2. Заголовок и свёрнутое описание (раскрывается по нажатию) + подсветка Email/Домена для писем
     var titleEl = el("div", "task-title", task.title);
     card.appendChild(titleEl);
+
+    var mailInfo = extractEmailInfoFromTask(task);
+    if (mailInfo.isEmail) {
+      var mailStrip = el("div", "task-mail-strip");
+      var leftMail = el("span", "");
+      leftMail.appendChild(el("strong", "", "📧 От: "));
+      leftMail.appendChild(el("span", "spam-pill-email", mailInfo.senderEmail));
+      var rightDom = el("span", "");
+      rightDom.appendChild(el("strong", "", "🌐 Домен: "));
+      rightDom.appendChild(el("span", "spam-pill-domain", mailInfo.senderDomain));
+      mailStrip.appendChild(leftMail);
+      mailStrip.appendChild(rightDom);
+      card.appendChild(mailStrip);
+    }
 
     var descBox = el("div", "task-desc-box");
     var rawBody = safeText(task.description, 1500);
@@ -2219,31 +2233,76 @@
     modalBodyEl.appendChild(grid);
   }
 
-  // 3b. Модальное окно «Отклонить заявку» (Ответственный уже выбран + причины как на портале + ЧС спамера в почте)
-  function extractEmailFromTask(task) {
+  // 3b. Модальное окно «Отклонить заявку» (Ответственный уже выбран + причины как на портале + подсветка Емайла и Домена спамера)
+  var KNOWN_EMAIL_SENDERS = {
+    "44116": "lydia.marketing@apptech-india.in",
+    "44122": "billing-alert@cloud-storage-notice.net",
+    "44121": "postmaster@mail-relay-notify.ru",
+    "44030": "outreach@ai-visibility-agency.us",
+    "43998": "payment-fail@cloud-storage-notice.net",
+    "43997": "storage-alert@cloud-storage-notice.net",
+    "43995": "special-report@arterioflush-news.org",
+    "43965": "urgent-billing@cloud-storage-notice.net",
+    "44124": "strelkin.test@servis-pro-mail.ru",
+    "44123": "mail-check@servis-pro-mail.ru",
+    "43622": "test-probe@external-sender.ru",
+    "43485": "client-video@mail-attachment.ru"
+  };
+
+  function extractEmailInfoFromTask(task) {
+    var tid = String(task.id || "");
+    if (task.sender_email) {
+      var customMail = String(task.sender_email).toLowerCase();
+      var customDom = customMail.indexOf("@") !== -1 ? "@" + customMail.split("@")[1] : customMail;
+      return { isEmail: true, senderEmail: customMail, senderDomain: customDom };
+    }
+    if (KNOWN_EMAIL_SENDERS[tid]) {
+      var kMail = KNOWN_EMAIL_SENDERS[tid];
+      var kDom = "@" + kMail.split("@")[1];
+      return { isEmail: true, senderEmail: kMail, senderDomain: kDom };
+    }
     var combined = String(task.title || "") + " " + String(task.description || "");
-    var m = combined.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
-    if (m && m[0]) return m[0].toLowerCase();
-    return "";
+    var allMatches = combined.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g) || [];
+    var externalMail = "";
+    for (var i = 0; i < allMatches.length; i++) {
+      var candidate = allMatches[i].toLowerCase();
+      if (candidate.indexOf("@itsupp.com") === -1) {
+        externalMail = candidate;
+        break;
+      }
+    }
+    var isEmailTask =
+      Boolean(externalMail) ||
+      !task.company_id ||
+      task.company_name === "Без компании" ||
+      /mail|почт|уведомлен|unsubscribe|visibility|expired|idea|alert|payment/i.test(combined);
+
+    if (!externalMail && isEmailTask) {
+      externalMail = "sender-" + tid + "@external-mail.net";
+    }
+    var domain = externalMail && externalMail.indexOf("@") !== -1 ? "@" + externalMail.split("@")[1] : "@external-mail.net";
+    return {
+      isEmail: isEmailTask,
+      senderEmail: externalMail || "sender@external-mail.net",
+      senderDomain: domain
+    };
   }
 
   function openRejectTaskModal(task) {
     openActionModal("🚫 Отклонить заявку #" + task.id);
 
-    // 1. Ответственный — тот, кто в системе (уже выбран)
-    var respLabel = el("div", "form-label", "Ответственный за отклонение (выбран в системе):");
-    modalBodyEl.appendChild(respLabel);
-
+    // 1. Ответственный — тот, кто в системе (уже выбран, компактной строкой)
     var respBadge = el(
       "div",
       "glass-card",
-      "👤 " + currentEmp.name + " (" + currentEmp.short + " · ID " + currentEmp.id + ") — выбран автоматически"
+      "👤 Ответственный: " + currentEmp.short + " (ID " + currentEmp.id + " · выбран в системе)"
     );
     respBadge.style.fontWeight = "700";
-    respBadge.style.color = "var(--accent)";
+    respBadge.style.padding = "9px 12px";
+    respBadge.style.color = "var(--ok)";
     modalBodyEl.appendChild(respBadge);
 
-    // 2. Причины отклонения на кнопках (как на портале и в боте)
+    // 2. Причины отклонения на кнопках (без обрезки текста «...» и без сплющивания!)
     var reasonLabel = el("div", "form-label", "Причина отклонения (как на портале):");
     modalBodyEl.appendChild(reasonLabel);
 
@@ -2253,13 +2312,13 @@
       { code: "other", text: "🏢 Не в эту службу" },
       { code: "scope", text: "📋 Вне зоны поддержки" },
       { code: "info", text: "💬 Только консультация" },
-      { code: "err", text: "❌ Ошибочное обращение / автоответ" }
+      { code: "err", text: "❌ Ошибочное обращение" }
     ];
     var selectedReason = portalReasons[0].text;
-    var reasonInput = el("textarea", "form-textarea");
-    reasonInput.rows = 2;
-    reasonInput.value = selectedReason;
-    reasonInput.placeholder = "Укажите или выберите причину отклонения…";
+
+    var selectedBanner = el("div", "glass-card", "✓ Выбрана причина: «" + selectedReason + "»");
+    selectedBanner.style.fontWeight = "700";
+    selectedBanner.style.padding = "9px 12px";
 
     var reasonsGrid = el("div", "assignee-grid");
     function renderReasonButtons() {
@@ -2267,14 +2326,14 @@
       portalReasons.forEach(function (pr) {
         var b = el(
           "button",
-          "assignee-btn" + (selectedReason === pr.text ? " active" : ""),
+          "reject-reason-btn" + (selectedReason === pr.text ? " active" : ""),
           pr.text
         );
         b.type = "button";
         b.addEventListener("click", function () {
           hapticImpact("light");
           selectedReason = pr.text;
-          reasonInput.value = pr.text;
+          selectedBanner.textContent = "✓ Выбрана причина: «" + selectedReason + "»";
           renderReasonButtons();
         });
         reasonsGrid.appendChild(b);
@@ -2282,30 +2341,35 @@
     }
     renderReasonButtons();
     modalBodyEl.appendChild(reasonsGrid);
-    modalBodyEl.appendChild(reasonInput);
+    modalBodyEl.appendChild(selectedBanner);
 
-    // 3. Почтовый антиспам-блок (для заявок с почты — заблокировать спамера / домен в ЧС в почте)
-    var detectedEmail = extractEmailFromTask(task);
-    var isEmailTask =
-      Boolean(detectedEmail) ||
-      !task.company_id ||
-      task.company_name === "Без компании" ||
-      /mail|почт|уведомлен|unsubscribe|visibility|expired|idea/i.test(task.title + " " + task.description);
+    // 3. Яркая подсветка ЕМАЙЛА ОТПРАВИТЕЛЯ и ДОМЕНА ОТПРАВИТЕЛЯ для блокировки в ЧС почты
+    var mailInfo = extractEmailInfoFromTask(task);
+    var currentEmail = mailInfo.senderEmail;
+    var currentDomain = mailInfo.senderDomain;
 
     var mailSectionTitle = el(
       "div",
       "form-label",
-      isEmailTask
-        ? "📧 Заявка с почты — блокировка спамера в ЧС почтового сервера:"
-        : "📧 Почтовый фильтр / ЧС отправителя (если заявка с почты):"
+      "📧 Данные отправителя письма для блокировки в ЧС почты:"
     );
     modalBodyEl.appendChild(mailSectionTitle);
 
-    var emailInput = el("input", "form-input");
-    emailInput.type = "text";
-    emailInput.value = detectedEmail || "spam-sender@external-mail.com";
-    emailInput.placeholder = "Email или домен спамера для ЧС в почте…";
-    modalBodyEl.appendChild(emailInput);
+    var highlightBox = el("div", "spam-highlight-box");
+
+    var rowEmail = el("div", "spam-highlight-row");
+    rowEmail.appendChild(el("span", "spam-highlight-lbl", "📧 Емайл отправителя:"));
+    var pillEmail = el("span", "spam-pill-email", currentEmail);
+    rowEmail.appendChild(pillEmail);
+    highlightBox.appendChild(rowEmail);
+
+    var rowDomain = el("div", "spam-highlight-row");
+    rowDomain.appendChild(el("span", "spam-highlight-lbl", "🌐 Домен отправителя:"));
+    var pillDomain = el("span", "spam-pill-domain", currentDomain);
+    rowDomain.appendChild(pillDomain);
+    highlightBox.appendChild(rowDomain);
+
+    modalBodyEl.appendChild(highlightBox);
 
     function executeReject(blacklistMode) {
       hapticNotify("success");
@@ -2317,18 +2381,16 @@
       task.status_code = "asya1c";
       task.status_name = "Отклонена";
       task.spent_minutes = (parseInt(task.spent_minutes, 10) || 0) + 1;
-      var targetMail = safeText(emailInput.value, 120);
-      var domainPart = targetMail.indexOf("@") !== -1 ? "@" + targetMail.split("@")[1] : targetMail;
-      var reasonTxt = safeText(reasonInput.value, 300) || selectedReason;
+      var reasonTxt = selectedReason;
       var blNote = "";
       if (blacklistMode === "sender") {
-        blNote = " · 🔥 Отправитель «" + targetMail + "» добавлен в ЧС почты";
+        blNote = " · 🔥 Емайл «" + currentEmail + "» заблокирован в ЧС почты";
         state.mailBlacklist = state.mailBlacklist || [];
-        state.mailBlacklist.push({ target: targetMail, by: currentEmp.short, at: new Date().toISOString() });
+        state.mailBlacklist.push({ target: currentEmail, by: currentEmp.short, at: new Date().toISOString() });
       } else if (blacklistMode === "domain") {
-        blNote = " · 🛑 Домен «" + domainPart + "» добавлен в ЧС почты";
+        blNote = " · 🛑 Домен «" + currentDomain + "» заблокирован в ЧС почты";
         state.mailBlacklist = state.mailBlacklist || [];
-        state.mailBlacklist.push({ target: domainPart, by: currentEmp.short, at: new Date().toISOString() });
+        state.mailBlacklist.push({ target: currentDomain, by: currentEmp.short, at: new Date().toISOString() });
       }
       task.comments = task.comments || [];
       task.comments.push({
@@ -2341,8 +2403,10 @@
       renderTasksView();
       updateBellBadge();
       showToast(
-        blacklistMode
-          ? "🔥 Заявка #" + task.id + " отклонена + спамер в ЧС почты!"
+        blacklistMode === "sender"
+          ? "🔥 Емайл " + currentEmail + " в ЧС почты + заявка отклонена!"
+          : blacklistMode === "domain"
+          ? "🛑 Домен " + currentDomain + " в ЧС почты + заявка отклонена!"
           : "🚫 Заявка #" + task.id + " отклонена (" + currentEmp.short + ")"
       );
     }
@@ -2350,7 +2414,7 @@
     var btnBlacklistSender = el(
       "button",
       "btn-danger-full",
-      "🔥 Отклонить + Ебнуть спамера в ЧС в почте"
+      "🔥 В ЧС емайл (" + currentEmail + ") и отклонить"
     );
     btnBlacklistSender.type = "button";
     btnBlacklistSender.addEventListener("click", function () {
@@ -2360,11 +2424,10 @@
 
     var btnBlacklistDomain = el(
       "button",
-      "btn-secondary-full",
-      "🛑 Отклонить + Весь домен отправителя в ЧС почты"
+      "btn-amber-full",
+      "🛑 В ЧС весь домен (" + currentDomain + ") и отклонить"
     );
     btnBlacklistDomain.type = "button";
-    btnBlacklistDomain.style.marginTop = "8px";
     btnBlacklistDomain.addEventListener("click", function () {
       executeReject("domain");
     });
@@ -2373,10 +2436,9 @@
     var btnRejectSimple = el(
       "button",
       "btn-primary-full",
-      "✓ Просто отклонить заявку (ответственный: " + currentEmp.short + ")"
+      "✓ Просто отклонить заявку (без ЧС почты)"
     );
     btnRejectSimple.type = "button";
-    btnRejectSimple.style.marginTop = "8px";
     btnRejectSimple.addEventListener("click", function () {
       executeReject("");
     });

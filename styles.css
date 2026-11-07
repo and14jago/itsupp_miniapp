@@ -1646,6 +1646,141 @@ html[data-theme="dark"] .status-closed { background: #252b33; border-color: #495
   cursor: pointer;
 }
 
+.btn-danger-full {
+  width: 100%;
+  border: 1.5px solid #d32f2f;
+  border-radius: 13px;
+  padding: 13px 16px;
+  background: linear-gradient(135deg, #e53935, #c62828);
+  color: #ffffff;
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(229, 57, 53, 0.32);
+  text-align: center;
+}
+
+.btn-amber-full {
+  width: 100%;
+  border: 1.5px solid #ef6c00;
+  border-radius: 13px;
+  padding: 13px 16px;
+  background: rgba(245, 124, 0, 0.14);
+  color: #e65100;
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+}
+
+[data-theme="dark"] .btn-amber-full {
+  background: rgba(255, 152, 0, 0.18);
+  border-color: #ff9800;
+  color: #ffb74d;
+}
+
+.reject-reason-btn {
+  padding: 10px 10px;
+  border-radius: 11px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.25;
+  cursor: pointer;
+  text-align: left;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.reject-reason-btn.active {
+  background: var(--sber-green-soft);
+  border: 1.5px solid var(--sber-green);
+  color: var(--ok);
+  font-weight: 700;
+}
+
+.spam-highlight-box {
+  background: var(--bg);
+  border: 1.5px solid rgba(229, 57, 53, 0.38);
+  border-radius: 13px;
+  padding: 11px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.spam-highlight-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.spam-highlight-lbl {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.spam-pill-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: rgba(229, 57, 53, 0.14);
+  border: 1.5px solid #e53935;
+  color: #c62828;
+  font-size: 13.5px;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  word-break: break-all;
+}
+
+[data-theme="dark"] .spam-pill-email {
+  background: rgba(229, 57, 53, 0.22);
+  border-color: #ff5252;
+  color: #ff8a80;
+}
+
+.spam-pill-domain {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: rgba(245, 124, 0, 0.15);
+  border: 1.5px solid #f57c00;
+  color: #e65100;
+  font-size: 13.5px;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  word-break: break-all;
+}
+
+[data-theme="dark"] .spam-pill-domain {
+  background: rgba(255, 152, 0, 0.22);
+  border-color: #ffa726;
+  color: #ffcc80;
+}
+
+.task-mail-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 6px 10px;
+  margin-bottom: 6px;
+  border-radius: 10px;
+  background: rgba(229, 57, 53, 0.08);
+  border: 1px dashed rgba(229, 57, 53, 0.42);
+  font-size: 12px;
+}
+
 /* Вложения к комментарию (скрепочка) */
 .comment-attach-row {
   display: flex;
@@ -2029,7 +2164,11 @@ html[data-theme="dark"] .status-closed { background: #252b33; border-color: #495
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 11px;
+  gap: 10px;
+}
+
+.action-sheet-body > * {
+  flex-shrink: 0;
 }
 
 .calc-display {
