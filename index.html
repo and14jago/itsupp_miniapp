@@ -193,14 +193,13 @@
             </button>
           </div>
 
-          <!-- Фильтр по статусу: «Все» слева -->
+          <!-- Фильтр по статусу: только активные статусы (без Закрыта / Отклонена / Решена) -->
           <div class="status-filter-row">
             <button type="button" class="status-chip active" data-status="all">Все</button>
-            <button type="button" class="status-chip" data-status="active">Актив.</button>
             <button type="button" class="status-chip" data-status="opened">Открыт.</button>
+            <button type="button" class="status-chip" data-status="work">Принят.</button>
             <button type="button" class="status-chip" data-status="working">В раб.</button>
             <button type="button" class="status-chip" data-status="delayed">Отлож.</button>
-            <button type="button" class="status-chip" data-status="completed">Решены</button>
           </div>
 
           <!-- Список карточек задач (в хронологическом порядке: сверху новые) -->
@@ -212,7 +211,7 @@
           <div class="section-card">
             <div class="section-head">
               <h2>Новая заявка</h2>
-              <span class="section-tag">Okdesk</span>
+              <span class="section-tag">Портал ITSUPP</span>
             </div>
             <p class="section-desc">
               Исполнитель назначается напрямую в <code>assignee_id</code> без подстановки сторонней группы.

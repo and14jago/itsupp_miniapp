@@ -832,7 +832,7 @@ html, body {
 /* Чипы фильтрации статусов (умещаются в 100% ширины без скролла) */
 .status-filter-row {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 2px;
   margin-bottom: 8px;
 }

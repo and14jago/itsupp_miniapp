@@ -10,7 +10,7 @@
   }
 
   var DATA = window.ITSUPP_DATA || { companies: [], employees: [], initialTasks: [] };
-  var STORAGE_KEY_STATE = "itsupp_miniapp_state_v2";
+  var STORAGE_KEY_STATE = "itsupp_miniapp_state_v3";
   var STORAGE_KEY_PIN = "itsupp_miniapp_pin_v2";
   var STORAGE_KEY_BIO = "itsupp_miniapp_bio_prefs_v2";
   var STORAGE_KEY_THEME = "itsupp_miniapp_theme_v1";
@@ -192,7 +192,7 @@
       tasks: JSON.parse(JSON.stringify(DATA.initialTasks || [])),
       freshEnabled: true,
       dutyEmpId: "8",
-      nextIssueId: 44122,
+      nextIssueId: 44125,
       nudgeTimestamps: {}
     };
   }
@@ -774,8 +774,9 @@
     return "foreign";
   }
 
+  // Исключение терминальных статусов (ЗАКРЫТА / ОТКЛОНЕНА / РЕШЕНА) как в боте (TERMINAL_STATUS_CODES)
   function isTerminalStatus(code) {
-    return code === "completed" || code === "asya1c";
+    return code === "completed" || code === "closed" || code === "asya1c" || code === "rejected";
   }
 
   // --- Переключение вкладок ---
@@ -835,10 +836,11 @@
     if (moreDutyBtn) moreDutyBtn.textContent = dutyLabel;
   }
 
-  // --- Списки и фильтрация задач ---
+  // --- Списки и фильтрация задач (без ЗАКРЫТА / ОТКЛОНЕНА / РЕШЕНА, как в боте) ---
   function filterTasksByScope(scope) {
     var empId = currentEmp.id;
     return state.tasks.filter(function (t) {
+      if (isTerminalStatus(t.status_code)) return false;
       if (scope === "mine") {
         return isOwnTaskForUser(t, empId);
       }
@@ -846,10 +848,10 @@
         return isControlTaskForUser(t, empId);
       }
       if (scope === "today") {
-        return (isOwnTaskForUser(t, empId) || currentEmp.role === "admin") && t.due_bucket === "today" && !isTerminalStatus(t.status_code);
+        return (isOwnTaskForUser(t, empId) || currentEmp.role === "admin") && t.due_bucket === "today";
       }
       if (scope === "overdue") {
-        return (isOwnTaskForUser(t, empId) || currentEmp.role === "admin") && t.due_bucket === "overdue" && !isTerminalStatus(t.status_code);
+        return (isOwnTaskForUser(t, empId) || currentEmp.role === "admin") && t.due_bucket === "overdue";
       }
       return true;
     });
@@ -858,9 +860,7 @@
   function updateScopeCounts() {
     var scopes = ["mine", "control", "today", "overdue", "all"];
     scopes.forEach(function (sc) {
-      var list = filterTasksByScope(sc).filter(function (t) {
-        return sc === "all" ? true : !isTerminalStatus(t.status_code);
-      });
+      var list = filterTasksByScope(sc);
       var badge = document.getElementById("cnt-" + sc);
       if (badge) badge.textContent = String(list.length);
     });
@@ -868,11 +868,13 @@
 
   var STATUS_META = {
     opened: { label: "Открыта", cls: "status-opened" },
+    resend: { label: "Переоткрыта", cls: "status-opened" },
     work: { label: "Принята", cls: "status-work" },
     working: { label: "Выполняется", cls: "status-working" },
     delayed: { label: "Отложена", cls: "status-delayed" },
-    restart: { label: "На доработке", cls: "status-restart" },
+    restart: { label: "В работе", cls: "status-restart" },
     completed: { label: "Решена", cls: "status-completed" },
+    closed: { label: "Закрыта", cls: "status-asya1c" },
     asya1c: { label: "Отклонена", cls: "status-asya1c" }
   };
 
@@ -931,11 +933,13 @@
     var filtered = rawList
       .filter(function (t) {
         if (activeStatusFilter === "all") {
-          // показывать все статусы
-        } else if (activeStatusFilter === "active") {
-          if (isTerminalStatus(t.status_code)) return false;
+          // все активные статусы (без Закрыта / Отклонена / Решена)
+        } else if (activeStatusFilter === "opened") {
+          if (t.status_code !== "opened" && t.status_code !== "resend") return false;
+        } else if (activeStatusFilter === "work") {
+          if (t.status_code !== "work") return false;
         } else if (activeStatusFilter === "working") {
-          if (t.status_code !== "working" && t.status_code !== "work") return false;
+          if (t.status_code !== "working" && t.status_code !== "restart") return false;
         } else if (t.status_code !== activeStatusFilter) {
           return false;
         }
@@ -1156,7 +1160,7 @@
       })
     );
     moreGrid.appendChild(
-      makeActionBtn("Открыть в Okdesk", "", function () {
+      makeActionBtn("Открыть на портале", "", function () {
         openIssueInOkdesk(task.id);
       })
     );
@@ -1531,7 +1535,7 @@
 
     var input = el("textarea", "form-textarea");
     input.rows = 3;
-    input.placeholder = "Введите текст комментария в Okdesk…";
+    input.placeholder = "Введите текст комментария к заявке…";
     modalBodyEl.appendChild(input);
 
     var btnSend = el("button", "btn-primary-full", "Отправить комментарий");
@@ -1559,7 +1563,7 @@
 
   // 6. Модальное окно выбора текущего сотрудника
   function openSwitchEmployeeModal() {
-    openActionModal("Профиль сотрудника (Okdesk)");
+    openActionModal("Профиль сотрудника (Портал ITSUPP)");
     modalBodyEl.appendChild(
       el(
         "p",
