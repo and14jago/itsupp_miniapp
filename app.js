@@ -16,6 +16,8 @@
   var STORAGE_KEY_THEME = "itsupp_miniapp_theme_v1";
   var STORAGE_KEY_AVATAR = "itsupp_miniapp_custom_avatar_v1";
   var STORAGE_KEY_AVATAR_TOUCHED = "itsupp_miniapp_avatar_touched_v1";
+  var STORAGE_KEY_LOGO_MIGRATED = "itsupp_miniapp_servis_pro_logo_v1";
+  var SERVIS_PRO_LOGO_URL = "./logo.png";
 
   function safeText(val, maxLen) {
     var s = String(val == null ? "" : val).replace(/[\u0000-\u001F\u007F]/g, "").trim();
@@ -245,6 +247,16 @@
     dept: "Руководство / ИТ"
   };
 
+  // Авто-замена старого сгенерированного логотипа на фирменный логотип СЕРВИС-ПРО
+  try {
+    if (!localStorage.getItem(STORAGE_KEY_LOGO_MIGRATED)) {
+      if (localStorage.getItem(STORAGE_KEY_AVATAR_TOUCHED)) {
+        localStorage.setItem(STORAGE_KEY_AVATAR, SERVIS_PRO_LOGO_URL);
+      }
+      localStorage.setItem(STORAGE_KEY_LOGO_MIGRATED, "1");
+    }
+  } catch (_e) {}
+
   function getSavedAvatar() {
     try {
       return localStorage.getItem(STORAGE_KEY_AVATAR) || "";
@@ -266,6 +278,7 @@
       if (dataUrl) {
         localStorage.setItem(STORAGE_KEY_AVATAR, String(dataUrl));
         localStorage.setItem(STORAGE_KEY_AVATAR_TOUCHED, "1");
+        localStorage.setItem(STORAGE_KEY_LOGO_MIGRATED, "1");
       } else {
         localStorage.removeItem(STORAGE_KEY_AVATAR);
       }
@@ -274,61 +287,21 @@
     }
   }
 
-  function buildItsuppLogoDataUrl() {
-    var canvas = document.createElement("canvas");
-    var size = 384;
-    canvas.width = size;
-    canvas.height = size;
-    var ctx = canvas.getContext("2d");
-
-    // Тёмно-изумрудный фирменный градиент ITSUPP
-    var grad = ctx.createLinearGradient(0, 0, size, size);
-    grad.addColorStop(0, "#0F172A");
-    grad.addColorStop(0.55, "#112A22");
-    grad.addColorStop(1, "#14532D");
-    ctx.fillStyle = grad;
-    ctx.beginPath();
-    ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Внутреннее светящееся кольцо
-    ctx.strokeStyle = "#21A038";
-    ctx.lineWidth = 8;
-    ctx.beginPath();
-    ctx.arc(size / 2, size / 2, size / 2 - 18, 0, Math.PI * 2);
-    ctx.stroke();
-
-    // Верхний зелёный индикатор статуса 24/7
-    ctx.fillStyle = "#22C55E";
-    ctx.beginPath();
-    ctx.arc(size / 2, 96, 14, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Надпись IT SUPP
-    ctx.fillStyle = "#FFFFFF";
-    ctx.font = "800 66px -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText("IT SUPP", size / 2, 194);
-
-    // Подзаголовок SERVICE DESK
-    ctx.fillStyle = "#86EFAC";
-    ctx.font = "700 24px -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif";
-    ctx.fillText("SERVICE DESK", size / 2, 262);
-
-    return canvas.toDataURL("image/png");
-  }
-
   function renderAvatarNode(targetEl, fallbackInitials) {
     if (!targetEl) return;
     var customImg = getSavedAvatar();
     targetEl.textContent = "";
-    if (customImg && customImg.indexOf("data:image/") === 0) {
+    if (
+      customImg &&
+      (customImg === SERVIS_PRO_LOGO_URL ||
+        customImg.indexOf("./logo.png") === 0 ||
+        customImg.indexOf("data:image/") === 0)
+    ) {
       targetEl.classList.add("has-custom-img");
       var img = document.createElement("img");
       img.className = "avatar-custom-img";
       img.src = customImg;
-      img.alt = fallbackInitials || "Logo";
+      img.alt = fallbackInitials || "СЕРВИС-ПРО";
       targetEl.appendChild(img);
     } else {
       targetEl.classList.remove("has-custom-img");
@@ -501,12 +474,11 @@
   if (btnSrcLogo) {
     btnSrcLogo.addEventListener("click", function () {
       closeAvatarMenuPopover();
-      var logoDataUrl = buildItsuppLogoDataUrl();
-      setSavedAvatar(logoDataUrl);
+      setSavedAvatar(SERVIS_PRO_LOGO_URL);
       setupLoginProfileUI();
       renderHeader();
       hapticNotify("success");
-      showToast("✓ Установлено лого ITSUPP");
+      showToast("✓ Установлено лого СЕРВИС-ПРО");
     });
   }
 
