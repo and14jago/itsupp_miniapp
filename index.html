@@ -5,48 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="referrer" content="no-referrer" />
   <meta name="robots" content="noindex, nofollow" />
-  <meta
-    http-equiv="Content-Security-Policy"
-    content="default-src 'none'; script-src 'self' https://telegram.org; style-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'none'; object-src 'none'; media-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none';"
-  />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self' https://telegram.org; style-src 'self'; img-src 'self' data: blob: https://t.me https://*.telesco.pe; connect-src 'self'; font-src 'none'; object-src 'none'; media-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none';"
+    />
   <title>ITSUPP — Рабочий кабинет</title>
   <link rel="stylesheet" href="./styles.css" />
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
   <div class="app-shell">
+    <!-- Скрытый input для загрузки фото или логотипа на экран входа -->
+    <input id="login-avatar-input" type="file" accept="image/*" class="hidden" />
+
     <!-- =========================================================
          ЭКРАН 1: ВХОД КАК В СБЕРЕ (FACE ID / TOUCH ID + 5-ЗНАЧНЫЙ КОД)
          ========================================================= -->
     <section id="screen-login" class="screen active" aria-label="Вход в приложение">
       <div class="sber-login-wrap">
         <div class="sber-top-bar">
-          <div class="sber-Brand">
+          <div class="sber-Brand hidden">
             <span class="sber-brand-dot"></span>
             <span class="sber-brand-title">ITSUPP ID</span>
           </div>
+          <div class="theme-switcher" role="group" aria-label="Тема оформления">
+            <button type="button" class="theme-btn" data-theme-mode="light" title="Дневная тема">☀️</button>
+            <button type="button" class="theme-btn" data-theme-mode="dark" title="Ночная тема">🌙</button>
+            <button type="button" class="theme-btn active" data-theme-mode="auto" title="Авто">Авто</button>
+          </div>
           <div class="top-bar-right">
-            <div class="theme-switcher" role="group" aria-label="Тема оформления">
-              <button type="button" class="theme-btn" data-theme-mode="light" title="Дневная тема">☀️</button>
-              <button type="button" class="theme-btn" data-theme-mode="dark" title="Ночная тема">🌙</button>
-              <button type="button" class="theme-btn active" data-theme-mode="auto" title="Авто">Авто</button>
-            </div>
-            <button id="btn-login-close" type="button" class="sber-link-btn">Закрыть</button>
+            <button id="btn-login-more" type="button" class="top-circle-btn" title="Меню и фото/логотип" aria-label="Меню">⋯</button>
+            <button id="btn-login-close" type="button" class="top-circle-btn" title="Закрыть" aria-label="Закрыть">✕</button>
           </div>
         </div>
 
         <div class="sber-profile-block">
-          <div class="sber-avatar-wrap">
-            <div id="user-avatar" class="sber-avatar">TG</div>
-            <div class="sber-avatar-badge" title="Защищённый контур">✓</div>
-          </div>
-          <div id="login-greeting" class="sber-greeting">Добрый вечер</div>
-          <div id="user-name" class="sber-user-name">Гость</div>
-          <div id="user-sub" class="sber-user-sub">Профиль Telegram</div>
+          <button type="button" id="btn-avatar-upload" class="sber-avatar-wrap" title="Нажмите, чтобы вставить фото или логотип">
+            <div id="user-avatar" class="sber-avatar">MS</div>
+            <div class="sber-avatar-badge" title="Загрузить фото или логотип">📷</div>
+          </button>
+          <div id="login-greeting" class="sber-greeting hidden">Добрый вечер</div>
+          <div id="user-name" class="sber-user-name">Mikhail Strelkin</div>
+          <div id="user-sub" class="sber-user-sub hidden">Профиль Telegram</div>
+          <button type="button" id="btn-avatar-hint" class="avatar-upload-link">Загрузить фото / лого</button>
         </div>
 
         <div class="sber-pin-section">
-          <div id="pin-prompt" class="sber-pin-label">Введите код доступа или войдите по биометрии</div>
+          <div id="pin-prompt" class="sber-pin-label hidden">Введите код доступа или войдите по биометрии</div>
           <div id="pin-dots" class="sber-pin-dots" role="status" aria-label="Индикатор кода доступа">
             <span class="pin-dot"></span>
             <span class="pin-dot"></span>
@@ -54,7 +59,7 @@
             <span class="pin-dot"></span>
             <span class="pin-dot"></span>
           </div>
-          <div id="pin-hint" class="sber-pin-hint">Поддерживается Face ID / Touch ID и 5-значный ПИН</div>
+          <div id="pin-hint" class="sber-pin-hint">Доступен быстрый вход по Face ID / Touch ID</div>
         </div>
 
         <div class="sber-keypad" role="group" aria-label="Клавиатура ввода кода">
@@ -84,7 +89,7 @@
           </button>
         </div>
 
-        <div class="sber-bio-actions">
+        <div class="sber-bio-actions hidden">
           <button id="btn-bio-login" type="button" class="btn-sber-bio">
             <svg class="bio-btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M4 8V6a2 2 0 0 1 2-2h2" />
@@ -106,7 +111,7 @@
          ЭКРАН 2: ОСНОВНОЙ ИНТЕРФЕЙС БОТА @itsupp_task_bot В MINI APP
          ========================================================= -->
     <section id="screen-app" class="screen" aria-label="Рабочий кабинет ITSUPP">
-      <!-- Компактная двухрядная шапка: 100% влезает на любой экран без скроллбаров -->
+      <!-- Компактная двухрядная шапка: справа кружок с 3 точками (⋯) и правее крестик (✕) = закрыть -->
       <header class="app-header">
         <div class="header-top">
           <button id="btn-switch-emp" type="button" class="emp-chip" title="Сменить профиль сотрудника">
@@ -124,9 +129,12 @@
               <button type="button" class="theme-btn" data-theme-mode="dark" title="Ночь">🌙</button>
               <button type="button" class="theme-btn active" data-theme-mode="auto" title="Авто">Авто</button>
             </div>
-            <button id="btn-top-refresh" type="button" class="icon-btn" title="Обновить задачи">🔄</button>
-            <button id="btn-top-bot" type="button" class="icon-btn" title="В чат бота">💬</button>
-            <button id="btn-top-lock" type="button" class="icon-btn" title="Заблокировать">🔒</button>
+            <button id="btn-top-more" type="button" class="top-circle-btn" title="Меню действий" aria-label="Меню">⋯</button>
+            <button id="btn-top-close" type="button" class="top-circle-btn" title="Закрыть приложение" aria-label="Закрыть">✕</button>
+            <!-- Скрытые прокси-кнопки для сохранения обратной совместимости обработчиков -->
+            <button id="btn-top-refresh" type="button" class="icon-btn hidden" title="Обновить задачи">🔄</button>
+            <button id="btn-top-bot" type="button" class="icon-btn hidden" title="В чат бота">💬</button>
+            <button id="btn-top-lock" type="button" class="icon-btn hidden" title="Заблокировать">🔒</button>
           </div>
         </div>
 

@@ -14,6 +14,7 @@
   var STORAGE_KEY_PIN = "itsupp_miniapp_pin_v2";
   var STORAGE_KEY_BIO = "itsupp_miniapp_bio_prefs_v2";
   var STORAGE_KEY_THEME = "itsupp_miniapp_theme_v1";
+  var STORAGE_KEY_AVATAR = "itsupp_miniapp_custom_avatar_v1";
 
   function safeText(val, maxLen) {
     var s = String(val == null ? "" : val).replace(/[\u0000-\u001F\u007F]/g, "").trim();
@@ -243,11 +244,57 @@
     dept: "Руководство / ИТ"
   };
 
+  function getSavedAvatar() {
+    try {
+      return localStorage.getItem(STORAGE_KEY_AVATAR) || "";
+    } catch (_e) {
+      return "";
+    }
+  }
+
+  function setSavedAvatar(dataUrl) {
+    try {
+      if (dataUrl) localStorage.setItem(STORAGE_KEY_AVATAR, String(dataUrl));
+      else localStorage.removeItem(STORAGE_KEY_AVATAR);
+    } catch (_e) {
+      showToast("Слишком большой файл изображения");
+    }
+  }
+
+  function renderAvatarNode(targetEl, fallbackInitials) {
+    if (!targetEl) return;
+    var customImg = getSavedAvatar();
+    targetEl.textContent = "";
+    if (customImg && customImg.indexOf("data:image/") === 0) {
+      targetEl.classList.add("has-custom-img");
+      var img = document.createElement("img");
+      img.className = "avatar-custom-img";
+      img.src = customImg;
+      img.alt = fallbackInitials || "Logo";
+      targetEl.appendChild(img);
+    } else {
+      targetEl.classList.remove("has-custom-img");
+      targetEl.textContent = fallbackInitials || "MS";
+    }
+  }
+
+  function getLoginInitials() {
+    if (tgUser && typeof tgUser === "object") {
+      var first = safeText(tgUser.first_name, 64);
+      var last = safeText(tgUser.last_name, 64);
+      var init = ((first.charAt(0) || "M") + (last.charAt(0) || "S")).toUpperCase();
+      return init || "MS";
+    }
+    return "MS";
+  }
+
   function setupLoginProfileUI() {
     var nameEl = document.getElementById("user-name");
     var subEl = document.getElementById("user-sub");
     var avatarEl = document.getElementById("user-avatar");
     var greetEl = document.getElementById("login-greeting");
+    var hintBtn = document.getElementById("btn-avatar-hint");
+    var initials = getLoginInitials();
 
     if (tgUser && typeof tgUser === "object") {
       var first = safeText(tgUser.first_name, 64);
@@ -255,23 +302,92 @@
       var uid = safeText(tgUser.id, 24);
       var uname = safeText(tgUser.username, 64);
       var fullName = (first + " " + last).trim() || ("ID " + uid);
-      var initials = ((first.charAt(0) || "T") + (last.charAt(0) || "")).toUpperCase();
 
       greetEl.textContent = timeGreeting() + (first ? ", " + first + "!" : "!");
       nameEl.textContent = fullName;
       subEl.textContent = matchedEmp
         ? matchedEmp.dept + " • Okdesk ID " + matchedEmp.id
         : (uname ? "@" + uname + " • ID " + uid : "Telegram ID: " + uid);
-      avatarEl.textContent = initials || "TG";
     } else {
       greetEl.textContent = timeGreeting() + ", Михаил!";
       nameEl.textContent = currentEmp.name;
       subEl.textContent = currentEmp.dept + " • Okdesk ID " + currentEmp.id;
-      avatarEl.textContent = "МС";
+    }
+
+    renderAvatarNode(avatarEl, initials);
+    if (hintBtn) {
+      hintBtn.textContent = getSavedAvatar() ? "Сменить фото / лого" : "Загрузить фото / лого";
     }
   }
 
   setupLoginProfileUI();
+
+  function triggerAvatarFilePicker() {
+    hapticImpact("light");
+    var fileIn = document.getElementById("login-avatar-input");
+    if (fileIn) {
+      fileIn.value = "";
+      fileIn.click();
+    }
+  }
+
+  var avatarInputEl = document.getElementById("login-avatar-input");
+  if (avatarInputEl) {
+    avatarInputEl.addEventListener("change", function (ev) {
+      var file = ev.currentTarget.files && ev.currentTarget.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function (loadEv) {
+        var rawUrl = String(loadEv.target.result || "");
+        if (rawUrl.indexOf("data:image/") !== 0) {
+          showToast("Выберите файл изображения (PNG, JPG, SVG, WEBP)");
+          return;
+        }
+        var img = new Image();
+        img.onload = function () {
+          try {
+            var canvas = document.createElement("canvas");
+            var size = 256;
+            canvas.width = size;
+            canvas.height = size;
+            var ctx = canvas.getContext("2d");
+            var w = img.naturalWidth || img.width || size;
+            var h = img.naturalHeight || img.height || size;
+            var minSide = Math.min(w, h);
+            var sx = (w - minSide) / 2;
+            var sy = (h - minSide) / 2;
+            ctx.clearRect(0, 0, size, size);
+            ctx.drawImage(img, sx, sy, minSide, minSide, 0, 0, size, size);
+            var outUrl = canvas.toDataURL("image/png");
+            setSavedAvatar(outUrl);
+          } catch (_err) {
+            setSavedAvatar(rawUrl);
+          }
+          setupLoginProfileUI();
+          renderHeader();
+          hapticNotify("success");
+          showToast("✓ Фото / логотип установлены");
+        };
+        img.onerror = function () {
+          setSavedAvatar(rawUrl);
+          setupLoginProfileUI();
+          renderHeader();
+          showToast("✓ Логотип установлен");
+        };
+        img.src = rawUrl;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  var btnAvatarUpload = document.getElementById("btn-avatar-upload");
+  if (btnAvatarUpload) {
+    btnAvatarUpload.addEventListener("click", triggerAvatarFilePicker);
+  }
+  var btnAvatarHint = document.getElementById("btn-avatar-hint");
+  if (btnAvatarHint) {
+    btnAvatarHint.addEventListener("click", triggerAvatarFilePicker);
+  }
 
   // =========================================================
   // ЭКРАН 1: СБЕР FACE ID / TOUCH ID + 5-ЗНАЧНЫЙ КОД ДОСТУПА
@@ -391,7 +507,9 @@
           var dotsWrap = document.getElementById("pin-dots");
           renderPinDots(true);
           dotsWrap.classList.add("shake");
-          document.getElementById("pin-prompt").textContent = "Неверный код. Попробуйте снова или войдите по " + bioTypeLabel;
+          var errMsg = "Неверный код. Попробуйте снова или войдите по " + bioTypeLabel;
+          document.getElementById("pin-prompt").textContent = errMsg;
+          document.getElementById("pin-hint").textContent = errMsg;
           setTimeout(function () {
             dotsWrap.classList.remove("shake");
             pinBuffer = "";
@@ -496,13 +614,18 @@
     document.getElementById("bio-modal").classList.add("hidden");
   });
 
-  document.getElementById("btn-login-close").addEventListener("click", function () {
-    if (tg && typeof tg.close === "function" && tg.initData) {
-      tg.close();
-    } else {
-      showToast("Откройте через Telegram для закрытия окна");
+  function closeMiniApp() {
+    hapticImpact("light");
+    if (tg && typeof tg.close === "function") {
+      try {
+        tg.close();
+        return;
+      } catch (_e) {}
     }
-  });
+    showToast("Закрытие окна (в Telegram закрывает мини-приложение)");
+  }
+
+  document.getElementById("btn-login-close").addEventListener("click", closeMiniApp);
 
   updatePinPrompts();
 
@@ -588,7 +711,7 @@
       .map(function (p) { return p.charAt(0); })
       .join("")
       .toUpperCase();
-    document.getElementById("app-emp-avatar").textContent = initials || "ИТ";
+    renderAvatarNode(document.getElementById("app-emp-avatar"), initials || "ИТ");
     document.getElementById("app-emp-name").textContent = currentEmp.short || currentEmp.name;
     document.getElementById("app-emp-role").textContent =
       (currentEmp.role === "admin" ? "Администратор" : "Сотрудник") + " · ID " + currentEmp.id;
@@ -1736,19 +1859,77 @@
 
   document.getElementById("btn-strip-fresh").addEventListener("click", toggleFreshNotifications);
 
+  function openTopMoreModal() {
+    hapticImpact("light");
+    openActionModal("Быстрое меню");
+    var stack = el("div", "bio-setting-actions");
+
+    var btnPhoto = el("button", "btn-secondary-full", "📷 Загрузить фото или логотип (экран входа)");
+    btnPhoto.type = "button";
+    btnPhoto.addEventListener("click", function () {
+      closeActionModal();
+      triggerAvatarFilePicker();
+    });
+    stack.appendChild(btnPhoto);
+
+    if (getSavedAvatar()) {
+      var btnResetPhoto = el("button", "btn-secondary-full", "🗑 Вернуть стандартный круг (" + getLoginInitials() + ")");
+      btnResetPhoto.type = "button";
+      btnResetPhoto.addEventListener("click", function () {
+        setSavedAvatar("");
+        setupLoginProfileUI();
+        renderHeader();
+        closeActionModal();
+        showToast("Восстановлен стандартный значок " + getLoginInitials());
+      });
+      stack.appendChild(btnResetPhoto);
+    }
+
+    var btnRef = el("button", "btn-secondary-full", "🔄 Обновить задачи (" + state.tasks.length + ")");
+    btnRef.type = "button";
+    btnRef.addEventListener("click", function () {
+      closeActionModal();
+      hapticImpact("medium");
+      renderAllAppViews();
+      showToast("Задачи обновлены (" + state.tasks.length + " в контуре)");
+    });
+    stack.appendChild(btnRef);
+
+    var btnLock = el("button", "btn-secondary-full", "🔒 Экран входа (Face ID / ПИН)");
+    btnLock.type = "button";
+    btnLock.addEventListener("click", function () {
+      closeActionModal();
+      lockToLoginScreen();
+    });
+    stack.appendChild(btnLock);
+
+    var btnCloseApp = el("button", "btn-secondary-full", "✕ Закрыть приложение (в чат бота)");
+    btnCloseApp.type = "button";
+    btnCloseApp.addEventListener("click", function () {
+      closeActionModal();
+      closeMiniApp();
+    });
+    stack.appendChild(btnCloseApp);
+
+    modalBodyEl.appendChild(stack);
+  }
+
+  var btnLoginMore = document.getElementById("btn-login-more");
+  if (btnLoginMore) btnLoginMore.addEventListener("click", openTopMoreModal);
+
+  var btnTopMore = document.getElementById("btn-top-more");
+  if (btnTopMore) btnTopMore.addEventListener("click", openTopMoreModal);
+
+  var btnTopClose = document.getElementById("btn-top-close");
+  if (btnTopClose) btnTopClose.addEventListener("click", closeMiniApp);
+
   document.getElementById("btn-top-refresh").addEventListener("click", function () {
     hapticImpact("medium");
     renderAllAppViews();
     showToast("Задачи обновлены (" + state.tasks.length + " в контуре)");
   });
 
-  document.getElementById("btn-top-bot").addEventListener("click", function () {
-    if (tg && typeof tg.close === "function" && tg.initData) {
-      tg.close();
-    } else {
-      showToast("Возврат в чат @itsupp_task_bot");
-    }
-  });
+  document.getElementById("btn-top-bot").addEventListener("click", closeMiniApp);
 
   document.getElementById("btn-top-lock").addEventListener("click", function () {
     hapticImpact("light");
@@ -1819,16 +2000,27 @@
   }
 
   // Поиск по задачам (Enter закрывает экранную клавиатуру)
+  function dismissKeyboard(inputEl) {
+    if (inputEl && typeof inputEl.blur === "function") {
+      inputEl.blur();
+    }
+    if (tg && typeof tg.hideKeyboard === "function") {
+      try {
+        tg.hideKeyboard();
+      } catch (_e) {}
+    }
+  }
+
   function bindDismissKeyboardOnEnter(inputEl) {
     if (!inputEl) return;
     inputEl.addEventListener("keydown", function (ev) {
       if (ev.key === "Enter" || ev.keyCode === 13) {
         ev.preventDefault();
-        inputEl.blur();
+        dismissKeyboard(inputEl);
       }
     });
     inputEl.addEventListener("search", function () {
-      inputEl.blur();
+      dismissKeyboard(inputEl);
     });
   }
 
