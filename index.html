@@ -15,8 +15,10 @@
 </head>
 <body>
   <div class="app-shell">
-    <!-- Скрытый input для загрузки фото или логотипа на экран входа -->
+    <!-- Скрытые input для выбора фото/камеры/файла на экране входа -->
     <input id="login-avatar-input" type="file" accept="image/*" class="hidden" />
+    <input id="login-camera-input" type="file" accept="image/*" capture="user" class="hidden" />
+    <input id="login-file-input" type="file" accept="image/*,.svg,.png,.jpg,.jpeg,.webp,.ico" class="hidden" />
 
     <!-- =========================================================
          ЭКРАН 1: ВХОД КАК В СБЕРЕ (FACE ID / TOUCH ID + 5-ЗНАЧНЫЙ КОД)
@@ -40,9 +42,14 @@
         </div>
 
         <div class="sber-profile-block">
-          <button type="button" id="btn-avatar-upload" class="sber-avatar-wrap" title="Нажмите, чтобы вставить или сменить фото / логотип">
+          <button type="button" id="btn-avatar-upload" class="sber-avatar-wrap" title="Нажмите, чтобы установить фото или лого">
             <div id="user-avatar" class="sber-avatar">MS</div>
-            <div class="sber-avatar-badge" title="Загрузить фото или логотип">📷</div>
+            <div id="avatar-edit-badge" class="sber-avatar-badge" title="Редактировать фото или лого">
+              <svg class="pencil-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                <path d="m15 5 4 4" />
+              </svg>
+            </div>
           </button>
           <div id="login-greeting" class="sber-greeting hidden">Добрый вечер</div>
           <div id="user-name" class="sber-user-name">Mikhail Strelkin</div>
@@ -530,6 +537,43 @@
         <div id="bio-modal-title" class="bio-modal-title">Face ID / Touch ID</div>
         <div id="bio-modal-sub" class="bio-modal-sub">Выполняется проверка биометрии…</div>
         <button id="btn-bio-cancel" type="button" class="btn-secondary-full">Отмена (ввести код)</button>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         КОНТЕКСТНОЕ МЕНЮ ФОТО / ЛОГОТИПА (МЕДИАТЕКА / СНИМОК / ФАЙЛ / ЛОГО)
+         ========================================================= -->
+    <div id="avatar-menu-modal" class="ios-popover-backdrop hidden" role="dialog" aria-modal="true" aria-label="Выбор фото или логотипа">
+      <div class="ios-popover-menu">
+        <button type="button" id="btn-avatar-src-gallery" class="ios-popover-item">
+          <svg class="ios-popover-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="5" width="15" height="13" rx="2" />
+            <path d="M7 3h12a2 2 0 0 1 2 2v11" />
+            <circle cx="8" cy="10" r="1.5" />
+            <path d="m18 14-3.5-3.5L6 18" />
+          </svg>
+          <span>Медиатека</span>
+        </button>
+        <button type="button" id="btn-avatar-src-camera" class="ios-popover-item">
+          <svg class="ios-popover-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
+            <circle cx="12" cy="13" r="3.5" />
+          </svg>
+          <span>Сделать снимок</span>
+        </button>
+        <button type="button" id="btn-avatar-src-file" class="ios-popover-item">
+          <svg class="ios-popover-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+          </svg>
+          <span>Выбрать файл</span>
+        </button>
+        <button type="button" id="btn-avatar-src-logo" class="ios-popover-item">
+          <svg class="ios-popover-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            <path d="m9 12 2 2 4-4" />
+          </svg>
+          <span>Установить лого</span>
+        </button>
       </div>
     </div>
 

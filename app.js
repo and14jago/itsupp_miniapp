@@ -15,6 +15,7 @@
   var STORAGE_KEY_BIO = "itsupp_miniapp_bio_prefs_v2";
   var STORAGE_KEY_THEME = "itsupp_miniapp_theme_v1";
   var STORAGE_KEY_AVATAR = "itsupp_miniapp_custom_avatar_v1";
+  var STORAGE_KEY_AVATAR_TOUCHED = "itsupp_miniapp_avatar_touched_v1";
 
   function safeText(val, maxLen) {
     var s = String(val == null ? "" : val).replace(/[\u0000-\u001F\u007F]/g, "").trim();
@@ -252,13 +253,70 @@
     }
   }
 
+  function hasUserEditedAvatar() {
+    try {
+      return Boolean(getSavedAvatar() || localStorage.getItem(STORAGE_KEY_AVATAR_TOUCHED));
+    } catch (_e) {
+      return Boolean(getSavedAvatar());
+    }
+  }
+
   function setSavedAvatar(dataUrl) {
     try {
-      if (dataUrl) localStorage.setItem(STORAGE_KEY_AVATAR, String(dataUrl));
-      else localStorage.removeItem(STORAGE_KEY_AVATAR);
+      if (dataUrl) {
+        localStorage.setItem(STORAGE_KEY_AVATAR, String(dataUrl));
+        localStorage.setItem(STORAGE_KEY_AVATAR_TOUCHED, "1");
+      } else {
+        localStorage.removeItem(STORAGE_KEY_AVATAR);
+      }
     } catch (_e) {
       showToast("Слишком большой файл изображения");
     }
+  }
+
+  function buildItsuppLogoDataUrl() {
+    var canvas = document.createElement("canvas");
+    var size = 384;
+    canvas.width = size;
+    canvas.height = size;
+    var ctx = canvas.getContext("2d");
+
+    // Тёмно-изумрудный фирменный градиент ITSUPP
+    var grad = ctx.createLinearGradient(0, 0, size, size);
+    grad.addColorStop(0, "#0F172A");
+    grad.addColorStop(0.55, "#112A22");
+    grad.addColorStop(1, "#14532D");
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Внутреннее светящееся кольцо
+    ctx.strokeStyle = "#21A038";
+    ctx.lineWidth = 8;
+    ctx.beginPath();
+    ctx.arc(size / 2, size / 2, size / 2 - 18, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Верхний зелёный индикатор статуса 24/7
+    ctx.fillStyle = "#22C55E";
+    ctx.beginPath();
+    ctx.arc(size / 2, 96, 14, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Надпись IT SUPP
+    ctx.fillStyle = "#FFFFFF";
+    ctx.font = "800 66px -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("IT SUPP", size / 2, 194);
+
+    // Подзаголовок SERVICE DESK
+    ctx.fillStyle = "#86EFAC";
+    ctx.font = "700 24px -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif";
+    ctx.fillText("SERVICE DESK", size / 2, 262);
+
+    return canvas.toDataURL("image/png");
   }
 
   function renderAvatarNode(targetEl, fallbackInitials) {
@@ -293,7 +351,7 @@
     var subEl = document.getElementById("user-sub");
     var avatarEl = document.getElementById("user-avatar");
     var greetEl = document.getElementById("login-greeting");
-    var hintBtn = document.getElementById("btn-avatar-hint");
+    var editBadgeEl = document.getElementById("avatar-edit-badge");
     var initials = getLoginInitials();
 
     if (tgUser && typeof tgUser === "object") {
@@ -315,78 +373,150 @@
     }
 
     renderAvatarNode(avatarEl, initials);
-    if (hintBtn) {
-      hintBtn.textContent = getSavedAvatar() ? "Сменить фото / лого" : "Загрузить фото / лого";
+    if (editBadgeEl) {
+      // Значок карандаша показывается только до первой установки фото или лого
+      editBadgeEl.classList.toggle("hidden", hasUserEditedAvatar());
     }
   }
 
   setupLoginProfileUI();
 
-  function triggerAvatarFilePicker() {
+  var avatarMenuModal = document.getElementById("avatar-menu-modal");
+
+  function openAvatarMenuPopover() {
     hapticImpact("light");
-    var fileIn = document.getElementById("login-avatar-input");
-    if (fileIn) {
-      fileIn.value = "";
-      fileIn.click();
+    if (avatarMenuModal) {
+      avatarMenuModal.classList.remove("hidden");
     }
   }
 
-  var avatarInputEl = document.getElementById("login-avatar-input");
-  if (avatarInputEl) {
-    avatarInputEl.addEventListener("change", function (ev) {
-      var file = ev.currentTarget.files && ev.currentTarget.files[0];
-      if (!file) return;
-      var reader = new FileReader();
-      reader.onload = function (loadEv) {
-        var rawUrl = String(loadEv.target.result || "");
-        if (rawUrl.indexOf("data:image/") !== 0) {
-          showToast("Выберите файл изображения (PNG, JPG, SVG, WEBP)");
-          return;
-        }
-        var img = new Image();
-        img.onload = function () {
-          try {
-            var canvas = document.createElement("canvas");
-            var size = 256;
-            canvas.width = size;
-            canvas.height = size;
-            var ctx = canvas.getContext("2d");
-            var w = img.naturalWidth || img.width || size;
-            var h = img.naturalHeight || img.height || size;
-            var minSide = Math.min(w, h);
-            var sx = (w - minSide) / 2;
-            var sy = (h - minSide) / 2;
-            ctx.clearRect(0, 0, size, size);
-            ctx.drawImage(img, sx, sy, minSide, minSide, 0, 0, size, size);
-            var outUrl = canvas.toDataURL("image/png");
-            setSavedAvatar(outUrl);
-          } catch (_err) {
-            setSavedAvatar(rawUrl);
-          }
-          setupLoginProfileUI();
-          renderHeader();
-          hapticNotify("success");
-          showToast("✓ Фото / логотип установлены");
-        };
-        img.onerror = function () {
+  function closeAvatarMenuPopover() {
+    if (avatarMenuModal) {
+      avatarMenuModal.classList.add("hidden");
+    }
+  }
+
+  function triggerAvatarFilePicker() {
+    openAvatarMenuPopover();
+  }
+
+  if (avatarMenuModal) {
+    avatarMenuModal.addEventListener("click", function (ev) {
+      if (ev.target === avatarMenuModal) {
+        closeAvatarMenuPopover();
+      }
+    });
+  }
+
+  function handleAvatarFileSelected(ev) {
+    var file = ev.currentTarget.files && ev.currentTarget.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function (loadEv) {
+      var rawUrl = String(loadEv.target.result || "");
+      if (rawUrl.indexOf("data:image/") !== 0) {
+        showToast("Выберите файл изображения (PNG, JPG, SVG, WEBP)");
+        return;
+      }
+      var img = new Image();
+      img.onload = function () {
+        try {
+          var canvas = document.createElement("canvas");
+          var size = 256;
+          canvas.width = size;
+          canvas.height = size;
+          var ctx = canvas.getContext("2d");
+          var w = img.naturalWidth || img.width || size;
+          var h = img.naturalHeight || img.height || size;
+          var minSide = Math.min(w, h);
+          var sx = (w - minSide) / 2;
+          var sy = (h - minSide) / 2;
+          ctx.clearRect(0, 0, size, size);
+          ctx.drawImage(img, sx, sy, minSide, minSide, 0, 0, size, size);
+          var outUrl = canvas.toDataURL("image/png");
+          setSavedAvatar(outUrl);
+        } catch (_err) {
           setSavedAvatar(rawUrl);
-          setupLoginProfileUI();
-          renderHeader();
-          showToast("✓ Логотип установлен");
-        };
-        img.src = rawUrl;
+        }
+        setupLoginProfileUI();
+        renderHeader();
+        hapticNotify("success");
+        showToast("✓ Фото установлено");
       };
-      reader.readAsDataURL(file);
+      img.onerror = function () {
+        setSavedAvatar(rawUrl);
+        setupLoginProfileUI();
+        renderHeader();
+        showToast("✓ Изображение установлено");
+      };
+      img.src = rawUrl;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  ["login-avatar-input", "login-camera-input", "login-file-input"].forEach(function (inputId) {
+    var inp = document.getElementById(inputId);
+    if (inp) {
+      inp.addEventListener("change", handleAvatarFileSelected);
+    }
+  });
+
+  var btnSrcGallery = document.getElementById("btn-avatar-src-gallery");
+  if (btnSrcGallery) {
+    btnSrcGallery.addEventListener("click", function () {
+      closeAvatarMenuPopover();
+      var inp = document.getElementById("login-avatar-input");
+      if (inp) {
+        inp.value = "";
+        inp.click();
+      }
+    });
+  }
+
+  var btnSrcCamera = document.getElementById("btn-avatar-src-camera");
+  if (btnSrcCamera) {
+    btnSrcCamera.addEventListener("click", function () {
+      closeAvatarMenuPopover();
+      var inp = document.getElementById("login-camera-input");
+      if (inp) {
+        inp.value = "";
+        inp.click();
+      }
+    });
+  }
+
+  var btnSrcFile = document.getElementById("btn-avatar-src-file");
+  if (btnSrcFile) {
+    btnSrcFile.addEventListener("click", function () {
+      closeAvatarMenuPopover();
+      var inp = document.getElementById("login-file-input");
+      if (inp) {
+        inp.value = "";
+        inp.click();
+      }
+    });
+  }
+
+  var btnSrcLogo = document.getElementById("btn-avatar-src-logo");
+  if (btnSrcLogo) {
+    btnSrcLogo.addEventListener("click", function () {
+      closeAvatarMenuPopover();
+      var logoDataUrl = buildItsuppLogoDataUrl();
+      setSavedAvatar(logoDataUrl);
+      setupLoginProfileUI();
+      renderHeader();
+      hapticNotify("success");
+      showToast("✓ Установлено лого ITSUPP");
     });
   }
 
   var btnAvatarUpload = document.getElementById("btn-avatar-upload");
   if (btnAvatarUpload) {
-    btnAvatarUpload.addEventListener("click", triggerAvatarFilePicker);
+    btnAvatarUpload.addEventListener("click", openAvatarMenuPopover);
   }
   var btnAvatarHint = document.getElementById("btn-avatar-hint");
   if (btnAvatarHint) {
-    btnAvatarHint.addEventListener("click", triggerAvatarFilePicker);
+    btnAvatarHint.addEventListener("click", openAvatarMenuPopover);
   }
 
   // =========================================================

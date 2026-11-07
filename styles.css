@@ -300,20 +300,86 @@ html, body {
 
 .sber-avatar-badge {
   position: absolute;
-  right: 4px;
-  bottom: 4px;
+  right: 2px;
+  bottom: 2px;
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: var(--sber-green);
-  color: #ffffff;
-  font-size: 15px;
-  font-weight: 800;
+  background: var(--card-bg);
+  color: var(--text);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2.5px solid var(--bg);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+  border: 2px solid var(--border);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+}
+
+.sber-avatar-badge.hidden {
+  display: none !important;
+}
+
+.pencil-svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Всплывающее меню в стиле iOS (Медиатека / Сделать снимок / Выбрать файл / Установить лого) */
+.ios-popover-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: rgba(15, 23, 42, 0.22);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 155px;
+}
+
+.ios-popover-backdrop.hidden {
+  display: none !important;
+}
+
+.ios-popover-menu {
+  width: 248px;
+  background: rgba(56, 56, 60, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 18px;
+  padding: 6px 0;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.ios-popover-item {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.12s ease;
+}
+
+.ios-popover-item + .ios-popover-item {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ios-popover-item:active {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.ios-popover-icon {
+  width: 22px;
+  height: 22px;
+  color: #ffffff;
+  flex-shrink: 0;
 }
 
 .avatar-upload-link {
