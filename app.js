@@ -539,15 +539,16 @@
     var saved = getSavedPin();
     var promptEl = document.getElementById("pin-prompt");
     var hintEl = document.getElementById("pin-hint");
+    if (hintEl) {
+      hintEl.textContent = "";
+      hintEl.classList.add("hidden");
+    }
     if (pinChangeMode) {
       promptEl.textContent = "Придумайте новый 5-значный код доступа";
-      hintEl.textContent = "Сменить пользователя";
     } else if (!saved) {
       promptEl.textContent = "Придумайте 5-значный код или войдите по " + bioTypeLabel;
-      hintEl.textContent = "Сменить пользователя";
     } else {
       promptEl.textContent = "Введите 5-значный код или войдите по " + bioTypeLabel;
-      hintEl.textContent = "Сменить пользователя";
     }
   }
 
@@ -688,14 +689,6 @@
   document.getElementById("btn-key-right").addEventListener("click", function () {
     triggerBiometricLogin();
   });
-
-  var pinHintBtn = document.getElementById("pin-hint");
-  if (pinHintBtn) {
-    pinHintBtn.addEventListener("click", function () {
-      hapticImpact("light");
-      openSwitchEmployeeModal();
-    });
-  }
 
   document.getElementById("btn-bio-login").addEventListener("click", function () {
     triggerBiometricLogin();
@@ -2507,9 +2500,9 @@
   }
 
   // =========================================================
-  // ПРИВЯЗКА ВСЕХ СОБЫТИЙ КАБИНЕТА
+  // ПРИВЯЗКА ВСЕХ СОБЫТИЙ КАБИНЕТА (чей Telegram — тот и пользователь)
   // =========================================================
-  document.getElementById("btn-switch-emp").addEventListener("click", openSwitchEmployeeModal);
+  void document.getElementById("btn-switch-emp");
   document.getElementById("btn-strip-duty").addEventListener("click", openDutyPickerModal);
 
   function toggleFreshNotifications() {
