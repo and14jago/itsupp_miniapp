@@ -621,14 +621,22 @@
   }
 
   var bioScanTimer = null;
+  function setCenterCircleScanning(isScanning) {
+    var avatarEl = document.getElementById("user-avatar");
+    var wrapEl = document.getElementById("btn-avatar-upload");
+    if (avatarEl) avatarEl.classList.toggle("scanning-pulse", Boolean(isScanning));
+    if (wrapEl) wrapEl.classList.toggle("scanning-pulse", Boolean(isScanning));
+  }
+
   function triggerBiometricLogin() {
     hapticImpact("medium");
     var modal = document.getElementById("bio-modal");
-    var sub = document.getElementById("bio-modal-sub");
-    var box = document.getElementById("bio-scanner-box");
-    modal.classList.remove("hidden");
-    box.classList.add("scanning");
-    sub.textContent = "Сканирование " + bioTypeLabel + "… Посмотрите на экран или приложите палец";
+    if (modal) modal.classList.add("hidden");
+    setCenterCircleScanning(true);
+    var hintEl = document.getElementById("pin-hint");
+    if (hintEl) {
+      hintEl.textContent = "Проверка " + bioTypeLabel + "…";
+    }
 
     if (bm && bm.isInited && bm.isBiometricAvailable) {
       try {
@@ -636,14 +644,11 @@
           bm.authenticate(
             { reason: "Подтвердите вход в рабочий кабинет ITSUPP" },
             function (success) {
+              setCenterCircleScanning(false);
               if (success) {
-                box.classList.remove("scanning");
-                sub.textContent = "✓ Биометрия подтверждена";
-                setTimeout(function () {
-                  unlockWorkspace(bioTypeLabel);
-                }, 260);
+                unlockWorkspace(bioTypeLabel);
               } else {
-                modal.classList.add("hidden");
+                updatePinPrompts();
                 showToast("Проверка " + bioTypeLabel + " отменена — введите 5-значный код");
               }
             }
@@ -655,7 +660,8 @@
             function (granted) {
               if (granted) doAuth();
               else {
-                modal.classList.add("hidden");
+                setCenterCircleScanning(false);
+                updatePinPrompts();
                 showToast("Доступ к биометрии не предоставлен — введите 5-значный код");
               }
             }
@@ -664,17 +670,16 @@
           doAuth();
         }
         return;
-      } catch (_e) {}
+      } catch (_e) {
+        setCenterCircleScanning(false);
+      }
     }
 
     if (bioScanTimer) clearTimeout(bioScanTimer);
     bioScanTimer = setTimeout(function () {
-      box.classList.remove("scanning");
-      sub.textContent = "✓ Лицо / отпечаток распознаны · Вход выполнен";
-      setTimeout(function () {
-        unlockWorkspace(bioTypeLabel);
-      }, 340);
-    }, 950);
+      setCenterCircleScanning(false);
+      unlockWorkspace(bioTypeLabel);
+    }, 480);
   }
 
   // Привязка кнопок экрана входа
@@ -815,7 +820,7 @@
     renderAvatarNode(document.getElementById("app-emp-avatar"), initials || "ИТ");
     document.getElementById("app-emp-name").textContent = currentEmp.short || currentEmp.name;
     document.getElementById("app-emp-role").textContent =
-      (currentEmp.role === "admin" ? "Администратор" : "Сотрудник") + " · ID " + currentEmp.id;
+      (currentEmp.role === "admin" ? "Админ" : "Исп.") + " · ID " + currentEmp.id;
 
     var freshPill = document.getElementById("btn-strip-fresh");
     var freshText = document.getElementById("strip-fresh-text");

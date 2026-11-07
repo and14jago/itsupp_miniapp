@@ -136,13 +136,13 @@ html, body {
 }
 
 .top-circle-btn {
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   border: 1px solid var(--border);
   background: var(--card-bg);
   color: var(--text);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1;
   display: inline-flex;
@@ -288,6 +288,26 @@ html, body {
 .sber-avatar.has-custom-img {
   background: var(--card-bg);
   border: 2.5px solid var(--border);
+}
+
+@keyframes centerCircleScanPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(33, 160, 56, 0.45), 0 10px 26px var(--sber-green-glow);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(33, 160, 56, 0), 0 12px 30px var(--sber-green-glow);
+    transform: scale(1.03);
+  }
+}
+
+.sber-avatar.scanning-pulse {
+  animation: centerCircleScanPulse 0.9s infinite ease-in-out;
+  border-color: var(--sber-green) !important;
+}
+
+#bio-modal {
+  display: none !important;
 }
 
 .avatar-custom-img {
@@ -599,15 +619,16 @@ html, body {
 .emp-chip {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 11px;
-  padding: 4px 8px 4px 5px;
+  padding: 4px 7px 4px 5px;
   color: var(--text);
   cursor: pointer;
   text-align: left;
   min-width: 0;
+  max-width: calc(100% - 168px);
   box-shadow: var(--card-shadow);
 }
 
