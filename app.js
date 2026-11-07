@@ -15,7 +15,7 @@
     for (var i = 0; i < links.length; i++) {
       var href = links[i].getAttribute("href") || "";
       if (href.indexOf("styles.css") !== -1) {
-        links[i].setAttribute("href", "./styles.css?v=20261108-07&_t=" + Date.now());
+        links[i].setAttribute("href", "./styles.css?v=20261108-08&_t=" + Date.now());
       }
     }
   }
@@ -28,6 +28,7 @@
 
   var DATA = window.ITSUPP_DATA || { companies: [], employees: [], initialTasks: [] };
   var STORAGE_KEY_STATE = "itsupp_miniapp_state_v5";
+  var STORAGE_KEY_TASK_OVERRIDES = "itsupp_miniapp_task_overrides_v1";
   var STORAGE_KEY_PIN = "itsupp_miniapp_pin_v2";
   var STORAGE_KEY_BIO = "itsupp_miniapp_bio_prefs_v2";
   var STORAGE_KEY_THEME = "itsupp_miniapp_theme_v1";
@@ -186,19 +187,95 @@
     return null;
   }
 
-  // --- Загрузка и сохранение состояния ---
+  // --- Загрузка и сохранение состояния (с постоянным сохранением статусов и списанного времени по ID заявки) ---
+  var OVERRIDE_FIELDS = [
+    "status_code",
+    "status_name",
+    "spent_minutes",
+    "spent_by_employee",
+    "work_by_employee",
+    "tracked_work_seconds",
+    "work_started_at",
+    "work_owner_id",
+    "timer_paused",
+    "assignee_id",
+    "assignee_name",
+    "deadline",
+    "deadline_at",
+    "due_bucket",
+    "comments",
+    "status_history",
+    "delegation_chain",
+    "control_by",
+    "billing_flag",
+    "updated_iso"
+  ];
+
+  function loadTaskOverrides() {
+    var map = {};
+    try {
+      // Миграция из прошлых ключей состояния, чтобы ни одно изменение статуса не потерялось
+      var legacyKeys = ["itsupp_miniapp_state_v4", STORAGE_KEY_STATE];
+      for (var k = 0; k < legacyKeys.length; k++) {
+        var rawLegacy = localStorage.getItem(legacyKeys[k]);
+        if (rawLegacy) {
+          var parsedLegacy = JSON.parse(rawLegacy);
+          if (parsedLegacy && Array.isArray(parsedLegacy.tasks)) {
+            parsedLegacy.tasks.forEach(function (t) {
+              if (!t || !t.id) return;
+              var tid = String(t.id);
+              map[tid] = map[tid] || {};
+              OVERRIDE_FIELDS.forEach(function (f) {
+                if (t[f] !== undefined) map[tid][f] = t[f];
+              });
+            });
+          }
+        }
+      }
+      var rawOv = localStorage.getItem(STORAGE_KEY_TASK_OVERRIDES);
+      if (rawOv) {
+        var parsedOv = JSON.parse(rawOv);
+        if (parsedOv && typeof parsedOv === "object") {
+          Object.keys(parsedOv).forEach(function (tid) {
+            map[tid] = Object.assign(map[tid] || {}, parsedOv[tid]);
+          });
+        }
+      }
+    } catch (_e) {}
+    return map;
+  }
+
+  function applyOverridesToTasks(tasksList, overridesMap) {
+    if (!Array.isArray(tasksList) || !overridesMap) return tasksList;
+    tasksList.forEach(function (t) {
+      if (!t || !t.id) return;
+      var ov = overridesMap[String(t.id)];
+      if (!ov) return;
+      OVERRIDE_FIELDS.forEach(function (f) {
+        if (ov[f] !== undefined) {
+          t[f] = ov[f];
+        }
+      });
+    });
+    return tasksList;
+  }
+
   function loadSavedState() {
+    var overridesMap = loadTaskOverrides();
     try {
       var raw = localStorage.getItem(STORAGE_KEY_STATE);
       if (raw) {
         var parsed = JSON.parse(raw);
         if (parsed && Array.isArray(parsed.tasks) && parsed.tasks.length > 0) {
+          applyOverridesToTasks(parsed.tasks, overridesMap);
           return parsed;
         }
       }
     } catch (_e) {}
+    var baseTasks = JSON.parse(JSON.stringify(DATA.initialTasks || []));
+    applyOverridesToTasks(baseTasks, overridesMap);
     return {
-      tasks: JSON.parse(JSON.stringify(DATA.initialTasks || [])),
+      tasks: baseTasks,
       freshEnabled: true,
       dutyEmpId: "8",
       nextIssueId: 44125,
@@ -211,6 +288,23 @@
   function saveState() {
     try {
       localStorage.setItem(STORAGE_KEY_STATE, JSON.stringify(state));
+      var overridesMap = {};
+      try {
+        var existingRaw = localStorage.getItem(STORAGE_KEY_TASK_OVERRIDES);
+        if (existingRaw) overridesMap = JSON.parse(existingRaw) || {};
+      } catch (_e2) {}
+      if (state && Array.isArray(state.tasks)) {
+        state.tasks.forEach(function (t) {
+          if (!t || !t.id) return;
+          var tid = String(t.id);
+          var entry = {};
+          OVERRIDE_FIELDS.forEach(function (f) {
+            if (t[f] !== undefined) entry[f] = t[f];
+          });
+          overridesMap[tid] = entry;
+        });
+      }
+      localStorage.setItem(STORAGE_KEY_TASK_OVERRIDES, JSON.stringify(overridesMap));
     } catch (_e) {}
   }
 
@@ -794,8 +888,18 @@
   }
 
   // Исключение терминальных статусов (ЗАКРЫТА / ОТКЛОНЕНА / РЕШЕНА) как в боте (TERMINAL_STATUS_CODES)
-  function isTerminalStatus(code) {
-    return code === "completed" || code === "closed" || code === "asya1c" || code === "rejected";
+  function isTerminalStatus(code, statusName) {
+    var c = String(code || "").toLowerCase();
+    var n = String(statusName || "").toLowerCase();
+    return (
+      c === "completed" ||
+      c === "closed" ||
+      c === "asya1c" ||
+      c === "rejected" ||
+      n.indexOf("отклон") !== -1 ||
+      n.indexOf("решен") !== -1 ||
+      n.indexOf("закрыт") !== -1
+    );
   }
 
   // --- Переключение вкладок ---
@@ -859,7 +963,7 @@
   function filterTasksByScope(scope) {
     var empId = currentEmp.id;
     return state.tasks.filter(function (t) {
-      if (isTerminalStatus(t.status_code)) return false;
+      if (isTerminalStatus(t.status_code, t.status_name)) return false;
       if (scope === "mine") {
         return isOwnTaskForUser(t, empId);
       }
@@ -1780,12 +1884,24 @@
     showToast("Заявка #" + task.id + " → «" + label + "»");
   }
 
+  function clearSearchIfMatchesTask(taskId) {
+    var tid = String(taskId || "");
+    if (searchQuery && searchQuery.replace(/^#/, "").trim() === tid) {
+      searchQuery = "";
+      var sIn = document.getElementById("task-search-input");
+      var sCl = document.getElementById("btn-search-clear");
+      if (sIn) sIn.value = "";
+      if (sCl) sCl.classList.add("hidden");
+    }
+  }
+
   function closeOneClick15(task) {
     hapticNotify("success");
     stopTaskWorkTimerIfRunning(task);
     task.timer_paused = false;
     task.status_code = "completed";
     task.status_name = "Решена";
+    task.updated_iso = new Date().toISOString();
     task.spent_minutes = (parseInt(task.spent_minutes, 10) || 0) + 15;
     task.spent_by_employee = task.spent_by_employee || {};
     var myId = String(currentEmp.id);
@@ -1797,7 +1913,8 @@
       text: "Закрыто в 1 клик (+15 мин)."
     });
     saveState();
-    renderTasksView();
+    clearSearchIfMatchesTask(task.id);
+    renderAllAppViews();
     updateBellBadge();
     showToast("⚡ Заявка #" + task.id + " закрыта (+15 мин)");
   }
@@ -2071,6 +2188,7 @@
       task.timer_paused = false;
       task.status_code = "completed";
       task.status_name = "Решена";
+      task.updated_iso = new Date().toISOString();
       task.spent_minutes = (parseInt(task.spent_minutes, 10) || 0) + addedMins;
       task.spent_by_employee = task.spent_by_employee || {};
       var myId = String(currentEmp.id);
@@ -2090,8 +2208,9 @@
           (cText ? ": " + cText : "")
       });
       saveState();
+      clearSearchIfMatchesTask(task.id);
       closeActionModal();
-      renderTasksView();
+      renderAllAppViews();
       updateBellBadge();
       showToast("Заявка #" + task.id + " решена (+" + formatMinutes(addedMins) + ")");
     });
@@ -2291,20 +2410,27 @@
   function openRejectTaskModal(task) {
     openActionModal("🚫 Отклонить заявку #" + task.id);
 
-    // 1. Ответственный — тот, кто в системе (уже выбран, компактной строкой)
+    var defaultRejectMins = 10;
+    var mailInfo = extractEmailInfoFromTask(task);
+    var currentEmail = mailInfo.senderEmail;
+    var currentDomain = mailInfo.senderDomain;
+
+    // 1. Ответственный — тот, кто в системе (уже выбран) + списание по умолчанию 10 мин
     var respBadge = el(
       "div",
       "glass-card",
-      "👤 Ответственный: " + currentEmp.short + " (ID " + currentEmp.id + " · выбран в системе)"
+      "👤 Ответственный: " +
+        currentEmp.short +
+        " (ID " +
+        currentEmp.id +
+        ") · ⏱ Списание: +" +
+        defaultRejectMins +
+        " мин"
     );
     respBadge.style.fontWeight = "700";
-    respBadge.style.padding = "9px 12px";
+    respBadge.style.padding = "8px 12px";
     respBadge.style.color = "var(--ok)";
     modalBodyEl.appendChild(respBadge);
-
-    // 2. Причины отклонения на кнопках (без обрезки текста «...» и без сплющивания!)
-    var reasonLabel = el("div", "form-label", "Причина отклонения (как на портале):");
-    modalBodyEl.appendChild(reasonLabel);
 
     var portalReasons = [
       { code: "spam", text: "🚫 Спам / рассылка / не заявка" },
@@ -2316,45 +2442,58 @@
     ];
     var selectedReason = portalReasons[0].text;
 
-    var selectedBanner = el("div", "glass-card", "✓ Выбрана причина: «" + selectedReason + "»");
-    selectedBanner.style.fontWeight = "700";
-    selectedBanner.style.padding = "9px 12px";
+    function executeReject(blacklistMode, reasonOverride) {
+      hapticNotify("success");
+      var reasonTxt = reasonOverride || selectedReason;
+      stopTaskWorkTimerIfRunning(task);
+      task.timer_paused = false;
+      task.work_started_at = "";
+      task.assignee_id = String(currentEmp.id);
+      task.assignee_name = currentEmp.short;
+      task.status_code = "asya1c";
+      task.status_name = "Отклонена";
+      task.updated_iso = new Date().toISOString();
+      task.spent_minutes = (parseInt(task.spent_minutes, 10) || 0) + defaultRejectMins;
+      task.spent_by_employee = task.spent_by_employee || {};
+      var myId = String(currentEmp.id);
+      task.spent_by_employee[myId] = (parseInt(task.spent_by_employee[myId], 10) || 0) + defaultRejectMins;
 
-    var reasonsGrid = el("div", "assignee-grid");
-    function renderReasonButtons() {
-      reasonsGrid.textContent = "";
-      portalReasons.forEach(function (pr) {
-        var b = el(
-          "button",
-          "reject-reason-btn" + (selectedReason === pr.text ? " active" : ""),
-          pr.text
-        );
-        b.type = "button";
-        b.addEventListener("click", function () {
-          hapticImpact("light");
-          selectedReason = pr.text;
-          selectedBanner.textContent = "✓ Выбрана причина: «" + selectedReason + "»";
-          renderReasonButtons();
-        });
-        reasonsGrid.appendChild(b);
+      var blNote = "";
+      if (blacklistMode === "sender") {
+        blNote = " · 🔥 Емайл «" + currentEmail + "» заблокирован в ЧС почты";
+        state.mailBlacklist = state.mailBlacklist || [];
+        state.mailBlacklist.push({ target: currentEmail, by: currentEmp.short, at: new Date().toISOString() });
+      } else if (blacklistMode === "domain") {
+        blNote = " · 🛑 Домен «" + currentDomain + "» заблокирован в ЧС почты";
+        state.mailBlacklist = state.mailBlacklist || [];
+        state.mailBlacklist.push({ target: currentDomain, by: currentEmp.short, at: new Date().toISOString() });
+      }
+      task.status_history = Array.isArray(task.status_history) ? task.status_history : [];
+      task.status_history.push({
+        time: new Date().toTimeString().slice(0, 8),
+        label: "🚫 Отклонена (" + reasonTxt + " · +" + defaultRejectMins + " мин)" + blNote
       });
+      task.comments = task.comments || [];
+      task.comments.push({
+        author: currentEmp.short,
+        time: new Date().toTimeString().slice(0, 5),
+        text: "Отклонена (" + reasonTxt + ", списано +" + defaultRejectMins + " мин)" + blNote
+      });
+      saveState();
+      clearSearchIfMatchesTask(task.id);
+      closeActionModal();
+      renderAllAppViews();
+      updateBellBadge();
+      showToast(
+        blacklistMode === "sender"
+          ? "🔥 Емайл " + currentEmail + " в ЧС + отклонена (+" + defaultRejectMins + "м)"
+          : blacklistMode === "domain"
+          ? "🛑 Домен " + currentDomain + " в ЧС + отклонена (+" + defaultRejectMins + "м)"
+          : "🚫 Заявка #" + task.id + " отклонена (+" + defaultRejectMins + " мин · убрана из списка)"
+      );
     }
-    renderReasonButtons();
-    modalBodyEl.appendChild(reasonsGrid);
-    modalBodyEl.appendChild(selectedBanner);
 
-    // 3. Яркая подсветка ЕМАЙЛА ОТПРАВИТЕЛЯ и ДОМЕНА ОТПРАВИТЕЛЯ для блокировки в ЧС почты
-    var mailInfo = extractEmailInfoFromTask(task);
-    var currentEmail = mailInfo.senderEmail;
-    var currentDomain = mailInfo.senderDomain;
-
-    var mailSectionTitle = el(
-      "div",
-      "form-label",
-      "📧 Данные отправителя письма для блокировки в ЧС почты:"
-    );
-    modalBodyEl.appendChild(mailSectionTitle);
-
+    // 2. Яркая подсветка ЕМАЙЛА ОТПРАВИТЕЛЯ и ДОМЕНА ОТПРАВИТЕЛЯ + кнопки ЧС почты сразу наверху
     var highlightBox = el("div", "spam-highlight-box");
 
     var rowEmail = el("div", "spam-highlight-row");
@@ -2371,76 +2510,60 @@
 
     modalBodyEl.appendChild(highlightBox);
 
-    function executeReject(blacklistMode) {
-      hapticNotify("success");
-      stopTaskWorkTimerIfRunning(task);
-      task.timer_paused = false;
-      task.work_started_at = "";
-      task.assignee_id = String(currentEmp.id);
-      task.assignee_name = currentEmp.short;
-      task.status_code = "asya1c";
-      task.status_name = "Отклонена";
-      task.spent_minutes = (parseInt(task.spent_minutes, 10) || 0) + 1;
-      var reasonTxt = selectedReason;
-      var blNote = "";
-      if (blacklistMode === "sender") {
-        blNote = " · 🔥 Емайл «" + currentEmail + "» заблокирован в ЧС почты";
-        state.mailBlacklist = state.mailBlacklist || [];
-        state.mailBlacklist.push({ target: currentEmail, by: currentEmp.short, at: new Date().toISOString() });
-      } else if (blacklistMode === "domain") {
-        blNote = " · 🛑 Домен «" + currentDomain + "» заблокирован в ЧС почты";
-        state.mailBlacklist = state.mailBlacklist || [];
-        state.mailBlacklist.push({ target: currentDomain, by: currentEmp.short, at: new Date().toISOString() });
-      }
-      task.comments = task.comments || [];
-      task.comments.push({
-        author: currentEmp.short,
-        time: new Date().toTimeString().slice(0, 5),
-        text: "Отклонена (" + reasonTxt + ")" + blNote
-      });
-      saveState();
-      closeActionModal();
-      renderTasksView();
-      updateBellBadge();
-      showToast(
-        blacklistMode === "sender"
-          ? "🔥 Емайл " + currentEmail + " в ЧС почты + заявка отклонена!"
-          : blacklistMode === "domain"
-          ? "🛑 Домен " + currentDomain + " в ЧС почты + заявка отклонена!"
-          : "🚫 Заявка #" + task.id + " отклонена (" + currentEmp.short + ")"
-      );
-    }
-
     var btnBlacklistSender = el(
       "button",
       "btn-danger-full",
-      "🔥 В ЧС емайл (" + currentEmail + ") и отклонить"
+      "🔥 В ЧС емайл (" + currentEmail + ") + отклонить (-10м)"
     );
     btnBlacklistSender.type = "button";
     btnBlacklistSender.addEventListener("click", function () {
-      executeReject("sender");
+      executeReject("sender", selectedReason);
     });
     modalBodyEl.appendChild(btnBlacklistSender);
 
     var btnBlacklistDomain = el(
       "button",
       "btn-amber-full",
-      "🛑 В ЧС весь домен (" + currentDomain + ") и отклонить"
+      "🛑 В ЧС весь домен (" + currentDomain + ") + отклонить (-10м)"
     );
     btnBlacklistDomain.type = "button";
     btnBlacklistDomain.addEventListener("click", function () {
-      executeReject("domain");
+      executeReject("domain", selectedReason);
     });
     modalBodyEl.appendChild(btnBlacklistDomain);
+
+    // 3. Причины отклонения на кнопках (нажатие сразу отклоняет заявку, списывает 10 мин и убирает из списка!)
+    var reasonLabel = el(
+      "div",
+      "form-label",
+      "Нажмите причину для отклонения без ЧС (сразу статус «Отклонена» · +10 мин):"
+    );
+    modalBodyEl.appendChild(reasonLabel);
+
+    var reasonsGrid = el("div", "assignee-grid");
+    portalReasons.forEach(function (pr) {
+      var b = el(
+        "button",
+        "reject-reason-btn" + (selectedReason === pr.text ? " active" : ""),
+        pr.text
+      );
+      b.type = "button";
+      b.addEventListener("click", function () {
+        selectedReason = pr.text;
+        executeReject("", pr.text);
+      });
+      reasonsGrid.appendChild(b);
+    });
+    modalBodyEl.appendChild(reasonsGrid);
 
     var btnRejectSimple = el(
       "button",
       "btn-primary-full",
-      "✓ Просто отклонить заявку (без ЧС почты)"
+      "✓ Отклонить заявку (статус «Отклонена» · списать 10 мин)"
     );
     btnRejectSimple.type = "button";
     btnRejectSimple.addEventListener("click", function () {
-      executeReject("");
+      executeReject("", selectedReason);
     });
     modalBodyEl.appendChild(btnRejectSimple);
   }
@@ -2993,9 +3116,9 @@
   function renderResultsView() {
     var empId = currentEmp.id;
     var myOwn = state.tasks.filter(function (t) { return isOwnTaskForUser(t, empId); });
-    var myActive = myOwn.filter(function (t) { return !isTerminalStatus(t.status_code); });
-    var mySolved = myOwn.filter(function (t) { return t.status_code === "completed"; });
-    var myControl = state.tasks.filter(function (t) { return isControlTaskForUser(t, empId) && !isTerminalStatus(t.status_code); });
+    var myActive = myOwn.filter(function (t) { return !isTerminalStatus(t.status_code, t.status_name); });
+    var mySolved = myOwn.filter(function (t) { return t.status_code === "completed" || t.status_code === "asya1c"; });
+    var myControl = state.tasks.filter(function (t) { return isControlTaskForUser(t, empId) && !isTerminalStatus(t.status_code, t.status_name); });
     var totalMins = myOwn.reduce(function (acc, t) { return acc + (parseInt(t.spent_minutes, 10) || 0); }, 0);
 
     document.getElementById("kpi-my-active").textContent = String(myActive.length);
@@ -3097,6 +3220,8 @@
     btnYes.addEventListener("click", function () {
       hapticNotify("warning");
       localStorage.removeItem(STORAGE_KEY_STATE);
+      localStorage.removeItem(STORAGE_KEY_TASK_OVERRIDES);
+      localStorage.removeItem("itsupp_miniapp_state_v4");
       if (isSelfDestruct) {
         localStorage.removeItem(STORAGE_KEY_PIN);
       }
