@@ -13,6 +13,7 @@
   var STORAGE_KEY_STATE = "itsupp_miniapp_state_v2";
   var STORAGE_KEY_PIN = "itsupp_miniapp_pin_v2";
   var STORAGE_KEY_BIO = "itsupp_miniapp_bio_prefs_v2";
+  var STORAGE_KEY_THEME = "itsupp_miniapp_theme_v1";
 
   function safeText(val, maxLen) {
     var s = String(val == null ? "" : val).replace(/[\u0000-\u001F\u007F]/g, "").trim();
@@ -37,14 +38,14 @@
 
   var toastTimer = null;
   function showToast(msg) {
-    var el = document.getElementById("toast");
-    if (!el) return;
-    el.textContent = safeText(msg, 180);
-    el.classList.remove("hidden");
+    var elToast = document.getElementById("toast");
+    if (!elToast) return;
+    elToast.textContent = safeText(msg, 180);
+    elToast.classList.remove("hidden");
     if (toastTimer) clearTimeout(toastTimer);
     toastTimer = setTimeout(function () {
-      el.classList.add("hidden");
-    }, 2600);
+      elToast.classList.add("hidden");
+    }, 2400);
   }
 
   function el(tag, className, text) {
@@ -54,6 +55,90 @@
     return node;
   }
 
+  // =========================================================
+  // УПРАВЛЕНИЕ ТЕМОЙ: ДЕНЬ / НОЧЬ / АВТО
+  // =========================================================
+  var darkMediaQuery = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+
+  function getSavedThemeMode() {
+    try {
+      var m = localStorage.getItem(STORAGE_KEY_THEME);
+      if (m === "light" || m === "dark" || m === "auto") return m;
+    } catch (_e) {}
+    return "auto";
+  }
+
+  var currentThemeMode = getSavedThemeMode();
+
+  function resolveEffectiveTheme(mode) {
+    if (mode === "light" || mode === "dark") return mode;
+    if (tg && (tg.colorScheme === "dark" || tg.colorScheme === "light")) {
+      return tg.colorScheme;
+    }
+    if (darkMediaQuery && typeof darkMediaQuery.matches === "boolean") {
+      return darkMediaQuery.matches ? "dark" : "light";
+    }
+    return "light";
+  }
+
+  function applyThemeMode(mode, notifyUser) {
+    currentThemeMode = mode === "light" || mode === "dark" || mode === "auto" ? mode : "auto";
+    try {
+      localStorage.setItem(STORAGE_KEY_THEME, currentThemeMode);
+    } catch (_e) {}
+
+    var effective = resolveEffectiveTheme(currentThemeMode);
+    document.documentElement.setAttribute("data-theme", effective);
+
+    var btns = document.querySelectorAll("[data-theme-mode]");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].classList.toggle("active", btns[i].getAttribute("data-theme-mode") === currentThemeMode);
+    }
+
+    if (tg) {
+      try {
+        var bgHex = effective === "dark" ? "#0F1115" : "#F5F6F8";
+        var hdrHex = effective === "dark" ? "#0F1115" : "#FFFFFF";
+        if (typeof tg.setBackgroundColor === "function") tg.setBackgroundColor(bgHex);
+        if (typeof tg.setHeaderColor === "function") tg.setHeaderColor(hdrHex);
+      } catch (_e) {}
+    }
+
+    if (notifyUser) {
+      var label =
+        currentThemeMode === "light"
+          ? "☀️ Тема: День"
+          : currentThemeMode === "dark"
+          ? "🌙 Тема: Ночь"
+          : "🌗 Тема: Авто (" + (effective === "dark" ? "ночь" : "день") + ")";
+      showToast(label);
+    }
+  }
+
+  applyThemeMode(currentThemeMode, false);
+
+  if (darkMediaQuery && typeof darkMediaQuery.addEventListener === "function") {
+    darkMediaQuery.addEventListener("change", function () {
+      if (currentThemeMode === "auto") applyThemeMode("auto", false);
+    });
+  }
+  if (tg && typeof tg.onEvent === "function") {
+    try {
+      tg.onEvent("themeChanged", function () {
+        if (currentThemeMode === "auto") applyThemeMode("auto", false);
+      });
+    } catch (_e) {}
+  }
+
+  var themeBtns = document.querySelectorAll("[data-theme-mode]");
+  for (var tIdx = 0; tIdx < themeBtns.length; tIdx++) {
+    themeBtns[tIdx].addEventListener("click", function (ev) {
+      hapticImpact("light");
+      applyThemeMode(ev.currentTarget.getAttribute("data-theme-mode"), true);
+    });
+  }
+
+  // --- Утилиты ---
   function timeGreeting() {
     var h = new Date().getHours();
     if (h >= 5 && h < 12) return "Доброе утро";
@@ -364,7 +449,6 @@
       } catch (_e) {}
     }
 
-    // Fallback / Desktop / WebApp Sber-style biometric scan
     if (bioScanTimer) clearTimeout(bioScanTimer);
     bioScanTimer = setTimeout(function () {
       box.classList.remove("scanning");
@@ -429,7 +513,7 @@
   var activeScope = "mine";
   var activeStatusFilter = "active";
   var searchQuery = "";
-  var botMenuExpanded = true;
+  var botMenuExpanded = false;
 
   // Черновик мастера создания задачи (create_task.py)
   var createDraft = {
@@ -447,7 +531,6 @@
   var lastAiParsed = null;
 
   // --- Правило принадлежности задачи из ASSIGN-ROUTE-DIAG-20261103 ---
-  // Только основной assignee_id считается «своей» задачей (соисполнители coexecutors исключены!)
   function isOwnTaskForUser(task, empId) {
     if (!task || !empId) return false;
     return String(task.assignee_id || "") === String(empId);
@@ -526,7 +609,7 @@
     var dutyLabel = "Дежурный: " + (dutyEmp ? dutyEmp.short : "Быков М. В.");
     document.getElementById("strip-duty-text").textContent = dutyLabel;
     var moreDutyBtn = document.getElementById("btn-more-duty");
-    if (moreDutyBtn) moreDutyBtn.textContent = "👨‍✈️ " + dutyLabel;
+    if (moreDutyBtn) moreDutyBtn.textContent = dutyLabel;
   }
 
   // --- Списки и фильтрация задач ---
@@ -545,7 +628,7 @@
       if (scope === "overdue") {
         return (isOwnTaskForUser(t, empId) || currentEmp.role === "admin") && t.due_bucket === "overdue" && !isTerminalStatus(t.status_code);
       }
-      return true; // "all"
+      return true;
     });
   }
 
@@ -560,50 +643,48 @@
     });
   }
 
-  // --- Матрица кнопок карточки задачи (1-в-1 с build_status_keyboard / build_control_card_keyboard / OFA) ---
   var STATUS_META = {
     opened: { label: "Открыта", cls: "status-opened" },
     work: { label: "Принята", cls: "status-work" },
     working: { label: "Выполняется", cls: "status-working" },
     delayed: { label: "Отложена", cls: "status-delayed" },
     restart: { label: "На доработке", cls: "status-restart" },
-    completed: { label: "✅ Решена", cls: "status-completed" },
+    completed: { label: "Решена", cls: "status-completed" },
     asya1c: { label: "Отклонена", cls: "status-asya1c" }
   };
 
   function getStatusButtonsForOwnCard(statusCode) {
     if (statusCode === "opened") {
       return [
-        { code: "delayed", text: "⏸ Отложить", cls: "btn-warn" },
-        { code: "work", text: "👍 Принял", cls: "btn-work" },
-        { code: "working", text: "▶️ Выполняю", cls: "btn-work" },
-        { code: "resend", text: "🔀 Передать задачу", cls: "" },
-        { code: "completed", text: "✅ Решена", cls: "btn-solve" },
-        { code: "asya1c", text: "✕ Отклонить", cls: "btn-danger" }
+        { code: "delayed", text: "Отложить", cls: "btn-warn" },
+        { code: "work", text: "Принял", cls: "btn-work" },
+        { code: "working", text: "Выполняю", cls: "btn-work" },
+        { code: "resend", text: "Передать задачу", cls: "" },
+        { code: "completed", text: "Решена", cls: "btn-solve" },
+        { code: "asya1c", text: "Отклонить", cls: "btn-danger" }
       ];
     }
     if (statusCode === "work") {
       return [
-        { code: "delayed", text: "⏸ Отложить", cls: "btn-warn" },
-        { code: "working", text: "▶️ Выполняю", cls: "btn-work" },
-        { code: "resend", text: "🔀 Передать задачу", cls: "" },
-        { code: "completed", text: "✅ Решена", cls: "btn-solve" }
+        { code: "delayed", text: "Отложить", cls: "btn-warn" },
+        { code: "working", text: "Выполняю", cls: "btn-work" },
+        { code: "resend", text: "Передать задачу", cls: "" },
+        { code: "completed", text: "Решена", cls: "btn-solve" }
       ];
     }
     if (statusCode === "delayed") {
       return [
-        { code: "completed", text: "✅ Решена", cls: "btn-solve" },
-        { code: "working", text: "▶️ Выполняю", cls: "btn-work" },
-        { code: "resend", text: "🔀 Передать задачу", cls: "" },
-        { code: "asya1c", text: "✕ Отклонить", cls: "btn-danger" }
+        { code: "completed", text: "Решена", cls: "btn-solve" },
+        { code: "working", text: "Выполняю", cls: "btn-work" },
+        { code: "resend", text: "Передать задачу", cls: "" },
+        { code: "asya1c", text: "Отклонить", cls: "btn-danger" }
       ];
     }
-    // working / restart
     return [
-      { code: "delayed", text: "⏸ Отложить", cls: "btn-warn" },
-      { code: "completed", text: "✅ Решена", cls: "btn-solve" },
-      { code: "resend", text: "🔀 Передать задачу", cls: "" },
-      { code: "restart", text: "↩️ На доработку", cls: "" }
+      { code: "delayed", text: "Отложить", cls: "btn-warn" },
+      { code: "completed", text: "Решена", cls: "btn-solve" },
+      { code: "resend", text: "Передать задачу", cls: "" },
+      { code: "restart", text: "На доработку", cls: "" }
     ];
   }
 
@@ -671,24 +752,25 @@
     });
   }
 
+  // --- Лёгкая карточка задачи с прогрессивным раскрытием «Ещё ▾» ---
   function buildTaskCardDOM(task) {
     var role = getTaskRole(task, currentEmp.id);
     var isCoexec = Array.isArray(task.coexecutors) && task.coexecutors.indexOf(String(currentEmp.id)) !== -1;
     var card = el("article", "task-card role-" + role);
 
-    // Верхняя строка: #ID, бейдж роли, статус
+    // 1. Лаконичная верхняя строка: #ID + спокойный бейдж роли + статус
     var topRow = el("div", "task-top-row");
     var idGroup = el("div", "task-id-group");
     idGroup.appendChild(el("span", "task-id", "#" + task.id));
 
     var roleText =
       role === "own"
-        ? "МОЯ ЗАДАЧА"
+        ? "Моя задача"
         : role === "control"
-        ? "НА КОНТРОЛЕ"
+        ? "На контроле"
         : isCoexec
-        ? "ЧУЖАЯ (СОИСПОЛНИТЕЛЬ)"
-        : "ЧУЖАЯ ЗАДАЧА";
+        ? "Соисполнитель"
+        : "Задача отдела";
     idGroup.appendChild(el("span", "role-badge " + role, roleText));
     topRow.appendChild(idGroup);
 
@@ -696,12 +778,13 @@
     topRow.appendChild(el("span", "status-badge " + stMeta.cls, stMeta.label));
     card.appendChild(topRow);
 
-    // Заголовок и описание
+    // 2. Заголовок и краткое описание
     card.appendChild(el("div", "task-title", task.title));
-    card.appendChild(el("div", "task-desc", task.description));
+    if (task.description && task.description !== task.title) {
+      card.appendChild(el("div", "task-desc", task.description));
+    }
 
-    // Сетка метаданных
-    var metaGrid = el("div", "task-meta-grid");
+    // 3. Компактная сводка метаданных без лишних рамок
     var assigneeEmp = getEmployeeById(task.assignee_id);
     var coexecNames = (task.coexecutors || [])
       .map(function (cid) {
@@ -710,23 +793,25 @@
       })
       .join(", ");
 
+    var metaGrid = el("div", "task-meta-grid");
     var items = [
-      ["Клиент: ", task.company_name || "—"],
-      ["Объект: ", task.entity_name || "Без объекта"],
-      ["Исполнитель: ", assigneeEmp ? assigneeEmp.short : "ID " + task.assignee_id],
-      ["Соисполнители: ", coexecNames || "нет"],
-      ["Затрачено: ", formatMinutes(task.spent_minutes || 0)],
-      ["Срок: ", task.deadline || "не задан"]
+      ["Клиент", task.company_name || "—"],
+      ["Объект", task.entity_name || "Без объекта"],
+      ["Исполнитель", assigneeEmp ? assigneeEmp.short : "ID " + task.assignee_id],
+      ["Время / Срок", formatMinutes(task.spent_minutes || 0) + " · " + (task.deadline || "без срока")]
     ];
+    if (coexecNames) {
+      items.push(["Соисполнители", coexecNames]);
+    }
     items.forEach(function (pair) {
       var mItem = el("div", "meta-item");
-      mItem.appendChild(el("span", "meta-lbl", pair[0]));
+      mItem.appendChild(el("span", "meta-lbl", pair[0] + ": "));
       mItem.appendChild(el("span", "meta-val", pair[1]));
       metaGrid.appendChild(mItem);
     });
     card.appendChild(metaGrid);
 
-    // Комментарии
+    // 4. Комментарии (если есть)
     if (Array.isArray(task.comments) && task.comments.length > 0) {
       var cBox = el("div", "task-comments-box");
       task.comments.slice(-2).forEach(function (c) {
@@ -738,133 +823,132 @@
       card.appendChild(cBox);
     }
 
-    // Клавиатура действий по роли
-    var kb = el("div", "task-kb-grid");
+    // 5. Прогрессивная панель кнопок: 2 главные кнопки на виду + раскрытие «Ещё ▾»
+    var primaryBar = el("div", "task-primary-bar");
+    var moreGrid = el("div", "task-kb-grid task-more-grid hidden");
+
+    function makeActionBtn(text, cls, onClick) {
+      var b = el("button", "task-btn " + (cls || ""), text);
+      b.type = "button";
+      b.addEventListener("click", onClick);
+      return b;
+    }
 
     if (isTerminalStatus(task.status_code)) {
-      var btnReopen = el("button", "task-btn", "🔄 Вернуть в работу");
-      btnReopen.type = "button";
-      btnReopen.addEventListener("click", function () {
-        applyQuickStatus(task, "working", "Выполняется");
-      });
-      kb.appendChild(btnReopen);
+      primaryBar.appendChild(
+        makeActionBtn("Вернуть в работу", "btn-work", function () {
+          applyQuickStatus(task, "working", "Выполняется");
+        })
+      );
     } else if (role === "own") {
       var ownActions = getStatusButtonsForOwnCard(task.status_code);
+      var primaryCodes =
+        task.status_code === "opened"
+          ? ["work", "completed"]
+          : task.status_code === "work"
+          ? ["working", "completed"]
+          : ["completed", "delayed"];
+
       ownActions.forEach(function (act) {
-        var b = el("button", "task-btn " + (act.cls || ""), act.text);
-        b.type = "button";
-        b.addEventListener("click", function () {
+        var isPrimary = primaryCodes.indexOf(act.code) !== -1;
+        var btnNode = makeActionBtn(act.text, act.cls, function () {
           handleCardAction(task, act.code);
         });
-        kb.appendChild(b);
+        if (isPrimary && primaryBar.children.length < 2) {
+          primaryBar.appendChild(btnNode);
+        } else {
+          moreGrid.appendChild(btnNode);
+        }
       });
 
       if (currentEmp.role === "admin" || String(currentEmp.id) === "1") {
-        var btnClose15 = el(
-          "button",
-          "task-btn btn-solve btn-wide",
-          "⚡ Закрыть в один клик, списать 15 минут"
+        moreGrid.appendChild(
+          makeActionBtn("⚡ Закрыть в 1 клик (-15м)", "btn-solve btn-wide", function () {
+            closeOneClick15(task);
+          })
         );
-        btnClose15.type = "button";
-        btnClose15.addEventListener("click", function () {
-          closeOneClick15(task);
-        });
-        kb.appendChild(btnClose15);
       }
     } else if (role === "control") {
-      // CONTROL-клавиатура (build_control_card_keyboard)
-      var btnTakeBack = el("button", "task-btn btn-work", "↩️ Забрать задачу");
-      btnTakeBack.type = "button";
-      btnTakeBack.addEventListener("click", function () {
-        takeTaskToSelf(task);
-      });
-      kb.appendChild(btnTakeBack);
-
-      var btnDelegate = el("button", "task-btn", "🔀 Делегировать");
-      btnDelegate.type = "button";
-      btnDelegate.addEventListener("click", function () {
-        openDelegateModal(task);
-      });
-      kb.appendChild(btnDelegate);
-
-      var btnNudge = el("button", "task-btn btn-warn", "🔔 Напомнить исполнителю");
-      btnNudge.type = "button";
-      btnNudge.addEventListener("click", function () {
-        nudgeAssignee(task);
-      });
-      kb.appendChild(btnNudge);
-
+      primaryBar.appendChild(
+        makeActionBtn("↩️ Забрать себе", "btn-work", function () {
+          takeTaskToSelf(task);
+        })
+      );
+      primaryBar.appendChild(
+        makeActionBtn("Напомнить", "", function () {
+          nudgeAssignee(task);
+        })
+      );
+      moreGrid.appendChild(
+        makeActionBtn("Делегировать", "", function () {
+          openDelegateModal(task);
+        })
+      );
       if (currentEmp.role === "admin" || String(currentEmp.id) === "1") {
-        var btnClose15Ctrl = el("button", "task-btn btn-solve", "⚡ Закрыть (-15м)");
-        btnClose15Ctrl.type = "button";
-        btnClose15Ctrl.addEventListener("click", function () {
-          closeOneClick15(task);
-        });
-        kb.appendChild(btnClose15Ctrl);
+        moreGrid.appendChild(
+          makeActionBtn("⚡ Закрыть (-15м)", "btn-solve", function () {
+            closeOneClick15(task);
+          })
+        );
       }
     } else {
-      // Чужая задача (FOREIGN / OFA)
-      var btnTake = el("button", "task-btn btn-work", "✋ Забрать задачу себе");
-      btnTake.type = "button";
-      btnTake.addEventListener("click", function () {
-        openTakeConfirmModal(task);
-      });
-      kb.appendChild(btnTake);
-
+      primaryBar.appendChild(
+        makeActionBtn("Забрать себе", "btn-work", function () {
+          openTakeConfirmModal(task);
+        })
+      );
       if (currentEmp.role === "admin") {
-        var btnAssignOfa = el("button", "task-btn", "👤 Назначить сотрудника");
-        btnAssignOfa.type = "button";
-        btnAssignOfa.addEventListener("click", function () {
-          openDelegateModal(task);
-        });
-        kb.appendChild(btnAssignOfa);
-
-        var btnNotifyOfa = el("button", "task-btn btn-warn", "🔔 Уведомить исполнителя");
-        btnNotifyOfa.type = "button";
-        btnNotifyOfa.addEventListener("click", function () {
-          nudgeAssignee(task);
-        });
-        kb.appendChild(btnNotifyOfa);
-
-        var btnSolveOfa = el("button", "task-btn btn-solve", "✅ Сменить статус / Решить");
-        btnSolveOfa.type = "button";
-        btnSolveOfa.addEventListener("click", function () {
-          openSpentTimeCalculatorModal(task);
-        });
-        kb.appendChild(btnSolveOfa);
+        primaryBar.appendChild(
+          makeActionBtn("Назначить", "", function () {
+            openDelegateModal(task);
+          })
+        );
+        moreGrid.appendChild(
+          makeActionBtn("Уведомить исполнителя", "", function () {
+            nudgeAssignee(task);
+          })
+        );
+        moreGrid.appendChild(
+          makeActionBtn("Сменить статус / Решить", "btn-solve", function () {
+            openSpentTimeCalculatorModal(task);
+          })
+        );
       }
     }
 
-    // Общие кнопки: Комментарий, Открыть в Okdesk, В чат бота
-    var btnComment = el("button", "task-btn", "💬 Комментарий");
-    btnComment.type = "button";
-    btnComment.addEventListener("click", function () {
-      openCommentModal(task);
-    });
-    kb.appendChild(btnComment);
+    moreGrid.appendChild(
+      makeActionBtn("Комментарий", "", function () {
+        openCommentModal(task);
+      })
+    );
+    moreGrid.appendChild(
+      makeActionBtn("Открыть в Okdesk", "", function () {
+        openIssueInOkdesk(task.id);
+      })
+    );
+    moreGrid.appendChild(
+      makeActionBtn("Скопировать ссылку", "", function () {
+        copyIssueLink(task.id);
+      })
+    );
+    moreGrid.appendChild(
+      makeActionBtn("Открыть в боте", "", function () {
+        openIssueInBotChat(task.id);
+      })
+    );
 
-    var btnOkdesk = el("button", "task-btn", "🔗 Открыть в Okdesk");
-    btnOkdesk.type = "button";
-    btnOkdesk.addEventListener("click", function () {
-      openIssueInOkdesk(task.id);
+    var btnMoreToggle = el("button", "task-btn task-btn-more", "Ещё ▾");
+    btnMoreToggle.type = "button";
+    btnMoreToggle.addEventListener("click", function () {
+      hapticImpact("light");
+      var isHidden = moreGrid.classList.toggle("hidden");
+      btnMoreToggle.textContent = isHidden ? "Ещё ▾" : "Скрыть ▴";
+      btnMoreToggle.classList.toggle("active", !isHidden);
     });
-    kb.appendChild(btnOkdesk);
+    primaryBar.appendChild(btnMoreToggle);
 
-    var btnCopy = el("button", "task-btn", "📋 Скопировать ссылку");
-    btnCopy.type = "button";
-    btnCopy.addEventListener("click", function () {
-      copyIssueLink(task.id);
-    });
-    kb.appendChild(btnCopy);
-
-    var btnBotChat = el("button", "task-btn", "🤖 Открыть в боте");
-    btnBotChat.type = "button";
-    btnBotChat.addEventListener("click", function () {
-      openIssueInBotChat(task.id);
-    });
-    kb.appendChild(btnBotChat);
-
-    card.appendChild(kb);
+    card.appendChild(primaryBar);
+    card.appendChild(moreGrid);
     return card;
   }
 
@@ -951,11 +1035,11 @@
     task.comments.push({
       author: currentEmp.short,
       time: new Date().toTimeString().slice(0, 5),
-      text: "🔔 Отправлено напоминание исполнителю " + (assignee ? assignee.short : "")
+      text: "Отправлено напоминание исполнителю " + (assignee ? assignee.short : "")
     });
     saveState();
     renderTasksView();
-    showToast("🔔 Напоминание отправлено исполнителю " + (assignee ? assignee.short : ""));
+    showToast("Напоминание отправлено исполнителю " + (assignee ? assignee.short : ""));
   }
 
   function openIssueInOkdesk(issueId) {
@@ -973,7 +1057,7 @@
     var url = "https://565.okdesk.ru/issues/" + encodeURIComponent(issueId);
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(url).then(
-        function () { showToast("📋 Ссылка скопирована: " + url); },
+        function () { showToast("Ссылка скопирована: " + url); },
         function () { showToast("Ссылка: " + url); }
       );
     } else {
@@ -992,7 +1076,7 @@
     showToast("Переход в бот: @itsupp_task_bot?start=task_" + issueId);
   }
 
-  // --- Модальные окна действий (Калькулятор времени / Отложить / Передать / Комментарий) ---
+  // --- Модальные окна действий ---
   var actionModal = document.getElementById("action-modal");
   var modalTitleEl = document.getElementById("modal-title");
   var modalBodyEl = document.getElementById("modal-body");
@@ -1009,16 +1093,15 @@
 
   document.getElementById("btn-modal-close").addEventListener("click", closeActionModal);
 
-  // 1. Калькулятор списания времени (spent_time_calculator_keyboard)
+  // 1. Калькулятор списания времени
   function openSpentTimeCalculatorModal(task) {
-    openActionModal("⏱ Списание времени · #" + task.id);
+    openActionModal("Списание времени · #" + task.id);
     var addedMins = 15;
     var billingFlag = task.billing_flag || "none";
 
-    var display = el("div", "calc-display", "⏱ К списанию: " + formatMinutes(addedMins));
+    var display = el("div", "calc-display", "К списанию: " + formatMinutes(addedMins));
     modalBodyEl.appendChild(display);
 
-    // Тариф (Обычная / Переработка / Не в договоре)
     var billingRow = el("div", "segmented-row");
     var billingOptions = [
       { flag: "none", label: "Обычная" },
@@ -1031,7 +1114,7 @@
         var b = el(
           "button",
           "seg-btn" + (billingFlag === opt.flag ? " active" : ""),
-          (billingFlag === opt.flag ? "✅ " : "☐ ") + opt.label
+          opt.label
         );
         b.type = "button";
         b.addEventListener("click", function () {
@@ -1044,7 +1127,6 @@
     renderBillingBtns();
     modalBodyEl.appendChild(billingRow);
 
-    // Сетка +/- минут как в SPENT_TIME_ADJUST_ROW1 и ROW2
     var row1Deltas = [-5, 5, -10, 10, -15, 15];
     var row2Deltas = [-30, 30, -120, 120, -240, 240];
 
@@ -1057,7 +1139,7 @@
         btn.addEventListener("click", function () {
           hapticImpact("light");
           addedMins = Math.max(0, addedMins + d);
-          display.textContent = "⏱ К списанию: " + formatMinutes(addedMins);
+          display.textContent = "К списанию: " + formatMinutes(addedMins);
         });
         grid.appendChild(btn);
       });
@@ -1072,7 +1154,7 @@
     commentInput.placeholder = "Комментарий к решению (необязательно)…";
     modalBodyEl.appendChild(commentInput);
 
-    var btnOk = el("button", "btn-primary-full", "✅ Продолжить и решить задачу");
+    var btnOk = el("button", "btn-primary-full", "Продолжить и решить задачу");
     btnOk.type = "button";
     btnOk.addEventListener("click", function () {
       hapticNotify("success");
@@ -1085,19 +1167,19 @@
       task.comments.push({
         author: currentEmp.short,
         time: new Date().toTimeString().slice(0, 5),
-        text: "✅ Решена (+" + formatMinutes(addedMins) + ")" + (cText ? ": " + cText : "")
+        text: "Решена (+" + formatMinutes(addedMins) + ")" + (cText ? ": " + cText : "")
       });
       saveState();
       closeActionModal();
       renderTasksView();
-      showToast("✅ Заявка #" + task.id + " решена (списано +" + formatMinutes(addedMins) + ")");
+      showToast("Заявка #" + task.id + " решена (+" + formatMinutes(addedMins) + ")");
     });
     modalBodyEl.appendChild(btnOk);
   }
 
-  // 2. Модальное окно «Отложить» (postpone_quick_keyboard + postpone_preset_keyboard)
+  // 2. Модальное окно «Отложить»
   function openPostponeModal(task) {
-    openActionModal("⏸ Отложить заявку #" + task.id);
+    openActionModal("Отложить заявку #" + task.id);
 
     var quickSlots = [
       { label: "Завтра 10:00 · +5 мин", deadline: "Завтра 10:00", addMins: 5, bucket: "upcoming" },
@@ -1123,7 +1205,7 @@
         saveState();
         closeActionModal();
         renderTasksView();
-        showToast("⏸ Заявка #" + task.id + " отложена (" + sl.deadline + ")");
+        showToast("Заявка #" + task.id + " отложена (" + sl.deadline + ")");
       });
       modalBodyEl.appendChild(b);
     });
@@ -1131,14 +1213,14 @@
 
   // 3. Модальное окно «Передать / Делегировать»
   function openDelegateModal(task) {
-    openActionModal("🔀 Передать заявку #" + task.id);
+    openActionModal("Передать заявку #" + task.id);
     var keepControl = true;
 
-    var ctrlBtn = el("button", "btn-secondary-full", "✅ Оставить у себя на контроле (CONTROL)");
+    var ctrlBtn = el("button", "btn-secondary-full", "✓ Оставить у себя на контроле (CONTROL)");
     ctrlBtn.type = "button";
     ctrlBtn.addEventListener("click", function () {
       keepControl = !keepControl;
-      ctrlBtn.textContent = (keepControl ? "✅ " : "☐ ") + "Оставить у себя на контроле (CONTROL)";
+      ctrlBtn.textContent = (keepControl ? "✓ " : "☐ ") + "Оставить у себя на контроле (CONTROL)";
     });
     modalBodyEl.appendChild(ctrlBtn);
 
@@ -1163,12 +1245,12 @@
         task.comments.push({
           author: currentEmp.short,
           time: new Date().toTimeString().slice(0, 5),
-          text: "🔀 Передана сотруднику " + emp.short
+          text: "Передана сотруднику " + emp.short
         });
         saveState();
         closeActionModal();
         renderTasksView();
-        showToast("🔀 Заявка #" + task.id + " передана → " + emp.short);
+        showToast("Заявка #" + task.id + " передана → " + emp.short);
       });
       grid.appendChild(b);
     });
@@ -1177,7 +1259,7 @@
 
   // 4. Подтверждение «Забрать чужую задачу»
   function openTakeConfirmModal(task) {
-    openActionModal("✋ Забрать заявку #" + task.id + "?");
+    openActionModal("Забрать заявку #" + task.id + "?");
     var assignee = getEmployeeById(task.assignee_id);
     modalBodyEl.appendChild(
       el(
@@ -1186,14 +1268,14 @@
         "Текущий исполнитель: " + (assignee ? assignee.name : "ID " + task.assignee_id) + ". Перевести заявку на себя (" + currentEmp.name + ")?"
       )
     );
-    var btnYes = el("button", "btn-primary-full", "✅ Да, забрать задачу");
+    var btnYes = el("button", "btn-primary-full", "Да, забрать задачу");
     btnYes.type = "button";
     btnYes.addEventListener("click", function () {
       takeTaskToSelf(task);
     });
     modalBodyEl.appendChild(btnYes);
 
-    var btnNo = el("button", "btn-secondary-full", "❌ Отмена");
+    var btnNo = el("button", "btn-secondary-full", "Отмена");
     btnNo.type = "button";
     btnNo.addEventListener("click", closeActionModal);
     modalBodyEl.appendChild(btnNo);
@@ -1201,7 +1283,7 @@
 
   // 5. Модальное окно «Комментарий»
   function openCommentModal(task) {
-    openActionModal("💬 Комментарий к #" + task.id);
+    openActionModal("Комментарий к #" + task.id);
     if (Array.isArray(task.comments) && task.comments.length > 0) {
       var list = el("div", "task-comments-box");
       task.comments.forEach(function (c) {
@@ -1218,7 +1300,7 @@
     input.placeholder = "Введите текст комментария в Okdesk…";
     modalBodyEl.appendChild(input);
 
-    var btnSend = el("button", "btn-primary-full", "📨 Отправить комментарий");
+    var btnSend = el("button", "btn-primary-full", "Отправить комментарий");
     btnSend.type = "button";
     btnSend.addEventListener("click", function () {
       var txt = safeText(input.value, 500);
@@ -1236,14 +1318,14 @@
       saveState();
       closeActionModal();
       renderTasksView();
-      showToast("💬 Комментарий добавлен в #" + task.id);
+      showToast("Комментарий добавлен в #" + task.id);
     });
     modalBodyEl.appendChild(btnSend);
   }
 
-  // 6. Модальное окно выбора текущего сотрудника (просмотр кабинета глазами любого сотрудника)
+  // 6. Модальное окно выбора текущего сотрудника
   function openSwitchEmployeeModal() {
-    openActionModal("👤 Профиль сотрудника (Okdesk)");
+    openActionModal("Профиль сотрудника (Okdesk)");
     modalBodyEl.appendChild(
       el(
         "p",
@@ -1265,16 +1347,16 @@
         createDraft.assigneeId = emp.id;
         closeActionModal();
         renderAllAppViews();
-        showToast("👤 Активен профиль: " + emp.name + " (ID " + emp.id + ")");
+        showToast("Активен профиль: " + emp.name + " (ID " + emp.id + ")");
       });
       grid.appendChild(b);
     });
     modalBodyEl.appendChild(grid);
   }
 
-  // 7. Модальное окно выбора Дежурного (handle_duty_callback)
+  // 7. Модальное окно выбора Дежурного
   function openDutyPickerModal() {
-    openActionModal("👨‍✈️ Назначить дежурного сотрудника");
+    openActionModal("Назначить дежурного сотрудника");
     var grid = el("div", "assignee-grid");
     DATA.employees.forEach(function (emp) {
       var b = el(
@@ -1289,7 +1371,7 @@
         saveState();
         closeActionModal();
         renderHeader();
-        showToast("👨‍✈️ Дежурный: " + emp.name);
+        showToast("Дежурный: " + emp.name);
       });
       grid.appendChild(b);
     });
@@ -1316,14 +1398,13 @@
       );
     }
 
-    // Сетка выбора исполнителя (Я + сотрудники из каталога)
     var grid = document.getElementById("create-assignee-grid");
     grid.textContent = "";
 
     var btnMe = el(
       "button",
       "assignee-btn" + (String(createDraft.assigneeId) === String(currentEmp.id) ? " active" : ""),
-      "👤 Я (" + currentEmp.short + ")"
+      "Я (" + currentEmp.short + ")"
     );
     btnMe.type = "button";
     btnMe.addEventListener("click", function () {
@@ -1387,7 +1468,6 @@
       return;
     }
 
-    // Проверка допустимости выбранного исполнителя по каталогу (защита ASSIGN-ROUTE-DIAG-20261103)
     var targetEmp = getEmployeeById(createDraft.assigneeId);
     if (!targetEmp && String(createDraft.assigneeId) !== String(currentEmp.id)) {
       hapticNotify("error");
@@ -1438,7 +1518,6 @@
     state.tasks.unshift(newTask);
     saveState();
 
-    // Очистка формы
     descEl.value = "";
     entityEl.value = "";
     createDraft.files = [];
@@ -1448,7 +1527,7 @@
     hapticNotify("success");
     activeScope = String(createDraft.assigneeId) === String(currentEmp.id) ? "mine" : "control";
     switchView("tasks");
-    showToast("✅ Заявка #" + newId + " создана на " + (targetEmp ? targetEmp.short : currentEmp.short));
+    showToast("Заявка #" + newId + " создана на " + (targetEmp ? targetEmp.short : currentEmp.short));
   }
 
   // =========================================================
@@ -1459,7 +1538,6 @@
     if (!txt) return null;
     var lower = txt.toLowerCase();
 
-    // Поиск компании из 130 реальных компаний
     var matchedCompany = { id: 30, name: "Сервис-Про ООО" };
     var bestScore = 0;
     DATA.companies.forEach(function (c) {
@@ -1475,7 +1553,6 @@
       }
     });
 
-    // Поиск сотрудника по фамилии
     var matchedAssignee = currentEmp;
     DATA.employees.forEach(function (emp) {
       var surname = emp.name.split(" ")[0].toLowerCase();
@@ -1485,14 +1562,12 @@
       }
     });
 
-    // Поиск времени
     var spent = 10;
     var mMin = lower.match(/(\d+)\s*(мин|м\b)/);
     if (mMin) spent = Math.min(240, Math.max(5, parseInt(mMin[1], 10)));
     else if (lower.indexOf("полчаса") !== -1) spent = 30;
     else if (lower.indexOf("час") !== -1) spent = 60;
 
-    // Тип заявки
     var isAcc = lower.indexOf("бухгалтер") !== -1 || lower.indexOf("акт") !== -1 || lower.indexOf("счет") !== -1 || lower.indexOf("эдо") !== -1;
 
     return {
@@ -1533,7 +1608,6 @@
       breakdownEl.appendChild(r);
     });
 
-    // Сводка по всем сотрудникам
     var allListEl = document.getElementById("all-results-list");
     allListEl.textContent = "";
     DATA.employees.forEach(function (emp) {
@@ -1545,7 +1619,6 @@
       allListEl.appendChild(row);
     });
 
-    // Статус системы
     var sysEl = document.getElementById("sys-status-list");
     sysEl.textContent = "";
     var sysRows = [
@@ -1579,7 +1652,7 @@
   }
 
   function openWipeConfirmModal(isSelfDestruct) {
-    openActionModal(isSelfDestruct ? "☠️ Самоуничтожение" : "🧹 Очистить чат / сбросить кэш");
+    openActionModal(isSelfDestruct ? "Самоуничтожение" : "Очистить кэш задач");
     modalBodyEl.appendChild(
       el(
         "p",
@@ -1589,7 +1662,7 @@
           : "Сбросить локальные изменения задач к эталонному состоянию продакшена?"
       )
     );
-    var btnYes = el("button", "btn-primary-full", "✅ Да, удалить");
+    var btnYes = el("button", "btn-primary-full", "Да, удалить");
     btnYes.type = "button";
     btnYes.addEventListener("click", function () {
       hapticNotify("warning");
@@ -1601,15 +1674,15 @@
       closeActionModal();
       if (isSelfDestruct) {
         lockToLoginScreen();
-        showToast("☠️ Сессия и код доступа очищены");
+        showToast("Сессия и код доступа очищены");
       } else {
         renderAllAppViews();
-        showToast("🧹 Состояние задач восстановлено");
+        showToast("Состояние задач восстановлено");
       }
     });
     modalBodyEl.appendChild(btnYes);
 
-    var btnNo = el("button", "btn-secondary-full", "❌ Нет");
+    var btnNo = el("button", "btn-secondary-full", "Нет");
     btnNo.type = "button";
     btnNo.addEventListener("click", closeActionModal);
     modalBodyEl.appendChild(btnNo);
@@ -1645,8 +1718,8 @@
     renderResultsView();
     showToast(
       state.freshEnabled
-        ? "🔔 Оповещение о новых задачах: ВКЛ"
-        : "🔕 Оповещение о новых задачах: ВЫКЛ"
+        ? "Оповещение о новых задачах: ВКЛ"
+        : "Оповещение о новых задачах: ВЫКЛ"
     );
   }
 
@@ -1655,7 +1728,7 @@
   document.getElementById("btn-top-refresh").addEventListener("click", function () {
     hapticImpact("medium");
     renderAllAppViews();
-    showToast("🔄 Задачи обновлены (" + state.tasks.length + " в контуре)");
+    showToast("Задачи обновлены (" + state.tasks.length + " в контуре)");
   });
 
   document.getElementById("btn-top-bot").addEventListener("click", function () {
@@ -1691,7 +1764,7 @@
         switchView("create");
       } else if (cmd === "refresh_tasks") {
         renderAllAppViews();
-        showToast("🔄 Задачи синхронизированы");
+        showToast("Задачи синхронизированы");
       } else if (cmd === "search") {
         switchView("tasks");
         document.getElementById("task-search-input").focus();
@@ -1819,7 +1892,7 @@
     if (!SpeechRec) {
       document.getElementById("ai500-input").value =
         "Клиника Фомина Тверь не печатает чек касса АТОЛ на ресепшене назначить на Быкова списать 15 минут";
-      showToast("🎙 Подставлен распознанный голосовой пример");
+      showToast("Подставлен распознанный голосовой пример");
       return;
     }
     if (isRecording && voiceRec) {

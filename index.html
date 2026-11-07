@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
@@ -25,7 +25,14 @@
             <span class="sber-brand-dot"></span>
             <span class="sber-brand-title">ITSUPP ID</span>
           </div>
-          <button id="btn-login-close" type="button" class="sber-link-btn">Закрыть</button>
+          <div class="top-bar-right">
+            <div class="theme-switcher" role="group" aria-label="Тема оформления">
+              <button type="button" class="theme-btn" data-theme-mode="light" title="Дневная тема">☀️ День</button>
+              <button type="button" class="theme-btn" data-theme-mode="dark" title="Ночная тема">🌙 Ночь</button>
+              <button type="button" class="theme-btn active" data-theme-mode="auto" title="Авто (как в системе)">Авто</button>
+            </div>
+            <button id="btn-login-close" type="button" class="sber-link-btn">Закрыть</button>
+          </div>
         </div>
 
         <div class="sber-profile-block">
@@ -63,7 +70,6 @@
           <button type="button" id="btn-pin-reset" class="key-btn key-aux">Не помню<br />код</button>
           <button type="button" class="key-btn" data-digit="0"><span class="key-num">0</span></button>
           <button type="button" id="btn-key-right" class="key-btn key-bio" aria-label="Биометрия или стереть">
-            <!-- Face ID / Touch ID SVG icon (default when PIN empty) -->
             <svg id="icon-key-bio" class="bio-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
               <path d="M4 8V6a2 2 0 0 1 2-2h2" />
               <path d="M4 16v2a2 2 0 0 0 2 2h2" />
@@ -128,16 +134,21 @@
             <span>👨‍✈️</span>
             <span id="strip-duty-text">Дежурный: Быков М. В.</span>
           </button>
+          <div class="theme-switcher strip-theme-switcher" role="group" aria-label="Тема оформления">
+            <button type="button" class="theme-btn" data-theme-mode="light" title="Дневная тема">☀️</button>
+            <button type="button" class="theme-btn" data-theme-mode="dark" title="Ночная тема">🌙</button>
+            <button type="button" class="theme-btn active" data-theme-mode="auto" title="Авто">Авто</button>
+          </div>
         </div>
       </header>
 
-      <!-- Клавиатура главного меню бота (1-в-1 с ReplyKeyboard @itsupp_task_bot) -->
+      <!-- Компактная полоса команд бота (свёрнута по умолчанию для лёгкости первого экрана) -->
       <div class="bot-menu-panel">
         <div class="bot-menu-header">
-          <span class="bot-menu-title">Меню @itsupp_task_bot</span>
-          <button id="btn-toggle-bot-kb" type="button" class="bot-menu-collapse">Свернуть ▴</button>
+          <span class="bot-menu-title">Быстрые команды @itsupp_task_bot</span>
+          <button id="btn-toggle-bot-kb" type="button" class="bot-menu-collapse">Развернуть ▾</button>
         </div>
-        <div id="bot-menu-grid" class="bot-menu-grid">
+        <div id="bot-menu-grid" class="bot-menu-grid hidden">
           <div class="bot-kb-row">
             <button type="button" class="bot-kb-btn" data-menu-cmd="mytasks">📋 Мои задачи</button>
             <button type="button" class="bot-kb-btn bot-kb-accent" data-menu-cmd="create_task">➕ Создать задачу</button>
@@ -178,19 +189,19 @@
           <!-- Фильтры разделов (Мои / На контроле / На сегодня / Просроченные / Все) -->
           <div class="scope-tabs" role="tablist">
             <button type="button" class="scope-tab active" data-scope="mine">
-              Мои задачи <span id="cnt-mine" class="scope-badge">0</span>
+              Мои <span id="cnt-mine" class="scope-badge">0</span>
             </button>
             <button type="button" class="scope-tab" data-scope="control">
-              На контроле <span id="cnt-control" class="scope-badge">0</span>
+              Контроль <span id="cnt-control" class="scope-badge">0</span>
             </button>
             <button type="button" class="scope-tab" data-scope="today">
-              На сегодня <span id="cnt-today" class="scope-badge">0</span>
+              Сегодня <span id="cnt-today" class="scope-badge">0</span>
             </button>
             <button type="button" class="scope-tab" data-scope="overdue">
-              Просроченные <span id="cnt-overdue" class="scope-badge badge-danger">0</span>
+              Просрочено <span id="cnt-overdue" class="scope-badge badge-danger">0</span>
             </button>
             <button type="button" class="scope-tab" data-scope="all">
-              Все задачи <span id="cnt-all" class="scope-badge">0</span>
+              Все <span id="cnt-all" class="scope-badge">0</span>
             </button>
           </div>
 
@@ -211,38 +222,38 @@
         <div id="view-create" class="app-view">
           <div class="section-card">
             <div class="section-head">
-              <h2>➕ Создать задачу</h2>
-              <span class="section-tag">Мастер Okdesk</span>
+              <h2>Новая заявка</h2>
+              <span class="section-tag">Okdesk</span>
             </div>
             <p class="section-desc">
-              Маршрут создания соответствует <code>src/create_task.py</code>: выбранный исполнитель уходит напрямую в <code>assignee_id</code> без подстановки чужой группы.
+              Исполнитель назначается напрямую в <code>assignee_id</code> без подстановки сторонней группы.
             </p>
 
             <!-- Шаг 1: Направление -->
             <div class="form-group">
-              <label class="form-label">1. Направление заявки</label>
+              <label class="form-label">Направление</label>
               <div class="segmented-row">
-                <button type="button" class="seg-btn active" data-create-type="service">🛠 Техническая поддержка</button>
-                <button type="button" class="seg-btn" data-create-type="000004">📊 В бухгалтерию</button>
+                <button type="button" class="seg-btn active" data-create-type="service">🛠 Техподдержка</button>
+                <button type="button" class="seg-btn" data-create-type="000004">📊 Бухгалтерия</button>
               </div>
             </div>
 
             <!-- Шаг 2: Клиент (130 компаний из companies_active.csv) -->
             <div class="form-group">
-              <label class="form-label">2. Клиент (справочник 130 активных компаний)</label>
+              <label class="form-label">Клиент (130 компаний)</label>
               <div class="selected-client-banner" id="create-selected-client">
                 <div>
-                  <div class="selected-client-label">Выбранный клиент:</div>
+                  <div class="selected-client-label">Выбранный клиент</div>
                   <div id="create-client-name" class="selected-client-name">Сервис-Про ООО (ID 30)</div>
                 </div>
-                <button type="button" id="btn-create-change-client" class="btn-mini">🔄 Сменить</button>
+                <button type="button" id="btn-create-change-client" class="btn-mini">Сменить</button>
               </div>
               <div id="create-client-picker" class="client-picker-box hidden">
                 <input
                   id="create-client-search"
                   type="search"
                   class="form-input"
-                  placeholder="Введите название клиента (например, Клиника Фомина, Сервис-Про)…"
+                  placeholder="Название клиента или ID…"
                   autocomplete="off"
                 />
                 <div id="create-client-results" class="client-results-list"></div>
@@ -251,30 +262,30 @@
 
             <!-- Шаг 3: Объект обслуживания -->
             <div class="form-group">
-              <label class="form-label">3. Объект обслуживания</label>
+              <label class="form-label">Объект обслуживания</label>
               <div class="entity-row">
                 <input
                   id="create-entity-input"
                   type="text"
                   class="form-input"
-                  placeholder="Например: Ресепшен 1 этаж / Сервер 1С (или без объекта)"
+                  placeholder="Например: Ресепшен 1 этаж / Сервер 1С"
                 />
-                <button type="button" id="btn-skip-entity" class="btn-mini">➡️ Без объекта</button>
+                <button type="button" id="btn-skip-entity" class="btn-mini">Без объекта</button>
               </div>
             </div>
 
             <!-- Шаг 4: Описание проблемы -->
             <div class="form-group">
-              <label class="form-label">4. Описание проблемы</label>
+              <label class="form-label">Описание проблемы</label>
               <textarea
                 id="create-desc-input"
                 class="form-textarea"
                 rows="3"
-                placeholder="Опишите проблему подробно. Первая строка станет заголовком заявки…"
+                placeholder="Опишите задачу. Первая строка станет заголовком…"
               ></textarea>
               <div class="attach-bar">
                 <label class="attach-btn">
-                  📎 Прикрепить фото/файл (до 5)
+                  📎 Прикрепить файлы (до 5)
                   <input id="create-file-input" type="file" multiple accept="image/*,.pdf,.txt,.doc,.docx,.xls,.xlsx" class="hidden" />
                 </label>
                 <span id="create-files-count" class="attach-count">Файлов: 0 / 5</span>
@@ -284,13 +295,13 @@
 
             <!-- Шаг 5: Исполнитель -->
             <div class="form-group">
-              <label class="form-label">5. Исполнитель (каталог сотрудников Okdesk)</label>
+              <label class="form-label">Исполнитель</label>
               <div id="create-assignee-grid" class="assignee-grid"></div>
             </div>
 
             <!-- Шаг 6: Списание времени при создании -->
             <div class="form-group">
-              <label class="form-label">6. Списание времени (по умолчанию 10 мин)</label>
+              <label class="form-label">Списание времени</label>
               <div id="create-spent-grid" class="preset-chips">
                 <button type="button" class="preset-chip" data-create-spent="5">5 мин</button>
                 <button type="button" class="preset-chip active" data-create-spent="10">10 мин</button>
@@ -303,8 +314,8 @@
             </div>
 
             <div class="form-actions">
-              <button type="button" id="btn-submit-create" class="btn-primary-full">✅ Отправить заявку</button>
-              <button type="button" id="btn-reset-create" class="btn-secondary-full">❌ Очистить черновик</button>
+              <button type="button" id="btn-submit-create" class="btn-primary-full">Создать заявку</button>
+              <button type="button" id="btn-reset-create" class="btn-secondary-full">Очистить форму</button>
             </div>
           </div>
         </div>
@@ -313,11 +324,11 @@
         <div id="view-ai500" class="app-view">
           <div class="section-card">
             <div class="section-head">
-              <h2>🎙 AI 500 — Голосовой ассистент</h2>
+              <h2>AI 500 — Голосовой ввод</h2>
               <span class="section-tag">ASR + NLP</span>
             </div>
             <p class="section-desc">
-              Надиктуйте или вставьте голосовой текст — AI 500 автоматически распознает клиента, сотрудника, трудозатраты и оформит чистую заявку.
+              Надиктуйте или вставьте текст — AI 500 определит клиента, сотрудника, время и оформит карточку.
             </p>
 
             <div class="voice-controls">
@@ -325,11 +336,11 @@
                 <span id="voice-mic-icon" class="mic-icon">🎙</span>
                 <span id="voice-mic-label">Начать запись голоса</span>
               </button>
-              <button type="button" id="btn-voice-demo" class="btn-mini">✨ Пример диктовки</button>
+              <button type="button" id="btn-voice-demo" class="btn-mini">Пример</button>
             </div>
 
             <div class="form-group">
-              <label class="form-label">Распознанный текст / черновик</label>
+              <label class="form-label">Текст для разбора</label>
               <textarea
                 id="ai500-input"
                 class="form-textarea"
@@ -339,11 +350,11 @@
             </div>
 
             <div class="ai-actions-row">
-              <button type="button" id="btn-ai500-parse" class="btn-primary-full">🤖 Разобрать и применить AI 500</button>
+              <button type="button" id="btn-ai500-parse" class="btn-primary-full">Разобрать через AI 500</button>
             </div>
 
             <div id="ai500-preview" class="ai-preview-box hidden">
-              <div class="ai-preview-title">Результат разбора AI 500</div>
+              <div class="ai-preview-title">Результат разбора</div>
               <div class="ai-kv"><span>Клиент:</span> <strong id="ai-res-client">—</strong></div>
               <div class="ai-kv"><span>Направление:</span> <strong id="ai-res-type">—</strong></div>
               <div class="ai-kv"><span>Исполнитель:</span> <strong id="ai-res-assignee">—</strong></div>
@@ -351,8 +362,8 @@
               <div class="ai-kv"><span>Заголовок:</span> <strong id="ai-res-title">—</strong></div>
               <div class="ai-kv"><span>Описание:</span> <span id="ai-res-desc">—</span></div>
               <div class="form-actions">
-                <button type="button" id="btn-ai500-create" class="btn-primary-full">✅ Создать эту заявку</button>
-                <button type="button" id="btn-ai500-to-wizard" class="btn-secondary-full">✏️ Открыть в мастере создания</button>
+                <button type="button" id="btn-ai500-create" class="btn-primary-full">Создать эту заявку</button>
+                <button type="button" id="btn-ai500-to-wizard" class="btn-secondary-full">Открыть в мастере создания</button>
               </div>
             </div>
           </div>
@@ -361,9 +372,9 @@
         <!-- ВКЛАДКА 4: МОЙ РЕЗУЛЬТАТ / ВСЕХ ПОСМОТРЕТЬ / СТАТУС -->
         <div id="view-results" class="app-view">
           <div class="segmented-row results-switch">
-            <button type="button" class="seg-btn active" data-res-tab="mine">📊 Мой результат</button>
-            <button type="button" class="seg-btn" data-res-tab="all">🏆 Все сотрудники</button>
-            <button type="button" class="seg-btn" data-res-tab="status">📈 Статус</button>
+            <button type="button" class="seg-btn active" data-res-tab="mine">Мой результат</button>
+            <button type="button" class="seg-btn" data-res-tab="all">Отдел</button>
+            <button type="button" class="seg-btn" data-res-tab="status">Статус</button>
           </div>
 
           <!-- Панель: Мой результат -->
@@ -371,11 +382,11 @@
             <div class="kpi-grid">
               <div class="kpi-card">
                 <div class="kpi-val" id="kpi-my-active">0</div>
-                <div class="kpi-lbl">В работе сейчас</div>
+                <div class="kpi-lbl">В работе</div>
               </div>
               <div class="kpi-card">
                 <div class="kpi-val" id="kpi-my-solved">0</div>
-                <div class="kpi-lbl">Решено заявок</div>
+                <div class="kpi-lbl">Решено</div>
               </div>
               <div class="kpi-card">
                 <div class="kpi-val" id="kpi-my-minutes">0м</div>
@@ -395,7 +406,7 @@
           <!-- Панель: Всех посмотреть! -->
           <div id="res-panel-all" class="res-panel">
             <div class="section-card">
-              <h3>🏆 Сводка по сотрудникам отдела</h3>
+              <h3>Сводка по сотрудникам отдела</h3>
               <div id="all-results-list" class="emp-stats-list"></div>
             </div>
           </div>
@@ -403,49 +414,59 @@
           <!-- Панель: Статус системы -->
           <div id="res-panel-status" class="res-panel">
             <div class="section-card">
-              <h3>📈 Статус контура ITSUPP</h3>
+              <h3>Статус контура ITSUPP</h3>
               <div class="sys-status-list" id="sys-status-list"></div>
             </div>
           </div>
         </div>
 
-        <!-- ВКЛАДКА 5: ЕЩЁ (РАСШИРЕННОЕ МЕНЮ БОТА + НАСТРОЙКИ СБЕР БИОМЕТРИИ) -->
+        <!-- ВКЛАДКА 5: ЕЩЁ (РАСШИРЕННОЕ МЕНЮ БОТА + НАСТРОЙКИ СБЕР БИОМЕТРИИ И ТЕМЫ) -->
         <div id="view-more" class="app-view">
           <div class="section-card">
-            <h3>⋯ Меню «Ещё» (@itsupp_task_bot)</h3>
-            <div class="more-menu-grid">
-              <button type="button" class="more-action-btn" data-more-cmd="alltasks">🌐 Все задачи отдела</button>
-              <button type="button" class="more-action-btn" data-more-cmd="results">📊 Мой результат</button>
-              <button type="button" class="more-action-btn" data-more-cmd="status">📈 Статус системы</button>
-              <button type="button" class="more-action-btn" data-more-cmd="today">📅 Задачи на сегодня</button>
-              <button type="button" class="more-action-btn" data-more-cmd="overdue">🔥 Просроченные задачи</button>
-              <button type="button" class="more-action-btn" data-more-cmd="duty" id="btn-more-duty">👨‍✈️ Дежурный: Быков М. В.</button>
-              <button type="button" class="more-action-btn warn" data-more-cmd="wipe">🧹 Очистить чат / сбросить кэш</button>
-              <button type="button" class="more-action-btn danger" data-more-cmd="selfdestruct">☠️ Самоуничтожение</button>
+            <h3>Тема оформления</h3>
+            <p class="section-desc">Переключение между светлой дневной, тёмной ночной и автоматической системной темой.</p>
+            <div class="segmented-row">
+              <button type="button" class="seg-btn" data-theme-mode="light">☀️ День</button>
+              <button type="button" class="seg-btn" data-theme-mode="dark">🌙 Ночь</button>
+              <button type="button" class="seg-btn active" data-theme-mode="auto">🌗 Авто</button>
             </div>
           </div>
 
           <div class="section-card">
-            <h3>🔐 Безопасность (Face ID / Touch ID как в Сбере)</h3>
+            <h3>Разделы и действия</h3>
+            <div class="more-menu-grid">
+              <button type="button" class="more-action-btn" data-more-cmd="alltasks">Все задачи отдела</button>
+              <button type="button" class="more-action-btn" data-more-cmd="results">Мой результат</button>
+              <button type="button" class="more-action-btn" data-more-cmd="status">Статус системы</button>
+              <button type="button" class="more-action-btn" data-more-cmd="today">Задачи на сегодня</button>
+              <button type="button" class="more-action-btn" data-more-cmd="overdue">Просроченные задачи</button>
+              <button type="button" class="more-action-btn" data-more-cmd="duty" id="btn-more-duty">Дежурный: Быков М. В.</button>
+              <button type="button" class="more-action-btn warn" data-more-cmd="wipe">Очистить кэш задач</button>
+              <button type="button" class="more-action-btn danger" data-more-cmd="selfdestruct">Самоуничтожение</button>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h3>Безопасность (Face ID / Touch ID и код)</h3>
             <div class="bio-settings-list">
               <div class="bio-setting-row">
                 <div>
-                  <div class="bio-setting-title">Быстрый вход по Face ID / Touch ID</div>
+                  <div class="bio-setting-title">Вход по Face ID / Touch ID</div>
                   <div id="bio-status-desc" class="bio-setting-sub">Проверка статуса BiometricManager…</div>
                 </div>
                 <button type="button" id="btn-toggle-bio-enabled" class="toggle-pill on">ВКЛ</button>
               </div>
               <div class="bio-setting-row">
                 <div>
-                  <div class="bio-setting-title">Автозапрос Face ID при открытии</div>
-                  <div class="bio-setting-sub">Сразу открывать сканер биометрии на экране входа</div>
+                  <div class="bio-setting-title">Автозапрос при открытии</div>
+                  <div class="bio-setting-sub">Сразу открывать сканер биометрии на входе</div>
                 </div>
                 <button type="button" id="btn-toggle-bio-auto" class="toggle-pill on">ВКЛ</button>
               </div>
               <div class="bio-setting-actions">
-                <button type="button" id="btn-test-bio" class="btn-secondary-full">🪪 Проверить Face ID / Touch ID</button>
-                <button type="button" id="btn-change-pin" class="btn-secondary-full">🔢 Сменить 5-значный код входа</button>
-                <button type="button" id="btn-lock-now" class="btn-secondary-full">🔒 Выйти на экран блокировки</button>
+                <button type="button" id="btn-test-bio" class="btn-secondary-full">Проверить Face ID / Touch ID</button>
+                <button type="button" id="btn-change-pin" class="btn-secondary-full">Сменить 5-значный код входа</button>
+                <button type="button" id="btn-lock-now" class="btn-secondary-full">Заблокировать экран</button>
               </div>
             </div>
           </div>
@@ -503,7 +524,6 @@
 
     <!-- =========================================================
          МОДАЛЬНОЕ ОКНО 2: ДЕТАЛЬНОЕ ДЕЙСТВИЕ ПО ЗАДАЧЕ
-         (Калькулятор времени / Отложить / Передать / Комментарий / Дежурный / Сотрудник)
          ========================================================= -->
     <div id="action-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
       <div class="action-sheet">
