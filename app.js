@@ -15,7 +15,7 @@
     for (var i = 0; i < links.length; i++) {
       var href = links[i].getAttribute("href") || "";
       if (href.indexOf("styles.css") !== -1) {
-        links[i].setAttribute("href", "./styles.css?v=20261108-15&_t=" + Date.now());
+        links[i].setAttribute("href", "./styles.css?v=20261108-16&_t=" + Date.now());
       }
     }
   }
@@ -203,6 +203,27 @@
     return rem + "м";
   }
 
+  // Форматирование даты/времени строго по Москве (UTC+3), как в Okdesk (YYYY-MM-DD HH:MM)
+  function formatMskDateTime(dateOrIso) {
+    var d = dateOrIso ? new Date(dateOrIso) : new Date();
+    if (isNaN(d.getTime())) d = new Date();
+    var msk = new Date(d.getTime() + 3 * 3600 * 1000);
+    var pad2 = function (n) {
+      return n < 10 ? "0" + n : String(n);
+    };
+    return (
+      msk.getUTCFullYear() +
+      "-" +
+      pad2(msk.getUTCMonth() + 1) +
+      "-" +
+      pad2(msk.getUTCDate()) +
+      " " +
+      pad2(msk.getUTCHours()) +
+      ":" +
+      pad2(msk.getUTCMinutes())
+    );
+  }
+
   function getEmployeeById(id) {
     var s = String(id || "");
     for (var i = 0; i < DATA.employees.length; i++) {
@@ -223,6 +244,9 @@
   var OVERRIDE_FIELDS = [
     "status_code",
     "status_name",
+    "_userStatusCode",
+    "_userStatusName",
+    "_userStatusAt",
     "spent_minutes",
     "spent_by_employee",
     "work_by_employee",
@@ -305,11 +329,23 @@
       if (!t || !t.id) return;
       var ov = overridesMap[String(t.id)];
       if (!ov) return;
+      var catalogStatus = t.status_code;
+      var catalogStatusName = t.status_name;
       OVERRIDE_FIELDS.forEach(function (f) {
         if (ov[f] !== undefined) {
           t[f] = ov[f];
         }
       });
+      // Если в переопределении нет явно зафиксированного пользователем статуса (_userStatusCode),
+      // а в Okdesk/каталоге статус уже продвинулся дальше «opened» (например, working / completed),
+      // не откатываем статус обратно в «opened» из-за старого кэша
+      if (!ov._userStatusCode && ov.status_code === "opened" && catalogStatus && catalogStatus !== "opened") {
+        t.status_code = catalogStatus;
+        t.status_name = catalogStatusName || t.status_name;
+      } else if (ov._userStatusCode) {
+        t.status_code = ov._userStatusCode;
+        t.status_name = ov._userStatusName || t.status_name;
+      }
     });
     return tasksList;
   }
@@ -410,6 +446,29 @@
     });
 
     applyOverridesToTasks(mergedTasks, overridesMap);
+    mergedTasks.forEach(function (t) {
+      if (!t || !t.id) return;
+      var catTask = catalogById[String(t.id)];
+      if (catTask && catTask.created_at) {
+        t.created_at = catTask.created_at;
+        if (catTask.created_iso) t.created_iso = catTask.created_iso;
+      } else if (t.created_iso && t.created_at === String(t.created_iso).slice(0, 16).replace("T", " ")) {
+        t.created_at = formatMskDateTime(t.created_iso);
+      }
+      // Восстановление статуса «Выполняю», если ранее был запущен таймер, но старый баг откатил в «opened»
+      if (
+        !t._userStatusCode &&
+        t.status_code === "opened" &&
+        t.work_started_at &&
+        !t.timer_paused
+      ) {
+        t.status_code = "working";
+        t.status_name = "Выполняю";
+        t._userStatusCode = "working";
+        t._userStatusName = "Выполняю";
+        t._userStatusAt = Date.now();
+      }
+    });
     mergedTasks.sort(function (a, b) {
       return (parseInt(b.id, 10) || 0) - (parseInt(a.id, 10) || 0);
     });
@@ -528,6 +587,7 @@
         st: String(raw.st || raw.status_code || ""),
         sp: parseInt(raw.sp != null ? raw.sp : raw.spent_minutes, 10) || 0,
         aid: parseInt(raw.aid || raw.assignee_id, 10) || 1,
+        dl: String(raw.dl || raw.deadline || "").slice(0, 60),
         cm: String(raw.cm || raw.comment || "Статус изменён в Mini App").slice(0, 220),
         blm: String(raw.blm || raw.blacklist_mode || ""),
         blt: String(raw.blt || raw.blacklist_target || "")
@@ -552,6 +612,18 @@
       };
     }
     return raw;
+  }
+
+  function lockUserStatusOnTask(task, code, name) {
+    if (!task) return;
+    task.status_code = code;
+    task.status_name = name;
+    task._userStatusCode = code;
+    task._userStatusName = name;
+    task._userStatusAt = Date.now();
+    if (task.id) {
+      localMutationGuardTs[String(task.id)] = Date.now();
+    }
   }
 
   function enqueueSyncOp(payload) {
@@ -702,27 +774,39 @@
       meta.deletedIds[String(did)] = true;
     });
 
+    var incomingTasks = Array.isArray(delta.tasks) ? delta.tasks : [];
+    var deltaById = {};
+    incomingTasks.forEach(function (dt) {
+      if (dt && dt.id) deltaById[String(dt.id)] = dt;
+    });
+
     var changedCount = 0;
 
-    // 1. Привязываем локально созданные задачи к реальным номерам Портала/Okdesk
+    // 1. Привязываем ТОЛЬКО ещё не синхронизированные локальные задачи к реальным номерам Портала/Okdesk
     (state.tasks || []).forEach(function (t) {
       if (!t || !t.id) return;
+      if (!isMiniAppCreatedTask(t) || t._syncedToPortal) return;
       var tid = String(t.id);
       var nt = normTitle(t.title);
-      var mappedId = idMap[tid] || (isMiniAppCreatedTask(t) && nt && titleMap[nt]) || "";
+      // Если в delta уже есть задача с таким же ID и таким же заголовком, перепривязка не нужна
+      if (deltaById[tid] && normTitle(deltaById[tid].title) === nt) {
+        t._syncedToPortal = true;
+        meta.syncedLocalIds[tid] = true;
+        if (nt) meta.syncedTitles[nt] = true;
+        return;
+      }
+      var mappedId = (nt && titleMap[nt]) || idMap[tid] || "";
       if (mappedId && String(mappedId) !== tid) {
         t.id = parseInt(mappedId, 10) || mappedId;
         t._syncedToPortal = true;
         meta.syncedLocalIds[tid] = true;
         if (nt) meta.syncedTitles[nt] = true;
         changedCount++;
-      } else if (isMiniAppCreatedTask(t) && nt && titleMap[nt] && String(titleMap[nt]) === tid) {
-        if (!t._syncedToPortal) {
-          t._syncedToPortal = true;
-          meta.syncedLocalIds[tid] = true;
-          meta.syncedTitles[nt] = true;
-          changedCount++;
-        }
+      } else if (nt && titleMap[nt] && String(titleMap[nt]) === tid) {
+        t._syncedToPortal = true;
+        meta.syncedLocalIds[tid] = true;
+        meta.syncedTitles[nt] = true;
+        changedCount++;
       }
     });
 
@@ -755,18 +839,17 @@
     state.tasks = uniqueTasks;
 
     // 4. Применяем изменённые и новые элементы из delta.tasks
-    var incomingTasks = Array.isArray(delta.tasks) ? delta.tasks : [];
     incomingTasks.forEach(function (dt) {
       if (!dt || !dt.id) return;
       var tid = String(dt.id);
       if (deletedSet[tid]) return;
       var existing = byId[tid];
       if (!existing) {
-        // Проверяем, нет ли локальной задачи с тем же заголовком
+        // Проверяем, нет ли ещё не синхронизированной локальной задачи с тем же заголовком
         var nt = normTitle(dt.title);
         for (var i = 0; i < state.tasks.length; i++) {
           var cand = state.tasks[i];
-          if (cand && isMiniAppCreatedTask(cand) && normTitle(cand.title) === nt) {
+          if (cand && isMiniAppCreatedTask(cand) && !cand._syncedToPortal && normTitle(cand.title) === nt) {
             delete byId[String(cand.id)];
             cand.id = dt.id;
             cand._syncedToPortal = true;
@@ -789,31 +872,47 @@
         byId[tid] = copyTask;
         changedCount++;
       } else {
-        // Если по задаче было локальное действие менее 90 секунд назад — не перетираем локальный статус
-        var recentLocalTs = localMutationGuardTs[tid] || 0;
-        var guarded = Date.now() - recentLocalTs < 90000;
-        if (!guarded) {
-          if (dt.status_code && dt.status_code !== existing.status_code) {
-            // Если локально уже отклонена/решена в overrides, сохраняем терминальный статус
-            var localTerm =
-              existing.status_code === "asya1c" ||
-              existing.status_code === "completed" ||
-              existing.status_code === "closed";
-            var remoteTerm =
-              dt.status_code === "asya1c" ||
-              dt.status_code === "completed" ||
-              dt.status_code === "closed";
-            if (!localTerm || remoteTerm) {
+        // Никогда не откатываем статус обратно в «opened», если задача уже переведена в другой статус!
+        // Если пользователь явно установил статус в Mini App (_userStatusCode), он НЕ меняется сам по себе:
+        // принимаем только терминальное закрытие на портале спустя >= 3 минут после локального действия.
+        var recentLocalTs = Math.max(localMutationGuardTs[tid] || 0, existing._userStatusAt || 0);
+        var guarded = Date.now() - recentLocalTs < 180000;
+        if (dt.status_code && dt.status_code !== existing.status_code) {
+          var localTerm =
+            existing.status_code === "asya1c" ||
+            existing.status_code === "completed" ||
+            existing.status_code === "closed";
+          var remoteTerm =
+            dt.status_code === "asya1c" ||
+            dt.status_code === "completed" ||
+            dt.status_code === "closed";
+          var isRevertToOpened = dt.status_code === "opened" && existing.status_code !== "opened";
+
+          if (!isRevertToOpened && !localTerm) {
+            if (!existing._userStatusCode) {
+              if (!guarded) {
+                existing.status_code = dt.status_code;
+                existing.status_name = dt.status_name || existing.status_name;
+                changedCount++;
+              }
+            } else if (remoteTerm && !guarded) {
               existing.status_code = dt.status_code;
               existing.status_name = dt.status_name || existing.status_name;
+              existing._userStatusCode = dt.status_code;
+              existing._userStatusName = dt.status_name || existing.status_name;
               changedCount++;
             }
           }
-          if (dt.assignee_id && String(dt.assignee_id) !== String(existing.assignee_id || "")) {
-            existing.assignee_id = String(dt.assignee_id);
-            existing.assignee_name = dt.assignee_name || existing.assignee_name;
-            changedCount++;
-          }
+        }
+        if (!guarded && dt.assignee_id && String(dt.assignee_id) !== String(existing.assignee_id || "")) {
+          existing.assignee_id = String(dt.assignee_id);
+          existing.assignee_name = dt.assignee_name || existing.assignee_name;
+          changedCount++;
+        }
+        if (dt.created_at && dt.created_at !== existing.created_at) {
+          existing.created_at = dt.created_at;
+          if (dt.created_iso) existing.created_iso = dt.created_iso;
+          changedCount++;
         }
         if (dt.title && dt.title !== existing.title) {
           existing.title = dt.title;
@@ -1594,17 +1693,17 @@
     asya1c: { label: "Отклонена", cls: "status-asya1c" }
   };
 
-  // Матрица разрешённых переходов статусов (как в боте DEFAULT_STATUS_TRANSITIONS)
+  // Матрица разрешённых переходов статусов — строго по настройкам Okdesk 565 (/issues/statuses/)
   var OKDESK_TRANSITIONS = {
-    opened: ["work", "working", "delayed", "resend", "completed", "asya1c"],
-    work: ["working", "delayed", "resend", "completed", "asya1c"],
+    opened: ["work", "working", "delayed", "resend", "asya1c"],
+    work: ["working", "delayed", "resend", "asya1c"],
     working: ["completed", "delayed", "resend", "restart", "asya1c"],
-    delayed: ["working", "completed", "resend", "asya1c"],
-    resend: ["work", "working", "delayed", "completed", "asya1c"],
-    restart: ["working", "delayed", "resend", "completed", "asya1c"],
-    completed: ["working"],
-    asya1c: ["working"],
-    closed: ["working"]
+    delayed: ["completed", "working", "resend", "asya1c"],
+    resend: ["work", "working", "delayed", "asya1c"],
+    restart: ["working", "delayed", "resend", "asya1c"],
+    completed: [],
+    asya1c: [],
+    closed: []
   };
 
   // --- Автоматический подсчёт времени висения заявки в системе и живого таймера выполнения ---
@@ -1699,33 +1798,33 @@
   }
 
   function getStatusButtonsForOwnCard(statusCode) {
-    if (statusCode === "opened") {
+    if (statusCode === "opened" || statusCode === "resend") {
       return [
         { code: "work", text: "Принял", cls: "btn-work" },
         { code: "working", text: "Выполняю", cls: "btn-solve" },
-        { code: "delayed", text: "Отложить", cls: "btn-warn" },
-        { code: "resend", text: "Передать задачу", cls: "" }
+        { code: "delayed", text: "Отложена", cls: "btn-warn" },
+        { code: "resend", text: "Делегировать", cls: "" }
       ];
     }
-    if (statusCode === "work") {
+    if (statusCode === "work" || statusCode === "restart") {
       return [
         { code: "working", text: "Выполняю", cls: "btn-solve" },
-        { code: "completed", text: "Решена", cls: "btn-solve" },
-        { code: "delayed", text: "Отложить", cls: "btn-warn" },
-        { code: "resend", text: "Передать задачу", cls: "" }
+        { code: "delayed", text: "Отложена", cls: "btn-warn" },
+        { code: "resend", text: "Делегировать", cls: "" }
       ];
     }
     if (statusCode === "delayed") {
       return [
         { code: "working", text: "Выполняю", cls: "btn-work" },
         { code: "completed", text: "Решена", cls: "btn-solve" },
-        { code: "resend", text: "Передать задачу", cls: "" }
+        { code: "resend", text: "Делегировать", cls: "" }
       ];
     }
     return [
       { code: "completed", text: "Решена", cls: "btn-solve" },
-      { code: "delayed", text: "Отложить", cls: "btn-warn" },
-      { code: "resend", text: "Передать задачу", cls: "" }
+      { code: "delayed", text: "Отложена", cls: "btn-warn" },
+      { code: "resend", text: "Делегировать", cls: "" },
+      { code: "restart", text: "На доработку", cls: "" }
     ];
   }
 
@@ -1778,10 +1877,11 @@
       })
       .slice()
       .sort(function (a, b) {
-        var ca = String(a.created_at || "");
-        var cb = String(b.created_at || "");
-        if (ca !== cb) return cb.localeCompare(ca);
-        return (parseInt(b.id, 10) || 0) - (parseInt(a.id, 10) || 0);
+        var idDiff = (parseInt(b.id, 10) || 0) - (parseInt(a.id, 10) || 0);
+        if (idDiff !== 0) return idDiff;
+        var ta = parseTaskDateMs(a.created_iso || a.created_at);
+        var tb = parseTaskDateMs(b.created_iso || b.created_at);
+        return tb - ta;
       });
 
     if (filtered.length === 0) {
@@ -1836,12 +1936,12 @@
     statusBtn.appendChild(el("span", "", stMeta.label + " ▾"));
 
     var inlinePopover = el("div", "status-inline-popover hidden");
-    var allowedTargets = OKDESK_TRANSITIONS[task.status_code] || ["work", "working", "delayed", "completed", "asya1c"];
+    var allowedTargets = OKDESK_TRANSITIONS[task.status_code] || ["work", "working", "delayed", "resend", "asya1c"];
     var ACTION_LABELS = {
       work: "Принял",
       working: "Выполняю",
-      delayed: "Отложить",
-      resend: "Передать",
+      delayed: "Отложена",
+      resend: "Делегировать",
       completed: "Решена",
       asya1c: "Отклонить",
       restart: "На доработку"
@@ -2009,7 +2109,18 @@
             handleCardAction(task, "working");
           })
         );
-      } else if (task.status_code === "work" || task.status_code === "delayed" || task.status_code === "restart") {
+      } else if (task.status_code === "work" || task.status_code === "restart") {
+        primaryBar.appendChild(
+          makeActionBtn("Выполняю ⏱", "btn-solve", function () {
+            handleCardAction(task, "working");
+          })
+        );
+        primaryBar.appendChild(
+          makeActionBtn("Отложена", "btn-warn", function () {
+            handleCardAction(task, "delayed");
+          })
+        );
+      } else if (task.status_code === "delayed") {
         primaryBar.appendChild(
           makeActionBtn("Выполняю ⏱", "btn-solve", function () {
             handleCardAction(task, "working");
@@ -2203,7 +2314,7 @@
       )
     );
 
-    var allowed = OKDESK_TRANSITIONS[task.status_code] || ["work", "working", "delayed", "completed", "asya1c"];
+    var allowed = OKDESK_TRANSITIONS[task.status_code] || ["work", "working", "delayed", "resend", "asya1c"];
     var list = el("div", "status-picker-list");
 
     allowed.forEach(function (targetCode) {
@@ -2425,8 +2536,7 @@
       task.timer_paused = false;
       task.work_owner_id = String(task.assignee_id || currentEmp.id);
       task.work_started_at = new Date().toISOString();
-      task.status_code = "working";
-      task.status_name = "Выполняю";
+      lockUserStatusOnTask(task, "working", "Выполняю");
       task.status_history.push({
         time: new Date().toTimeString().slice(0, 8),
         label: "▶ Старт / продолжение таймера (" + ownerEmp.short + ")"
@@ -2477,8 +2587,7 @@
           ")"
       });
     }
-    task.status_code = code;
-    task.status_name = label;
+    lockUserStatusOnTask(task, code, label);
     task.updated_iso = new Date().toISOString();
     saveState();
     enqueueSyncOp({
@@ -2510,8 +2619,7 @@
     hapticNotify("success");
     stopTaskWorkTimerIfRunning(task);
     task.timer_paused = false;
-    task.status_code = "completed";
-    task.status_name = "Решена";
+    lockUserStatusOnTask(task, "completed", "Решена");
     task.updated_iso = new Date().toISOString();
     task.spent_minutes = (parseInt(task.spent_minutes, 10) || 0) + 15;
     task.spent_by_employee = task.spent_by_employee || {};
@@ -2561,8 +2669,7 @@
     task.work_owner_id = String(currentEmp.id);
     task.timer_paused = false;
     task.work_started_at = new Date().toISOString();
-    task.status_code = "working";
-    task.status_name = "Выполняю";
+    lockUserStatusOnTask(task, "working", "Выполняю");
     task.status_history = Array.isArray(task.status_history) ? task.status_history : [];
     task.status_history.push({
       time: new Date().toTimeString().slice(0, 8),
@@ -2813,8 +2920,7 @@
       hapticNotify("success");
       stopTaskWorkTimerIfRunning(task);
       task.timer_paused = false;
-      task.status_code = "completed";
-      task.status_name = "Решена";
+      lockUserStatusOnTask(task, "completed", "Решена");
       task.updated_iso = new Date().toISOString();
       task.spent_minutes = (parseInt(task.spent_minutes, 10) || 0) + addedMins;
       task.spent_by_employee = task.spent_by_employee || {};
@@ -2877,8 +2983,7 @@
         stopTaskWorkTimerIfRunning(task);
         task.timer_paused = false;
         task.work_started_at = "";
-        task.status_code = "delayed";
-        task.status_name = "Отложена";
+        lockUserStatusOnTask(task, "delayed", "Отложена");
         task.deadline = sl.deadline;
         task.deadline_at = sl.deadline;
         task.due_bucket = sl.bucket;
@@ -2967,8 +3072,7 @@
         task.assignee_id = String(emp.id);
         task.assignee_name = emp.short;
         task.work_owner_id = String(emp.id);
-        task.status_code = "resend";
-        task.status_name = "Делегирована";
+        lockUserStatusOnTask(task, "resend", "Делегирована");
         task.updated_iso = new Date().toISOString();
         if (keepControl) {
           task.control_by = task.control_by || [];
@@ -3107,8 +3211,7 @@
       task.work_started_at = "";
       task.assignee_id = String(currentEmp.id);
       task.assignee_name = currentEmp.short;
-      task.status_code = "asya1c";
-      task.status_name = "Отклонена";
+      lockUserStatusOnTask(task, "asya1c", "Отклонена");
       task.updated_iso = new Date().toISOString();
       task.spent_minutes = (parseInt(task.spent_minutes, 10) || 0) + defaultRejectMins;
       task.spent_by_employee = task.spent_by_employee || {};
@@ -3810,7 +3913,7 @@
       billing_flag: "none",
       deadline: "Сегодня 19:00",
       due_bucket: "today",
-      created_at: nowIso.slice(0, 16).replace("T", " "),
+      created_at: formatMskDateTime(nowIso),
       created_iso: nowIso,
       updated_iso: nowIso,
       comments: [
