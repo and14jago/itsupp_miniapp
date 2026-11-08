@@ -634,255 +634,13 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
-      "id": 44132,
-      "title": "Тест мини апп 2",
-      "description": "Тест мини апп 2\n—\nАвтор (инженер): Стрелкин М. В.\nИсточник: Mini App (@itsupp_task_bot)",
-      "timeline_summary": "Создана: 2026-11-08 19:07",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "1",
-      "assignee_name": "Стрелкин М. В.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 34,
-      "spent_by_employee": {
-        "1": 34
-      },
-      "created_at": "2026-11-08 19:07",
-      "created_iso": "2026-11-08T19:07:37.607+03:00",
-      "updated_iso": "2026-11-08T19:26:34.478+03:00",
-      "reacted_iso": "2026-11-08T19:13:24.769+03:00",
-      "work_started_at": "2026-11-08T19:26:34.478+03:00",
-      "deadline_at": "2026-11-09 10:00",
-      "deadline": "2026-11-09 10:00",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "Смена статуса через @itsupp_task_bot | user=ITSUPP Admin | контакт=@MikhailStrelkin",
-          "is_public": false
-        },
-        {
-          "author": "Стрелкин М. В.",
-          "time": "",
-          "text": "W",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44131,
-      "title": "Тестер мини апп",
-      "description": "Тестер мини апп\n—\nАвтор (инженер): Стрелкин М. В.\nИсточник: Mini App (@itsupp_task_bot)",
-      "timeline_summary": "Создана: 2026-11-08 19:03",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "1",
-      "assignee_name": "Стрелкин М. В.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 40,
-      "spent_by_employee": {
-        "1": 40
-      },
-      "created_at": "2026-11-08 19:03",
-      "created_iso": "2026-11-08T19:03:31.366+03:00",
-      "updated_iso": "2026-11-08T19:27:07.911+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
-      "due_bucket": "today",
-      "comments": [],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44130,
-      "title": "Проверка связи тест",
-      "description": "Проверка связи тест\n—\nАвтор (инженер): Лисовский Д.\nИсточник: Mini App (@itsupp_task_bot)",
-      "timeline_summary": "Создана: 2026-11-08 18:59",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "1",
-      "assignee_name": "Стрелкин М. В.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 35,
-      "spent_by_employee": {
-        "1": 35
-      },
-      "created_at": "2026-11-08 18:59",
-      "created_iso": "2026-11-08T18:59:21.074+03:00",
-      "updated_iso": "2026-11-08T19:26:35.274+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
-      "due_bucket": "today",
-      "comments": [],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44129,
-      "title": "Разработка портала",
-      "description": "Разработка портала\n—\nАвтор (инженер): Стрелкин М. В.\nИсточник: Mini App (@itsupp_task_bot)",
-      "timeline_summary": "Создана: 2026-11-08 18:59",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "1",
-      "assignee_name": "Стрелкин М. В.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 35,
-      "spent_by_employee": {
-        "1": 35
-      },
-      "created_at": "2026-11-08 18:59",
-      "created_iso": "2026-11-08T18:59:19.913+03:00",
-      "updated_iso": "2026-11-08T19:28:13.197+03:00",
-      "reacted_iso": "2026-11-08T19:28:13.184+03:00",
-      "work_started_at": "2026-11-08T19:28:13.197+03:00",
-      "deadline_at": "2026-11-09 10:00",
-      "deadline": "2026-11-09 10:00",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "Статус «Выполняю» (Mini App)",
-          "is_public": false
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44128,
-      "title": "Разработка мини app",
-      "description": "Разработка мини app\n—\nАвтор (инженер): Стрелкин М. В.\nИсточник: Mini App (@itsupp_task_bot)",
-      "timeline_summary": "Создана: 2026-11-08 18:59",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "1",
-      "assignee_name": "Стрелкин М. В.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 65,
-      "spent_by_employee": {
-        "1": 65
-      },
-      "created_at": "2026-11-08 18:59",
-      "created_iso": "2026-11-08T18:59:18.999+03:00",
-      "updated_iso": "2026-11-08T19:28:14.139+03:00",
-      "reacted_iso": "2026-11-08T19:28:14.072+03:00",
-      "work_started_at": "2026-11-08T19:28:14.139+03:00",
-      "deadline_at": "2026-11-09 10:00",
-      "deadline": "2026-11-09 10:00",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "Статус «Выполняю» (Mini App)",
-          "is_public": false
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44127,
       "title": "Проверка скорости работы so.itsupp.com контура в южном",
       "description": "Проверка скорости работы so.itsupp.com контура в южном\n—\nАвтор (инженер): Стрелкин Михаил Владимирович\nИсточник: Mini App (@itsupp_task_bot)",
       "timeline_summary": "Создана: 2026-11-08 13:04",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -909,13 +667,20 @@ window.ITSUPP_DATA = {
       },
       "created_at": "2026-11-08 13:04",
       "created_iso": "2026-11-08T13:04:24.415+03:00",
-      "updated_iso": "2026-11-08T13:04:24.839+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
+      "updated_iso": "2026-11-08T19:50:51.535+03:00",
+      "reacted_iso": "2026-11-08T19:50:51.517+03:00",
+      "work_started_at": "2026-11-08T19:50:51.535+03:00",
+      "deadline_at": "2026-11-09 10:00",
+      "deadline": "2026-11-09 10:00",
       "due_bucket": "today",
-      "comments": [],
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "?????? ?????????? (Mini App)",
+          "is_public": false
+        }
+      ],
       "_syncedToPortal": true
     },
     {
@@ -923,9 +688,9 @@ window.ITSUPP_DATA = {
       "title": "Разработака телеграмм бота",
       "description": "Разработака телеграмм бота\n📎 Прикреплённые файлы (1): photo_5438598000826590129_y.jpg",
       "timeline_summary": "Создана: 2026-11-08 12:35",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -950,13 +715,20 @@ window.ITSUPP_DATA = {
       "spent_by_employee": {},
       "created_at": "2026-11-08 12:35",
       "created_iso": "2026-11-08T12:35:33.830+03:00",
-      "updated_iso": "2026-11-08T12:36:40.889+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
+      "updated_iso": "2026-11-08T19:50:52.270+03:00",
+      "reacted_iso": "2026-11-08T19:50:52.257+03:00",
+      "work_started_at": "2026-11-08T19:50:52.270+03:00",
+      "deadline_at": "2026-11-09 10:00",
+      "deadline": "2026-11-09 10:00",
       "due_bucket": "today",
-      "comments": [],
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "?????? ?????????? (Mini App)",
+          "is_public": false
+        }
+      ],
       "_syncedToPortal": true
     },
     {
