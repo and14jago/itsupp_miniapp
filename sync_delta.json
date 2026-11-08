@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794157294,
-  "updated_at": "2026-11-08T20:01:34.481666+03:00",
+  "sync_seq": 1794160773,
+  "updated_at": "2026-11-08T20:59:33.183586+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -69,6 +69,10 @@
       "spent_by_employee": {
         "1": 35
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-08 19:07",
       "created_iso": "2026-11-08T19:07:37.607+03:00",
       "updated_iso": "2026-11-08T19:50:44.117+03:00",
@@ -131,6 +135,10 @@
       "spent_by_employee": {
         "1": 41
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-08 19:03",
       "created_iso": "2026-11-08T19:03:31.366+03:00",
       "updated_iso": "2026-11-08T19:50:46.586+03:00",
@@ -187,6 +195,10 @@
       "spent_by_employee": {
         "1": 36
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-08 18:59",
       "created_iso": "2026-11-08T18:59:21.074+03:00",
       "updated_iso": "2026-11-08T19:50:48.359+03:00",
@@ -243,6 +255,10 @@
       "spent_by_employee": {
         "1": 36
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-08 18:59",
       "created_iso": "2026-11-08T18:59:19.913+03:00",
       "updated_iso": "2026-11-08T19:50:49.550+03:00",
@@ -299,6 +315,10 @@
       "spent_by_employee": {
         "1": 66
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-08 18:59",
       "created_iso": "2026-11-08T18:59:18.999+03:00",
       "updated_iso": "2026-11-08T19:50:50.908+03:00",
@@ -355,6 +375,10 @@
       "spent_by_employee": {
         "1": 10
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-08 13:04",
       "created_iso": "2026-11-08T13:04:24.415+03:00",
       "updated_iso": "2026-11-08T19:50:51.535+03:00",
@@ -378,9 +402,9 @@
       "title": "Разработака телеграмм бота",
       "description": "Разработака телеграмм бота\n📎 Прикреплённые файлы (1): photo_5438598000826590129_y.jpg",
       "timeline_summary": "Создана: 2026-11-08 12:35",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -401,17 +425,29 @@
       "control_by": [
         "7"
       ],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
+      "spent_minutes": 10,
+      "spent_by_employee": {
+        "1": 10
+      },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-08 12:35",
       "created_iso": "2026-11-08T12:35:33.830+03:00",
-      "updated_iso": "2026-11-08T19:50:52.270+03:00",
+      "updated_iso": "2026-11-08T20:59:31.257+03:00",
       "reacted_iso": "2026-11-08T19:50:52.257+03:00",
-      "work_started_at": "2026-11-08T19:50:52.270+03:00",
+      "work_started_at": "",
       "deadline_at": "2026-11-09 10:00",
       "deadline": "2026-11-09 10:00",
       "due_bucket": "today",
       "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "Удаленное подключение",
+          "is_public": false
+        },
         {
           "author": "Кукушкина А. А.",
           "time": "",
@@ -451,6 +487,10 @@
       "spent_by_employee": {
         "13": 18
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-07 11:23",
       "created_iso": "2026-11-07T11:23:00.208+03:00",
       "updated_iso": "2026-11-07T11:23:10.847+03:00",
@@ -505,6 +545,10 @@
       "spent_by_employee": {
         "13": 20
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-07 11:21",
       "created_iso": "2026-11-07T11:21:28.678+03:00",
       "updated_iso": "2026-11-07T11:22:30.388+03:00",
@@ -559,6 +603,10 @@
       "spent_by_employee": {
         "13": 300
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-07 11:20",
       "created_iso": "2026-11-07T11:20:31.467+03:00",
       "updated_iso": "2026-11-07T11:21:09.405+03:00",
@@ -613,6 +661,10 @@
       "spent_by_employee": {
         "7": 15
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-07 11:11",
       "created_iso": "2026-11-07T11:11:55.737+03:00",
       "updated_iso": "2026-11-07T12:17:48.192+03:00",
@@ -667,6 +719,10 @@
       "spent_by_employee": {
         "7": 32
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-06 18:16",
       "created_iso": "2026-11-06T18:16:04.572+03:00",
       "updated_iso": "2026-11-06T18:49:00.154+03:00",
@@ -718,6 +774,10 @@
       "control_by": [],
       "spent_minutes": 0,
       "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-06 18:15",
       "created_iso": "2026-11-06T18:15:47.265+03:00",
       "updated_iso": "2026-11-08T11:21:18.197+03:00",
@@ -768,6 +828,10 @@
       ],
       "spent_minutes": 0,
       "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-06 17:54",
       "created_iso": "2026-11-06T17:54:49.146+03:00",
       "updated_iso": "2026-11-06T17:54:50.990+03:00",
@@ -808,6 +872,10 @@
       "spent_by_employee": {
         "11": 25
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-06 17:36",
       "created_iso": "2026-11-06T17:36:33.557+03:00",
       "updated_iso": "2026-11-06T17:45:32.908+03:00",
@@ -863,6 +931,10 @@
       "spent_by_employee": {
         "11": 40
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-06 16:26",
       "created_iso": "2026-11-06T16:26:28.507+03:00",
       "updated_iso": "2026-11-06T17:12:28.373+03:00",
@@ -916,6 +988,10 @@
       "spent_by_employee": {
         "8": 10
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-06 16:18",
       "created_iso": "2026-11-06T16:18:22.691+03:00",
       "updated_iso": "2026-11-06T16:26:03.427+03:00",
@@ -969,6 +1045,10 @@
       "spent_by_employee": {
         "11": 5
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-06 16:17",
       "created_iso": "2026-11-06T16:17:33.391+03:00",
       "updated_iso": "2026-11-06T16:17:45.634+03:00",
@@ -1022,6 +1102,10 @@
       "spent_by_employee": {
         "12": 60
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-06 16:14",
       "created_iso": "2026-11-06T16:14:53.910+03:00",
       "updated_iso": "2026-11-06T16:16:00.523+03:00",
@@ -1075,6 +1159,10 @@
       "spent_by_employee": {
         "12": 15
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-06 16:13",
       "created_iso": "2026-11-06T16:13:24.499+03:00",
       "updated_iso": "2026-11-06T16:13:40.893+03:00",
@@ -1128,6 +1216,10 @@
       "spent_by_employee": {
         "8": 20
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-06 15:48",
       "created_iso": "2026-11-06T15:48:28.777+03:00",
       "updated_iso": "2026-11-06T16:18:05.579+03:00",
@@ -1181,6 +1273,10 @@
       "spent_by_employee": {
         "1": 15
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-06 15:25",
       "created_iso": "2026-11-06T15:25:53.398+03:00",
       "updated_iso": "2026-11-07T17:06:10.546+03:00",
@@ -1240,6 +1336,10 @@
       "spent_by_employee": {
         "8": 10
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-06 15:16",
       "created_iso": "2026-11-06T15:16:29.461+03:00",
       "updated_iso": "2026-11-06T15:26:06.461+03:00",
@@ -1293,6 +1393,10 @@
       "spent_by_employee": {
         "12": 10
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-06 15:15",
       "created_iso": "2026-11-06T15:15:05.498+03:00",
       "updated_iso": "2026-11-06T15:15:23.788+03:00",
@@ -1346,6 +1450,10 @@
       "spent_by_employee": {
         "12": 10
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-06 14:50",
       "created_iso": "2026-11-06T14:50:51.631+03:00",
       "updated_iso": "2026-11-06T14:51:16.817+03:00",

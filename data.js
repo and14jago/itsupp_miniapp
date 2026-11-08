@@ -665,59 +665,15 @@ window.ITSUPP_DATA = {
       "spent_by_employee": {
         "1": 10
       },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-08 13:04",
       "created_iso": "2026-11-08T13:04:24.415+03:00",
       "updated_iso": "2026-11-08T19:50:51.535+03:00",
       "reacted_iso": "2026-11-08T19:50:51.517+03:00",
       "work_started_at": "2026-11-08T19:50:51.535+03:00",
-      "deadline_at": "2026-11-09 10:00",
-      "deadline": "2026-11-09 10:00",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "?????? ?????????? (Mini App)",
-          "is_public": false
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44126,
-      "title": "Разработака телеграмм бота",
-      "description": "Разработака телеграмм бота\n📎 Прикреплённые файлы (1): photo_5438598000826590129_y.jpg",
-      "timeline_summary": "Создана: 2026-11-08 12:35",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "1",
-      "assignee_name": "Стрелкин М. В.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "created_at": "2026-11-08 12:35",
-      "created_iso": "2026-11-08T12:35:33.830+03:00",
-      "updated_iso": "2026-11-08T19:50:52.270+03:00",
-      "reacted_iso": "2026-11-08T19:50:52.257+03:00",
-      "work_started_at": "2026-11-08T19:50:52.270+03:00",
       "deadline_at": "2026-11-09 10:00",
       "deadline": "2026-11-09 10:00",
       "due_bucket": "today",
@@ -758,6 +714,10 @@ window.ITSUPP_DATA = {
       "control_by": [],
       "spent_minutes": 0,
       "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-06 18:15",
       "created_iso": "2026-11-06T18:15:47.265+03:00",
       "updated_iso": "2026-11-08T11:21:18.197+03:00",
@@ -808,6 +768,10 @@ window.ITSUPP_DATA = {
       ],
       "spent_minutes": 0,
       "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
       "created_at": "2026-11-06 17:54",
       "created_iso": "2026-11-06T17:54:49.146+03:00",
       "updated_iso": "2026-11-06T17:54:50.990+03:00",
