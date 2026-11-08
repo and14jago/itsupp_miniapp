@@ -580,12 +580,18 @@
       };
     }
     var issueId = String(raw.id || raw.issue_id || "");
-    if (kind === "status") {
+    if (kind === "status" || kind === "timer") {
       return {
-        op: "status",
+        op: kind,
         id: issueId,
         st: String(raw.st || raw.status_code || ""),
         sp: parseInt(raw.sp != null ? raw.sp : raw.spent_minutes, 10) || 0,
+        ws: parseInt(raw.ws != null ? raw.ws : raw.work_seconds, 10) || 0,
+        ts: parseInt(raw.ts != null ? raw.ts : raw.total_work_seconds, 10) || 0,
+        wb: raw.wb || raw.work_by_employee || {},
+        tp: Boolean(raw.tp != null ? raw.tp : raw.timer_paused),
+        wsa: String(raw.wsa || raw.work_started_at || "").slice(0, 32),
+        bf: String(raw.bf || raw.billing_flag || "none"),
         aid: parseInt(raw.aid || raw.assignee_id, 10) || 1,
         dl: String(raw.dl || raw.deadline || "").slice(0, 60),
         cm: String(raw.cm || raw.comment || "Статус изменён в Mini App").slice(0, 220),
@@ -598,6 +604,11 @@
         op: "assign",
         id: issueId,
         aid: parseInt(raw.aid || raw.assignee_id, 10) || 1,
+        paid: parseInt(raw.paid || raw.prev_assignee_id, 10) || 0,
+        psec: parseInt(raw.psec || raw.prev_work_seconds, 10) || 0,
+        ws: parseInt(raw.ws != null ? raw.ws : raw.work_seconds, 10) || 0,
+        ts: parseInt(raw.ts != null ? raw.ts : raw.total_work_seconds, 10) || 0,
+        wb: raw.wb || raw.work_by_employee || {},
         st: String(raw.st || raw.status_code || ""),
         cm: String(raw.cm || raw.comment || "").slice(0, 220)
       };
@@ -627,6 +638,34 @@
   }
 
   function enqueueSyncOp(payload) {
+    if (payload && (payload.id || payload.issue_id) && Array.isArray(state.tasks)) {
+      var targetId = String(payload.id || payload.issue_id);
+      for (var i = 0; i < state.tasks.length; i++) {
+        var tk = state.tasks[i];
+        if (tk && String(tk.id) === targetId) {
+          var tStats = getTaskTimingStats(tk);
+          if (payload.ws == null && payload.work_seconds == null) {
+            payload.ws = Math.round(tStats.ownWorkSec || 0);
+          }
+          if (payload.ts == null && payload.total_work_seconds == null) {
+            payload.ts = Math.round(tStats.totalWorkSec || 0);
+          }
+          if (!payload.wb && !payload.work_by_employee) {
+            payload.wb = tStats.byEmp || tk.work_by_employee || {};
+          }
+          if (payload.tp == null && payload.timer_paused == null) {
+            payload.tp = Boolean(tk.timer_paused);
+          }
+          if (!payload.wsa && !payload.work_started_at) {
+            payload.wsa = String(tk.work_started_at || "");
+          }
+          if (!payload.bf && !payload.billing_flag) {
+            payload.bf = String(tk.billing_flag || "none");
+          }
+          break;
+        }
+      }
+    }
     var norm = normalizeSyncPayload(payload);
     if (!norm || !norm.op) return;
     if (norm.id) {
@@ -928,6 +967,22 @@
             existing.spent_by_employee || {},
             dt.spent_by_employee || {}
           );
+          changedCount++;
+        }
+        if ((dt.tracked_work_seconds || 0) > (existing.tracked_work_seconds || 0)) {
+          existing.tracked_work_seconds = dt.tracked_work_seconds;
+          existing.work_by_employee = Object.assign(
+            existing.work_by_employee || {},
+            dt.work_by_employee || {}
+          );
+          changedCount++;
+        }
+        if (Array.isArray(dt.delegation_chain) && dt.delegation_chain.length > (Array.isArray(existing.delegation_chain) ? existing.delegation_chain.length : 0)) {
+          existing.delegation_chain = dt.delegation_chain;
+          changedCount++;
+        }
+        if (dt.billing_flag && dt.billing_flag !== "none" && (!existing.billing_flag || existing.billing_flag === "none")) {
+          existing.billing_flag = dt.billing_flag;
           changedCount++;
         }
         existing._syncedToPortal = true;
@@ -2531,6 +2586,14 @@
         time: new Date().toTimeString().slice(0, 8),
         label: "⏸ Пауза таймера (" + ownerEmp.short + ": " + formatDurationSec(st.ownWorkSec, true) + ")"
       });
+      enqueueSyncOp({
+        op: "timer",
+        id: String(task.id),
+        st: String(task.status_code || "working"),
+        tp: true,
+        aid: parseInt(currentEmp.id || task.assignee_id, 10) || 1,
+        cm: "Пауза таймера (" + ownerEmp.short + ": " + formatDurationSec(st.ownWorkSec, true) + ")"
+      });
       showToast("⏸ Таймер по заявке #" + task.id + " на паузе");
     } else {
       task.timer_paused = false;
@@ -2652,8 +2715,10 @@
     var prevEmp = getEmployeeById(task.assignee_id);
     var prevStats = getTaskTimingStats(task);
     stopTaskWorkTimerIfRunning(task);
+    var prevSecForSync = 0;
     if (prevEmp && String(prevEmp.id) !== String(currentEmp.id)) {
       var prevSec = (prevStats.byEmp && prevStats.byEmp[String(prevEmp.id)]) || 0;
+      prevSecForSync = prevSec;
       task.delegation_chain = Array.isArray(task.delegation_chain) ? task.delegation_chain : [];
       task.delegation_chain.push({
         from_id: String(prevEmp.id),
@@ -2680,6 +2745,8 @@
       op: "assign",
       id: String(task.id),
       aid: parseInt(currentEmp.id, 10) || 1,
+      paid: prevEmp && String(prevEmp.id) !== String(currentEmp.id) ? (parseInt(prevEmp.id, 10) || 0) : 0,
+      psec: prevSecForSync,
       st: "working",
       cm: "Забрал в работу: " + currentEmp.short
     });
@@ -3098,6 +3165,8 @@
           op: "assign",
           issue_id: String(task.id),
           assignee_id: String(emp.id),
+          prev_assignee_id: String(prevEmp.id) !== String(emp.id) ? String(prevEmp.id) : "",
+          prev_work_seconds: String(prevEmp.id) !== String(emp.id) ? prevSec : 0,
           status_code: "resend",
           comment: "Делегирована: " + chainSummary,
           actor_id: String(currentEmp.id),
@@ -4037,6 +4106,9 @@
     myOwn.forEach(function (t) {
       var ts = getTaskTimingStats(t);
       var timerMins = Math.max(0, Math.round(ts.ownWorkSec / 60));
+      var loggedMins = parseInt(t.spent_minutes, 10) || 0;
+      var diffMins = loggedMins - timerMins;
+      var diffLabel = diffMins === 0 ? "Δ 0м" : (diffMins > 0 ? "Δ +" + diffMins + "м" : "Δ " + diffMins + "м");
       var r = el("div", "stat-row");
       r.appendChild(el("span", "", "#" + t.id + " · " + t.company_name + " (" + t.status_name + ")"));
       r.appendChild(
@@ -4046,8 +4118,11 @@
           "⏱ Таймер: " +
             formatDurationSec(ts.ownWorkSec, true) +
             (ts.totalWorkSec > ts.ownWorkSec ? " (всего " + formatMinutes(Math.round(ts.totalWorkSec / 60)) + ")" : "") +
-            " · Списано: " +
-            formatMinutes(t.spent_minutes || 0)
+            " · 💰 Списано: " +
+            formatMinutes(loggedMins) +
+            " (" +
+            diffLabel +
+            ")"
         )
       );
       breakdownEl.appendChild(r);
@@ -4062,6 +4137,9 @@
         var ts = getTaskTimingStats(t);
         return accSec + ((ts.byEmp && ts.byEmp[String(emp.id)]) || 0);
       }, 0);
+      var empTimerMins = Math.round(empTimerSec / 60);
+      var empDiff = mins - empTimerMins;
+      var empDiffStr = empDiff === 0 ? "Δ 0м" : (empDiff > 0 ? "Δ +" + empDiff + "м" : "Δ " + empDiff + "м");
       var row = el("div", "stat-row");
       row.appendChild(el("span", "", emp.short + " (" + emp.dept + ")"));
       row.appendChild(
@@ -4071,8 +4149,11 @@
           empTasks.length +
             " заяв. · ⏱ " +
             formatDurationSec(empTimerSec, false) +
-            " · Списано: " +
-            formatMinutes(mins)
+            " · 💰 Списано: " +
+            formatMinutes(mins) +
+            " (" +
+            empDiffStr +
+            ")"
         )
       );
       allListEl.appendChild(row);
