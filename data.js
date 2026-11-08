@@ -638,9 +638,9 @@ window.ITSUPP_DATA = {
       "title": "Тест мини апп 2",
       "description": "Тест мини апп 2\n—\nАвтор (инженер): Стрелкин М. В.\nИсточник: Mini App (@itsupp_task_bot)",
       "timeline_summary": "Создана: 2026-11-08 19:07",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
+      "status_code": "work",
+      "status_name": "Принял",
+      "status_color": "#605cb8",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -667,13 +667,20 @@ window.ITSUPP_DATA = {
       },
       "created_at": "2026-11-08 19:07",
       "created_iso": "2026-11-08T19:07:37.607+03:00",
-      "updated_iso": "2026-11-08T19:07:38.313+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
+      "updated_iso": "2026-11-08T19:13:24.795+03:00",
+      "reacted_iso": "2026-11-08T19:13:24.769+03:00",
+      "work_started_at": "2026-11-08T19:13:24.795+03:00",
       "deadline_at": "Без срока",
       "deadline": "Без срока",
       "due_bucket": "today",
-      "comments": [],
+      "comments": [
+        {
+          "author": "Стрелкин М. В.",
+          "time": "",
+          "text": "W",
+          "is_public": true
+        }
+      ],
       "_syncedToPortal": true
     },
     {
