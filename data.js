@@ -661,15 +661,15 @@ window.ITSUPP_DATA = {
       "control_by": [
         "7"
       ],
-      "spent_minutes": 10,
+      "spent_minutes": 34,
       "spent_by_employee": {
-        "1": 10
+        "1": 34
       },
       "created_at": "2026-11-08 19:07",
       "created_iso": "2026-11-08T19:07:37.607+03:00",
-      "updated_iso": "2026-11-08T19:15:57.570+03:00",
+      "updated_iso": "2026-11-08T19:26:34.478+03:00",
       "reacted_iso": "2026-11-08T19:13:24.769+03:00",
-      "work_started_at": "2026-11-08T19:15:57.570+03:00",
+      "work_started_at": "2026-11-08T19:26:34.478+03:00",
       "deadline_at": "2026-11-09 10:00",
       "deadline": "2026-11-09 10:00",
       "due_bucket": "today",
@@ -760,13 +760,13 @@ window.ITSUPP_DATA = {
       "control_by": [
         "7"
       ],
-      "spent_minutes": 10,
+      "spent_minutes": 35,
       "spent_by_employee": {
-        "1": 10
+        "1": 35
       },
       "created_at": "2026-11-08 18:59",
       "created_iso": "2026-11-08T18:59:21.074+03:00",
-      "updated_iso": "2026-11-08T18:59:21.458+03:00",
+      "updated_iso": "2026-11-08T19:26:35.274+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
