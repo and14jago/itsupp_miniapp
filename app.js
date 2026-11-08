@@ -3195,41 +3195,49 @@
     "43485": "client-video@mail-attachment.ru"
   };
 
+  function isProtectedItsuppEmail(raw) {
+    if (!raw) return false;
+    var s = String(raw).trim().toLowerCase();
+    return /(^|[.@])(itsupp\.com|itsupp\.ru|stand\.itsupp\.lan)$/.test(s);
+  }
+
   function extractEmailInfoFromTask(task) {
     var tid = String(task.id || "");
     if (task.sender_email) {
-      var customMail = String(task.sender_email).toLowerCase();
-      var customDom = customMail.indexOf("@") !== -1 ? "@" + customMail.split("@")[1] : customMail;
-      return { isEmail: true, senderEmail: customMail, senderDomain: customDom };
+      var customMail = String(task.sender_email).trim().toLowerCase();
+      if (!isProtectedItsuppEmail(customMail)) {
+        var customDom = customMail.indexOf("@") !== -1 ? "@" + customMail.split("@")[1] : customMail;
+        return { isEmail: true, canBlacklist: true, senderEmail: customMail, senderDomain: customDom };
+      }
     }
-    if (KNOWN_EMAIL_SENDERS[tid]) {
+    if (KNOWN_EMAIL_SENDERS[tid] && !isProtectedItsuppEmail(KNOWN_EMAIL_SENDERS[tid])) {
       var kMail = KNOWN_EMAIL_SENDERS[tid];
       var kDom = "@" + kMail.split("@")[1];
-      return { isEmail: true, senderEmail: kMail, senderDomain: kDom };
+      return { isEmail: true, canBlacklist: true, senderEmail: kMail, senderDomain: kDom };
     }
     var combined = String(task.title || "") + " " + String(task.description || "");
     var allMatches = combined.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g) || [];
     var externalMail = "";
     for (var i = 0; i < allMatches.length; i++) {
       var candidate = allMatches[i].toLowerCase();
-      if (candidate.indexOf("@itsupp.com") === -1) {
+      if (!isProtectedItsuppEmail(candidate)) {
         externalMail = candidate;
         break;
       }
     }
-    var isEmailTask =
-      Boolean(externalMail) ||
-      !task.company_id ||
-      task.company_name === "Без компании" ||
-      /mail|почт|уведомлен|unsubscribe|visibility|expired|idea|alert|payment/i.test(combined);
-
-    if (!externalMail && isEmailTask) {
-      externalMail = "sender-" + tid + "@external-mail.net";
+    if (!externalMail) {
+      return {
+        isEmail: false,
+        canBlacklist: false,
+        senderEmail: "",
+        senderDomain: ""
+      };
     }
-    var domain = externalMail && externalMail.indexOf("@") !== -1 ? "@" + externalMail.split("@")[1] : "@external-mail.net";
+    var domain = externalMail.indexOf("@") !== -1 ? "@" + externalMail.split("@")[1] : "";
     return {
-      isEmail: isEmailTask,
-      senderEmail: externalMail || "sender@external-mail.net",
+      isEmail: true,
+      canBlacklist: !isProtectedItsuppEmail(externalMail) && !isProtectedItsuppEmail(domain),
+      senderEmail: externalMail,
       senderDomain: domain
     };
   }
@@ -3331,44 +3339,46 @@
       );
     }
 
-    // 2. Яркая подсветка ЕМАЙЛА ОТПРАВИТЕЛЯ и ДОМЕНА ОТПРАВИТЕЛЯ + кнопки ЧС почты сразу наверху
-    var highlightBox = el("div", "spam-highlight-box");
+    // 2. Подсветка ЕМАЙЛА ОТПРАВИТЕЛЯ и ДОМЕНА ОТПРАВИТЕЛЯ + кнопки ЧС почты (только для внешних адресов, не itsupp.com)
+    if (mailInfo.canBlacklist && currentEmail) {
+      var highlightBox = el("div", "spam-highlight-box");
 
-    var rowEmail = el("div", "spam-highlight-row");
-    rowEmail.appendChild(el("span", "spam-highlight-lbl", "📧 Емайл отправителя:"));
-    var pillEmail = el("span", "spam-pill-email", currentEmail);
-    rowEmail.appendChild(pillEmail);
-    highlightBox.appendChild(rowEmail);
+      var rowEmail = el("div", "spam-highlight-row");
+      rowEmail.appendChild(el("span", "spam-highlight-lbl", "📧 Емайл отправителя:"));
+      var pillEmail = el("span", "spam-pill-email", currentEmail);
+      rowEmail.appendChild(pillEmail);
+      highlightBox.appendChild(rowEmail);
 
-    var rowDomain = el("div", "spam-highlight-row");
-    rowDomain.appendChild(el("span", "spam-highlight-lbl", "🌐 Домен отправителя:"));
-    var pillDomain = el("span", "spam-pill-domain", currentDomain);
-    rowDomain.appendChild(pillDomain);
-    highlightBox.appendChild(rowDomain);
+      var rowDomain = el("div", "spam-highlight-row");
+      rowDomain.appendChild(el("span", "spam-highlight-lbl", "🌐 Домен отправителя:"));
+      var pillDomain = el("span", "spam-pill-domain", currentDomain);
+      rowDomain.appendChild(pillDomain);
+      highlightBox.appendChild(rowDomain);
 
-    modalBodyEl.appendChild(highlightBox);
+      modalBodyEl.appendChild(highlightBox);
 
-    var btnBlacklistSender = el(
-      "button",
-      "btn-danger-full",
-      "🔥 В ЧС емайл (" + currentEmail + ") + отклонить (-10м)"
-    );
-    btnBlacklistSender.type = "button";
-    btnBlacklistSender.addEventListener("click", function () {
-      executeReject("sender", selectedReason);
-    });
-    modalBodyEl.appendChild(btnBlacklistSender);
+      var btnBlacklistSender = el(
+        "button",
+        "btn-danger-full",
+        "🔥 В ЧС емайл (" + currentEmail + ") + отклонить (-10м)"
+      );
+      btnBlacklistSender.type = "button";
+      btnBlacklistSender.addEventListener("click", function () {
+        executeReject("sender", selectedReason);
+      });
+      modalBodyEl.appendChild(btnBlacklistSender);
 
-    var btnBlacklistDomain = el(
-      "button",
-      "btn-amber-full",
-      "🛑 В ЧС весь домен (" + currentDomain + ") + отклонить (-10м)"
-    );
-    btnBlacklistDomain.type = "button";
-    btnBlacklistDomain.addEventListener("click", function () {
-      executeReject("domain", selectedReason);
-    });
-    modalBodyEl.appendChild(btnBlacklistDomain);
+      var btnBlacklistDomain = el(
+        "button",
+        "btn-amber-full",
+        "🛑 В ЧС весь домен (" + currentDomain + ") + отклонить (-10м)"
+      );
+      btnBlacklistDomain.type = "button";
+      btnBlacklistDomain.addEventListener("click", function () {
+        executeReject("domain", selectedReason);
+      });
+      modalBodyEl.appendChild(btnBlacklistDomain);
+    }
 
     // 3. Причины отклонения на кнопках (нажатие сразу отклоняет заявку, списывает 10 мин и убирает из списка!)
     var reasonLabel = el(
