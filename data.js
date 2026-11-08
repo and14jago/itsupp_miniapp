@@ -634,60 +634,6 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
-      "id": 44127,
-      "title": "Проверка скорости работы so.itsupp.com контура в южном",
-      "description": "Проверка скорости работы so.itsupp.com контура в южном\n—\nАвтор (инженер): Стрелкин Михаил Владимирович\nИсточник: Mini App (@itsupp_task_bot)",
-      "timeline_summary": "Создана: 2026-11-08 13:04",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "1",
-      "assignee_name": "Стрелкин М. В.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 10,
-      "spent_by_employee": {
-        "1": 10
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-08 13:04",
-      "created_iso": "2026-11-08T13:04:24.415+03:00",
-      "updated_iso": "2026-11-08T19:50:51.535+03:00",
-      "reacted_iso": "2026-11-08T19:50:51.517+03:00",
-      "work_started_at": "2026-11-08T19:50:51.535+03:00",
-      "deadline_at": "2026-11-09 10:00",
-      "deadline": "2026-11-09 10:00",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "?????? ?????????? (Mini App)",
-          "is_public": false
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44114,
       "title": "Белтрус (регистрация на портале ЕСП)",
       "description": "",

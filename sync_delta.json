@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794160773,
-  "updated_at": "2026-11-08T20:59:33.183586+03:00",
+  "sync_seq": 1794163284,
+  "updated_at": "2026-11-08T21:41:24.035195+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -348,9 +348,9 @@
       "title": "Проверка скорости работы so.itsupp.com контура в южном",
       "description": "Проверка скорости работы so.itsupp.com контура в южном\n—\nАвтор (инженер): Стрелкин Михаил Владимирович\nИсточник: Mini App (@itsupp_task_bot)",
       "timeline_summary": "Создана: 2026-11-08 13:04",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -371,23 +371,31 @@
       "control_by": [
         "7"
       ],
-      "spent_minutes": 10,
+      "spent_minutes": 547,
       "spent_by_employee": {
-        "1": 10
+        "1": 547
       },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
+      "tracked_work_seconds": 31016,
+      "work_by_employee": {
+        "1": 31016
+      },
       "timer_paused": false,
       "billing_flag": "none",
       "created_at": "2026-11-08 13:04",
       "created_iso": "2026-11-08T13:04:24.415+03:00",
-      "updated_iso": "2026-11-08T19:50:51.535+03:00",
+      "updated_iso": "2026-11-08T21:41:23.841+03:00",
       "reacted_iso": "2026-11-08T19:50:51.517+03:00",
-      "work_started_at": "2026-11-08T19:50:51.535+03:00",
+      "work_started_at": "",
       "deadline_at": "2026-11-09 10:00",
       "deadline": "2026-11-09 10:00",
       "due_bucket": "today",
       "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "Решена через Mini App (+537 мин) [⏱ По таймеру: 8ч 36м 56с | 💰 Списано: 537м | Δ +20м]",
+          "is_public": false
+        },
         {
           "author": "Кукушкина А. А.",
           "time": "",
