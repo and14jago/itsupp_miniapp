@@ -15,7 +15,7 @@
     for (var i = 0; i < links.length; i++) {
       var href = links[i].getAttribute("href") || "";
       if (href.indexOf("styles.css") !== -1) {
-        links[i].setAttribute("href", "./styles.css?v=20261108-11&_t=" + Date.now());
+        links[i].setAttribute("href", "./styles.css?v=20261108-15&_t=" + Date.now());
       }
     }
   }
@@ -29,8 +29,8 @@
   var DATA = window.ITSUPP_DATA || { companies: [], employees: [], initialTasks: [] };
   var STORAGE_KEY_STATE = "itsupp_miniapp_state_v5";
   var STORAGE_KEY_TASK_OVERRIDES = "itsupp_miniapp_task_overrides_v1";
-  var STORAGE_KEY_SYNC_QUEUE = "itsupp_miniapp_sync_queue_v1";
-  var STORAGE_KEY_SYNC_META = "itsupp_miniapp_sync_meta_v1";
+  var STORAGE_KEY_SYNC_QUEUE = "itsupp_miniapp_sync_queue_v2";
+  var STORAGE_KEY_SYNC_META = "itsupp_miniapp_sync_meta_v2";
   var STORAGE_KEY_PIN = "itsupp_miniapp_pin_v2";
   var STORAGE_KEY_BIO = "itsupp_miniapp_bio_prefs_v2";
   var STORAGE_KEY_THEME = "itsupp_miniapp_theme_v1";
@@ -501,16 +501,70 @@
     } catch (_e) {}
   }
 
+  function normalizeSyncPayload(raw) {
+    if (!raw || !raw.op) return null;
+    var kind = String(raw.op);
+    if (kind === "create") {
+      var ti = String(raw.ti || raw.title || raw.de || raw.description || "").trim().slice(0, 160);
+      var de = String(raw.de || raw.description || ti).trim().slice(0, 380);
+      return {
+        op: "create",
+        lid: String(raw.lid || raw.local_id || ""),
+        cid: parseInt(raw.cid || raw.company_id, 10) || 30,
+        tp: String(raw.tp || raw.type_code || "service"),
+        aid: parseInt(raw.aid || raw.assignee_id, 10) || 1,
+        sp: parseInt(raw.sp != null ? raw.sp : raw.spent_minutes, 10) || 0,
+        en: String(raw.en || raw.entity_name || "").slice(0, 80),
+        ti: ti,
+        de: de,
+        au: String(raw.au || raw.creator_name || "Стрелкин М. В.").slice(0, 60)
+      };
+    }
+    var issueId = String(raw.id || raw.issue_id || "");
+    if (kind === "status") {
+      return {
+        op: "status",
+        id: issueId,
+        st: String(raw.st || raw.status_code || ""),
+        sp: parseInt(raw.sp != null ? raw.sp : raw.spent_minutes, 10) || 0,
+        aid: parseInt(raw.aid || raw.assignee_id, 10) || 1,
+        cm: String(raw.cm || raw.comment || "Статус изменён в Mini App").slice(0, 220),
+        blm: String(raw.blm || raw.blacklist_mode || ""),
+        blt: String(raw.blt || raw.blacklist_target || "")
+      };
+    }
+    if (kind === "assign") {
+      return {
+        op: "assign",
+        id: issueId,
+        aid: parseInt(raw.aid || raw.assignee_id, 10) || 1,
+        st: String(raw.st || raw.status_code || ""),
+        cm: String(raw.cm || raw.comment || "").slice(0, 220)
+      };
+    }
+    if (kind === "comment") {
+      return {
+        op: "comment",
+        id: issueId,
+        cm: String(raw.cm || raw.content || raw.comment || "").slice(0, 350),
+        pub: Boolean(raw.pub != null ? raw.pub : raw.public),
+        au: parseInt(raw.au || raw.author_id, 10) || 1
+      };
+    }
+    return raw;
+  }
+
   function enqueueSyncOp(payload) {
-    if (!payload || !payload.op) return;
-    if (payload.id) {
-      localMutationGuardTs[String(payload.id)] = Date.now();
+    var norm = normalizeSyncPayload(payload);
+    if (!norm || !norm.op) return;
+    if (norm.id) {
+      localMutationGuardTs[String(norm.id)] = Date.now();
     }
     var q = loadSyncQueue();
     var cid = -(1000000 + (Math.floor(Date.now() / 10) % 800000000) + Math.floor(Math.random() * 999));
     q.push({
       chat_id: cid,
-      payload: payload,
+      payload: norm,
       queued_at: Date.now()
     });
     saveSyncQueue(q);
@@ -522,8 +576,9 @@
     var q = loadSyncQueue();
     var queuedTitles = {};
     q.forEach(function (item) {
-      if (item && item.payload && item.payload.op === "create" && item.payload.ti) {
-        queuedTitles[normTitle(item.payload.ti)] = true;
+      var p = item && item.payload ? normalizeSyncPayload(item.payload) : null;
+      if (p && p.op === "create" && p.ti) {
+        queuedTitles[normTitle(p.ti)] = true;
       }
     });
 
@@ -571,13 +626,15 @@
     isFlushingQueue = true;
 
     var item = q[0];
-    var rawJson = JSON.stringify(item.payload);
+    var normPayload = normalizeSyncPayload(item.payload) || item.payload;
+    var rawJson = JSON.stringify(normPayload);
     var posts = [];
     if (rawJson.length <= 420) {
       posts.push({
         chat_id: item.chat_id,
         message_id: 1,
         schedule_cleanup: false,
+        verified: true,
         text: "MINIAPP_OP:" + rawJson
       });
     } else {
@@ -589,6 +646,7 @@
           chat_id: item.chat_id,
           message_id: pIdx + 1,
           schedule_cleanup: false,
+          verified: true,
           text: "MINIAPP_PART:" + totalParts + ":" + (pIdx + 1) + ":" + slice
         });
       }
@@ -612,15 +670,19 @@
         var curQ = loadSyncQueue();
         curQ.shift();
         saveSyncQueue(curQ);
-        if (item.payload && item.payload.op === "create") {
+        if (normPayload && normPayload.op === "create") {
           var meta = loadSyncMeta();
-          if (item.payload.lid) meta.syncedLocalIds[String(item.payload.lid)] = true;
-          if (item.payload.ti) meta.syncedTitles[normTitle(item.payload.ti)] = true;
+          if (normPayload.lid) meta.syncedLocalIds[String(normPayload.lid)] = true;
+          if (normPayload.ti) meta.syncedTitles[normTitle(normPayload.ti)] = true;
           saveSyncMeta(meta);
         }
         isFlushingQueue = false;
         if (curQ.length > 0) {
           setTimeout(flushOutboundSyncQueue, 250);
+        } else {
+          setTimeout(function () {
+            syncWithPortalDelta(false);
+          }, 3500);
         }
       })
       .catch(function () {
@@ -3705,6 +3767,9 @@
 
     var finalTitle = rawTitle || rawDesc.split("\n")[0].slice(0, 120);
     var finalDesc = rawDesc || rawTitle;
+    if (Array.isArray(createDraft.files) && createDraft.files.length > 0) {
+      finalDesc += "\n\n📎 Прикреплённые файлы (" + createDraft.files.length + "): " + createDraft.files.join(", ");
+    }
 
     var targetEmp = getEmployeeById(createDraft.assigneeId);
     if (!targetEmp && String(createDraft.assigneeId) !== String(currentEmp.id)) {
