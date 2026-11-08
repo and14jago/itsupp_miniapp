@@ -717,13 +717,13 @@ window.ITSUPP_DATA = {
       "control_by": [
         "7"
       ],
-      "spent_minutes": 10,
+      "spent_minutes": 40,
       "spent_by_employee": {
-        "1": 10
+        "1": 40
       },
       "created_at": "2026-11-08 19:03",
       "created_iso": "2026-11-08T19:03:31.366+03:00",
-      "updated_iso": "2026-11-08T19:03:31.863+03:00",
+      "updated_iso": "2026-11-08T19:27:07.911+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
