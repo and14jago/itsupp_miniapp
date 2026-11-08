@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794132529,
-  "updated_at": "2026-11-08T13:08:49.128359+03:00",
+  "sync_seq": 1794137280,
+  "updated_at": "2026-11-08T14:28:00.511998+03:00",
   "id_map": {
     "44125": "44127"
   },
@@ -1067,6 +1067,265 @@
           "author": "Боровитин Е. С.",
           "time": "",
           "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44101,
+      "title": "Копирование и установка эцп для фдока",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-06 14:43",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 69,
+      "company_name": "УК КДФ",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 20,
+      "spent_by_employee": {
+        "12": 20
+      },
+      "created_at": "2026-11-06 14:43",
+      "created_iso": "2026-11-06T14:43:08.082+03:00",
+      "updated_iso": "2026-11-06T14:43:20.351+03:00",
+      "reacted_iso": "2026-11-06T14:43:12.802+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-06 15:42",
+      "deadline": "2026-11-06 15:42",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        },
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44100,
+      "title": "Помощь с удаленным доступом",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-06 14:24",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 168,
+      "company_name": "ООО \"Клиника Фомина Уфа\" (ЦМТ)",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 10,
+      "spent_by_employee": {
+        "12": 10
+      },
+      "created_at": "2026-11-06 14:24",
+      "created_iso": "2026-11-06T14:24:55.596+03:00",
+      "updated_iso": "2026-11-06T14:25:07.526+03:00",
+      "reacted_iso": "2026-11-06T14:24:59.115+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-06 15:23",
+      "deadline": "2026-11-06 15:23",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        },
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44099,
+      "title": "Помощь с 1с",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-06 14:24",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 69,
+      "company_name": "УК КДФ",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 10,
+      "spent_by_employee": {
+        "12": 10
+      },
+      "created_at": "2026-11-06 14:24",
+      "created_iso": "2026-11-06T14:24:06.971+03:00",
+      "updated_iso": "2026-11-06T14:24:19.250+03:00",
+      "reacted_iso": "2026-11-06T14:24:11.201+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-06 15:23",
+      "deadline": "2026-11-06 15:23",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        },
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44098,
+      "title": "документы заказать по концепту",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-06 14:06",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "7",
+      "assignee_name": "Кукушкина А. А.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 16,
+      "spent_by_employee": {
+        "7": 16
+      },
+      "created_at": "2026-11-06 14:06",
+      "created_iso": "2026-11-06T14:06:14.414+03:00",
+      "updated_iso": "2026-11-06T14:23:24.463+03:00",
+      "reacted_iso": "2026-11-06T14:06:27.042+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-06 15:05",
+      "deadline": "2026-11-06 15:05",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "сделано",
+          "is_public": true
+        },
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "делаю",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44097,
+      "title": "Белтрус: переход на лицензионный Frontol, обновление кассы и настройка обмена с 1С",
+      "description": "Клиент: Белтрус. Оплата клиента: 32 500 ₽.\nГлавный ответственный: Малышев Андрей Сергеевич — контроль всей цепочки, включая отправку документов.\nОбщий плановый срок: до 12 ноября 2026 года.\nДаты этапов ниже ориентировочные. Андрей определяет график по согласованию с заказчиком, в рабочие дни и рабочее время.\nПОРЯДОК ВЫПОЛНЕНИЯ\n1. Проверить оплату и наличие прошивки — ориентир 9 ноября.\nАндрею поручить Максиму совместно с Анастасией проверить, входит ли обновление прошивки ККТ в оплаченные 32 500 ₽, есть ли подходящая прошивка и необходимые права на обновление.\nЕсли прошивка не оплачена или отсутствует — заранее согласовать стоимость с клиентом, организовать оплату и получение. Закрыть эти вопросы до начала работ на кассе. Контроль — Андрей.\n2. Обеспечить лицензию Frontol — Анастасия, ориентир 9–10 ноября.\nПри наличии выдать лицензию из резерва Максиму и заказать пополнение. Если лицензии нет — заказать. Получить счёт, подготовить платёжное поручение и передать руководителю на оплату. Проконтролировать получение лицензии и пополнение резерва.\n3. Подготовить и выполнить переход — Максим, ориентир 10–11 ноября.\nТочную дату и время определяет Андрей по согласованию с заказчиком. Все лицензии и компоненты подготовить заранее, обеспечить минимальный простой.\nСделать и проверить резервную копию, подготовить возможность отката. Установить лицензионный Frontol, перенести данные и настройки с сохранением продаж и истории закрытых смен. Подключить оборудование, настроить обмен с 1С, ПИо",
+      "timeline_summary": "Создана: 2026-11-06 13:43",
+      "status_code": "work",
+      "status_name": "Принял",
+      "status_color": "#605cb8",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 26,
+      "company_name": "Белтрус ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "6",
+      "assignee_name": "Малышев А. С.",
+      "coexecutors": [
+        "7",
+        "8"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "created_at": "2026-11-06 13:43",
+      "created_iso": "2026-11-06T13:43:54.512+03:00",
+      "updated_iso": "2026-11-06T17:45:21.338+03:00",
+      "reacted_iso": "2026-11-06T17:45:21.316+03:00",
+      "work_started_at": "2026-11-06T17:45:21.338+03:00",
+      "deadline_at": "2026-11-12 18:00",
+      "deadline": "2026-11-12 18:00",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Малышев А. С.",
+          "time": "",
+          "text": "принял",
           "is_public": true
         }
       ],
