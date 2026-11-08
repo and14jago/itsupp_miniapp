@@ -13,7 +13,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <link rel="stylesheet" href="./styles.css?v=20261108-08" />
+  <link rel="stylesheet" href="./styles.css?v=20261108-09" />
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
@@ -213,42 +213,30 @@
           <div id="tasks-list" class="tasks-list"></div>
         </div>
 
-        <!-- ВКЛАДКА 2: МАСТЕР СОЗДАНИЯ ЗАДАЧИ (create_task.py) -->
+        <!-- ВКЛАДКА 2: МАСТЕР СОЗДАНИЯ ЗАДАЧИ (КОМПАКТНЫЙ ЭКРАН БЕЗ ПЕРЕКРЫТИЯ КЛАВИАТУРОЙ) -->
         <div id="view-create" class="app-view">
-          <div class="section-card">
-            <div class="section-head">
-              <h2>Новая заявка</h2>
-              <span class="section-tag">Портал ITSUPP</span>
-            </div>
-            <p class="section-desc">
-              Исполнитель назначается напрямую в <code>assignee_id</code> без подстановки сторонней группы.
-            </p>
-
-            <!-- Шаг 1: Направление -->
-            <div class="form-group">
-              <label class="form-label">Направление</label>
-              <div class="segmented-row">
-                <button type="button" class="seg-btn active" data-create-type="service">🛠 Техподдержка</button>
-                <button type="button" class="seg-btn" data-create-type="000004">📊 Бухгалтерия</button>
-              </div>
+          <div class="section-card create-card-compact">
+            <!-- Шаг 1: Направление (сразу наверху без лишних заголовков) -->
+            <div class="segmented-row create-seg-compact">
+              <button type="button" class="seg-btn active" data-create-type="service">🛠 Техподдержка</button>
+              <button type="button" class="seg-btn" data-create-type="000004">📊 Бухгалтерия</button>
             </div>
 
-            <!-- Шаг 2: Клиент (130 компаний из companies_active.csv) -->
-            <div class="form-group">
-              <label class="form-label">Клиент (130 компаний)</label>
-              <div class="selected-client-banner" id="create-selected-client">
-                <div>
-                  <div class="selected-client-label">Выбранный клиент</div>
-                  <div id="create-client-name" class="selected-client-name">Сервис-Про ООО (ID 30)</div>
+            <!-- Шаг 2: Клиент (в одну компактную строку) -->
+            <div class="create-row-compact">
+              <div class="selected-client-banner create-client-compact" id="create-selected-client">
+                <div class="create-client-inline">
+                  <span class="create-inline-lbl">Клиент:</span>
+                  <span id="create-client-name" class="selected-client-name">Сервис-Про ООО (ID 30)</span>
                 </div>
-                <button type="button" id="btn-create-change-client" class="btn-mini">Сменить</button>
+                <button type="button" id="btn-create-change-client" class="btn-mini create-btn-mini">Сменить</button>
               </div>
               <div id="create-client-picker" class="client-picker-box hidden">
                 <input
                   id="create-client-search"
                   type="search"
                   enterkeyhint="search"
-                  class="form-input"
+                  class="form-input create-input-compact"
                   placeholder="Название клиента или ID…"
                   autocomplete="off"
                 />
@@ -256,63 +244,83 @@
               </div>
             </div>
 
-            <!-- Шаг 3: Объект обслуживания -->
-            <div class="form-group">
-              <label class="form-label">Объект обслуживания</label>
+            <!-- Шаг 3: Объект обслуживания (показывается ТОЛЬКО если у выбранного клиента есть объекты обслуживания) -->
+            <div id="create-entity-group" class="create-row-compact hidden">
+              <div id="create-entity-chips" class="preset-chips create-entity-chips"></div>
               <div class="entity-row">
                 <input
                   id="create-entity-input"
                   type="text"
-                  enterkeyhint="done"
-                  class="form-input"
-                  placeholder="Например: Ресепшен 1 этаж / Сервер 1С"
+                  enterkeyhint="next"
+                  class="form-input create-input-compact"
+                  placeholder="Объект обслуживания…"
                 />
-                <button type="button" id="btn-skip-entity" class="btn-mini">Без объекта</button>
+                <button type="button" id="btn-skip-entity" class="btn-mini create-btn-mini">Без объекта</button>
               </div>
             </div>
 
-            <!-- Шаг 4: Описание проблемы -->
-            <div class="form-group">
-              <label class="form-label">Описание проблемы</label>
+            <!-- Шаг 4: Тема и Описание заявки в верхней половине экрана (видны над клавиатурой; Enter переводит курсор дальше) -->
+            <div class="create-row-compact">
+              <input
+                id="create-title-input"
+                type="text"
+                enterkeyhint="next"
+                class="form-input create-input-compact"
+                placeholder="Тема заявки (суть проблемы)…"
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="create-row-compact">
               <textarea
                 id="create-desc-input"
-                class="form-textarea"
-                rows="3"
-                placeholder="Опишите задачу. Первая строка станет заголовком…"
+                enterkeyhint="done"
+                class="form-textarea create-textarea-compact"
+                rows="2"
+                placeholder="Описание заявки (необязательно, если заполнена тема)…"
               ></textarea>
-              <div class="attach-bar">
-                <label class="attach-btn">
-                  📎 Прикрепить файлы (до 5)
-                  <input id="create-file-input" type="file" multiple accept="image/*,.pdf,.txt,.doc,.docx,.xls,.xlsx" class="hidden" />
-                </label>
-                <span id="create-files-count" class="attach-count">Файлов: 0 / 5</span>
+            </div>
+
+            <!-- Шаг 5: Исполнитель (выпадающий список как статус заявки, по умолчанию выбран текущий пользователь) + Файлы -->
+            <div class="create-assignee-files-row">
+              <div class="create-assignee-inline">
+                <span class="create-inline-lbl">Исполнитель:</span>
+                <div class="create-assignee-popover-wrap" id="create-assignee-wrap">
+                  <button type="button" id="btn-create-assignee-pill" class="create-assignee-pill">
+                    <span class="status-dot" style="background: var(--sber-green);"></span>
+                    <span id="create-assignee-label">Я (Стрелкин М. В.)</span>
+                    <span class="emp-chip-caret">▾</span>
+                  </button>
+                  <div id="create-assignee-popover" class="create-assignee-popover hidden"></div>
+                </div>
               </div>
-              <div id="create-files-list" class="attach-chips"></div>
-            </div>
 
-            <!-- Шаг 5: Исполнитель -->
-            <div class="form-group">
-              <label class="form-label">Исполнитель</label>
-              <div id="create-assignee-grid" class="assignee-grid"></div>
+              <label class="attach-btn create-attach-compact">
+                📎 <span id="create-files-count">Файлы: 0/5</span>
+                <input id="create-file-input" type="file" multiple accept="image/*,.pdf,.txt,.doc,.docx,.xls,.xlsx" class="hidden" />
+              </label>
             </div>
+            <div id="create-files-list" class="attach-chips"></div>
+            <!-- Скрытый контейнер для обратной совместимости -->
+            <div id="create-assignee-grid" class="hidden"></div>
 
-            <!-- Шаг 6: Списание времени при создании -->
-            <div class="form-group">
-              <label class="form-label">Списание времени</label>
-              <div id="create-spent-grid" class="preset-chips">
-                <button type="button" class="preset-chip" data-create-spent="5">5 мин</button>
-                <button type="button" class="preset-chip active" data-create-spent="10">10 мин</button>
-                <button type="button" class="preset-chip" data-create-spent="15">15 мин</button>
-                <button type="button" class="preset-chip" data-create-spent="20">20 мин</button>
-                <button type="button" class="preset-chip" data-create-spent="30">30 мин</button>
-                <button type="button" class="preset-chip" data-create-spent="45">45 мин</button>
-                <button type="button" class="preset-chip" data-create-spent="60">1 ч</button>
+            <!-- Шаг 6: Списание времени (в одну компактную полосу) -->
+            <div class="create-spent-row">
+              <span class="create-inline-lbl">Время:</span>
+              <div id="create-spent-grid" class="preset-chips create-spent-chips">
+                <button type="button" class="preset-chip" data-create-spent="5">5м</button>
+                <button type="button" class="preset-chip active" data-create-spent="10">10м</button>
+                <button type="button" class="preset-chip" data-create-spent="15">15м</button>
+                <button type="button" class="preset-chip" data-create-spent="20">20м</button>
+                <button type="button" class="preset-chip" data-create-spent="30">30м</button>
+                <button type="button" class="preset-chip" data-create-spent="45">45м</button>
+                <button type="button" class="preset-chip" data-create-spent="60">1ч</button>
               </div>
             </div>
 
-            <div class="form-actions">
-              <button type="button" id="btn-submit-create" class="btn-primary-full">Создать заявку</button>
-              <button type="button" id="btn-reset-create" class="btn-secondary-full">Очистить форму</button>
+            <div class="create-actions-row">
+              <button type="button" id="btn-submit-create" class="btn-primary-full create-submit-btn">Создать заявку</button>
+              <button type="button" id="btn-reset-create" class="btn-secondary-full create-reset-btn">Очистить</button>
             </div>
           </div>
         </div>
@@ -600,7 +608,7 @@
     <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
   </div>
 
-  <script src="./data.js?v=20261108-08"></script>
-  <script src="./app.js?v=20261108-08"></script>
+  <script src="./data.js?v=20261108-09"></script>
+  <script src="./app.js?v=20261108-09"></script>
 </body>
 </html>

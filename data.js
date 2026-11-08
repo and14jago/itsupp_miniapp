@@ -622,6 +622,14 @@ window.ITSUPP_DATA = {
                           "short":  "Кочнов И. И.",
                           "role":  "staff",
                           "dept":  "Инфраструктура"
+                      },
+                      {
+                          "id":  "14",
+                          "tg_id":  "267234313",
+                          "name":  "Лисовский Денис",
+                          "short":  "Лисовский Д.",
+                          "role":  "staff",
+                          "dept":  "1С / Разработка"
                       }
                   ],
     "initialTasks":  [

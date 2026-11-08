@@ -15,7 +15,7 @@
     for (var i = 0; i < links.length; i++) {
       var href = links[i].getAttribute("href") || "";
       if (href.indexOf("styles.css") !== -1) {
-        links[i].setAttribute("href", "./styles.css?v=20261108-08&_t=" + Date.now());
+        links[i].setAttribute("href", "./styles.css?v=20261108-09&_t=" + Date.now());
       }
     }
   }
@@ -2906,8 +2906,32 @@
   }
 
   // =========================================================
-  // ВКЛАДКА 2: МАСТЕР СОЗДАНИЯ ЗАДАЧИ (src/create_task.py)
+  // ВКЛАДКА 2: МАСТЕР СОЗДАНИЯ ЗАЯВКИ (КОМПАКТНЫЙ В 1 ЭКРАН)
   // =========================================================
+  function getCompanyServiceObjects(companyId) {
+    var cid = String(companyId || "");
+    var found = [];
+    function addObj(name) {
+      var clean = safeText(name, 120);
+      if (!clean || clean === "Без объекта") return;
+      if (found.indexOf(clean) === -1) found.push(clean);
+    }
+    for (var i = 0; i < DATA.companies.length; i++) {
+      var c = DATA.companies[i];
+      if (String(c.id) === cid && Array.isArray(c.entities)) {
+        c.entities.forEach(addObj);
+      }
+    }
+    var allTasks = (DATA.initialTasks || []).concat(state.tasks || []);
+    for (var j = 0; j < allTasks.length; j++) {
+      var t = allTasks[j];
+      if (t && String(t.company_id) === cid && t.entity_name) {
+        addObj(t.entity_name);
+      }
+    }
+    return found;
+  }
+
   function renderCreateView() {
     document.getElementById("create-client-name").textContent =
       createDraft.companyName + " (ID " + createDraft.companyId + ")";
@@ -2925,37 +2949,89 @@
       );
     }
 
-    var grid = document.getElementById("create-assignee-grid");
-    grid.textContent = "";
+    // Показываем «Объект обслуживания» ТОЛЬКО если у выбранного клиента есть объекты обслуживания
+    var entityGroup = document.getElementById("create-entity-group");
+    var entityChips = document.getElementById("create-entity-chips");
+    var entityInput = document.getElementById("create-entity-input");
+    var serviceObjects = getCompanyServiceObjects(createDraft.companyId);
+    if (entityGroup) {
+      if (serviceObjects.length > 0) {
+        entityGroup.classList.remove("hidden");
+        if (entityChips) {
+          entityChips.textContent = "";
+          serviceObjects.forEach(function (objName) {
+            var ch = el(
+              "button",
+              "preset-chip" + (entityInput && entityInput.value === objName ? " active" : ""),
+              "🏢 " + objName
+            );
+            ch.type = "button";
+            ch.addEventListener("click", function () {
+              hapticImpact("light");
+              if (entityInput) entityInput.value = objName;
+              renderCreateView();
+            });
+            entityChips.appendChild(ch);
+          });
+        }
+        if (entityInput && !entityInput.value) {
+          entityInput.value = serviceObjects[0];
+        }
+      } else {
+        entityGroup.classList.add("hidden");
+        if (entityInput) entityInput.value = "";
+        if (entityChips) entityChips.textContent = "";
+      }
+    }
 
-    var btnMe = el(
-      "button",
-      "assignee-btn" + (String(createDraft.assigneeId) === String(currentEmp.id) ? " active" : ""),
-      "Я (" + currentEmp.short + ")"
-    );
-    btnMe.type = "button";
-    btnMe.addEventListener("click", function () {
-      hapticImpact("light");
-      createDraft.assigneeId = String(currentEmp.id);
-      renderCreateView();
-    });
-    grid.appendChild(btnMe);
+    // Выпадающий список исполнителя (как статус заявки): по умолчанию выбран тот, кто в системе
+    var selectedEmp = getEmployeeById(createDraft.assigneeId) || currentEmp;
+    var isMe = String(selectedEmp.id) === String(currentEmp.id);
+    var assigneeLabelEl = document.getElementById("create-assignee-label");
+    if (assigneeLabelEl) {
+      assigneeLabelEl.textContent = isMe
+        ? "Я (" + currentEmp.short + ")"
+        : selectedEmp.short + " · ID " + selectedEmp.id;
+    }
 
-    DATA.employees.forEach(function (emp) {
-      if (String(emp.id) === String(currentEmp.id)) return;
-      var b = el(
+    var popoverEl = document.getElementById("create-assignee-popover");
+    if (popoverEl) {
+      popoverEl.textContent = "";
+
+      var optMe = el(
         "button",
-        "assignee-btn" + (String(createDraft.assigneeId) === String(emp.id) ? " active" : ""),
-        emp.short + " (ID " + emp.id + ")"
+        "create-assignee-opt" + (isMe ? " active" : ""),
+        "● Я (" + currentEmp.short + " · ID " + currentEmp.id + ")"
       );
-      b.type = "button";
-      b.addEventListener("click", function () {
+      optMe.type = "button";
+      optMe.addEventListener("click", function (ev) {
+        ev.stopPropagation();
         hapticImpact("light");
-        createDraft.assigneeId = String(emp.id);
+        createDraft.assigneeId = String(currentEmp.id);
+        popoverEl.classList.add("hidden");
         renderCreateView();
       });
-      grid.appendChild(b);
-    });
+      popoverEl.appendChild(optMe);
+
+      DATA.employees.forEach(function (emp) {
+        if (String(emp.id) === String(currentEmp.id)) return;
+        var active = String(createDraft.assigneeId) === String(emp.id);
+        var opt = el(
+          "button",
+          "create-assignee-opt" + (active ? " active" : ""),
+          "● " + emp.short + " · ID " + emp.id
+        );
+        opt.type = "button";
+        opt.addEventListener("click", function (ev) {
+          ev.stopPropagation();
+          hapticImpact("light");
+          createDraft.assigneeId = String(emp.id);
+          popoverEl.classList.add("hidden");
+          renderCreateView();
+        });
+        popoverEl.appendChild(opt);
+      });
+    }
   }
 
   function renderClientSearchResults(query) {
@@ -2977,6 +3053,8 @@
         hapticImpact("light");
         createDraft.companyId = comp.id;
         createDraft.companyName = comp.name;
+        var entityInput = document.getElementById("create-entity-input");
+        if (entityInput) entityInput.value = "";
         document.getElementById("create-client-picker").classList.add("hidden");
         renderCreateView();
       });
@@ -2985,15 +3063,22 @@
   }
 
   function submitCreateTask() {
+    var titleEl = document.getElementById("create-title-input");
     var descEl = document.getElementById("create-desc-input");
     var entityEl = document.getElementById("create-entity-input");
-    var desc = safeText(descEl.value, 1000);
-    if (!desc) {
+    var rawTitle = titleEl ? safeText(titleEl.value, 200) : "";
+    var rawDesc = descEl ? safeText(descEl.value, 1000) : "";
+
+    // Если заполнена тема, а описание пустое — без ошибки подставляем тему вместо описания!
+    if (!rawTitle && !rawDesc) {
       hapticNotify("error");
-      showToast("Введите текстом описание проблемы");
-      descEl.focus();
+      showToast("Укажите тему или описание заявки");
+      if (titleEl) titleEl.focus();
       return;
     }
+
+    var finalTitle = rawTitle || rawDesc.split("\n")[0].slice(0, 120);
+    var finalDesc = rawDesc || rawTitle;
 
     var targetEmp = getEmployeeById(createDraft.assigneeId);
     if (!targetEmp && String(createDraft.assigneeId) !== String(currentEmp.id)) {
@@ -3002,37 +3087,41 @@
       return;
     }
 
-    var firstLine = desc.split("\n")[0].slice(0, 120);
-    var newId = String(state.nextIssueId || 44122);
-    state.nextIssueId = (parseInt(newId, 10) || 44122) + 1;
+    var newId = String(state.nextIssueId || 44125);
+    state.nextIssueId = (parseInt(newId, 10) || 44125) + 1;
 
     var defaultCoexecs = ["8", "9", "11", "12"].filter(function (id) {
       return id !== String(createDraft.assigneeId);
     });
     var ctrlList = String(createDraft.assigneeId) !== String(currentEmp.id) ? [String(currentEmp.id)] : [];
+    var nowIso = new Date().toISOString();
 
     var newTask = {
       id: newId,
-      title: firstLine,
-      description: desc,
+      title: finalTitle,
+      description: finalDesc,
       company_id: createDraft.companyId,
       company_name: createDraft.companyName,
-      entity_name: safeText(entityEl.value, 120) || "Без объекта",
+      entity_name: (entityEl && safeText(entityEl.value, 120)) || "Без объекта",
       type_code: createDraft.typeCode,
       type_name: createDraft.typeName,
       status_code: "opened",
       status_name: "Открыта",
       priority: "Обычный",
       assignee_id: String(createDraft.assigneeId),
+      assignee_name: targetEmp ? targetEmp.short : currentEmp.short,
       creator_id: String(currentEmp.id),
       control_by: ctrlList,
       coexecutors: defaultCoexecs,
       observers: ["6"],
       spent_minutes: createDraft.spentMinutes,
+      spent_by_employee: {},
       billing_flag: "none",
       deadline: "Сегодня 19:00",
       due_bucket: "today",
-      created_at: new Date().toISOString().slice(0, 16).replace("T", " "),
+      created_at: nowIso.slice(0, 16).replace("T", " "),
+      created_iso: nowIso,
+      updated_iso: nowIso,
       comments: [
         {
           author: currentEmp.short,
@@ -3041,14 +3130,18 @@
         }
       ]
     };
+    if (createDraft.spentMinutes > 0) {
+      newTask.spent_by_employee[String(createDraft.assigneeId)] = createDraft.spentMinutes;
+    }
 
     state.tasks.unshift(newTask);
     saveState();
 
-    descEl.value = "";
-    entityEl.value = "";
+    if (titleEl) titleEl.value = "";
+    if (descEl) descEl.value = "";
+    if (entityEl) entityEl.value = "";
     createDraft.files = [];
-    document.getElementById("create-files-count").textContent = "Файлов: 0 / 5";
+    document.getElementById("create-files-count").textContent = "Файлы: 0/5";
     document.getElementById("create-files-list").textContent = "";
 
     hapticNotify("success");
@@ -3450,9 +3543,59 @@
 
   var searchInput = document.getElementById("task-search-input");
   var searchClear = document.getElementById("btn-search-clear");
+  var createEntityInput = document.getElementById("create-entity-input");
+  var createTitleInput = document.getElementById("create-title-input");
+  var createDescInput = document.getElementById("create-desc-input");
+
   bindDismissKeyboardOnEnter(searchInput);
   bindDismissKeyboardOnEnter(document.getElementById("create-client-search"));
-  bindDismissKeyboardOnEnter(document.getElementById("create-entity-input"));
+
+  // Переход курсора в следующее поле ввода по нажатию Enter на клавиатуре
+  if (createEntityInput) {
+    createEntityInput.addEventListener("keydown", function (ev) {
+      if (ev.key === "Enter" || ev.keyCode === 13) {
+        ev.preventDefault();
+        if (createTitleInput) createTitleInput.focus();
+      }
+    });
+  }
+
+  if (createTitleInput) {
+    createTitleInput.addEventListener("keydown", function (ev) {
+      if (ev.key === "Enter" || ev.keyCode === 13) {
+        ev.preventDefault();
+        if (createDescInput) createDescInput.focus();
+      }
+    });
+  }
+
+  if (createDescInput) {
+    createDescInput.addEventListener("keydown", function (ev) {
+      if ((ev.key === "Enter" || ev.keyCode === 13) && !ev.shiftKey) {
+        ev.preventDefault();
+        dismissKeyboard(createDescInput);
+      }
+    });
+  }
+
+  // Выпадающий список сотрудников в форме «Создать» (работает точно как выбор статуса заявки)
+  var btnAssigneePill = document.getElementById("btn-create-assignee-pill");
+  var assigneePopover = document.getElementById("create-assignee-popover");
+  if (btnAssigneePill && assigneePopover) {
+    btnAssigneePill.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      hapticImpact("light");
+      assigneePopover.classList.toggle("hidden");
+    });
+    document.addEventListener("click", function (ev) {
+      if (!assigneePopover.classList.contains("hidden")) {
+        var wrap = document.getElementById("create-assignee-wrap");
+        if (!wrap || !wrap.contains(ev.target)) {
+          assigneePopover.classList.add("hidden");
+        }
+      }
+    });
+  }
 
   searchInput.addEventListener("input", function () {
     searchQuery = safeText(searchInput.value, 80);
@@ -3499,7 +3642,7 @@
   document.getElementById("create-file-input").addEventListener("change", function (ev) {
     var files = Array.prototype.slice.call(ev.currentTarget.files || [], 0, 5);
     createDraft.files = files.map(function (f) { return f.name; });
-    document.getElementById("create-files-count").textContent = "Файлов: " + createDraft.files.length + " / 5";
+    document.getElementById("create-files-count").textContent = "Файлы: " + createDraft.files.length + "/5";
     var chips = document.getElementById("create-files-list");
     chips.textContent = "";
     createDraft.files.forEach(function (name) {
@@ -3517,6 +3660,7 @@
 
   document.getElementById("btn-submit-create").addEventListener("click", submitCreateTask);
   document.getElementById("btn-reset-create").addEventListener("click", function () {
+    if (createTitleInput) createTitleInput.value = "";
     document.getElementById("create-desc-input").value = "";
     document.getElementById("create-entity-input").value = "";
     createDraft.companyId = 30;
@@ -3600,6 +3744,7 @@
     createDraft.typeName = lastAiParsed.typeName;
     createDraft.assigneeId = lastAiParsed.assigneeId;
     createDraft.spentMinutes = lastAiParsed.spentMinutes;
+    if (createTitleInput) createTitleInput.value = lastAiParsed.title;
     document.getElementById("create-desc-input").value = lastAiParsed.description;
     submitCreateTask();
   });
@@ -3612,6 +3757,7 @@
     createDraft.typeName = lastAiParsed.typeName;
     createDraft.assigneeId = lastAiParsed.assigneeId;
     createDraft.spentMinutes = lastAiParsed.spentMinutes;
+    if (createTitleInput) createTitleInput.value = lastAiParsed.title;
     document.getElementById("create-desc-input").value = lastAiParsed.description;
     switchView("create");
   });

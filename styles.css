@@ -1565,16 +1565,16 @@ html[data-theme="dark"] .status-closed { background: #252b33; border-color: #495
 .assignee-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 9px;
+  gap: 6px;
 }
 
 .assignee-btn {
-  padding: 13px 12px;
-  border-radius: 12px;
+  padding: 8px 10px;
+  border-radius: 9px;
   border: 1px solid var(--border-strong);
   background: var(--bg);
   color: var(--text);
-  font-size: 14px;
+  font-size: 12.5px;
   font-weight: 600;
   cursor: pointer;
   text-align: left;
@@ -2215,4 +2215,241 @@ html[data-theme="dark"] .status-closed { background: #252b33; border-color: #495
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
   z-index: 80;
   pointer-events: none;
+}
+
+/* =========================================================
+   КОМПАКТНАЯ ФОРМА СОЗДАНИЯ ЗАЯВКИ (В 1 ЭКРАН, ПОЛЯ ВВЕРХУ НАД КЛАВИАТУРОЙ)
+   ========================================================= */
+.create-card-compact {
+  padding: 10px 11px;
+  margin-bottom: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.create-seg-compact {
+  padding: 2px;
+  margin-bottom: 0;
+}
+
+.create-seg-compact .seg-btn {
+  padding: 6px 8px;
+  font-size: 12.5px;
+}
+
+.create-row-compact {
+  margin: 0;
+}
+
+.create-client-compact {
+  padding: 6px 9px;
+  border-radius: 9px;
+  gap: 8px;
+}
+
+.create-client-inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.create-inline-lbl {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.create-client-compact .selected-client-name {
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.create-btn-mini {
+  padding: 5px 10px;
+  font-size: 11.5px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.create-entity-chips {
+  margin-bottom: 5px;
+  gap: 5px;
+}
+
+.create-input-compact {
+  padding: 8px 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  border-radius: 9px;
+}
+
+.create-textarea-compact {
+  padding: 7px 10px;
+  font-size: 13px;
+  line-height: 1.35;
+  border-radius: 9px;
+  min-height: 52px;
+  max-height: 78px;
+  resize: none;
+}
+
+/* Строка Исполнитель (выпадающий список как статус заявки) + Файлы */
+.create-assignee-files-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.create-assignee-inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  flex: 1;
+}
+
+.create-assignee-popover-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  flex: 1;
+}
+
+.create-assignee-pill {
+  width: 100%;
+  max-width: 210px;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(33, 160, 56, 0.42);
+  background: var(--sber-green-soft);
+  color: var(--ok);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.create-assignee-pill #create-assignee-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Выпадающий список всех 12 сотрудников (узкие аккуратные кнопки-капсулы как у статуса заявки) */
+.create-assignee-popover {
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: 0;
+  width: 226px;
+  z-index: 95;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border-strong);
+  border-radius: 12px;
+  padding: 5px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.26);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.create-assignee-opt {
+  width: 100%;
+  height: 24px;
+  padding: 0 9px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.create-assignee-opt.active {
+  background: var(--sber-green-soft);
+  border-color: var(--sber-green);
+  color: var(--ok);
+  font-weight: 700;
+}
+
+.create-assignee-opt:active {
+  transform: scale(0.98);
+}
+
+.create-attach-compact {
+  padding: 5px 9px;
+  font-size: 11.5px;
+  border-radius: 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Полоса списания времени в 1 строку */
+.create-spent-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.create-spent-chips {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 4px;
+  flex: 1;
+  overflow-x: auto;
+}
+
+.create-spent-chips .preset-chip {
+  flex: 1;
+  padding: 5px 4px;
+  font-size: 11.5px;
+  border-radius: 8px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Кнопки Создать заявку + Очистить в 1 строку */
+.create-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 2px;
+}
+
+.create-submit-btn {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+.create-reset-btn {
+  width: auto;
+  flex: 0 0 auto;
+  padding: 10px 12px;
+  font-size: 13px;
+  border-radius: 10px;
 }
