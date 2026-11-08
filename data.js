@@ -634,6 +634,56 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44133,
+      "title": "тест app 3",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-08 21:42",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "1",
+      "assignee_name": "Стрелкин М. В.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-08 21:42",
+      "created_iso": "2026-11-08T21:42:04.767+03:00",
+      "updated_iso": "2026-11-08T22:04:59.880+03:00",
+      "reacted_iso": "2026-11-08T22:04:59.858+03:00",
+      "work_started_at": "2026-11-08T22:04:59.880+03:00",
+      "deadline_at": "2026-11-09 10:00",
+      "deadline": "2026-11-09 10:00",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "?????? ??????? ? ??????? ITSUPP",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44114,
       "title": "Белтрус (регистрация на портале ЕСП)",
       "description": "",
