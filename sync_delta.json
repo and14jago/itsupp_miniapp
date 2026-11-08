@@ -1,0 +1,1076 @@
+{
+  "sync_seq": 1794132529,
+  "updated_at": "2026-11-08T13:08:49.128359+03:00",
+  "id_map": {
+    "44125": "44127"
+  },
+  "title_map": {
+    "проверка скорости работы so.itsupp.com контура в южном": "44127",
+    "разработака телеграмм бота": "44126",
+    "помощь с телефоном + активация office": "44120",
+    "помощь с интернетом": "44119",
+    "починка и настройка личного пк (06-07.11.2026)": "44118",
+    "буэнос проверить реквизиты": "44117",
+    "файлер проверить доки": "44115",
+    "белтрус (регистрация на портале есп)": "44114",
+    "medical genomics: дополнить описание инфраструктуры и подготовить ответы на ведомость архитектуры": "44113",
+    "удаление 1с, ovpn, логов": "44112",
+    "+7 905 600-66-55  александр, даст anydesk или rudesktop установить софт, скопировать ключ с рутокен, положить на 6 флешек, проверить, что с каждой флешки ключ работает. потом ключ с компа удалить. крипто можно оставить": "44111",
+    "молодо (не могу распечатать шк)": "44110",
+    "помощь с фрмо": "44109",
+    "работа на сервере": "44108",
+    "настройка рдп": "44107",
+    "кф-тула кабинет 101 (не печатает принтер на двух сторонах)": "44106",
+    "[black friday 2026] exclusive luxury watches starting at $250": "44105",
+    "медикал геномикс (пропал vpn на удалёнке)": "44104",
+    "отключение уволившихся сотрудников": "44103",
+    "создание учеток": "44102",
+    "копирование и установка эцп для фдока": "44101",
+    "помощь с удаленным доступом": "44100",
+    "помощь с 1с": "44099",
+    "документы заказать по концепту": "44098",
+    "белтрус: переход на лицензионный frontol, обновление кассы и настройка обмена с 1с": "44097"
+  },
+  "deleted_ids": [
+    "44116",
+    "44121",
+    "44122",
+    "44123",
+    "44124"
+  ],
+  "tasks": [
+    {
+      "id": 44127,
+      "title": "Проверка скорости работы so.itsupp.com контура в южном",
+      "description": "Проверка скорости работы so.itsupp.com контура в южном\n—\nАвтор (инженер): Стрелкин Михаил Владимирович\nИсточник: Mini App (@itsupp_task_bot)",
+      "timeline_summary": "Создана: 2026-11-08 13:04",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "1",
+      "assignee_name": "Стрелкин М. В.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 10,
+      "spent_by_employee": {
+        "1": 10
+      },
+      "created_at": "2026-11-08 13:04",
+      "created_iso": "2026-11-08T13:04:24.415+03:00",
+      "updated_iso": "2026-11-08T13:04:24.839+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44126,
+      "title": "Разработака телеграмм бота",
+      "description": "Разработака телеграмм бота\n📎 Прикреплённые файлы (1): photo_5438598000826590129_y.jpg",
+      "timeline_summary": "Создана: 2026-11-08 12:35",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "1",
+      "assignee_name": "Стрелкин М. В.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "created_at": "2026-11-08 12:35",
+      "created_iso": "2026-11-08T12:35:33.830+03:00",
+      "updated_iso": "2026-11-08T12:36:40.889+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44120,
+      "title": "Помощь с телефоном + активация office",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-07 11:23",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 180,
+      "company_name": "МСЧ 14",
+      "entity_name": "Без объекта",
+      "assignee_id": "13",
+      "assignee_name": "Кочнов И. И.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 18,
+      "spent_by_employee": {
+        "13": 18
+      },
+      "created_at": "2026-11-07 11:23",
+      "created_iso": "2026-11-07T11:23:00.208+03:00",
+      "updated_iso": "2026-11-07T11:23:10.847+03:00",
+      "reacted_iso": "2026-11-07T11:23:03.856+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-09 10:00",
+      "deadline": "2026-11-09 10:00",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кочнов И. И.",
+          "time": "",
+          "text": "Помощь с телефоном + активация office",
+          "is_public": true
+        },
+        {
+          "author": "Кочнов И. И.",
+          "time": "",
+          "text": "Помощь с телефоном + активация office",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44119,
+      "title": "Помощь с интернетом",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-07 11:21",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 112,
+      "company_name": "КЛИНИКА ФОМИНА ДОЛГОРУКОВСКАЯ ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "13",
+      "assignee_name": "Кочнов И. И.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 20,
+      "spent_by_employee": {
+        "13": 20
+      },
+      "created_at": "2026-11-07 11:21",
+      "created_iso": "2026-11-07T11:21:28.678+03:00",
+      "updated_iso": "2026-11-07T11:22:30.388+03:00",
+      "reacted_iso": "2026-11-07T11:21:32.211+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-09 10:00",
+      "deadline": "2026-11-09 10:00",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кочнов И. И.",
+          "time": "",
+          "text": "Помощь с интернетом",
+          "is_public": true
+        },
+        {
+          "author": "Кочнов И. И.",
+          "time": "",
+          "text": "Помощь с интернетом",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44118,
+      "title": "Починка и настройка личного пк (06-07.11.2026)",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-07 11:20",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "13",
+      "assignee_name": "Кочнов И. И.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 300,
+      "spent_by_employee": {
+        "13": 300
+      },
+      "created_at": "2026-11-07 11:20",
+      "created_iso": "2026-11-07T11:20:31.467+03:00",
+      "updated_iso": "2026-11-07T11:21:09.405+03:00",
+      "reacted_iso": "2026-11-07T11:20:35.477+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-09 10:00",
+      "deadline": "2026-11-09 10:00",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кочнов И. И.",
+          "time": "",
+          "text": "Починка и настройка личного пк (06-07.11.2026)",
+          "is_public": true
+        },
+        {
+          "author": "Кочнов И. И.",
+          "time": "",
+          "text": "Починка и настройка личного пк (06-07.11.2026)",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44117,
+      "title": "Буэнос проверить реквизиты",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-07 11:11",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "7",
+      "assignee_name": "Кукушкина А. А.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 15,
+      "spent_by_employee": {
+        "7": 15
+      },
+      "created_at": "2026-11-07 11:11",
+      "created_iso": "2026-11-07T11:11:55.737+03:00",
+      "updated_iso": "2026-11-07T12:17:48.192+03:00",
+      "reacted_iso": "2026-11-07T11:12:08.395+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-09 10:00",
+      "deadline": "2026-11-09 10:00",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "сделано",
+          "is_public": true
+        },
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44115,
+      "title": "файлер проверить доки",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-06 18:16",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "7",
+      "assignee_name": "Кукушкина А. А.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 32,
+      "spent_by_employee": {
+        "7": 32
+      },
+      "created_at": "2026-11-06 18:16",
+      "created_iso": "2026-11-06T18:16:04.572+03:00",
+      "updated_iso": "2026-11-06T18:49:00.154+03:00",
+      "reacted_iso": "2026-11-06T18:16:29.187+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-09 10:00",
+      "deadline": "2026-11-09 10:00",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "сделано",
+          "is_public": true
+        },
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "делаю",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44114,
+      "title": "Белтрус (регистрация на портале ЕСП)",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-06 18:15",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 26,
+      "company_name": "Белтрус ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
+      "coexecutors": [
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "created_at": "2026-11-06 18:15",
+      "created_iso": "2026-11-06T18:15:47.265+03:00",
+      "updated_iso": "2026-11-08T11:21:18.197+03:00",
+      "reacted_iso": "2026-11-06T18:15:51.026+03:00",
+      "work_started_at": "2026-11-08T11:21:18.197+03:00",
+      "deadline_at": "2026-11-09 10:00",
+      "deadline": "2026-11-09 10:00",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "✉️ Отправлена отбивка инициатору заявки:\nВаше обращение №44114 отклонено и закрыто без выполнения.\nПричина: Дубликат заявки",
+          "is_public": true
+        },
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44113,
+      "title": "Medical Genomics: дополнить описание инфраструктуры и подготовить ответы на ведомость архитектуры",
+      "description": "Ответственный: Кочнов Иван Игоревич.\nНаблюдатели: Малышев Андрей Сергеевич и Стрелкин Михаил Владимирович.\nСрок сдачи: среда, 11 ноября 2026 года, до 18:00 МСК.\nКРАТКИЙ ПОРЯДОК ДЕЙСТВИЙ\n1. Иван — продолжить начатое описание инфраструктуры, проверить уже переданные сведения и заполнить недостающие ответы по всем 20 пунктам приложения.\n2. Иван — адресно запросить сведения у внешних участников; по каждому вопросу зафиксировать ФИО, организацию, контакт, дату запроса, результат либо статус и ожидаемый срок ответа.\n3. Иван — до срока приложить заполненный Word-файл и подтверждающие материалы. Андрей Малышев и Михаил Стрелкин контролируют выполнение как наблюдатели.\nПОДРОБНОЕ ЗАДАНИЕ\nПодготовить ответы на оставшиеся вопросы по инфраструктуре Medical Genomics. Подробный перечень с адресами, портами и названиями оборудования находится в приложенном Word-файле. Приложенный PDF предназначен для просмотра и печати того же задания.\nИспользовать уже переданные сведения из «Инфра 3» и ведомости архитектуры. Под каждым пунктом в файле сохранено, что уже известно. Дополнить недостающие данные и проверить указанные расхождения.\nПо обслуживаемым нами системам собрать техническую информацию. Вопросы разработчикам, лаборатории, бухгалтерии, заказчику и подрядчикам направить соответствующим ответственным. Для каждого внешнего вопроса указать конкретного человека, организацию, контакт, дату запроса и результат либо ожидаемый срок ответа. Если ответственный неизвестен, получить его контакт у предст",
+      "timeline_summary": "Создана: 2026-11-06 17:54",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 52,
+      "company_name": "Медикал Геномикс ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "13",
+      "assignee_name": "Кочнов И. И.",
+      "coexecutors": [],
+      "observers": [
+        "1",
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "created_at": "2026-11-06 17:54",
+      "created_iso": "2026-11-06T17:54:49.146+03:00",
+      "updated_iso": "2026-11-06T17:54:50.990+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "2026-11-11 18:00",
+      "deadline": "2026-11-11 18:00",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44112,
+      "title": "Удаление 1с, ovpn, логов",
+      "description": ".",
+      "timeline_summary": "Создана: 2026-11-06 17:36",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 112,
+      "company_name": "КЛИНИКА ФОМИНА ДОЛГОРУКОВСКАЯ ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "11",
+      "assignee_name": "Никулин Д. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 25,
+      "spent_by_employee": {
+        "11": 25
+      },
+      "created_at": "2026-11-06 17:36",
+      "created_iso": "2026-11-06T17:36:33.557+03:00",
+      "updated_iso": "2026-11-06T17:45:32.908+03:00",
+      "reacted_iso": "2026-11-06T17:45:14.595+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-09 09:44",
+      "deadline": "2026-11-09 09:44",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Никулин Д. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        },
+        {
+          "author": "Никулин Д. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44111,
+      "title": "+7 905 600-66-55  Александр, даст Anydesk или rudesktop Установить софт, скопировать ключ с Рутокен, положить на 6 флешек, проверить, что с каждой флешки ключ работает. Потом ключ с компа удалить. Крипто можно оставить",
+      "description": "Установить софт, скопировать ключ с Рутокен, положить на 6 флешек, проверить, что с каждой флешки ключ работает. Потом ключ с компа удалить. Крипто можно оставить\n—\nАвтор (инженер): ITSUPP Admin\nTelegram user id: 423709417\nИсточник: @itsupp_task_bot / Создать задачу\nITSUPP operation_id: 767d9bb6-aeb7-4e90-8031-21c0ffc4e56b\nrequest_uuid: 767d9bb6-aeb7-4e90-8031-21c0ffc4e56b",
+      "timeline_summary": "Создана: 2026-11-06 16:26",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "11",
+      "assignee_name": "Никулин Д. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 40,
+      "spent_by_employee": {
+        "11": 40
+      },
+      "created_at": "2026-11-06 16:26",
+      "created_iso": "2026-11-06T16:26:28.507+03:00",
+      "updated_iso": "2026-11-06T17:12:28.373+03:00",
+      "reacted_iso": "2026-11-06T16:40:25.175+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-06 17:26",
+      "deadline": "2026-11-06 17:26",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Никулин Д. С.",
+          "time": "",
+          "text": "Ключи скопировал, протестировал",
+          "is_public": true
+        },
+        {
+          "author": "Никулин Д. С.",
+          "time": "",
+          "text": "Взял в работу",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44110,
+      "title": "Молодо (Не могу распечатать шк)",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-06 16:18",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 156,
+      "company_name": "МОЛОДО ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
+      "coexecutors": [
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 10,
+      "spent_by_employee": {
+        "8": 10
+      },
+      "created_at": "2026-11-06 16:18",
+      "created_iso": "2026-11-06T16:18:22.691+03:00",
+      "updated_iso": "2026-11-06T16:26:03.427+03:00",
+      "reacted_iso": "2026-11-06T16:18:26.864+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-06 17:17",
+      "deadline": "2026-11-06 17:17",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        },
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44109,
+      "title": "Помощь с фрмо",
+      "description": "..",
+      "timeline_summary": "Создана: 2026-11-06 16:17",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 205,
+      "company_name": "ООО \"Клиника Фомина Нижний Новгород\"",
+      "entity_name": "Без объекта",
+      "assignee_id": "11",
+      "assignee_name": "Никулин Д. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 5,
+      "spent_by_employee": {
+        "11": 5
+      },
+      "created_at": "2026-11-06 16:17",
+      "created_iso": "2026-11-06T16:17:33.391+03:00",
+      "updated_iso": "2026-11-06T16:17:45.634+03:00",
+      "reacted_iso": "2026-11-06T16:17:37.254+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-06 17:16",
+      "deadline": "2026-11-06 17:16",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Никулин Д. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        },
+        {
+          "author": "Никулин Д. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44108,
+      "title": "Работа на сервере",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-06 16:14",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 69,
+      "company_name": "УК КДФ",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 60,
+      "spent_by_employee": {
+        "12": 60
+      },
+      "created_at": "2026-11-06 16:14",
+      "created_iso": "2026-11-06T16:14:53.910+03:00",
+      "updated_iso": "2026-11-06T16:16:00.523+03:00",
+      "reacted_iso": "2026-11-06T16:14:58.951+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-06 17:13",
+      "deadline": "2026-11-06 17:13",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": "Просмотр sql таблиц, проверка бекапов",
+          "is_public": true
+        },
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44107,
+      "title": "Настройка рдп",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-06 16:13",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 213,
+      "company_name": "КЛИНИКА ФОМИНА ОМСК ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 15,
+      "spent_by_employee": {
+        "12": 15
+      },
+      "created_at": "2026-11-06 16:13",
+      "created_iso": "2026-11-06T16:13:24.499+03:00",
+      "updated_iso": "2026-11-06T16:13:40.893+03:00",
+      "reacted_iso": "2026-11-06T16:13:27.412+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-06 17:12",
+      "deadline": "2026-11-06 17:12",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        },
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44106,
+      "title": "КФ-Тула кабинет 101 (не печатает принтер на двух сторонах)",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-06 15:48",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 173,
+      "company_name": "КЛИНИКА ФОМИНА ТУЛА ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
+      "coexecutors": [
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 20,
+      "spent_by_employee": {
+        "8": 20
+      },
+      "created_at": "2026-11-06 15:48",
+      "created_iso": "2026-11-06T15:48:28.777+03:00",
+      "updated_iso": "2026-11-06T16:18:05.579+03:00",
+      "reacted_iso": "2026-11-06T15:48:32.459+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-06 16:47",
+      "deadline": "2026-11-06 16:47",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        },
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44105,
+      "title": "[Black Friday 2026] Exclusive Luxury Watches Starting at $250",
+      "description": "lang=en> Redefine Excellence - Luxury Watches from $250\nstyle=\"FONT-FAMILY: Garamond, Baskerville, 'Times New Roman', serif; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: #f7f5f0\">\nstyle=\"PADDING-BOTTOM: 35px; PADDING-TOP: 35px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: #f7f5f0\"\ncellSpacing=0 cellPadding=0 width=\"100%\" border=0>\nstyle=\"OVERFLOW: hidden; BORDER-TOP: #1a2530 2px solid; BORDER-RIGHT: #1a2530 2px solid; BORDER-BOTTOM: #1a2530 2px solid; BORDER-LEFT: #1a2530 2px solid; BACKGROUND-COLOR: #ffffff\"\ncellSpacing=0 cellPadding=0 width=600 border=0>\nstyle=\"PADDING-BOTTOM: 10px; PADDING-TOP: 20px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: #1a2530\"\nalign=center> style=\"FONT-SIZE: 18px; TEXT-DECORATION: none; TEXT-TRANSFORM: uppercase; COLOR: #ffffff; LETTER-SPACING: 3px\"\nhref=\"https://///k2.ynbmlp.com////////k2f5ew///////nb1tbry5.html\"\ntarget=_blank>FINE WATCHMAKING\nhref=\"https://///k2.ynbmlp.com////////k2f5ew///////nb1tbry5.html\"\ntarget=_blank> style=\"FONT-SIZE: 16px; MAX-WIDTH: 600px; BORDER-TOP: 0px; HEIGHT: auto; BORDER-RIGHT: 0px; WIDTH: 100%; BORDER-BOTTOM: 0px; COLOR: #1a2530; PADDING-BOTTOM: 25px; TEXT-ALIGN: center; PADDING-TOP: 25px; PADDING-LEFT: 0px; BORDER-LEFT: 0px; DISPLAY: block; PADDING-RIGHT: 0px; BACKGROUND-COLOR: #eae5d9\"\nalt=\"Discover Exceptional Luxury Watches Starting from $250 - Shop Exclusive Designs!\"\nsrc=\"https://///k2.ynbmlp.com/////k1.jpg\" width=600>\nst",
+      "timeline_summary": "Создана: 2026-11-06 15:25",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 0,
+      "company_name": "Без компании",
+      "entity_name": "Без объекта",
+      "assignee_id": "1",
+      "assignee_name": "Стрелкин М. В.",
+      "coexecutors": [
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 15,
+      "spent_by_employee": {
+        "1": 15
+      },
+      "created_at": "2026-11-06 15:25",
+      "created_iso": "2026-11-06T15:25:53.398+03:00",
+      "updated_iso": "2026-11-07T17:06:10.546+03:00",
+      "reacted_iso": "2026-11-07T17:06:07.828+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-09 09:59",
+      "deadline": "2026-11-09 09:59",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "Задача выполнена",
+          "is_public": false
+        },
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "Смена статуса через @itsupp_task_bot | user=ITSUPP Admin | контакт=@MikhailStrelkin",
+          "is_public": false
+        },
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "Автоматически назначен Быков Максим Владимирович. @itsupp_task_bot",
+          "is_public": false
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44104,
+      "title": "Медикал Геномикс (пропал VPN на удалёнке)",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-06 15:16",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 52,
+      "company_name": "Медикал Геномикс ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
+      "coexecutors": [
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 10,
+      "spent_by_employee": {
+        "8": 10
+      },
+      "created_at": "2026-11-06 15:16",
+      "created_iso": "2026-11-06T15:16:29.461+03:00",
+      "updated_iso": "2026-11-06T15:26:06.461+03:00",
+      "reacted_iso": "2026-11-06T15:16:33.435+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-06 16:15",
+      "deadline": "2026-11-06 16:15",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "прописал Fastlink",
+          "is_public": true
+        },
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44103,
+      "title": "Отключение уволившихся сотрудников",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-06 15:15",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 69,
+      "company_name": "УК КДФ",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 10,
+      "spent_by_employee": {
+        "12": 10
+      },
+      "created_at": "2026-11-06 15:15",
+      "created_iso": "2026-11-06T15:15:05.498+03:00",
+      "updated_iso": "2026-11-06T15:15:23.788+03:00",
+      "reacted_iso": "2026-11-06T15:15:10.820+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-06 16:14",
+      "deadline": "2026-11-06 16:14",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        },
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44102,
+      "title": "Создание учеток",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-06 14:50",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 179,
+      "company_name": "Ленинский (ЦЕНТР ПОТОКА МСК-ЛЕНИНСКИЙ ООО)",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 10,
+      "spent_by_employee": {
+        "12": 10
+      },
+      "created_at": "2026-11-06 14:50",
+      "created_iso": "2026-11-06T14:50:51.631+03:00",
+      "updated_iso": "2026-11-06T14:51:16.817+03:00",
+      "reacted_iso": "2026-11-06T14:51:08.155+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-06 15:50",
+      "deadline": "2026-11-06 15:50",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        },
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    }
+  ]
+}

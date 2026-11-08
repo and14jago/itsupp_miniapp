@@ -15,7 +15,7 @@
     for (var i = 0; i < links.length; i++) {
       var href = links[i].getAttribute("href") || "";
       if (href.indexOf("styles.css") !== -1) {
-        links[i].setAttribute("href", "./styles.css?v=20261108-10&_t=" + Date.now());
+        links[i].setAttribute("href", "./styles.css?v=20261108-11&_t=" + Date.now());
       }
     }
   }
@@ -29,6 +29,8 @@
   var DATA = window.ITSUPP_DATA || { companies: [], employees: [], initialTasks: [] };
   var STORAGE_KEY_STATE = "itsupp_miniapp_state_v5";
   var STORAGE_KEY_TASK_OVERRIDES = "itsupp_miniapp_task_overrides_v1";
+  var STORAGE_KEY_SYNC_QUEUE = "itsupp_miniapp_sync_queue_v1";
+  var STORAGE_KEY_SYNC_META = "itsupp_miniapp_sync_meta_v1";
   var STORAGE_KEY_PIN = "itsupp_miniapp_pin_v2";
   var STORAGE_KEY_BIO = "itsupp_miniapp_bio_prefs_v2";
   var STORAGE_KEY_THEME = "itsupp_miniapp_theme_v1";
@@ -241,13 +243,35 @@
     "updated_iso"
   ];
 
+  var HISTORICAL_STATE_KEYS = [
+    "itsupp_miniapp_state_v1",
+    "itsupp_miniapp_state_v2",
+    "itsupp_miniapp_state_v3",
+    "itsupp_miniapp_state_v4",
+    STORAGE_KEY_STATE
+  ];
+
+  function isMiniAppCreatedTask(t) {
+    if (!t || !t.id) return false;
+    if (t._createdInMiniApp) return true;
+    var cmts = Array.isArray(t.comments) ? t.comments : [];
+    for (var i = 0; i < cmts.length; i++) {
+      var txt = String((cmts[i] && cmts[i].text) || "");
+      if (txt.indexOf("Создана через Mini App") !== -1) return true;
+    }
+    return false;
+  }
+
+  function normTitle(s) {
+    return String(s || "").trim().toLowerCase().replace(/\s+/g, " ");
+  }
+
   function loadTaskOverrides() {
     var map = {};
     try {
       // Миграция из прошлых ключей состояния, чтобы ни одно изменение статуса не потерялось
-      var legacyKeys = ["itsupp_miniapp_state_v4", STORAGE_KEY_STATE];
-      for (var k = 0; k < legacyKeys.length; k++) {
-        var rawLegacy = localStorage.getItem(legacyKeys[k]);
+      for (var k = 0; k < HISTORICAL_STATE_KEYS.length; k++) {
+        var rawLegacy = localStorage.getItem(HISTORICAL_STATE_KEYS[k]);
         if (rawLegacy) {
           var parsedLegacy = JSON.parse(rawLegacy);
           if (parsedLegacy && Array.isArray(parsedLegacy.tasks)) {
@@ -290,26 +314,118 @@
     return tasksList;
   }
 
+  function collectHistoricalMiniAppTasks() {
+    var found = [];
+    var seenTitles = {};
+    try {
+      for (var k = 0; k < HISTORICAL_STATE_KEYS.length; k++) {
+        var raw = localStorage.getItem(HISTORICAL_STATE_KEYS[k]);
+        if (!raw) continue;
+        var parsed = JSON.parse(raw);
+        if (!parsed || !Array.isArray(parsed.tasks)) continue;
+        parsed.tasks.forEach(function (t) {
+          if (!isMiniAppCreatedTask(t)) return;
+          var nt = normTitle(t.title);
+          if (!nt || seenTitles[nt]) return;
+          seenTitles[nt] = true;
+          t._createdInMiniApp = true;
+          found.push(t);
+        });
+      }
+    } catch (_e) {}
+    return found;
+  }
+
   function loadSavedState() {
     var overridesMap = loadTaskOverrides();
+    var initialCatalog = JSON.parse(JSON.stringify(DATA.initialTasks || []));
+    var catalogById = {};
+    var catalogByTitle = {};
+    initialCatalog.forEach(function (ct) {
+      if (!ct || !ct.id) return;
+      catalogById[String(ct.id)] = ct;
+      var nt = normTitle(ct.title);
+      if (nt) catalogByTitle[nt] = ct;
+    });
+
+    var parsedState = null;
     try {
       var raw = localStorage.getItem(STORAGE_KEY_STATE);
       if (raw) {
-        var parsed = JSON.parse(raw);
-        if (parsed && Array.isArray(parsed.tasks) && parsed.tasks.length > 0) {
-          applyOverridesToTasks(parsed.tasks, overridesMap);
-          return parsed;
+        var p = JSON.parse(raw);
+        if (p && Array.isArray(p.tasks) && p.tasks.length > 0) {
+          parsedState = p;
         }
       }
     } catch (_e) {}
-    var baseTasks = JSON.parse(JSON.stringify(DATA.initialTasks || []));
-    applyOverridesToTasks(baseTasks, overridesMap);
+
+    var mergedTasks = [];
+    var seenIds = {};
+    var seenTitles = {};
+
+    if (parsedState && Array.isArray(parsedState.tasks)) {
+      parsedState.tasks.forEach(function (t) {
+        if (!t || !t.id) return;
+        var tid = String(t.id);
+        var nt = normTitle(t.title);
+        // Если локальная задача уже синхронизирована и есть в каталоге под реальным ID портала
+        if (isMiniAppCreatedTask(t) && nt && catalogByTitle[nt]) {
+          var realTask = catalogByTitle[nt];
+          var realId = String(realTask.id);
+          t.id = realTask.id;
+          t._syncedToPortal = true;
+          tid = realId;
+        }
+        if (seenIds[tid]) return;
+        seenIds[tid] = true;
+        if (nt) seenTitles[nt] = true;
+        mergedTasks.push(t);
+      });
+    }
+
+    // Добираем локально созданные задачи из прошлых версий state (v1..v4)
+    var histCreated = collectHistoricalMiniAppTasks();
+    histCreated.forEach(function (ht) {
+      var nt = normTitle(ht.title);
+      if (nt && catalogByTitle[nt]) {
+        ht.id = catalogByTitle[nt].id;
+        ht._syncedToPortal = true;
+      }
+      var tid = String(ht.id);
+      if (seenIds[tid] || (nt && seenTitles[nt])) return;
+      seenIds[tid] = true;
+      if (nt) seenTitles[nt] = true;
+      mergedTasks.unshift(ht);
+    });
+
+    // Добираем новые задачи с Портала (из initialTasks), которых ещё не было в localStorage
+    initialCatalog.forEach(function (ct) {
+      if (!ct || !ct.id) return;
+      var tid = String(ct.id);
+      var nt = normTitle(ct.title);
+      if (seenIds[tid] || (nt && seenTitles[nt])) return;
+      seenIds[tid] = true;
+      if (nt) seenTitles[nt] = true;
+      mergedTasks.push(ct);
+    });
+
+    applyOverridesToTasks(mergedTasks, overridesMap);
+    mergedTasks.sort(function (a, b) {
+      return (parseInt(b.id, 10) || 0) - (parseInt(a.id, 10) || 0);
+    });
+
+    var maxId = 44127;
+    mergedTasks.forEach(function (t) {
+      var num = parseInt(t.id, 10) || 0;
+      if (num > maxId) maxId = num;
+    });
+
     return {
-      tasks: baseTasks,
-      freshEnabled: true,
-      dutyEmpId: "8",
-      nextIssueId: 44125,
-      nudgeTimestamps: {}
+      tasks: mergedTasks,
+      freshEnabled: parsedState && typeof parsedState.freshEnabled === "boolean" ? parsedState.freshEnabled : true,
+      dutyEmpId: (parsedState && parsedState.dutyEmpId) || "8",
+      nextIssueId: maxId + 1,
+      nudgeTimestamps: (parsedState && parsedState.nudgeTimestamps) || {}
     };
   }
 
@@ -336,6 +452,391 @@
       }
       localStorage.setItem(STORAGE_KEY_TASK_OVERRIDES, JSON.stringify(overridesMap));
     } catch (_e) {}
+  }
+
+  // =========================================================
+  // ЕЖЕМИНУТНЫЙ ДВУСТОРОННИЙ ОБМЕН ИЗМЕНЕННЫМИ ЭЛЕМЕНТАМИ С ПОРТАЛОМ
+  // =========================================================
+  var SYNC_TRACK_URL = "https://n8n.itsupp.com/task-bot/v1/track";
+  var SYNC_DELTA_RAW_URL = "https://raw.githubusercontent.com/and14jago/itsupp_miniapp/main/sync_delta.json";
+  var SYNC_DELTA_LOCAL_URL = "./sync_delta.json";
+  var localMutationGuardTs = {};
+
+  function loadSyncMeta() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY_SYNC_META);
+      if (raw) {
+        var p = JSON.parse(raw);
+        if (p && typeof p === "object") {
+          p.syncedLocalIds = p.syncedLocalIds || {};
+          p.syncedTitles = p.syncedTitles || {};
+          p.deletedIds = p.deletedIds || {};
+          return p;
+        }
+      }
+    } catch (_e) {}
+    return { syncedLocalIds: {}, syncedTitles: {}, deletedIds: {}, lastSyncSeq: 0, lastSyncAt: "" };
+  }
+
+  function saveSyncMeta(meta) {
+    try {
+      localStorage.setItem(STORAGE_KEY_SYNC_META, JSON.stringify(meta));
+    } catch (_e) {}
+  }
+
+  function loadSyncQueue() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY_SYNC_QUEUE);
+      if (raw) {
+        var arr = JSON.parse(raw);
+        if (Array.isArray(arr)) return arr;
+      }
+    } catch (_e) {}
+    return [];
+  }
+
+  function saveSyncQueue(q) {
+    try {
+      localStorage.setItem(STORAGE_KEY_SYNC_QUEUE, JSON.stringify(q));
+    } catch (_e) {}
+  }
+
+  function enqueueSyncOp(payload) {
+    if (!payload || !payload.op) return;
+    if (payload.id) {
+      localMutationGuardTs[String(payload.id)] = Date.now();
+    }
+    var q = loadSyncQueue();
+    var cid = -(1000000 + (Math.floor(Date.now() / 10) % 800000000) + Math.floor(Math.random() * 999));
+    q.push({
+      chat_id: cid,
+      payload: payload,
+      queued_at: Date.now()
+    });
+    saveSyncQueue(q);
+    flushOutboundSyncQueue();
+  }
+
+  function scanUnsyncedLocalTasks() {
+    var meta = loadSyncMeta();
+    var q = loadSyncQueue();
+    var queuedTitles = {};
+    q.forEach(function (item) {
+      if (item && item.payload && item.payload.op === "create" && item.payload.ti) {
+        queuedTitles[normTitle(item.payload.ti)] = true;
+      }
+    });
+
+    var added = false;
+    (state.tasks || []).forEach(function (t) {
+      if (!t || !t.id) return;
+      if (!isMiniAppCreatedTask(t)) return;
+      if (t._syncedToPortal) return;
+      var tid = String(t.id);
+      var nt = normTitle(t.title);
+      if (meta.syncedLocalIds[tid] || (nt && meta.syncedTitles[nt]) || (nt && queuedTitles[nt])) {
+        return;
+      }
+      var cid = -(1000000 + (Math.floor(Date.now() / 10) % 800000000) + Math.floor(Math.random() * 999));
+      q.push({
+        chat_id: cid,
+        payload: {
+          op: "create",
+          lid: tid,
+          cid: parseInt(t.company_id, 10) || 30,
+          tp: String(t.type_code || "service"),
+          aid: parseInt(t.assignee_id, 10) || 1,
+          sp: parseInt(t.spent_minutes, 10) || 0,
+          en: String(t.entity_name || ""),
+          ti: String(t.title || "").slice(0, 160),
+          de: String(t.description || t.title || "").slice(0, 380),
+          au: String(t.assignee_name || "Стрелкин М. В.")
+        },
+        queued_at: Date.now()
+      });
+      if (nt) queuedTitles[nt] = true;
+      added = true;
+    });
+
+    if (added) {
+      saveSyncQueue(q);
+    }
+  }
+
+  var isFlushingQueue = false;
+  function flushOutboundSyncQueue() {
+    if (isFlushingQueue || typeof window.fetch !== "function") return;
+    var q = loadSyncQueue();
+    if (!q.length) return;
+    isFlushingQueue = true;
+
+    var item = q[0];
+    var rawJson = JSON.stringify(item.payload);
+    var posts = [];
+    if (rawJson.length <= 420) {
+      posts.push({
+        chat_id: item.chat_id,
+        message_id: 1,
+        schedule_cleanup: false,
+        text: "MINIAPP_OP:" + rawJson
+      });
+    } else {
+      var chunkSize = 360;
+      var totalParts = Math.ceil(rawJson.length / chunkSize);
+      for (var pIdx = 0; pIdx < totalParts; pIdx++) {
+        var slice = rawJson.slice(pIdx * chunkSize, (pIdx + 1) * chunkSize);
+        posts.push({
+          chat_id: item.chat_id,
+          message_id: pIdx + 1,
+          schedule_cleanup: false,
+          text: "MINIAPP_PART:" + totalParts + ":" + (pIdx + 1) + ":" + slice
+        });
+      }
+    }
+
+    var chain = Promise.resolve();
+    posts.forEach(function (postBody) {
+      chain = chain.then(function () {
+        return fetch(SYNC_TRACK_URL, {
+          method: "POST",
+          mode: "no-cors",
+          keepalive: true,
+          headers: { "Content-Type": "text/plain;charset=UTF-8" },
+          body: JSON.stringify(postBody)
+        });
+      });
+    });
+
+    chain
+      .then(function () {
+        var curQ = loadSyncQueue();
+        curQ.shift();
+        saveSyncQueue(curQ);
+        if (item.payload && item.payload.op === "create") {
+          var meta = loadSyncMeta();
+          if (item.payload.lid) meta.syncedLocalIds[String(item.payload.lid)] = true;
+          if (item.payload.ti) meta.syncedTitles[normTitle(item.payload.ti)] = true;
+          saveSyncMeta(meta);
+        }
+        isFlushingQueue = false;
+        if (curQ.length > 0) {
+          setTimeout(flushOutboundSyncQueue, 250);
+        }
+      })
+      .catch(function () {
+        isFlushingQueue = false;
+      });
+  }
+
+  function applyPortalDelta(delta) {
+    if (!delta || typeof delta !== "object") return 0;
+    var meta = loadSyncMeta();
+    var idMap = delta.id_map || {};
+    var titleMap = delta.title_map || {};
+    var deletedArr = Array.isArray(delta.deleted_ids) ? delta.deleted_ids : [];
+    var deletedSet = {};
+    deletedArr.forEach(function (did) {
+      deletedSet[String(did)] = true;
+      meta.deletedIds[String(did)] = true;
+    });
+
+    var changedCount = 0;
+
+    // 1. Привязываем локально созданные задачи к реальным номерам Портала/Okdesk
+    (state.tasks || []).forEach(function (t) {
+      if (!t || !t.id) return;
+      var tid = String(t.id);
+      var nt = normTitle(t.title);
+      var mappedId = idMap[tid] || (isMiniAppCreatedTask(t) && nt && titleMap[nt]) || "";
+      if (mappedId && String(mappedId) !== tid) {
+        t.id = parseInt(mappedId, 10) || mappedId;
+        t._syncedToPortal = true;
+        meta.syncedLocalIds[tid] = true;
+        if (nt) meta.syncedTitles[nt] = true;
+        changedCount++;
+      } else if (isMiniAppCreatedTask(t) && nt && titleMap[nt] && String(titleMap[nt]) === tid) {
+        if (!t._syncedToPortal) {
+          t._syncedToPortal = true;
+          meta.syncedLocalIds[tid] = true;
+          meta.syncedTitles[nt] = true;
+          changedCount++;
+        }
+      }
+    });
+
+    // 2. Убираем удалённые в Okdesk задачи (кроме ещё не синхронизированных локальных)
+    var beforeLen = state.tasks.length;
+    state.tasks = (state.tasks || []).filter(function (t) {
+      if (!t || !t.id) return false;
+      var tid = String(t.id);
+      if (deletedSet[tid] && !isMiniAppCreatedTask(t)) {
+        return false;
+      }
+      return true;
+    });
+    if (state.tasks.length !== beforeLen) {
+      changedCount += Math.abs(beforeLen - state.tasks.length);
+    }
+
+    // 3. Дедупликация по ID после перепривязки
+    var uniqueTasks = [];
+    var byId = {};
+    state.tasks.forEach(function (t) {
+      var tid = String(t.id);
+      if (byId[tid]) {
+        changedCount++;
+        return;
+      }
+      byId[tid] = t;
+      uniqueTasks.push(t);
+    });
+    state.tasks = uniqueTasks;
+
+    // 4. Применяем изменённые и новые элементы из delta.tasks
+    var incomingTasks = Array.isArray(delta.tasks) ? delta.tasks : [];
+    incomingTasks.forEach(function (dt) {
+      if (!dt || !dt.id) return;
+      var tid = String(dt.id);
+      if (deletedSet[tid]) return;
+      var existing = byId[tid];
+      if (!existing) {
+        // Проверяем, нет ли локальной задачи с тем же заголовком
+        var nt = normTitle(dt.title);
+        for (var i = 0; i < state.tasks.length; i++) {
+          var cand = state.tasks[i];
+          if (cand && isMiniAppCreatedTask(cand) && normTitle(cand.title) === nt) {
+            delete byId[String(cand.id)];
+            cand.id = dt.id;
+            cand._syncedToPortal = true;
+            byId[tid] = cand;
+            existing = cand;
+            changedCount++;
+            break;
+          }
+        }
+      }
+
+      if (!existing) {
+        // Если задача уже закрыта/отклонена, не добавляем заново
+        if (dt.status_code === "completed" || dt.status_code === "closed" || dt.status_code === "asya1c") {
+          return;
+        }
+        var copyTask = JSON.parse(JSON.stringify(dt));
+        copyTask._syncedToPortal = true;
+        state.tasks.unshift(copyTask);
+        byId[tid] = copyTask;
+        changedCount++;
+      } else {
+        // Если по задаче было локальное действие менее 90 секунд назад — не перетираем локальный статус
+        var recentLocalTs = localMutationGuardTs[tid] || 0;
+        var guarded = Date.now() - recentLocalTs < 90000;
+        if (!guarded) {
+          if (dt.status_code && dt.status_code !== existing.status_code) {
+            // Если локально уже отклонена/решена в overrides, сохраняем терминальный статус
+            var localTerm =
+              existing.status_code === "asya1c" ||
+              existing.status_code === "completed" ||
+              existing.status_code === "closed";
+            var remoteTerm =
+              dt.status_code === "asya1c" ||
+              dt.status_code === "completed" ||
+              dt.status_code === "closed";
+            if (!localTerm || remoteTerm) {
+              existing.status_code = dt.status_code;
+              existing.status_name = dt.status_name || existing.status_name;
+              changedCount++;
+            }
+          }
+          if (dt.assignee_id && String(dt.assignee_id) !== String(existing.assignee_id || "")) {
+            existing.assignee_id = String(dt.assignee_id);
+            existing.assignee_name = dt.assignee_name || existing.assignee_name;
+            changedCount++;
+          }
+        }
+        if (dt.title && dt.title !== existing.title) {
+          existing.title = dt.title;
+          changedCount++;
+        }
+        if (dt.description && !existing.description) {
+          existing.description = dt.description;
+          changedCount++;
+        }
+        if ((dt.spent_minutes || 0) > (existing.spent_minutes || 0)) {
+          existing.spent_minutes = dt.spent_minutes;
+          existing.spent_by_employee = Object.assign(
+            existing.spent_by_employee || {},
+            dt.spent_by_employee || {}
+          );
+          changedCount++;
+        }
+        existing._syncedToPortal = true;
+      }
+    });
+
+    state.tasks.sort(function (a, b) {
+      return (parseInt(b.id, 10) || 0) - (parseInt(a.id, 10) || 0);
+    });
+
+    var maxId = 44127;
+    state.tasks.forEach(function (t) {
+      var n = parseInt(t.id, 10) || 0;
+      if (n > maxId) maxId = n;
+    });
+    if ((state.nextIssueId || 0) <= maxId) {
+      state.nextIssueId = maxId + 1;
+    }
+
+    meta.lastSyncSeq = Math.max(meta.lastSyncSeq || 0, parseInt(delta.sync_seq, 10) || 0);
+    meta.lastSyncAt = new Date().toISOString();
+    saveSyncMeta(meta);
+
+    if (changedCount > 0) {
+      saveState();
+    }
+    return changedCount;
+  }
+
+  var isSyncingDelta = false;
+  function syncWithPortalDelta(manual) {
+    scanUnsyncedLocalTasks();
+    flushOutboundSyncQueue();
+    if (isSyncingDelta || typeof window.fetch !== "function") return;
+    isSyncingDelta = true;
+
+    var ts = Date.now();
+    var pRaw = fetch(SYNC_DELTA_RAW_URL + "?_t=" + ts, { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .catch(function () { return null; });
+    var pLocal = fetch(SYNC_DELTA_LOCAL_URL + "?_t=" + ts, { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .catch(function () { return null; });
+
+    Promise.all([pRaw, pLocal])
+      .then(function (results) {
+        isSyncingDelta = false;
+        var d1 = results[0];
+        var d2 = results[1];
+        var best = d1;
+        if (!best || (d2 && (parseInt(d2.sync_seq, 10) || 0) > (parseInt(best.sync_seq, 10) || 0))) {
+          best = d2;
+        }
+        if (!best) return;
+        var changed = applyPortalDelta(best);
+        if (changed > 0 || manual) {
+          if (typeof renderAllAppViews === "function") renderAllAppViews();
+          if (typeof updateBellBadge === "function") updateBellBadge();
+        }
+        if (manual) {
+          showToast(
+            changed > 0
+              ? "🔄 Синхронизировано с порталом (обновлено: " + changed + ")"
+              : "✓ Данные актуальны · синхронизировано с порталом"
+          );
+        }
+      })
+      .catch(function () {
+        isSyncingDelta = false;
+      });
   }
 
   function loadBioPrefs() {
@@ -1868,6 +2369,15 @@
         time: new Date().toTimeString().slice(0, 8),
         label: "▶ Старт / продолжение таймера (" + ownerEmp.short + ")"
       });
+      enqueueSyncOp({
+        op: "status",
+        id: String(task.id),
+        st: "working",
+        sn: "Выполняю",
+        sp: 0,
+        aid: parseInt(currentEmp.id || task.assignee_id, 10) || 1,
+        cm: "Старт работы в Mini App"
+      });
       showToast("▶ Таймер по заявке #" + task.id + " запущен");
     }
     saveState();
@@ -1909,6 +2419,15 @@
     task.status_name = label;
     task.updated_iso = new Date().toISOString();
     saveState();
+    enqueueSyncOp({
+      op: "status",
+      id: String(task.id),
+      st: String(code),
+      sn: String(label || ""),
+      sp: 0,
+      aid: parseInt(currentEmp.id || task.assignee_id, 10) || 1,
+      cm: "Статус «" + label + "» (Mini App)"
+    });
     renderTasksView();
     updateBellBadge();
     showToast("Заявка #" + task.id + " → «" + label + "»");
@@ -1943,6 +2462,15 @@
       text: "Закрыто в 1 клик (+15 мин)."
     });
     saveState();
+    enqueueSyncOp({
+      op: "status",
+      id: String(task.id),
+      st: "completed",
+      sn: "Решена",
+      sp: 15,
+      aid: parseInt(currentEmp.id, 10) || 1,
+      cm: "Закрыто в 1 клик (+15 мин) в Mini App"
+    });
     clearSearchIfMatchesTask(task.id);
     renderAllAppViews();
     updateBellBadge();
@@ -1979,6 +2507,13 @@
       label: "↩️ Забрал в работу: " + currentEmp.short + " (запущен личный таймер)"
     });
     saveState();
+    enqueueSyncOp({
+      op: "assign",
+      id: String(task.id),
+      aid: parseInt(currentEmp.id, 10) || 1,
+      st: "working",
+      cm: "Забрал в работу: " + currentEmp.short
+    });
     closeActionModal();
     renderTasksView();
     updateBellBadge();
@@ -2238,6 +2773,16 @@
           (cText ? ": " + cText : "")
       });
       saveState();
+      enqueueSyncOp({
+        op: "status",
+        issue_id: String(task.id),
+        status_code: "completed",
+        assignee_id: String(task.assignee_id || currentEmp.id),
+        spent_minutes: addedMins,
+        comment: cText || ("Решена через Mini App (+" + addedMins + " мин)"),
+        actor_id: String(currentEmp.id),
+        actor_name: currentEmp.short
+      });
       clearSearchIfMatchesTask(task.id);
       closeActionModal();
       renderAllAppViews();
@@ -2294,6 +2839,17 @@
             ")"
         });
         saveState();
+        enqueueSyncOp({
+          op: "status",
+          issue_id: String(task.id),
+          status_code: "delayed",
+          assignee_id: String(task.assignee_id || currentEmp.id),
+          spent_minutes: sl.addMins || 0,
+          deadline: sl.deadline,
+          comment: "Отложена (" + sl.deadline + ")",
+          actor_id: String(currentEmp.id),
+          actor_name: currentEmp.short
+        });
         closeActionModal();
         renderTasksView();
         updateBellBadge();
@@ -2372,6 +2928,15 @@
           text: "Делегирована: " + chainSummary + " (таймер остановлен)"
         });
         saveState();
+        enqueueSyncOp({
+          op: "assign",
+          issue_id: String(task.id),
+          assignee_id: String(emp.id),
+          status_code: "resend",
+          comment: "Делегирована: " + chainSummary,
+          actor_id: String(currentEmp.id),
+          actor_name: currentEmp.short
+        });
         closeActionModal();
         renderTasksView();
         updateBellBadge();
@@ -2510,6 +3075,18 @@
         text: "Отклонена (" + reasonTxt + ", списано +" + defaultRejectMins + " мин)" + blNote
       });
       saveState();
+      enqueueSyncOp({
+        op: "status",
+        issue_id: String(task.id),
+        status_code: "asya1c",
+        assignee_id: String(currentEmp.id),
+        spent_minutes: defaultRejectMins,
+        comment: "Отклонена (" + reasonTxt + ", +" + defaultRejectMins + " мин)" + blNote,
+        blacklist_mode: blacklistMode || "",
+        blacklist_target: blacklistMode === "sender" ? currentEmail : blacklistMode === "domain" ? currentDomain : "",
+        actor_id: String(currentEmp.id),
+        actor_name: currentEmp.short
+      });
       clearSearchIfMatchesTask(task.id);
       closeActionModal();
       renderAllAppViews();
@@ -2868,6 +3445,14 @@
         attachments: attachedFiles.slice()
       });
       saveState();
+      enqueueSyncOp({
+        op: "comment",
+        issue_id: String(task.id),
+        content: txt || "Приложены файлы к заявке",
+        public: Boolean(isPublic),
+        author_id: String(currentEmp.id),
+        author_name: currentEmp.short
+      });
       closeActionModal();
       renderTasksView();
       showToast(
@@ -3174,9 +3759,28 @@
     if (createDraft.spentMinutes > 0) {
       newTask.spent_by_employee[String(createDraft.assigneeId)] = createDraft.spentMinutes;
     }
+    newTask._createdInMiniApp = true;
+    newTask._syncedToPortal = false;
 
     state.tasks.unshift(newTask);
     saveState();
+    enqueueSyncOp({
+      op: "create",
+      local_id: String(newId),
+      title: finalTitle,
+      description: finalDesc,
+      company_id: createDraft.companyId,
+      company_name: createDraft.companyName,
+      entity_name: newTask.entity_name,
+      type_code: createDraft.typeCode,
+      assignee_id: String(createDraft.assigneeId),
+      creator_id: String(currentEmp.id),
+      creator_name: currentEmp.short,
+      spent_minutes: createDraft.spentMinutes,
+      coexecutors: defaultCoexecs,
+      observers: ["6"],
+      created_iso: nowIso
+    });
 
     if (titleEl) titleEl.value = "";
     if (descEl) descEl.value = "";
@@ -3438,13 +4042,13 @@
     });
     stack.appendChild(btnSetCorpLogo);
 
-    var btnRef = el("button", "btn-secondary-full", "🔄 Обновить задачи (" + state.tasks.length + ")");
+    var btnRef = el("button", "btn-secondary-full", "🔄 Синхронизировать с порталом (" + state.tasks.length + ")");
     btnRef.type = "button";
     btnRef.addEventListener("click", function () {
       closeActionModal();
       hapticImpact("medium");
+      syncWithPortalDelta(true);
       renderAllAppViews();
-      showToast("Задачи обновлены (" + state.tasks.length + " в контуре)");
     });
     stack.appendChild(btnRef);
 
@@ -3483,8 +4087,8 @@
 
   document.getElementById("btn-top-refresh").addEventListener("click", function () {
     hapticImpact("medium");
+    syncWithPortalDelta(true);
     renderAllAppViews();
-    showToast("Задачи обновлены (" + state.tasks.length + " в контуре)");
   });
 
   document.getElementById("btn-top-bot").addEventListener("click", closeMiniApp);
@@ -3513,8 +4117,8 @@
       } else if (cmd === "create_task") {
         switchView("create");
       } else if (cmd === "refresh_tasks") {
+        syncWithPortalDelta(true);
         renderAllAppViews();
-        showToast("Задачи синхронизированы");
       } else if (cmd === "search") {
         switchView("tasks");
         document.getElementById("task-search-input").focus();
@@ -3873,5 +4477,22 @@
 
   document.getElementById("btn-lock-now").addEventListener("click", function () {
     lockToLoginScreen();
+  });
+
+  // =========================================================
+  // ЕЖЕМИНУТНАЯ ДВУСТОРОННЯЯ СИНХРОНИЗАЦИЯ ИЗМЕНЁННЫХ ЭЛЕМЕНТОВ С ПОРТАЛОМ
+  // =========================================================
+  setTimeout(function () {
+    syncWithPortalDelta(false);
+  }, 400);
+
+  setInterval(function () {
+    syncWithPortalDelta(false);
+  }, 60000);
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") {
+      syncWithPortalDelta(false);
+    }
   });
 })();
