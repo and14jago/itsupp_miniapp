@@ -780,9 +780,9 @@ window.ITSUPP_DATA = {
       "title": "Разработка портала",
       "description": "Разработка портала\n—\nАвтор (инженер): Стрелкин М. В.\nИсточник: Mini App (@itsupp_task_bot)",
       "timeline_summary": "Создана: 2026-11-08 18:59",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -809,13 +809,20 @@ window.ITSUPP_DATA = {
       },
       "created_at": "2026-11-08 18:59",
       "created_iso": "2026-11-08T18:59:19.913+03:00",
-      "updated_iso": "2026-11-08T19:27:39.388+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
+      "updated_iso": "2026-11-08T19:28:13.197+03:00",
+      "reacted_iso": "2026-11-08T19:28:13.184+03:00",
+      "work_started_at": "2026-11-08T19:28:13.197+03:00",
+      "deadline_at": "2026-11-09 10:00",
+      "deadline": "2026-11-09 10:00",
       "due_bucket": "today",
-      "comments": [],
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "Статус «Выполняю» (Mini App)",
+          "is_public": false
+        }
+      ],
       "_syncedToPortal": true
     },
     {
@@ -823,9 +830,9 @@ window.ITSUPP_DATA = {
       "title": "Разработка мини app",
       "description": "Разработка мини app\n—\nАвтор (инженер): Стрелкин М. В.\nИсточник: Mini App (@itsupp_task_bot)",
       "timeline_summary": "Создана: 2026-11-08 18:59",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -852,13 +859,20 @@ window.ITSUPP_DATA = {
       },
       "created_at": "2026-11-08 18:59",
       "created_iso": "2026-11-08T18:59:18.999+03:00",
-      "updated_iso": "2026-11-08T19:27:40.696+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
+      "updated_iso": "2026-11-08T19:28:14.139+03:00",
+      "reacted_iso": "2026-11-08T19:28:14.072+03:00",
+      "work_started_at": "2026-11-08T19:28:14.139+03:00",
+      "deadline_at": "2026-11-09 10:00",
+      "deadline": "2026-11-09 10:00",
       "due_bucket": "today",
-      "comments": [],
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "Статус «Выполняю» (Mini App)",
+          "is_public": false
+        }
+      ],
       "_syncedToPortal": true
     },
     {
