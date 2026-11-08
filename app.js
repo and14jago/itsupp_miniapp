@@ -15,7 +15,7 @@
     for (var i = 0; i < links.length; i++) {
       var href = links[i].getAttribute("href") || "";
       if (href.indexOf("styles.css") !== -1) {
-        links[i].setAttribute("href", "./styles.css?v=20261108-16&_t=" + Date.now());
+        links[i].setAttribute("href", "./styles.css?v=20261108-18&_t=" + Date.now());
       }
     }
   }
@@ -517,6 +517,7 @@
   // ЕЖЕМИНУТНЫЙ ДВУСТОРОННИЙ ОБМЕН ИЗМЕНЕННЫМИ ЭЛЕМЕНТАМИ С ПОРТАЛОМ
   // =========================================================
   var SYNC_TRACK_URL = "https://n8n.itsupp.com/task-bot/v1/track";
+  var SYNC_PORTAL_LIVE_URL = "https://portal.itsupp.com/api/miniapp-delta";
   var SYNC_DELTA_RAW_URL = "https://raw.githubusercontent.com/and14jago/itsupp_miniapp/main/sync_delta.json";
   var SYNC_DELTA_LOCAL_URL = "./sync_delta.json";
   var localMutationGuardTs = {};
@@ -927,20 +928,14 @@
             dt.status_code === "closed";
           var isRevertToOpened = dt.status_code === "opened" && existing.status_code !== "opened";
 
-          if (!isRevertToOpened && !localTerm) {
-            if (!existing._userStatusCode) {
-              if (!guarded) {
-                existing.status_code = dt.status_code;
-                existing.status_name = dt.status_name || existing.status_name;
-                changedCount++;
-              }
-            } else if (remoteTerm && !guarded) {
-              existing.status_code = dt.status_code;
-              existing.status_name = dt.status_name || existing.status_name;
+          if (!isRevertToOpened && !localTerm && !guarded) {
+            existing.status_code = dt.status_code;
+            existing.status_name = dt.status_name || existing.status_name;
+            if (existing._userStatusCode) {
               existing._userStatusCode = dt.status_code;
               existing._userStatusName = dt.status_name || existing.status_name;
-              changedCount++;
             }
+            changedCount++;
           }
         }
         if (!guarded && dt.assignee_id && String(dt.assignee_id) !== String(existing.assignee_id || "")) {
@@ -1020,6 +1015,9 @@
     isSyncingDelta = true;
 
     var ts = Date.now();
+    var pLive = fetch(SYNC_PORTAL_LIVE_URL + "?_t=" + ts + (manual ? "&refresh=1" : ""), { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .catch(function () { return null; });
     var pRaw = fetch(SYNC_DELTA_RAW_URL + "?_t=" + ts, { cache: "no-store" })
       .then(function (r) { return r.ok ? r.json() : null; })
       .catch(function () { return null; });
@@ -1027,17 +1025,16 @@
       .then(function (r) { return r.ok ? r.json() : null; })
       .catch(function () { return null; });
 
-    Promise.all([pRaw, pLocal])
+    Promise.all([pLive, pRaw, pLocal])
       .then(function (results) {
         isSyncingDelta = false;
-        var d1 = results[0];
-        var d2 = results[1];
-        var best = d1;
-        if (!best || (d2 && (parseInt(d2.sync_seq, 10) || 0) > (parseInt(best.sync_seq, 10) || 0))) {
-          best = d2;
-        }
+        var candidates = results.filter(Boolean);
+        var totalChanged = 0;
+        candidates.forEach(function (cand) { totalChanged += applyPortalDelta(cand); });
+        var best = candidates[0] || null;
+        if (best) best._preAppliedChanged = totalChanged;
         if (!best) return;
-        var changed = applyPortalDelta(best);
+        var changed = typeof best._preAppliedChanged === "number" ? best._preAppliedChanged : applyPortalDelta(best);
         if (changed > 0 || manual) {
           if (typeof renderAllAppViews === "function") renderAllAppViews();
           if (typeof updateBellBadge === "function") updateBellBadge();
@@ -4334,7 +4331,17 @@
 
   updateBellBadge();
 
+  var btnSearchRef = document.getElementById("btn-search-refresh");
+  if (btnSearchRef) {
+    btnSearchRef.addEventListener("click", function () {
+      hapticImpact("medium");
+      showToast("🔄 Подтягиваем свежие данные…");
+      syncWithPortalDelta(true);
+      renderAllAppViews();
+    });
+  }
   document.getElementById("btn-top-refresh").addEventListener("click", function () {
+    showToast("🔄 Подтягиваем свежие данные…");
     hapticImpact("medium");
     syncWithPortalDelta(true);
     renderAllAppViews();

@@ -827,7 +827,27 @@ html, body {
   border-color: var(--accent);
 }
 
+.search-bar-wrap { gap: 6px; }
+.search-input { flex: 1; min-width: 0; }
+.btn-search-refresh {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 33px;
+  padding: 0 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(33, 160, 56, 0.35);
+  background: var(--sber-green-soft);
+  color: var(--ok);
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-search-refresh:active { transform: scale(0.96); }
 .search-clear {
+  right: 98px !important;
   position: absolute;
   right: 9px;
   background: transparent;

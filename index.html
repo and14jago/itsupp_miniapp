@@ -14,7 +14,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <link rel="stylesheet" href="./styles.css?v=20261108-17" />
+  <link rel="stylesheet" href="./styles.css?v=20261108-18" />
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body lang="ru">
@@ -147,7 +147,7 @@
             <button id="btn-top-more" type="button" class="top-circle-btn" title="Меню действий" aria-label="Меню">⋯</button>
             <button id="btn-top-close" type="button" class="top-circle-btn" title="Закрыть приложение" aria-label="Закрыть">✕</button>
             <!-- Скрытые прокси-кнопки для сохранения обратной совместимости обработчиков -->
-            <button id="btn-top-refresh" type="button" class="icon-btn hidden" title="Обновить задачи">🔄</button>
+            <button id="btn-top-refresh" type="button" class="top-circle-btn" title="Обновить задачи вручную (авто каждую минуту)" aria-label="Обновить задачи">🔄</button>
             <button id="btn-top-bot" type="button" class="icon-btn hidden" title="В чат бота">💬</button>
             <button id="btn-top-lock" type="button" class="icon-btn hidden" title="Заблокировать">🔒</button>
           </div>
@@ -185,6 +185,7 @@
               placeholder="Поиск по #номеру, клиенту, объекту…"
             />
             <button id="btn-search-clear" type="button" class="search-clear hidden">✕</button>
+            <button id="btn-search-refresh" type="button" class="btn-search-refresh" title="Обновить задачи вручную (авто каждую минуту)">🔄 Обновить</button>
           </div>
 
           <!-- Фильтры разделов: «Все» слева, все 5 кнопок гарантированно влезают в экран -->
