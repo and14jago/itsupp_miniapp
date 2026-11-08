@@ -15,7 +15,7 @@
     for (var i = 0; i < links.length; i++) {
       var href = links[i].getAttribute("href") || "";
       if (href.indexOf("styles.css") !== -1) {
-        links[i].setAttribute("href", "./styles.css?v=20261108-09&_t=" + Date.now());
+        links[i].setAttribute("href", "./styles.css?v=20261108-10&_t=" + Date.now());
       }
     }
   }
@@ -71,10 +71,40 @@
     }, 2400);
   }
 
+  // Принудительные атрибуты русской раскладки клавиатуры для всех текстовых полей ввода (iOS/Android WebKit)
+  function applyRussianKeyboardTraits(node) {
+    if (!node || !node.tagName) return;
+    var t = node.tagName.toLowerCase();
+    if (t !== "input" && t !== "textarea") return;
+    var inputType = (node.getAttribute("type") || "text").toLowerCase();
+    if (inputType === "file" || inputType === "hidden" || inputType === "checkbox" || inputType === "radio") return;
+    node.setAttribute("lang", "ru");
+    node.setAttribute("xml:lang", "ru");
+    node.setAttribute("inputmode", "text");
+    node.setAttribute("autocapitalize", "sentences");
+    node.setAttribute("autocorrect", "on");
+    node.setAttribute("spellcheck", "true");
+    node.removeAttribute("autocomplete");
+  }
+
+  document.addEventListener("focusin", function (ev) {
+    if (ev && ev.target) {
+      applyRussianKeyboardTraits(ev.target);
+    }
+  });
+
+  var allExistingInputs = document.querySelectorAll("input, textarea");
+  for (var inpIdx = 0; inpIdx < allExistingInputs.length; inpIdx++) {
+    applyRussianKeyboardTraits(allExistingInputs[inpIdx]);
+  }
+
   function el(tag, className, text) {
     var node = document.createElement(tag);
     if (className) node.className = className;
     if (text !== undefined && text !== null) node.textContent = String(text);
+    if (tag === "input" || tag === "textarea") {
+      applyRussianKeyboardTraits(node);
+    }
     return node;
   }
 
@@ -2997,6 +3027,17 @@
     var popoverEl = document.getElementById("create-assignee-popover");
     if (popoverEl) {
       popoverEl.textContent = "";
+
+      var headRow = el("div", "create-assignee-popover-head");
+      headRow.appendChild(el("span", "", "👤 Выберите исполнителя"));
+      var btnClosePop = el("button", "create-assignee-close", "✕");
+      btnClosePop.type = "button";
+      btnClosePop.addEventListener("click", function (ev) {
+        ev.stopPropagation();
+        popoverEl.classList.add("hidden");
+      });
+      headRow.appendChild(btnClosePop);
+      popoverEl.appendChild(headRow);
 
       var optMe = el(
         "button",

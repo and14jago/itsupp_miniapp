@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="light">
+<html lang="ru" xml:lang="ru" data-theme="light">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Language" content="ru" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="referrer" content="no-referrer" />
   <meta name="robots" content="noindex, nofollow" />
@@ -13,10 +14,10 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <link rel="stylesheet" href="./styles.css?v=20261108-09" />
+  <link rel="stylesheet" href="./styles.css?v=20261108-10" />
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
-<body>
+<body lang="ru">
   <div class="app-shell">
     <!-- Скрытые input для выбора фото/камеры/файла на экране входа -->
     <input id="login-avatar-input" type="file" accept="image/*" class="hidden" />
@@ -167,16 +168,21 @@
       <main class="app-main">
         <!-- ВКЛАДКА 1: ЗАДАЧИ И ПОИСК -->
         <div id="view-tasks" class="app-view active">
-          <!-- Поиск (Enter закрывает клавиатуру) -->
+          <!-- Поиск (Enter закрывает клавиатуру, по умолчанию русская раскладка) -->
           <div id="search-box-wrap" class="search-bar-wrap">
             <span class="search-icon">🔎</span>
             <input
               id="task-search-input"
-              type="search"
+              type="text"
+              lang="ru"
+              xml:lang="ru"
+              inputmode="text"
               enterkeyhint="search"
+              autocapitalize="sentences"
+              autocorrect="on"
+              spellcheck="true"
               class="search-input"
               placeholder="Поиск по #номеру, клиенту, объекту…"
-              autocomplete="off"
             />
             <button id="btn-search-clear" type="button" class="search-clear hidden">✕</button>
           </div>
@@ -234,11 +240,16 @@
               <div id="create-client-picker" class="client-picker-box hidden">
                 <input
                   id="create-client-search"
-                  type="search"
+                  type="text"
+                  lang="ru"
+                  xml:lang="ru"
+                  inputmode="text"
                   enterkeyhint="search"
+                  autocapitalize="sentences"
+                  autocorrect="on"
+                  spellcheck="true"
                   class="form-input create-input-compact"
                   placeholder="Название клиента или ID…"
-                  autocomplete="off"
                 />
                 <div id="create-client-results" class="client-results-list"></div>
               </div>
@@ -251,7 +262,13 @@
                 <input
                   id="create-entity-input"
                   type="text"
+                  lang="ru"
+                  xml:lang="ru"
+                  inputmode="text"
                   enterkeyhint="next"
+                  autocapitalize="sentences"
+                  autocorrect="on"
+                  spellcheck="true"
                   class="form-input create-input-compact"
                   placeholder="Объект обслуживания…"
                 />
@@ -264,17 +281,28 @@
               <input
                 id="create-title-input"
                 type="text"
+                lang="ru"
+                xml:lang="ru"
+                inputmode="text"
                 enterkeyhint="next"
+                autocapitalize="sentences"
+                autocorrect="on"
+                spellcheck="true"
                 class="form-input create-input-compact"
                 placeholder="Тема заявки (суть проблемы)…"
-                autocomplete="off"
               />
             </div>
 
             <div class="create-row-compact">
               <textarea
                 id="create-desc-input"
+                lang="ru"
+                xml:lang="ru"
+                inputmode="text"
                 enterkeyhint="done"
+                autocapitalize="sentences"
+                autocorrect="on"
+                spellcheck="true"
                 class="form-textarea create-textarea-compact"
                 rows="2"
                 placeholder="Описание заявки (необязательно, если заполнена тема)…"
@@ -348,6 +376,12 @@
               <label class="form-label">Текст для разбора</label>
               <textarea
                 id="ai500-input"
+                lang="ru"
+                xml:lang="ru"
+                inputmode="text"
+                autocapitalize="sentences"
+                autocorrect="on"
+                spellcheck="true"
                 class="form-textarea"
                 rows="3"
                 placeholder="Например: Клиника Фомина Тверь не работает касса АТОЛ на ресепшене назначить на Быкова списать 15 минут…"
@@ -608,7 +642,7 @@
     <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
   </div>
 
-  <script src="./data.js?v=20261108-09"></script>
-  <script src="./app.js?v=20261108-09"></script>
+  <script src="./data.js?v=20261108-10"></script>
+  <script src="./app.js?v=20261108-10"></script>
 </body>
 </html>
