@@ -634,6 +634,49 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44132,
+      "title": "Тест мини апп 2",
+      "description": "Тест мини апп 2\n—\nАвтор (инженер): Стрелкин М. В.\nИсточник: Mini App (@itsupp_task_bot)",
+      "timeline_summary": "Создана: 2026-11-08 19:07",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "1",
+      "assignee_name": "Стрелкин М. В.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 10,
+      "spent_by_employee": {
+        "1": 10
+      },
+      "created_at": "2026-11-08 19:07",
+      "created_iso": "2026-11-08T19:07:37.607+03:00",
+      "updated_iso": "2026-11-08T19:07:38.313+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44131,
       "title": "Тестер мини апп",
       "description": "Тестер мини апп\n—\nАвтор (инженер): Стрелкин М. В.\nИсточник: Mini App (@itsupp_task_bot)",
