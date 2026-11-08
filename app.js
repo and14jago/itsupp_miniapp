@@ -943,6 +943,27 @@
           existing.assignee_name = dt.assignee_name || existing.assignee_name;
           changedCount++;
         }
+        if (dt.assignee_name && dt.assignee_name !== "Не назначен" && dt.assignee_name !== existing.assignee_name) {
+          existing.assignee_name = dt.assignee_name;
+          if (!existing.assignee_id && String(dt.assignee_name).indexOf("Стрелкин") !== -1) {
+            existing.assignee_id = "1";
+          }
+          changedCount++;
+        }
+        var nextComp = dt.company_name || dt.company;
+        if (nextComp && nextComp !== "Без компании" && nextComp !== existing.company_name) {
+          existing.company_name = nextComp;
+          changedCount++;
+        }
+        var nextObj = dt.entity_name || dt.object;
+        if (nextObj && nextObj !== "Без объекта" && nextObj !== existing.entity_name) {
+          existing.entity_name = nextObj;
+          changedCount++;
+        }
+        if (dt.work_started_at && dt.work_started_at !== existing.work_started_at) {
+          existing.work_started_at = dt.work_started_at;
+          changedCount++;
+        }
         if (dt.created_at && dt.created_at !== existing.created_at) {
           existing.created_at = dt.created_at;
           if (dt.created_iso) existing.created_iso = dt.created_iso;
@@ -2107,9 +2128,9 @@
     var metaGrid = el("div", "task-meta-grid");
     var items = [
       ["Создана", task.created_at || "—"],
-      ["Клиент", task.company_name || "—"],
-      ["Объект", task.entity_name || "Без объекта"],
-      ["Исполнитель", assigneeEmp ? assigneeEmp.short : "Не назначен"],
+      ["Клиент", task.company_name || task.company || "—"],
+      ["Объект", task.entity_name || task.object || "Без объекта"],
+      ["Исполнитель", assigneeEmp ? assigneeEmp.short : (task.assignee_name || "Не назначен")],
       ["Срок SLA", task.deadline_at || task.deadline || "Без срока"]
     ];
     if (coexecNames) {
