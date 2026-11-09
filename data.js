@@ -647,10 +647,9 @@ window.ITSUPP_DATA = {
       "company_id": 30,
       "company_name": "Сервис-Про ООО",
       "entity_name": "Без объекта",
-      "assignee_id": "",
-      "assignee_name": "Не назначен",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
       "coexecutors": [
-        "8",
         "9",
         "11",
         "12"
@@ -667,13 +666,20 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-10 00:01",
       "created_iso": "2026-11-10T00:01:29.661+03:00",
-      "updated_iso": "2026-11-10T00:01:29.738+03:00",
+      "updated_iso": "2026-11-10T00:12:26.493+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
       "deadline": "Без срока",
       "due_bucket": "today",
-      "comments": [],
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "Автоматически назначен Быков Максим Владимирович. @itsupp_task_bot",
+          "is_public": false
+        }
+      ],
       "_syncedToPortal": true
     },
     {
