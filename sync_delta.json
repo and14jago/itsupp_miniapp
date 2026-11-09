@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794232804,
-  "updated_at": "2026-11-09T17:00:04.970500+03:00",
+  "sync_seq": 1794233793,
+  "updated_at": "2026-11-09T17:16:33.838446+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -46,7 +46,7 @@
     "обучал даню как пользоваться таблицей": "44148",
     "алексей, помощь с переносом узи нна диск": "44149",
     "алексей, помощь с переносом узи на диск": "44149",
-    "помощь с эцп": "44167",
+    "помощь с эцп": "44190",
     "тонус энгельса (консультация по егаис)": "44151",
     "тонус энгельса касса 1 (ошибка тпг)": "44152",
     "тестирование пе оператора на можайского": "44153",
@@ -76,7 +76,8 @@
     "помощь с телевизором mi": "44186",
     "новая учетка, настройка  подключения": "44187",
     "установка и активация mc office": "44188",
-    "сервис-про (заполнить и подписать акты для оптравки фн от конуептстрой)": "44191"
+    "сервис-про (заполнить и подписать акты для оптравки фн от конуептстрой)": "44191",
+    "установка драйвера принтера": "44192"
   },
   "deleted_ids": [
     "44116",
@@ -86,6 +87,55 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44192,
+      "title": "Установка драйвера принтера",
+      "description": ".",
+      "timeline_summary": "Создана: 2026-11-09 17:16",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 174,
+      "company_name": "Щербатова Юлия Евгеньевна (Студио 13)",
+      "entity_name": "Без объекта",
+      "assignee_id": "11",
+      "assignee_name": "Никулин Д. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 17:16",
+      "created_iso": "2026-11-09T17:16:29.553+03:00",
+      "updated_iso": "2026-11-09T17:16:32.845+03:00",
+      "reacted_iso": "2026-11-09T17:16:32.832+03:00",
+      "work_started_at": "2026-11-09T17:16:32.845+03:00",
+      "deadline_at": "2026-11-10 09:15",
+      "deadline": "2026-11-10 09:15",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Никулин Д. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44191,
       "title": "Сервис-ПРО (заполнить и подписать акты для оптравки ФН от КонуептСтрой)",
@@ -1430,63 +1480,6 @@
       "work_started_at": "",
       "deadline_at": "2026-11-09 12:25",
       "deadline": "2026-11-09 12:25",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        },
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44167,
-      "title": "Помощь с эцп",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-09 11:25",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 179,
-      "company_name": "Ленинский (ЦЕНТР ПОТОКА МСК-ЛЕНИНСКИЙ ООО)",
-      "entity_name": "Без объекта",
-      "assignee_id": "12",
-      "assignee_name": "Боровитин Е. С.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 20,
-      "spent_by_employee": {
-        "12": 20
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 11:25",
-      "created_iso": "2026-11-09T11:25:18.949+03:00",
-      "updated_iso": "2026-11-09T11:25:31.069+03:00",
-      "reacted_iso": "2026-11-09T11:25:23.189+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 12:24",
-      "deadline": "2026-11-09 12:24",
       "due_bucket": "today",
       "comments": [
         {
