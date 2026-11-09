@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794233823,
-  "updated_at": "2026-11-09T17:17:03.731050+03:00",
+  "sync_seq": 1794234798,
+  "updated_at": "2026-11-09T17:33:18.833561+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -21,7 +21,7 @@
     "+7 905 600-66-55  александр, даст anydesk или rudesktop установить софт, скопировать ключ с рутокен, положить на 6 флешек, проверить, что с каждой флешки ключ работает. потом ключ с компа удалить. крипто можно оставить": "44111",
     "молодо (не могу распечатать шк)": "44110",
     "помощь с фрмо": "44109",
-    "работа на сервере": "44168",
+    "работа на сервере": "44189",
     "настройка рдп": "44107",
     "кф-тула кабинет 101 (не печатает принтер на двух сторонах)": "44106",
     "[black friday 2026] exclusive luxury watches starting at $250": "44105",
@@ -77,7 +77,8 @@
     "новая учетка, настройка  подключения": "44187",
     "установка и активация mc office": "44188",
     "сервис-про (заполнить и подписать акты для оптравки фн от конуептстрой)": "44191",
-    "установка драйвера принтера": "44192"
+    "установка драйвера принтера": "44192",
+    "учетка, настройка удаленного доступа": "44193"
   },
   "deleted_ids": [
     "44116",
@@ -87,6 +88,55 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44193,
+      "title": "Учетка, настройка удаленного доступа",
+      "description": "Учетка, настройка удаленного доступа",
+      "timeline_summary": "Создана: 2026-11-09 17:33",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 232,
+      "company_name": "Компания ID 232",
+      "entity_name": "Без объекта",
+      "assignee_id": "9",
+      "assignee_name": "Нарыжнев Н. С.",
+      "coexecutors": [
+        "8",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 17:33",
+      "created_iso": "2026-11-09T17:33:08.947+03:00",
+      "updated_iso": "2026-11-09T17:33:11.734+03:00",
+      "reacted_iso": "2026-11-09T17:33:11.718+03:00",
+      "work_started_at": "2026-11-09T17:33:11.734+03:00",
+      "deadline_at": "2026-11-10 09:32",
+      "deadline": "2026-11-10 09:32",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Нарыжнев Н. С.",
+          "time": "",
+          "text": "Учетка, настройка удаленного доступа",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44192,
       "title": "Установка драйвера принтера",
@@ -1443,63 +1493,6 @@
           "author": "Нарыжнев Н. С.",
           "time": "",
           "text": "Не могу зайти в личный кабинет на закупках",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44168,
-      "title": "Работа на сервере",
-      "description": "Проверка бекапов и очистка места на synologi",
-      "timeline_summary": "Создана: 2026-11-09 11:26",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 69,
-      "company_name": "УК КДФ",
-      "entity_name": "Без объекта",
-      "assignee_id": "12",
-      "assignee_name": "Боровитин Е. С.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 30,
-      "spent_by_employee": {
-        "12": 30
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 11:26",
-      "created_iso": "2026-11-09T11:26:00.175+03:00",
-      "updated_iso": "2026-11-09T11:26:10.807+03:00",
-      "reacted_iso": "2026-11-09T11:26:03.543+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 12:25",
-      "deadline": "2026-11-09 12:25",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        },
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
           "is_public": true
         }
       ],
