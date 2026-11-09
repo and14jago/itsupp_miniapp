@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794236124,
-  "updated_at": "2026-11-09T17:55:24.546192+03:00",
+  "sync_seq": 1794248714,
+  "updated_at": "2026-11-09T21:25:14.659386+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -80,7 +80,8 @@
     "установка драйвера принтера": "44192",
     "учетка, настройка удаленного доступа": "44193",
     "тонус ленина 53 (настроить вариант расчёта налогово по умолчанию ндс в том числе)": "44194",
-    "не могу зайти на удаленку": "44195"
+    "не могу зайти на удаленку": "44195",
+    "активация office": "44196"
   },
   "deleted_ids": [
     "44116",
@@ -90,6 +91,56 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44196,
+      "title": "Активация office",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-09 21:25",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 120,
+      "company_name": "КЛИНИКА ФОМИНА ПЕНЗА ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "13",
+      "assignee_name": "Кочнов И. И.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 21:25",
+      "created_iso": "2026-11-09T21:25:00.592+03:00",
+      "updated_iso": "2026-11-09T21:25:12.879+03:00",
+      "reacted_iso": "2026-11-09T21:25:12.859+03:00",
+      "work_started_at": "2026-11-09T21:25:12.879+03:00",
+      "deadline_at": "2026-11-10 10:00",
+      "deadline": "2026-11-10 10:00",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кочнов И. И.",
+          "time": "",
+          "text": "Активация office",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44195,
       "title": "Не могу зайти на удаленку",
@@ -1452,63 +1503,6 @@
           "author": "Нарыжнев Н. С.",
           "time": "",
           "text": "Государственная информационная система обязательного медицинского страхования «ГИС ОМС»   Федеральная подсистема персонифицированного учета медицинской помощи ГИС ОМС ФПУМП ОПИСАНИЕ ВЕБ-СЕРВИСОВ ДЛЯ РАЗРАБОТЧИКОВ МИС МО           Листов: 534     версия 20.98 (API 38.0)       2026\n12:02\nесть вот такая инструкция, можете подключиться, полестать?",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44171,
-      "title": "КФ-Ленинский (а кто-нибудь может реанимирвать мне телеграмм?)",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-09 11:55",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 179,
-      "company_name": "Ленинский (ЦЕНТР ПОТОКА МСК-ЛЕНИНСКИЙ ООО)",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 10,
-      "spent_by_employee": {
-        "8": 10
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 11:55",
-      "created_iso": "2026-11-09T11:55:02.718+03:00",
-      "updated_iso": "2026-11-09T12:03:54.670+03:00",
-      "reacted_iso": "2026-11-09T11:55:07.254+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 12:54",
-      "deadline": "2026-11-09 12:54",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
-          "is_public": true
-        },
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
           "is_public": true
         }
       ],
