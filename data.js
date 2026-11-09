@@ -634,18 +634,70 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
-      "id": 44133,
-      "title": "тест app 3",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-08 21:42",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
+      "id": 44136,
+      "title": "1С дает ошибку при обмене с элма error 500",
+      "description": "1С дает ошибку при обмене с элма error 500",
+      "timeline_summary": "Создана: 2026-11-09 08:34",
+      "status_code": "work",
+      "status_name": "Принял",
+      "status_color": "#605cb8",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
+      "company_id": 69,
+      "company_name": "УК КДФ",
+      "entity_name": "Без объекта",
+      "assignee_id": "",
+      "assignee_name": "Не назначен",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 08:34",
+      "created_iso": "2026-11-09T08:34:15.700+03:00",
+      "updated_iso": "2026-11-09T08:34:24.451+03:00",
+      "reacted_iso": "2026-11-09T08:34:24.431+03:00",
+      "work_started_at": "2026-11-09T08:34:24.451+03:00",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "Ознакомление с заявкой (15 мин) · Время: списано 15 мин (по таймеру: 15 мин, По договору (Обычная))",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44135,
+      "title": "Систематические алобы на тормоза в 1С каждое утро",
+      "description": "Систематические алобы на тормоза в 1С каждое утро",
+      "timeline_summary": "Создана: 2026-11-09 07:55",
+      "status_code": "work",
+      "status_name": "Принял",
+      "status_color": "#605cb8",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 213,
+      "company_name": "КЛИНИКА ФОМИНА ОМСК ООО",
       "entity_name": "Без объекта",
       "assignee_id": "1",
       "assignee_name": "Стрелкин М. В.",
@@ -658,27 +710,89 @@ window.ITSUPP_DATA = {
       "observers": [
         "6"
       ],
-      "control_by": [],
+      "control_by": [
+        "7"
+      ],
       "spent_minutes": 0,
       "spent_by_employee": {},
       "tracked_work_seconds": 0,
       "work_by_employee": {},
       "timer_paused": false,
       "billing_flag": "none",
-      "created_at": "2026-11-08 21:42",
-      "created_iso": "2026-11-08T21:42:04.767+03:00",
-      "updated_iso": "2026-11-08T22:04:59.880+03:00",
-      "reacted_iso": "2026-11-08T22:04:59.858+03:00",
-      "work_started_at": "2026-11-08T22:04:59.880+03:00",
-      "deadline_at": "2026-11-09 10:00",
-      "deadline": "2026-11-09 10:00",
+      "created_at": "2026-11-09 07:55",
+      "created_iso": "2026-11-09T07:55:23.955+03:00",
+      "updated_iso": "2026-11-09T07:55:31.811+03:00",
+      "reacted_iso": "2026-11-09T07:55:31.785+03:00",
+      "work_started_at": "2026-11-09T07:55:31.811+03:00",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
       "due_bucket": "today",
       "comments": [
         {
           "author": "Кукушкина А. А.",
           "time": "",
-          "text": "?????? ??????? ? ??????? ITSUPP",
+          "text": "Ознакомление с заявкой (5 мин) · Время: списано 5 мин (по таймеру: 5 мин, По договору (Обычная))",
           "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44134,
+      "title": "Обслуживание бд 1С 7.21 & 7.31",
+      "description": "Обслуживание бд 1С 7.21 & 7.31",
+      "timeline_summary": "Создана: 2026-11-09 01:11",
+      "status_code": "work",
+      "status_name": "Принял",
+      "status_color": "#605cb8",
+      "priority": "normal",
+      "type_code": "additionalwork",
+      "type_name": "Доп. работы",
+      "company_id": 69,
+      "company_name": "УК КДФ",
+      "entity_name": "Без объекта",
+      "assignee_id": "1",
+      "assignee_name": "Стрелкин М. В.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 20,
+      "spent_by_employee": {
+        "1": 20
+      },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 01:11",
+      "created_iso": "2026-11-09T01:11:42.331+03:00",
+      "updated_iso": "2026-11-09T01:15:10.751+03:00",
+      "reacted_iso": "2026-11-09T01:15:09.226+03:00",
+      "work_started_at": "2026-11-09T01:15:10.751+03:00",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "⚠️ ВНИМАНИЕ: РАБОТЫ В НЕРАБОЧЕЕ ВРЕМЯ Работы по данной заявке выполняются в нерабочее время и тарифицируются отдельно по действующим условиям обслуживания.",
+          "is_public": true
+        },
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "Смена статуса через @itsupp_task_bot | user=ITSUPP Admin | контакт=@MikhailStrelkin",
+          "is_public": false
         }
       ],
       "_syncedToPortal": true
