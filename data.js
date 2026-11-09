@@ -634,6 +634,55 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44146,
+      "title": "Не моуг зайти в 1С",
+      "description": "Не моуг зайти в 1С",
+      "timeline_summary": "Создана: 2026-11-09 10:03",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 120,
+      "company_name": "КЛИНИКА ФОМИНА ПЕНЗА ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "9",
+      "assignee_name": "Нарыжнев Н. С.",
+      "coexecutors": [
+        "8",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 10:03",
+      "created_iso": "2026-11-09T10:03:33.404+03:00",
+      "updated_iso": "2026-11-09T10:03:37.100+03:00",
+      "reacted_iso": "2026-11-09T10:03:37.074+03:00",
+      "work_started_at": "2026-11-09T10:03:37.100+03:00",
+      "deadline_at": "2026-11-09 11:02",
+      "deadline": "2026-11-09 11:02",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Нарыжнев Н. С.",
+          "time": "",
+          "text": "Не моуг зайти в 1С",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44142,
       "title": "почта проверить входящие",
       "description": "",
