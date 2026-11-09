@@ -634,6 +634,52 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44139,
+      "title": "Проверить нагрузку - перезапустить службу 1С - Щербакова ws222",
+      "description": "Проверить нагрузку - перезапустить службу 1С - Щербакова ws222\n—\nАвтор (инженер): ITSUPP Admin\nTelegram user id: 423709417\nИсточник: @itsupp_task_bot / Создать задачу\nITSUPP operation_id: 9104b756-7aec-4fe0-8e22-c51ea5ee6bb8\nrequest_uuid: 9104b756-7aec-4fe0-8e22-c51ea5ee6bb8",
+      "timeline_summary": "Создана: 2026-11-09 09:14",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 10,
+      "spent_by_employee": {
+        "12": 10
+      },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 09:14",
+      "created_iso": "2026-11-09T09:14:09.004+03:00",
+      "updated_iso": "2026-11-09T09:14:10.263+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "2026-11-09 10:14",
+      "deadline": "2026-11-09 10:14",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44138,
       "title": "Белтрус счет на замену ФН",
       "description": "",
