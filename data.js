@@ -1039,55 +1039,6 @@ window.ITSUPP_DATA = {
       "_syncedToPortal": true
     },
     {
-      "id": 44156,
-      "title": "ТО",
-      "description": "ТО",
-      "timeline_summary": "Создана: 2026-11-09 11:05",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 25,
-      "company_name": "Архангельское ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "9",
-      "assignee_name": "Нарыжнев Н. С.",
-      "coexecutors": [
-        "8",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 11:05",
-      "created_iso": "2026-11-09T11:05:36.347+03:00",
-      "updated_iso": "2026-11-09T11:05:41.581+03:00",
-      "reacted_iso": "2026-11-09T11:05:41.557+03:00",
-      "work_started_at": "2026-11-09T11:05:41.581+03:00",
-      "deadline_at": "2026-11-09 12:04",
-      "deadline": "2026-11-09 12:04",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "ТО",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44155,
       "title": "Тонус Советский (не загружается накладная ЕГАИС город 77)",
       "description": "",
@@ -1131,56 +1082,6 @@ window.ITSUPP_DATA = {
           "author": "Быков М. В.",
           "time": "",
           "text": "+",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44154,
-      "title": "Ульяновск в офд добавить",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-09 10:54",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "7",
-      "assignee_name": "Кукушкина А. А.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 10:54",
-      "created_iso": "2026-11-09T10:54:52.693+03:00",
-      "updated_iso": "2026-11-09T10:55:06.076+03:00",
-      "reacted_iso": "2026-11-09T10:55:06.054+03:00",
-      "work_started_at": "2026-11-09T10:55:06.076+03:00",
-      "deadline_at": "2026-11-09 11:54",
-      "deadline": "2026-11-09 11:54",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "делаю",
           "is_public": true
         }
       ],
