@@ -634,6 +634,55 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44150,
+      "title": "Помощь с эцп",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-09 10:43",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 149,
+      "company_name": "КЛИНИКА ФОМИНА МИЧУРИНСКИЙ ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 10:43",
+      "created_iso": "2026-11-09T10:43:07.676+03:00",
+      "updated_iso": "2026-11-09T10:43:16.002+03:00",
+      "reacted_iso": "2026-11-09T10:43:15.985+03:00",
+      "work_started_at": "2026-11-09T10:43:16.002+03:00",
+      "deadline_at": "2026-11-09 11:42",
+      "deadline": "2026-11-09 11:42",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44149,
       "title": "Алексей, помощь с переносом УЗИ на диск",
       "description": "Алексей, помощь с переносом УЗИ нна диск",
