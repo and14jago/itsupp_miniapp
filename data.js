@@ -887,65 +887,6 @@ window.ITSUPP_DATA = {
       "_syncedToPortal": true
     },
     {
-      "id": 44136,
-      "title": "1С дает ошибку при обмене с элма error 500",
-      "description": "1С дает ошибку при обмене с элма error 500",
-      "timeline_summary": "Создана: 2026-11-09 08:34",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 69,
-      "company_name": "УК КДФ",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {
-        "1": 0
-      },
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 08:34",
-      "created_iso": "2026-11-09T08:34:15.700+03:00",
-      "updated_iso": "2026-11-09T08:53:38.443+03:00",
-      "reacted_iso": "2026-11-09T08:34:24.431+03:00",
-      "work_started_at": "2026-11-09T05:45:41.658Z",
-      "deadline_at": "2026-11-09 10:00",
-      "deadline": "2026-11-09 10:00",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "Статус «Выполняю» (Mini App)",
-          "is_public": false
-        },
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "Ознакомление с заявкой (15 мин) · Время: списано 15 мин (по таймеру: 15 мин, По договору (Обычная))",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44135,
       "title": "Систематические алобы на тормоза в 1С каждое утро",
       "description": "Систематические алобы на тормоза в 1С каждое утро",
