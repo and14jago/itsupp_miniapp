@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794229486,
-  "updated_at": "2026-11-09T16:04:46.013517+03:00",
+  "sync_seq": 1794229515,
+  "updated_at": "2026-11-09T16:05:15.791010+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -86,9 +86,9 @@
       "title": "Сбор технической информации МГ",
       "description": ".",
       "timeline_summary": "Создана: 2026-11-09 16:04",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -106,21 +106,29 @@
         "6"
       ],
       "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
+      "spent_minutes": 150,
+      "spent_by_employee": {
+        "11": 150
+      },
       "tracked_work_seconds": 0,
       "work_by_employee": {},
       "timer_paused": false,
       "billing_flag": "none",
       "created_at": "2026-11-09 16:04",
       "created_iso": "2026-11-09T16:04:42.281+03:00",
-      "updated_iso": "2026-11-09T16:04:45.588+03:00",
+      "updated_iso": "2026-11-09T16:04:55.464+03:00",
       "reacted_iso": "2026-11-09T16:04:45.575+03:00",
-      "work_started_at": "2026-11-09T16:04:45.588+03:00",
+      "work_started_at": "",
       "deadline_at": "2026-11-09 17:03",
       "deadline": "2026-11-09 17:03",
       "due_bucket": "today",
       "comments": [
+        {
+          "author": "Никулин Д. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        },
         {
           "author": "Никулин Д. С.",
           "time": "",
