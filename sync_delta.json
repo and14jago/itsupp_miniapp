@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794231701,
-  "updated_at": "2026-11-09T16:41:41.393845+03:00",
+  "sync_seq": 1794232346,
+  "updated_at": "2026-11-09T16:52:26.296796+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -74,7 +74,8 @@
     "сбор технической информации мг": "44184",
     "установка принтера hp": "44185",
     "помощь с телевизором mi": "44186",
-    "новая учетка, настройка  подключения": "44187"
+    "новая учетка, настройка  подключения": "44187",
+    "установка и активация mc office": "44188"
   },
   "deleted_ids": [
     "44116",
@@ -84,6 +85,120 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44189,
+      "title": "работа на сервере",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-09 16:52",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 174,
+      "company_name": "Щербатова Юлия Евгеньевна (Студио 13)",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 20,
+      "spent_by_employee": {
+        "12": 20
+      },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 16:52",
+      "created_iso": "2026-11-09T16:52:13.585+03:00",
+      "updated_iso": "2026-11-09T16:52:25.589+03:00",
+      "reacted_iso": "2026-11-09T16:52:17.902+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-09 17:51",
+      "deadline": "2026-11-09 17:51",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        },
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44188,
+      "title": "Установка и активация mc office",
+      "description": ".",
+      "timeline_summary": "Создана: 2026-11-09 16:52",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 168,
+      "company_name": "ООО \"Клиника Фомина Уфа\" (ЦМТ)",
+      "entity_name": "Без объекта",
+      "assignee_id": "11",
+      "assignee_name": "Никулин Д. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 15,
+      "spent_by_employee": {
+        "11": 15
+      },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 16:52",
+      "created_iso": "2026-11-09T16:52:04.101+03:00",
+      "updated_iso": "2026-11-09T16:52:13.337+03:00",
+      "reacted_iso": "2026-11-09T16:52:07.137+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-09 17:51",
+      "deadline": "2026-11-09 17:51",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Никулин Д. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        },
+        {
+          "author": "Никулин Д. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44187,
       "title": "Новая учетка, настройка  подключения",
@@ -1383,116 +1498,6 @@
           "author": "Быков М. В.",
           "time": "",
           "text": "+",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44154,
-      "title": "Ульяновск в офд добавить",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-09 10:54",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "7",
-      "assignee_name": "Кукушкина А. А.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 20,
-      "spent_by_employee": {
-        "7": 20
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 10:54",
-      "created_iso": "2026-11-09T10:54:52.693+03:00",
-      "updated_iso": "2026-11-09T11:16:13.702+03:00",
-      "reacted_iso": "2026-11-09T10:55:06.054+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 11:54",
-      "deadline": "2026-11-09 11:54",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "сделано",
-          "is_public": true
-        },
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "делаю",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44153,
-      "title": "Тестирование ПЕ оператора на Можайского",
-      "description": "Комп протестирован 2000₽ за потраченное время. Освободил С, протестировал LAN оживил на сколько возможно. Рекомендация - установка ssd 256, переоо но с системы на ssd (Kingston/samsung)",
-      "timeline_summary": "Создана: 2026-11-09 10:52",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 76,
-      "company_name": "Форс ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "1",
-      "assignee_name": "Стрелкин М. В.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 10:52",
-      "created_iso": "2026-11-09T10:52:40.871+03:00",
-      "updated_iso": "2026-11-09T10:52:54.275+03:00",
-      "reacted_iso": "2026-11-09T10:52:54.258+03:00",
-      "work_started_at": "2026-11-09T10:52:54.275+03:00",
-      "deadline_at": "2026-11-09 11:51",
-      "deadline": "2026-11-09 11:51",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "Начал выполнение (таймер запущен)",
           "is_public": true
         }
       ],
