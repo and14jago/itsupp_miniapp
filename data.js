@@ -634,55 +634,6 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
-      "id": 44175,
-      "title": "Новая учетка, настройка подключения",
-      "description": "Новая учетка, настройка подключения",
-      "timeline_summary": "Создана: 2026-11-09 13:27",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 149,
-      "company_name": "КЛИНИКА ФОМИНА МИЧУРИНСКИЙ ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "9",
-      "assignee_name": "Нарыжнев Н. С.",
-      "coexecutors": [
-        "8",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 13:27",
-      "created_iso": "2026-11-09T13:27:52.769+03:00",
-      "updated_iso": "2026-11-09T13:27:55.810+03:00",
-      "reacted_iso": "2026-11-09T13:27:55.797+03:00",
-      "work_started_at": "2026-11-09T13:27:55.810+03:00",
-      "deadline_at": "2026-11-09 14:26",
-      "deadline": "2026-11-09 14:26",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "Новая учетка, настройка подключения",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44166,
       "title": "Проверить/заполнить 71",
       "description": "Поступило обращение клиента: Проверить/заполнить 71. Требуется провести диагностику и выполнить необходимые работы для устранения проблемы.",
