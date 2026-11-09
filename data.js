@@ -634,6 +634,56 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44142,
+      "title": "почта проверить входящие",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-09 09:41",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "7",
+      "assignee_name": "Кукушкина А. А.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 09:41",
+      "created_iso": "2026-11-09T09:41:29.666+03:00",
+      "updated_iso": "2026-11-09T09:41:41.084+03:00",
+      "reacted_iso": "2026-11-09T09:41:41.066+03:00",
+      "work_started_at": "2026-11-09T09:41:41.084+03:00",
+      "deadline_at": "2026-11-09 10:40",
+      "deadline": "2026-11-09 10:40",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "делаю",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44136,
       "title": "1С дает ошибку при обмене с элма error 500",
       "description": "1С дает ошибку при обмене с элма error 500",

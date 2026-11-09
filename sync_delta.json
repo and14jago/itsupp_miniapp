@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794206475,
-  "updated_at": "2026-11-09T09:41:15.021975+03:00",
+  "sync_seq": 1794206505,
+  "updated_at": "2026-11-09T09:41:45.500106+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -36,7 +36,8 @@
     "белтрус счет на замену фн": "44138",
     "проверить нагрузку - перезапустить службу 1с - щербакова ws222": "44139",
     "помощь с впнами": "44140",
-    "новые учетки": "44141"
+    "новые учетки": "44141",
+    "почта проверить входящие": "44142"
   },
   "deleted_ids": [
     "44116",
@@ -46,6 +47,56 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44142,
+      "title": "почта проверить входящие",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-09 09:41",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "7",
+      "assignee_name": "Кукушкина А. А.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 09:41",
+      "created_iso": "2026-11-09T09:41:29.666+03:00",
+      "updated_iso": "2026-11-09T09:41:41.084+03:00",
+      "reacted_iso": "2026-11-09T09:41:41.066+03:00",
+      "work_started_at": "2026-11-09T09:41:41.084+03:00",
+      "deadline_at": "2026-11-09 10:40",
+      "deadline": "2026-11-09 10:40",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "делаю",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44141,
       "title": "Новые учетки",
@@ -1436,65 +1487,6 @@
           "author": "Никулин Д. С.",
           "time": "",
           "text": ".",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44111,
-      "title": "+7 905 600-66-55  Александр, даст Anydesk или rudesktop Установить софт, скопировать ключ с Рутокен, положить на 6 флешек, проверить, что с каждой флешки ключ работает. Потом ключ с компа удалить. Крипто можно оставить",
-      "description": "Установить софт, скопировать ключ с Рутокен, положить на 6 флешек, проверить, что с каждой флешки ключ работает. Потом ключ с компа удалить. Крипто можно оставить\n—\nАвтор (инженер): ITSUPP Admin\nTelegram user id: 423709417\nИсточник: @itsupp_task_bot / Создать задачу\nITSUPP operation_id: 767d9bb6-aeb7-4e90-8031-21c0ffc4e56b\nrequest_uuid: 767d9bb6-aeb7-4e90-8031-21c0ffc4e56b",
-      "timeline_summary": "Создана: 2026-11-06 16:26",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "11",
-      "assignee_name": "Никулин Д. С.",
-      "coexecutors": [
-        "8",
-        "9",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 40,
-      "spent_by_employee": {
-        "11": 40
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-06 16:26",
-      "created_iso": "2026-11-06T16:26:28.507+03:00",
-      "updated_iso": "2026-11-06T17:12:28.373+03:00",
-      "reacted_iso": "2026-11-06T16:40:25.175+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-06 17:26",
-      "deadline": "2026-11-06 17:26",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Никулин Д. С.",
-          "time": "",
-          "text": "Ключи скопировал, протестировал",
-          "is_public": true
-        },
-        {
-          "author": "Никулин Д. С.",
-          "time": "",
-          "text": "Взял в работу",
           "is_public": true
         }
       ],
