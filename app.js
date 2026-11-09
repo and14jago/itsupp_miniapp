@@ -242,6 +242,8 @@
 
   // --- Загрузка и сохранение состояния (с постоянным сохранением статусов и списанного времени по ID заявки) ---
   var OVERRIDE_FIELDS = [
+    "title",
+    "description",
     "status_code",
     "status_name",
     "_userStatusCode",
@@ -2052,9 +2054,42 @@
     topRow.appendChild(statusWrap);
     card.appendChild(topRow);
 
-    // 2. Заголовок и свёрнутое описание (раскрывается по нажатию) + подсветка Email/Домена для писем
+    // 2. Заголовок + карандашик редактирования темы и описания + свёрнутое описание
+    var titleRow = el("div", "task-title-row");
     var titleEl = el("div", "task-title", task.title);
-    card.appendChild(titleEl);
+    var editPencilBtn = el("button", "task-edit-pencil", "✏️");
+    editPencilBtn.type = "button";
+    editPencilBtn.title = "Исправить тему и описание задачи";
+    titleRow.appendChild(titleEl);
+    titleRow.appendChild(editPencilBtn);
+    card.appendChild(titleRow);
+
+    var inlineEditorBox = el("div", "task-inline-editor hidden");
+    var inlineFields = el("div", "task-inline-fields");
+    var subjInput = el("input", "form-input task-inline-input");
+    subjInput.type = "text";
+    subjInput.placeholder = "Тема задачи";
+    subjInput.value = task.title || "";
+    var descInput = el("textarea", "form-textarea task-inline-textarea");
+    descInput.rows = 2;
+    descInput.placeholder = "Описание задачи";
+    descInput.value = safeText(task.description, 1500) || task.title || "";
+    inlineFields.appendChild(subjInput);
+    inlineFields.appendChild(descInput);
+
+    var inlineActions = el("div", "task-inline-actions");
+    var btnConfirmEdit = el("button", "task-edit-circle task-edit-confirm", "✓");
+    btnConfirmEdit.type = "button";
+    btnConfirmEdit.title = "Зафиксировать изменения";
+    var btnCancelEdit = el("button", "task-edit-circle task-edit-cancel", "✕");
+    btnCancelEdit.type = "button";
+    btnCancelEdit.title = "Сбросить изменения";
+    inlineActions.appendChild(btnConfirmEdit);
+    inlineActions.appendChild(btnCancelEdit);
+
+    inlineEditorBox.appendChild(inlineFields);
+    inlineEditorBox.appendChild(inlineActions);
+    card.appendChild(inlineEditorBox);
 
     var mailInfo = extractEmailInfoFromTask(task);
     if (mailInfo.isEmail) {
@@ -2096,6 +2131,61 @@
     descBox.appendChild(toggleBtn);
     descBox.appendChild(bodyDiv);
     card.appendChild(descBox);
+
+    editPencilBtn.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      hapticImpact("light");
+      subjInput.value = task.title || "";
+      descInput.value = safeText(task.description, 1500) || task.title || "";
+      titleRow.classList.add("hidden");
+      descBox.classList.add("hidden");
+      inlineEditorBox.classList.remove("hidden");
+      subjInput.focus();
+    });
+
+    btnCancelEdit.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      hapticImpact("light");
+      inlineEditorBox.classList.add("hidden");
+      titleRow.classList.remove("hidden");
+      descBox.classList.remove("hidden");
+    });
+
+    btnConfirmEdit.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      var nextSubj = safeText(subjInput.value, 220);
+      var nextDesc = safeText(descInput.value, 1500) || nextSubj;
+      if (!nextSubj) {
+        hapticNotify("error");
+        showToast("Тема задачи не может быть пустой");
+        return;
+      }
+      task.title = nextSubj;
+      task.description = nextDesc;
+      task.updated_iso = new Date().toISOString();
+      titleEl.textContent = nextSubj;
+      rawBody = nextDesc;
+      hasBody = Boolean(rawBody && rawBody !== nextSubj);
+      bodyDiv.textContent = hasBody ? rawBody : (task.timeline_summary || "В теле заявки указана только тема: «" + nextSubj + "».");
+      inlineEditorBox.classList.add("hidden");
+      titleRow.classList.remove("hidden");
+      descBox.classList.remove("hidden");
+      saveState();
+      hapticNotify("success");
+      showToast("✓ Текст задачи #" + task.id + " обновлён");
+      if (typeof fetch === "function") {
+        fetch("https://portal.itsupp.com/api/tickets-update-text", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            ticketId: String(task.id),
+            number: Number(task.id) || String(task.id),
+            subject: nextSubj,
+            description: nextDesc
+          })
+        }).catch(function () {});
+      }
+    });
 
     // 3. Автоматическая полоса времени в системе и живого таймера выполнения
     var tStats = getTaskTimingStats(task);
@@ -3862,12 +3952,18 @@
       }
     }
 
-    // Выпадающий список исполнителя (как статус заявки): по умолчанию выбран тот, кто в системе
+    // Выпадающий список исполнителя (как статус заявки): по умолчанию выбран тот, кто в системе + поддержка точечных групповых задач
+    var isGroupAll = String(createDraft.assigneeId) === "group:all";
+    var isGroupEng = String(createDraft.assigneeId) === "group:engineers";
     var selectedEmp = getEmployeeById(createDraft.assigneeId) || currentEmp;
-    var isMe = String(selectedEmp.id) === String(currentEmp.id);
+    var isMe = !isGroupAll && !isGroupEng && String(selectedEmp.id) === String(currentEmp.id);
     var assigneeLabelEl = document.getElementById("create-assignee-label");
     if (assigneeLabelEl) {
-      assigneeLabelEl.textContent = isMe
+      assigneeLabelEl.textContent = isGroupAll
+        ? "👥 Всем сотрудникам (точечно)"
+        : isGroupEng
+        ? "🛠 Инженерам ТП (точечно)"
+        : isMe
         ? "Я (" + currentEmp.short + ")"
         : selectedEmp.short + " · ID " + selectedEmp.id;
     }
@@ -3877,7 +3973,7 @@
       popoverEl.textContent = "";
 
       var headRow = el("div", "create-assignee-popover-head");
-      headRow.appendChild(el("span", "", "👤 Выберите исполнителя"));
+      headRow.appendChild(el("span", "", "👤 Выберите исполнителя или группу"));
       var btnClosePop = el("button", "create-assignee-close", "✕");
       btnClosePop.type = "button";
       btnClosePop.addEventListener("click", function (ev) {
@@ -3886,6 +3982,36 @@
       });
       headRow.appendChild(btnClosePop);
       popoverEl.appendChild(headRow);
+
+      var optGroupAll = el(
+        "button",
+        "create-assignee-opt" + (isGroupAll ? " active" : ""),
+        "👥 Всем сотрудникам (точечно каждому в Email и Telegram)"
+      );
+      optGroupAll.type = "button";
+      optGroupAll.addEventListener("click", function (ev) {
+        ev.stopPropagation();
+        hapticImpact("light");
+        createDraft.assigneeId = "group:all";
+        popoverEl.classList.add("hidden");
+        renderCreateView();
+      });
+      popoverEl.appendChild(optGroupAll);
+
+      var optGroupEng = el(
+        "button",
+        "create-assignee-opt" + (isGroupEng ? " active" : ""),
+        "🛠 Инженерам техподдержки (точечно каждому)"
+      );
+      optGroupEng.type = "button";
+      optGroupEng.addEventListener("click", function (ev) {
+        ev.stopPropagation();
+        hapticImpact("light");
+        createDraft.assigneeId = "group:engineers";
+        popoverEl.classList.add("hidden");
+        renderCreateView();
+      });
+      popoverEl.appendChild(optGroupEng);
 
       var optMe = el(
         "button",
@@ -3972,81 +4098,101 @@
       finalDesc += "\n\n📎 Прикреплённые файлы (" + createDraft.files.length + "): " + createDraft.files.join(", ");
     }
 
-    var targetEmp = getEmployeeById(createDraft.assigneeId);
-    if (!targetEmp && String(createDraft.assigneeId) !== String(currentEmp.id)) {
+    var isGroupSelection = String(createDraft.assigneeId).indexOf("group:") === 0;
+    var targetEmployees = [];
+    if (isGroupSelection) {
+      targetEmployees = DATA.employees.filter(function (emp) {
+        if (String(emp.id) === "4" || String(emp.id) === "14") return false;
+        if (createDraft.assigneeId === "group:engineers") {
+          return ["5", "8", "9", "10", "11", "12", "13"].indexOf(String(emp.id)) !== -1;
+        }
+        return true;
+      });
+    } else {
+      var singleEmp = getEmployeeById(createDraft.assigneeId) || currentEmp;
+      targetEmployees = [singleEmp];
+    }
+
+    if (!targetEmployees.length) {
       hapticNotify("error");
-      showToast("Выбранный исполнитель недоступен в каталоге");
+      showToast("В выбранной группе нет активных исполнителей");
       return;
     }
 
-    var newId = String(state.nextIssueId || 44125);
-    state.nextIssueId = (parseInt(newId, 10) || 44125) + 1;
-
-    var defaultCoexecs = ["8", "9", "11", "12"].filter(function (id) {
-      return id !== String(createDraft.assigneeId);
-    });
-    var ctrlList = String(createDraft.assigneeId) !== String(currentEmp.id) ? [String(currentEmp.id)] : [];
     var nowIso = new Date().toISOString();
+    var firstCreatedId = "";
 
-    var newTask = {
-      id: newId,
-      title: finalTitle,
-      description: finalDesc,
-      company_id: createDraft.companyId,
-      company_name: createDraft.companyName,
-      entity_name: (entityEl && safeText(entityEl.value, 120)) || "Без объекта",
-      type_code: createDraft.typeCode,
-      type_name: createDraft.typeName,
-      status_code: "opened",
-      status_name: "Открыта",
-      priority: "Обычный",
-      assignee_id: String(createDraft.assigneeId),
-      assignee_name: targetEmp ? targetEmp.short : currentEmp.short,
-      creator_id: String(currentEmp.id),
-      control_by: ctrlList,
-      coexecutors: defaultCoexecs,
-      observers: ["6"],
-      spent_minutes: createDraft.spentMinutes,
-      spent_by_employee: {},
-      billing_flag: "none",
-      deadline: "Сегодня 19:00",
-      due_bucket: "today",
-      created_at: formatMskDateTime(nowIso),
-      created_iso: nowIso,
-      updated_iso: nowIso,
-      comments: [
-        {
-          author: currentEmp.short,
-          time: new Date().toTimeString().slice(0, 5),
-          text: "Создана через Mini App (исполнитель ID " + createDraft.assigneeId + ", group=null)."
-        }
-      ]
-    };
-    if (createDraft.spentMinutes > 0) {
-      newTask.spent_by_employee[String(createDraft.assigneeId)] = createDraft.spentMinutes;
-    }
-    newTask._createdInMiniApp = true;
-    newTask._syncedToPortal = false;
+    targetEmployees.forEach(function (empTarget) {
+      var newId = String(state.nextIssueId || 44125);
+      state.nextIssueId = (parseInt(newId, 10) || 44125) + 1;
+      if (!firstCreatedId) firstCreatedId = newId;
 
-    state.tasks.unshift(newTask);
-    saveState();
-    enqueueSyncOp({
-      op: "create",
-      local_id: String(newId),
-      title: finalTitle,
-      description: finalDesc,
-      company_id: createDraft.companyId,
-      company_name: createDraft.companyName,
-      entity_name: newTask.entity_name,
-      type_code: createDraft.typeCode,
-      assignee_id: String(createDraft.assigneeId),
-      creator_id: String(currentEmp.id),
-      creator_name: currentEmp.short,
-      spent_minutes: createDraft.spentMinutes,
-      coexecutors: defaultCoexecs,
-      observers: ["6"],
-      created_iso: nowIso
+      var defaultCoexecs = ["8", "9", "11", "12"].filter(function (id) {
+        return id !== String(empTarget.id);
+      });
+      var ctrlList = String(empTarget.id) !== String(currentEmp.id) ? [String(currentEmp.id)] : [];
+
+      var newTask = {
+        id: newId,
+        title: finalTitle,
+        description: finalDesc,
+        company_id: createDraft.companyId,
+        company_name: createDraft.companyName,
+        entity_name: (entityEl && safeText(entityEl.value, 120)) || "Без объекта",
+        type_code: createDraft.typeCode,
+        type_name: createDraft.typeName,
+        status_code: "opened",
+        status_name: "Открыта",
+        priority: "Обычный",
+        assignee_id: String(empTarget.id),
+        assignee_name: empTarget.short,
+        creator_id: String(currentEmp.id),
+        control_by: ctrlList,
+        coexecutors: defaultCoexecs,
+        observers: ["6"],
+        spent_minutes: createDraft.spentMinutes,
+        spent_by_employee: {},
+        billing_flag: "none",
+        deadline: "Сегодня 19:00",
+        due_bucket: "today",
+        created_at: formatMskDateTime(nowIso),
+        created_iso: nowIso,
+        updated_iso: nowIso,
+        comments: [
+          {
+            author: currentEmp.short,
+            time: new Date().toTimeString().slice(0, 5),
+            text: "Создана через Mini App (точечный исполнитель: " + empTarget.short + " · ID " + empTarget.id + ")."
+          }
+        ]
+      };
+      if (createDraft.spentMinutes > 0) {
+        newTask.spent_by_employee[String(empTarget.id)] = createDraft.spentMinutes;
+      }
+      newTask._createdInMiniApp = true;
+      newTask._syncedToPortal = false;
+
+      state.tasks.unshift(newTask);
+      enqueueSyncOp({
+        op: "create",
+        local_id: String(newId),
+        title: finalTitle,
+        description: finalDesc,
+        company_id: createDraft.companyId,
+        company_name: createDraft.companyName,
+        entity_name: newTask.entity_name,
+        type_code: createDraft.typeCode,
+        assignee_id: String(empTarget.id),
+        creator_id: String(currentEmp.id),
+        creator_name: currentEmp.short,
+        spent_minutes: createDraft.spentMinutes,
+        coexecutors: defaultCoexecs,
+        observers: ["6"],
+        created_iso: nowIso
+      });
     });
+
+    saveState();
 
     if (titleEl) titleEl.value = "";
     if (descEl) descEl.value = "";
@@ -4056,9 +4202,13 @@
     document.getElementById("create-files-list").textContent = "";
 
     hapticNotify("success");
-    activeScope = String(createDraft.assigneeId) === String(currentEmp.id) ? "mine" : "control";
+    activeScope = !isGroupSelection && String(createDraft.assigneeId) === String(currentEmp.id) ? "mine" : "control";
     switchView("tasks");
-    showToast("Заявка #" + newId + " создана на " + (targetEmp ? targetEmp.short : currentEmp.short));
+    showToast(
+      targetEmployees.length > 1
+        ? "✓ Создано " + targetEmployees.length + " точечных задач (каждому исполнителю)"
+        : "Заявка #" + firstCreatedId + " создана на " + targetEmployees[0].short
+    );
   }
 
   // =========================================================
@@ -4776,9 +4926,38 @@
   }
 
   // =========================================================
+  // ОТКРЫТИЕ КОНКРЕТНОЙ ЗАДАЧИ ПО ССЫЛКЕ (?task=<id> ИЛИ start_param=task_<id>)
+  // =========================================================
+  function applyDeepLinkedTaskFilter() {
+    try {
+      var qTask = "";
+      if (window.location && window.location.search) {
+        var params = new URLSearchParams(window.location.search);
+        qTask = String(params.get("task") || params.get("issue") || "").trim();
+      }
+      if (!qTask && tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) {
+        var sp = String(tg.initDataUnsafe.start_param).trim();
+        var m = sp.match(/(?:task_|issue_|o\|)?(\d{3,10})/);
+        if (m) qTask = m[1];
+      }
+      if (qTask && /^\d+$/.test(qTask)) {
+        activeScope = "all";
+        searchQuery = qTask;
+        var sIn = document.getElementById("task-search-input");
+        var sCl = document.getElementById("btn-search-clear");
+        if (sIn) sIn.value = "#" + qTask;
+        if (sCl) sCl.classList.remove("hidden");
+        switchView("tasks");
+        renderTasksView();
+      }
+    } catch (_e) {}
+  }
+
+  // =========================================================
   // ЕЖЕМИНУТНАЯ ДВУСТОРОННЯЯ СИНХРОНИЗАЦИЯ ИЗМЕНЁННЫХ ЭЛЕМЕНТОВ С ПОРТАЛОМ
   // =========================================================
   setTimeout(function () {
+    applyDeepLinkedTaskFilter();
     syncWithPortalDelta(false);
   }, 400);
 
