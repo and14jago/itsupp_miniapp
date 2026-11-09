@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794223899,
-  "updated_at": "2026-11-09T14:31:39.851507+03:00",
+  "sync_seq": 1794224118,
+  "updated_at": "2026-11-09T14:35:18.448562+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -66,7 +66,9 @@
     "помощь с лисом": "44176",
     "кф-калуга (эрс ошибка при отправке)": "44177",
     "ип яковлев алексей николаевич (ремонт ккт атол 30ф)": "44178",
-    "буэнос падел тверь (у нас проблема с ключом эцп по буэнос падел. токен перестал работать)": "44179"
+    "буэнос падел тверь (у нас проблема с ключом эцп по буэнос падел. токен перестал работать)": "44179",
+    "проблема с фсс": "44181",
+    "акопян счет на фронтол": "44180"
   },
   "deleted_ids": [
     "44116",
@@ -76,6 +78,105 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44181,
+      "title": "Проблема с ФСС",
+      "description": "Проблема с ФСС",
+      "timeline_summary": "Создана: 2026-11-09 14:35",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 0,
+      "company_name": "Без компании",
+      "entity_name": "Без объекта",
+      "assignee_id": "9",
+      "assignee_name": "Нарыжнев Н. С.",
+      "coexecutors": [
+        "8",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 14:35",
+      "created_iso": "2026-11-09T14:35:09.853+03:00",
+      "updated_iso": "2026-11-09T14:35:13.087+03:00",
+      "reacted_iso": "2026-11-09T14:35:13.070+03:00",
+      "work_started_at": "2026-11-09T14:35:13.087+03:00",
+      "deadline_at": "2026-11-09 15:34",
+      "deadline": "2026-11-09 15:34",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Нарыжнев Н. С.",
+          "time": "",
+          "text": "Проблема с ФСС",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44180,
+      "title": "Акопян счет на Фронтол",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-09 14:34",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "7",
+      "assignee_name": "Кукушкина А. А.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 14:34",
+      "created_iso": "2026-11-09T14:34:58.915+03:00",
+      "updated_iso": "2026-11-09T14:35:08.075+03:00",
+      "reacted_iso": "2026-11-09T14:35:08.059+03:00",
+      "work_started_at": "2026-11-09T14:35:08.075+03:00",
+      "deadline_at": "2026-11-09 15:34",
+      "deadline": "2026-11-09 15:34",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "делаю",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44179,
       "title": "Буэнос Падел Тверь (у нас проблема с ключом ЭЦП по Буэнос Падел. Токен перестал работать)",
@@ -1372,120 +1473,6 @@
           "author": "Кукушкина А. А.",
           "time": "",
           "text": "делаю",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44146,
-      "title": "Не моуг зайти в 1С",
-      "description": "Не моуг зайти в 1С",
-      "timeline_summary": "Создана: 2026-11-09 10:03",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 120,
-      "company_name": "КЛИНИКА ФОМИНА ПЕНЗА ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "9",
-      "assignee_name": "Нарыжнев Н. С.",
-      "coexecutors": [
-        "8",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 5,
-      "spent_by_employee": {
-        "9": 5
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 10:03",
-      "created_iso": "2026-11-09T10:03:33.404+03:00",
-      "updated_iso": "2026-11-09T10:08:23.557+03:00",
-      "reacted_iso": "2026-11-09T10:03:37.074+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 11:02",
-      "deadline": "2026-11-09 11:02",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "решено",
-          "is_public": true
-        },
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "Не моуг зайти в 1С",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44145,
-      "title": "ТО пк",
-      "description": ".",
-      "timeline_summary": "Создана: 2026-11-09 09:56",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 15,
-      "company_name": "Тонус ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "11",
-      "assignee_name": "Никулин Д. С.",
-      "coexecutors": [
-        "8",
-        "9",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 30,
-      "spent_by_employee": {
-        "11": 30
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 09:56",
-      "created_iso": "2026-11-09T09:56:09.068+03:00",
-      "updated_iso": "2026-11-09T09:56:22.039+03:00",
-      "reacted_iso": "2026-11-09T09:56:12.453+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 10:55",
-      "deadline": "2026-11-09 10:55",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Никулин Д. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        },
-        {
-          "author": "Никулин Д. С.",
-          "time": "",
-          "text": ".",
           "is_public": true
         }
       ],
