@@ -638,9 +638,9 @@ window.ITSUPP_DATA = {
       "title": "Проверить нагрузку - перезапустить службу 1С - Щербакова ws222",
       "description": "Проверить нагрузку - перезапустить службу 1С - Щербакова ws222\n—\nАвтор (инженер): ITSUPP Admin\nTelegram user id: 423709417\nИсточник: @itsupp_task_bot / Создать задачу\nITSUPP operation_id: 9104b756-7aec-4fe0-8e22-c51ea5ee6bb8\nrequest_uuid: 9104b756-7aec-4fe0-8e22-c51ea5ee6bb8",
       "timeline_summary": "Создана: 2026-11-09 09:14",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -670,13 +670,20 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-09 09:14",
       "created_iso": "2026-11-09T09:14:09.004+03:00",
-      "updated_iso": "2026-11-09T09:14:10.263+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
+      "updated_iso": "2026-11-09T09:22:52.926+03:00",
+      "reacted_iso": "2026-11-09T09:22:52.897+03:00",
+      "work_started_at": "2026-11-09T09:22:52.926+03:00",
       "deadline_at": "2026-11-09 10:14",
       "deadline": "2026-11-09 10:14",
       "due_bucket": "today",
-      "comments": [],
+      "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
       "_syncedToPortal": true
     },
     {
