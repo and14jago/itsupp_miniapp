@@ -472,6 +472,16 @@
         t._userStatusName = "Выполняю";
         t._userStatusAt = Date.now();
       }
+      if (t.status_code === "working" && !t.timer_paused && t.last_bell_hour === undefined) {
+        var initStart = Date.parse(String(t.work_started_at || t.updated_iso || "").replace(" ", "T"));
+        if (!isNaN(initStart) && initStart > 0) {
+          var initElapsed = Math.max(0, Math.floor((Date.now() - initStart) / 1000)) + (parseInt(t.tracked_work_seconds, 10) || 0);
+          var initHrs = Math.floor(initElapsed / 3600);
+          if (initHrs > 1) {
+            t.last_bell_hour = initHrs;
+          }
+        }
+      }
     });
     mergedTasks.sort(function (a, b) {
       return (parseInt(b.id, 10) || 0) - (parseInt(a.id, 10) || 0);
@@ -2426,24 +2436,154 @@
   });
 
   // Живое обновление секундомера на карточках в статусе «Выполняю» + почасовые напоминания в колокольчик 🔔
+  function openHourlyTimerAlertModal(task, hoursDone, tst) {
+    if (!task) return;
+    var stats = tst || getTaskTimingStats(task);
+    var assigneeEmp = getEmployeeById(task.assignee_id) || currentEmp;
+    openActionModal("⏰ Таймер включён уже " + hoursDone + " ч · #" + task.id);
+
+    var alertBanner = el(
+      "div",
+      "glass-card",
+      "🔔 Оповещение исполнителю (" +
+        assigneeEmp.short +
+        "): таймер по задаче #" +
+        task.id +
+        " непрерывно включён уже " +
+        hoursDone +
+        " ч (" +
+        formatDurationSec(stats.ownWorkSec || stats.workSec, true) +
+        ")."
+    );
+    alertBanner.style.marginBottom = "10px";
+    alertBanner.style.fontWeight = "600";
+    modalBodyEl.appendChild(alertBanner);
+
+    var detailsCard = el("div", "glass-card");
+    var rows = [
+      ["Задача", "#" + task.id + " — " + (task.title || "")],
+      ["Клиент", task.company_name || "Без компании"],
+      ["Исполнитель", assigneeEmp.name || assigneeEmp.short],
+      ["Время по таймеру", formatDurationSec(stats.ownWorkSec || stats.workSec, true) + " (идёт ⏱)"],
+      ["Списано времени", formatMinutes(stats.spentMins || 0)]
+    ];
+    rows.forEach(function (pair) {
+      var r = el("div", "stat-row");
+      r.appendChild(el("span", "", pair[0]));
+      r.appendChild(el("strong", "", pair[1]));
+      detailsCard.appendChild(r);
+    });
+    modalBodyEl.appendChild(detailsCard);
+
+    var actionsStack = el("div", "bio-setting-actions");
+
+    var btnContinue = el("button", "btn-primary-full", "▶ Продолжаю работу (напомнить через 1 час)");
+    btnContinue.type = "button";
+    btnContinue.addEventListener("click", function () {
+      hapticImpact("light");
+      closeActionModal();
+      showToast("⏱ Таймер по #" + task.id + " продолжает идти (следующее оповещение через 1 ч)");
+    });
+    actionsStack.appendChild(btnContinue);
+
+    var btnPauseNow = el("button", "btn-secondary-full", "⏸ Поставить таймер на паузу");
+    btnPauseNow.type = "button";
+    btnPauseNow.addEventListener("click", function () {
+      closeActionModal();
+      if (stats.isTicking) {
+        toggleTaskPauseResume(task);
+      }
+    });
+    actionsStack.appendChild(btnPauseNow);
+
+    var btnSolveNow = el("button", "btn-secondary-full", "✓ Решена (списать время и закрыть)");
+    btnSolveNow.type = "button";
+    btnSolveNow.addEventListener("click", function () {
+      closeActionModal();
+      openSpentTimeCalculatorModal(task);
+    });
+    actionsStack.appendChild(btnSolveNow);
+
+    var btnJumpTask = el("button", "btn-secondary-full", "📍 Перейти к карточке задачи #" + task.id);
+    btnJumpTask.type = "button";
+    btnJumpTask.addEventListener("click", function () {
+      closeActionModal();
+      switchView("tasks");
+      activeScope = "all";
+      activeStatusFilter = "all";
+      searchInput.value = String(task.id);
+      searchQuery = String(task.id);
+      searchClear.classList.remove("hidden");
+      renderTasksView();
+    });
+    actionsStack.appendChild(btnJumpTask);
+
+    modalBodyEl.appendChild(actionsStack);
+  }
+
   setInterval(function () {
     var hasHourlyChanges = false;
+    var alertTaskToPopup = null;
+    var alertHoursToPopup = 0;
+    var alertStatsToPopup = null;
+
     for (var m = 0; m < state.tasks.length; m++) {
       var tk = state.tasks[m];
       var tst = getTaskTimingStats(tk);
-      if (tst.isTicking && String(tk.assignee_id) === String(currentEmp.id)) {
-        var hoursDone = Math.floor(tst.workSec / 3600);
+      if (tst.isTicking) {
+        var effSec = Math.max(tst.ownWorkSec || 0, tst.workSec || 0);
+        var hoursDone = Math.floor(effSec / 3600);
         var lastNotifiedHour = parseInt(tk.last_bell_hour, 10) || 0;
         if (hoursDone >= 1 && hoursDone > lastNotifiedHour) {
           tk.last_bell_hour = hoursDone;
+          tk.last_timer_alert_at = new Date().toISOString();
+          var assEmp = getEmployeeById(tk.assignee_id) || currentEmp;
+          tk.status_history = Array.isArray(tk.status_history) ? tk.status_history : [];
+          tk.status_history.push({
+            time: new Date().toTimeString().slice(0, 8),
+            label:
+              "⏰ Оповещение исполнителю (" +
+              assEmp.short +
+              "): таймер включён уже " +
+              hoursDone +
+              " ч (" +
+              formatDurationSec(effSec, true) +
+              ")"
+          });
           hasHourlyChanges = true;
-          showToast("🔔 Напоминание (" + hoursDone + " ч): в работе задача #" + tk.id);
+          if (String(tk.assignee_id) === String(currentEmp.id)) {
+            hapticNotify("warning");
+            showToast(
+              "⏰ Таймер по задаче #" +
+                tk.id +
+                " включён уже " +
+                hoursDone +
+                " ч (" +
+                formatDurationSec(effSec, true) +
+                ")"
+            );
+            enqueueSyncOp({
+              op: "timer_alert",
+              id: String(tk.id),
+              aid: parseInt(tk.assignee_id || currentEmp.id, 10) || 1,
+              hr: hoursDone,
+              ws: Math.round(effSec)
+            });
+            if (!alertTaskToPopup) {
+              alertTaskToPopup = tk;
+              alertHoursToPopup = hoursDone;
+              alertStatsToPopup = tst;
+            }
+          }
         }
       }
     }
     if (hasHourlyChanges) {
       saveState();
       updateBellBadge();
+      if (alertTaskToPopup && actionModal && actionModal.classList.contains("hidden")) {
+        openHourlyTimerAlertModal(alertTaskToPopup, alertHoursToPopup, alertStatsToPopup);
+      }
     }
 
     if (activeView !== "tasks") return;
@@ -3544,23 +3684,32 @@
 
   // 3c. Колокольчик 🔔 в правом верхнем углу — почасовые напоминания о запущенном таймере и переход к задаче
   function getActiveRunningTasksForBell() {
-    var running = [];
+    var myRunning = [];
+    var otherRunning = [];
     for (var i = 0; i < state.tasks.length; i++) {
       var t = state.tasks[i];
       if (t.status_code === "completed" || t.status_code === "closed" || t.status_code === "asya1c") continue;
       var st = getTaskTimingStats(t);
       if (st.isTicking || st.isPaused) {
-        running.push({ task: t, stats: st, hours: Math.floor(st.workSec / 3600) });
+        var entry = {
+          task: t,
+          stats: st,
+          hours: Math.floor(Math.max(st.ownWorkSec || 0, st.workSec || 0) / 3600),
+          isMine: String(t.assignee_id) === String(currentEmp.id)
+        };
+        if (entry.isMine) myRunning.push(entry);
+        else otherRunning.push(entry);
       }
     }
-    return running;
+    return myRunning.concat(otherRunning);
   }
 
   function updateBellBadge() {
     var badge = document.getElementById("bell-badge");
     if (!badge) return;
     var list = getActiveRunningTasksForBell();
-    var count = list.length;
+    var myList = list.filter(function (x) { return x.isMine; });
+    var count = myList.length > 0 ? myList.length : list.length;
     badge.textContent = String(count);
     badge.classList.toggle("hidden", count === 0);
   }
