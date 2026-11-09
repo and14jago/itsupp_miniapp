@@ -708,17 +708,19 @@ window.ITSUPP_DATA = {
         "6"
       ],
       "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
+      "spent_minutes": 40,
+      "spent_by_employee": {
+        "7": 40
+      },
       "tracked_work_seconds": 0,
       "work_by_employee": {},
       "timer_paused": false,
       "billing_flag": "none",
       "created_at": "2026-11-09 15:00",
       "created_iso": "2026-11-09T15:00:07.559+03:00",
-      "updated_iso": "2026-11-09T15:02:08.280+03:00",
+      "updated_iso": "2026-11-09T15:50:48.302+03:00",
       "reacted_iso": "2026-11-09T15:02:08.268+03:00",
-      "work_started_at": "2026-11-09T15:02:08.280+03:00",
+      "work_started_at": "2026-11-09T15:50:48.302+03:00",
       "deadline_at": "2026-11-09 16:01",
       "deadline": "2026-11-09 16:01",
       "due_bucket": "today",
