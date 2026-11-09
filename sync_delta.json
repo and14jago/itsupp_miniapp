@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794204137,
-  "updated_at": "2026-11-09T09:02:17.047987+03:00",
+  "sync_seq": 1794204685,
+  "updated_at": "2026-11-09T09:11:25.073901+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -32,7 +32,8 @@
     "обслуживание бд 1с 7.21 & 7.31": "44134",
     "систематические алобы на тормоза в 1с каждое утро": "44135",
     "1с дает ошибку при обмене с элма error 500": "44136",
-    "починить опенвпн на удаленке. энидеск 1776160043": "44137"
+    "починить опенвпн на удаленке. энидеск 1776160043": "44137",
+    "белтрус счет на замену фн": "44138"
   },
   "deleted_ids": [
     "44116",
@@ -42,6 +43,56 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44138,
+      "title": "Белтрус счет на замену ФН",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-09 09:11",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "7",
+      "assignee_name": "Кукушкина А. А.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 09:11",
+      "created_iso": "2026-11-09T09:11:05.230+03:00",
+      "updated_iso": "2026-11-09T09:11:18.411+03:00",
+      "reacted_iso": "2026-11-09T09:11:18.396+03:00",
+      "work_started_at": "2026-11-09T09:11:18.411+03:00",
+      "deadline_at": "2026-11-09 10:10",
+      "deadline": "2026-11-09 10:10",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "делаю",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44137,
       "title": "починить опенвпн на удаленке. энидеск 1776160043",
@@ -1409,63 +1460,6 @@
           "author": "Боровитин Е. С.",
           "time": "",
           "text": "Просмотр sql таблиц, проверка бекапов",
-          "is_public": true
-        },
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44107,
-      "title": "Настройка рдп",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-06 16:13",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 213,
-      "company_name": "КЛИНИКА ФОМИНА ОМСК ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "12",
-      "assignee_name": "Боровитин Е. С.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 15,
-      "spent_by_employee": {
-        "12": 15
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-06 16:13",
-      "created_iso": "2026-11-06T16:13:24.499+03:00",
-      "updated_iso": "2026-11-06T16:13:40.893+03:00",
-      "reacted_iso": "2026-11-06T16:13:27.412+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-06 17:12",
-      "deadline": "2026-11-06 17:12",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
           "is_public": true
         },
         {
