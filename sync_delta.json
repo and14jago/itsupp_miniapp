@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794211816,
-  "updated_at": "2026-11-09T11:10:16.420500+03:00",
+  "sync_seq": 1794211849,
+  "updated_at": "2026-11-09T11:10:49.668401+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -63,6 +63,231 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44166,
+      "title": "Проверить/заполнить 71",
+      "description": "Поступило обращение клиента: Проверить/заполнить 71. Требуется провести диагностику и выполнить необходимые работы для устранения проблемы.",
+      "timeline_summary": "Создана: 2026-11-09 11:10",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "",
+      "assignee_name": "Не назначен",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 11:10",
+      "created_iso": "2026-11-09T11:10:15.322+03:00",
+      "updated_iso": "2026-11-09T11:10:15.373+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44165,
+      "title": "Проверить/заполнить 71",
+      "description": "Поступило обращение клиента: Проверить/заполнить 71. Требуется провести диагностику и выполнить необходимые работы для устранения проблемы.",
+      "timeline_summary": "Создана: 2026-11-09 11:10",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "",
+      "assignee_name": "Не назначен",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 11:10",
+      "created_iso": "2026-11-09T11:10:14.899+03:00",
+      "updated_iso": "2026-11-09T11:10:14.962+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44164,
+      "title": "Проверить/заполнить 71",
+      "description": "Поступило обращение клиента: Проверить/заполнить 71. Требуется провести диагностику и выполнить необходимые работы для устранения проблемы.",
+      "timeline_summary": "Создана: 2026-11-09 11:10",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "",
+      "assignee_name": "Не назначен",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 11:10",
+      "created_iso": "2026-11-09T11:10:14.472+03:00",
+      "updated_iso": "2026-11-09T11:10:14.545+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44163,
+      "title": "Проверить/заполнить 71",
+      "description": "Поступило обращение клиента: Проверить/заполнить 71. Требуется провести диагностику и выполнить необходимые работы для устранения проблемы.",
+      "timeline_summary": "Создана: 2026-11-09 11:10",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "",
+      "assignee_name": "Не назначен",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 11:10",
+      "created_iso": "2026-11-09T11:10:14.005+03:00",
+      "updated_iso": "2026-11-09T11:10:14.064+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44162,
+      "title": "Проверить/заполнить 71",
+      "description": "Поступило обращение клиента: Проверить/заполнить 71. Требуется провести диагностику и выполнить необходимые работы для устранения проблемы.",
+      "timeline_summary": "Создана: 2026-11-09 11:10",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "",
+      "assignee_name": "Не назначен",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 11:10",
+      "created_iso": "2026-11-09T11:10:13.596+03:00",
+      "updated_iso": "2026-11-09T11:10:13.666+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
     {
       "id": 44161,
       "title": "Проверить/заполнить 71",
@@ -1096,299 +1321,6 @@
           "time": "",
           "text": "делаю",
           "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44141,
-      "title": "Новые учетки",
-      "description": "Новые учетки",
-      "timeline_summary": "Создана: 2026-11-09 09:27",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 176,
-      "company_name": "Медсанчасть №14 ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "9",
-      "assignee_name": "Нарыжнев Н. С.",
-      "coexecutors": [
-        "8",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 7,
-      "spent_by_employee": {
-        "9": 7
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 09:27",
-      "created_iso": "2026-11-09T09:27:46.448+03:00",
-      "updated_iso": "2026-11-09T09:34:43.816+03:00",
-      "reacted_iso": "2026-11-09T09:27:49.447+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 10:26",
-      "deadline": "2026-11-09 10:26",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "решено",
-          "is_public": true
-        },
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "Новые учетки",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44140,
-      "title": "Помощь с впнами",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-09 09:25",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 52,
-      "company_name": "Медикал Геномикс ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "12",
-      "assignee_name": "Боровитин Е. С.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 20,
-      "spent_by_employee": {
-        "12": 20
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 09:25",
-      "created_iso": "2026-11-09T09:25:22.822+03:00",
-      "updated_iso": "2026-11-09T09:39:59.164+03:00",
-      "reacted_iso": "2026-11-09T09:25:27.510+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 10:24",
-      "deadline": "2026-11-09 10:24",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        },
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44139,
-      "title": "Проверить нагрузку - перезапустить службу 1С - Щербакова ws222",
-      "description": "Проверить нагрузку - перезапустить службу 1С - Щербакова ws222\n—\nАвтор (инженер): ITSUPP Admin\nTelegram user id: 423709417\nИсточник: @itsupp_task_bot / Создать задачу\nITSUPP operation_id: 9104b756-7aec-4fe0-8e22-c51ea5ee6bb8\nrequest_uuid: 9104b756-7aec-4fe0-8e22-c51ea5ee6bb8",
-      "timeline_summary": "Создана: 2026-11-09 09:14",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "12",
-      "assignee_name": "Боровитин Е. С.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 20,
-      "spent_by_employee": {
-        "12": 20
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 09:14",
-      "created_iso": "2026-11-09T09:14:09.004+03:00",
-      "updated_iso": "2026-11-09T09:23:07.412+03:00",
-      "reacted_iso": "2026-11-09T09:22:52.897+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 10:14",
-      "deadline": "2026-11-09 10:14",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        },
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44138,
-      "title": "Белтрус счет на замену ФН",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-09 09:11",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "7",
-      "assignee_name": "Кукушкина А. А.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 29,
-      "spent_by_employee": {
-        "7": 29
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 09:11",
-      "created_iso": "2026-11-09T09:11:05.230+03:00",
-      "updated_iso": "2026-11-09T09:41:08.113+03:00",
-      "reacted_iso": "2026-11-09T09:11:18.396+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 10:10",
-      "deadline": "2026-11-09 10:10",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "сделано",
-          "is_public": true
-        },
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "делаю",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44137,
-      "title": "починить опенвпн на удаленке. энидеск 1776160043",
-      "description": "починить опенвпн на удаленке. энидеск 1776160043",
-      "timeline_summary": "Создана: 2026-11-09 09:01",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 52,
-      "company_name": "Медикал Геномикс ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "12",
-      "assignee_name": "Боровитин Е. С.",
-      "coexecutors": [],
-      "observers": [
-        "6",
-        "331"
-      ],
-      "control_by": [
-        "331"
-      ],
-      "spent_minutes": 5,
-      "spent_by_employee": {
-        "12": 5
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 09:01",
-      "created_iso": "2026-11-09T09:01:54.356+03:00",
-      "updated_iso": "2026-11-09T09:24:52.967+03:00",
-      "reacted_iso": "2026-11-09T09:24:46.760+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 10:23",
-      "deadline": "2026-11-09 10:23",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        },
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        },
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "Автоматически назначен Быков Максим Владимирович. @itsupp_task_bot",
-          "is_public": false
         }
       ],
       "_syncedToPortal": true
