@@ -634,6 +634,55 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44171,
+      "title": "КФ-Ленинский (а кто-нибудь может реанимирвать мне телеграмм?)",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-09 11:55",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 179,
+      "company_name": "Ленинский (ЦЕНТР ПОТОКА МСК-ЛЕНИНСКИЙ ООО)",
+      "entity_name": "Без объекта",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
+      "coexecutors": [
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 11:55",
+      "created_iso": "2026-11-09T11:55:02.718+03:00",
+      "updated_iso": "2026-11-09T11:55:07.269+03:00",
+      "reacted_iso": "2026-11-09T11:55:07.254+03:00",
+      "work_started_at": "2026-11-09T11:55:07.269+03:00",
+      "deadline_at": "2026-11-09 12:54",
+      "deadline": "2026-11-09 12:54",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44170,
       "title": "Помощь с манго",
       "description": "",
