@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794225741,
-  "updated_at": "2026-11-09T15:02:21.107526+03:00",
+  "sync_seq": 1794227153,
+  "updated_at": "2026-11-09T15:25:53.205490+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -69,7 +69,8 @@
     "буэнос падел тверь (у нас проблема с ключом эцп по буэнос падел. токен перестал работать)": "44179",
     "проблема с фсс": "44181",
     "акопян счет на фронтол": "44180",
-    "буэнос падел ульяновск регистрация касс": "44182"
+    "буэнос падел ульяновск регистрация касс": "44182",
+    "кф-белгород (ошибка сканера в 1с мдлп)": "44183"
   },
   "deleted_ids": [
     "44116",
@@ -79,6 +80,48 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44183,
+      "title": "КФ-Белгород (ошибка сканера в 1С МДЛП)",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-09 15:25",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 98,
+      "company_name": "КЛИНИКА ФОМИНА БЕЛГОРОД ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
+      "coexecutors": [
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 15:25",
+      "created_iso": "2026-11-09T15:25:52.206+03:00",
+      "updated_iso": "2026-11-09T15:25:52.266+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
     {
       "id": 44182,
       "title": "Буэнос Падел Ульяновск регистрация касс",
@@ -1425,63 +1468,6 @@
           "author": "Нарыжнев Н. С.",
           "time": "",
           "text": "Алексей, помощь с переносом УЗИ на диск",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44148,
-      "title": "Обучал Даню как пользоваться таблицей",
-      "description": "Обучал Даню как пользоваться таблицей",
-      "timeline_summary": "Создана: 2026-11-09 10:32",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "9",
-      "assignee_name": "Нарыжнев Н. С.",
-      "coexecutors": [
-        "8",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 5,
-      "spent_by_employee": {
-        "9": 5
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 10:32",
-      "created_iso": "2026-11-09T10:32:12.237+03:00",
-      "updated_iso": "2026-11-09T12:03:14.804+03:00",
-      "reacted_iso": "2026-11-09T10:32:18.393+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 11:31",
-      "deadline": "2026-11-09 11:31",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "решено",
-          "is_public": true
-        },
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "Обучал Даню как пользоваться таблицей",
           "is_public": true
         }
       ],
