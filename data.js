@@ -635,7 +635,7 @@ window.ITSUPP_DATA = {
   "initialTasks": [
     {
       "id": 44149,
-      "title": "Алексей, помощь с переносом УЗИ нна диск",
+      "title": "Алексей, помощь с переносом УЗИ на диск",
       "description": "Алексей, помощь с переносом УЗИ нна диск",
       "timeline_summary": "Создана: 2026-11-09 10:32",
       "status_code": "working",
@@ -666,9 +666,9 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-09 10:32",
       "created_iso": "2026-11-09T10:32:52.338+03:00",
-      "updated_iso": "2026-11-09T10:32:55.330+03:00",
+      "updated_iso": "2026-11-09T10:36:32.740+03:00",
       "reacted_iso": "2026-11-09T10:32:55.308+03:00",
-      "work_started_at": "2026-11-09T10:32:55.330+03:00",
+      "work_started_at": "2026-11-09T10:36:32.740+03:00",
       "deadline_at": "2026-11-09 11:31",
       "deadline": "2026-11-09 11:31",
       "due_bucket": "today",
