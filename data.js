@@ -634,6 +634,55 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44194,
+      "title": "Тонус Ленина 53 (настроить вариант расчёта налогово по умолчанию НДС в том числе)",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-09 17:37",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 15,
+      "company_name": "Тонус ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
+      "coexecutors": [
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 17:37",
+      "created_iso": "2026-11-09T17:37:44.051+03:00",
+      "updated_iso": "2026-11-09T17:37:47.694+03:00",
+      "reacted_iso": "2026-11-09T17:37:47.676+03:00",
+      "work_started_at": "2026-11-09T17:37:47.694+03:00",
+      "deadline_at": "2026-11-10 09:36",
+      "deadline": "2026-11-10 09:36",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44193,
       "title": "Учетка, настройка удаленного доступа",
       "description": "Учетка, настройка удаленного доступа",
