@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794205376,
-  "updated_at": "2026-11-09T09:22:56.998488+03:00",
+  "sync_seq": 1794205407,
+  "updated_at": "2026-11-09T09:23:27.616109+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -49,9 +49,9 @@
       "title": "Проверить нагрузку - перезапустить службу 1С - Щербакова ws222",
       "description": "Проверить нагрузку - перезапустить службу 1С - Щербакова ws222\n—\nАвтор (инженер): ITSUPP Admin\nTelegram user id: 423709417\nИсточник: @itsupp_task_bot / Создать задачу\nITSUPP operation_id: 9104b756-7aec-4fe0-8e22-c51ea5ee6bb8\nrequest_uuid: 9104b756-7aec-4fe0-8e22-c51ea5ee6bb8",
       "timeline_summary": "Создана: 2026-11-09 09:14",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -71,9 +71,9 @@
       "control_by": [
         "7"
       ],
-      "spent_minutes": 10,
+      "spent_minutes": 20,
       "spent_by_employee": {
-        "12": 10
+        "12": 20
       },
       "tracked_work_seconds": 0,
       "work_by_employee": {},
@@ -81,13 +81,19 @@
       "billing_flag": "none",
       "created_at": "2026-11-09 09:14",
       "created_iso": "2026-11-09T09:14:09.004+03:00",
-      "updated_iso": "2026-11-09T09:22:52.926+03:00",
+      "updated_iso": "2026-11-09T09:23:07.412+03:00",
       "reacted_iso": "2026-11-09T09:22:52.897+03:00",
-      "work_started_at": "2026-11-09T09:22:52.926+03:00",
+      "work_started_at": "",
       "deadline_at": "2026-11-09 10:14",
       "deadline": "2026-11-09 10:14",
       "due_bucket": "today",
       "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        },
         {
           "author": "Боровитин Е. С.",
           "time": "",
