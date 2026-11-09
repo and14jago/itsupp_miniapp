@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794223161,
-  "updated_at": "2026-11-09T14:19:21.462931+03:00",
+  "sync_seq": 1794223683,
+  "updated_at": "2026-11-09T14:28:03.322211+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -137,9 +137,9 @@
       "title": "КФ-Калуга (ЭРС ошибка при отправке)",
       "description": "",
       "timeline_summary": "Создана: 2026-11-09 14:14",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -157,21 +157,29 @@
         "6"
       ],
       "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
+      "spent_minutes": 15,
+      "spent_by_employee": {
+        "8": 15
+      },
       "tracked_work_seconds": 0,
       "work_by_employee": {},
       "timer_paused": false,
       "billing_flag": "none",
       "created_at": "2026-11-09 14:14",
       "created_iso": "2026-11-09T14:14:37.218+03:00",
-      "updated_iso": "2026-11-09T14:14:41.271+03:00",
+      "updated_iso": "2026-11-09T14:27:39.764+03:00",
       "reacted_iso": "2026-11-09T14:14:41.259+03:00",
-      "work_started_at": "2026-11-09T14:14:41.271+03:00",
+      "work_started_at": "",
       "deadline_at": "2026-11-09 15:13",
       "deadline": "2026-11-09 15:13",
       "due_bucket": "today",
       "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        },
         {
           "author": "Быков М. В.",
           "time": "",
