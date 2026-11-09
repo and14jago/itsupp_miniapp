@@ -634,6 +634,103 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44198,
+      "title": "Элма 400 ошибка",
+      "description": "Элма 400 ошибка",
+      "timeline_summary": "Создана: 2026-11-09 22:46",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 69,
+      "company_name": "УК КДФ",
+      "entity_name": "Без объекта",
+      "assignee_id": "1",
+      "assignee_name": "Стрелкин М. В.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 22:46",
+      "created_iso": "2026-11-09T22:46:03.842+03:00",
+      "updated_iso": "2026-11-09T22:46:03.935+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44197,
+      "title": "Элма 400 ошибка",
+      "description": "Элма 400 ошибка",
+      "timeline_summary": "Создана: 2026-11-09 22:46",
+      "status_code": "work",
+      "status_name": "Принял",
+      "status_color": "#605cb8",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 69,
+      "company_name": "УК КДФ",
+      "entity_name": "Без объекта",
+      "assignee_id": "1",
+      "assignee_name": "Стрелкин М. В.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 22:46",
+      "created_iso": "2026-11-09T22:46:03.764+03:00",
+      "updated_iso": "2026-11-09T22:46:10.028+03:00",
+      "reacted_iso": "2026-11-09T22:46:10.009+03:00",
+      "work_started_at": "2026-11-09T22:46:10.028+03:00",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "Статус «Выполняю» (Mini App портала) · Время: списано 5 мин (по таймеру: 5 мин, По договору (Обычная))",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44187,
       "title": "Новая учетка, настройка  подключения",
       "description": "Новая учетка, настройка  подключения",
