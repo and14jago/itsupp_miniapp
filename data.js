@@ -702,8 +702,8 @@ window.ITSUPP_DATA = {
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
-      "company_id": 0,
-      "company_name": "Без компании",
+      "company_id": 156,
+      "company_name": "МОЛОДО ООО",
       "entity_name": "Без объекта",
       "assignee_id": "9",
       "assignee_name": "Нарыжнев Н. С.",
@@ -724,17 +724,17 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-09 14:35",
       "created_iso": "2026-11-09T14:35:09.853+03:00",
-      "updated_iso": "2026-11-09T14:35:13.087+03:00",
+      "updated_iso": "2026-11-09T16:27:28.206+03:00",
       "reacted_iso": "2026-11-09T14:35:13.070+03:00",
-      "work_started_at": "2026-11-09T14:35:13.087+03:00",
-      "deadline_at": "2026-11-09 15:34",
-      "deadline": "2026-11-09 15:34",
+      "work_started_at": "2026-11-09T16:27:28.206+03:00",
+      "deadline_at": "2026-11-09 15:35",
+      "deadline": "2026-11-09 15:35",
       "due_bucket": "today",
       "comments": [
         {
           "author": "Нарыжнев Н. С.",
           "time": "",
-          "text": "Проблема с ФСС",
+          "text": "Проблема с ФСС\nустановка ФСС, настройка поиск подписей.",
           "is_public": true
         }
       ],
