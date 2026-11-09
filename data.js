@@ -647,10 +647,9 @@ window.ITSUPP_DATA = {
       "company_id": 69,
       "company_name": "УК КДФ",
       "entity_name": "Без объекта",
-      "assignee_id": "",
-      "assignee_name": "Не назначен",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
       "coexecutors": [
-        "8",
         "9",
         "11",
         "12"
@@ -671,7 +670,7 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-09 08:34",
       "created_iso": "2026-11-09T08:34:15.700+03:00",
-      "updated_iso": "2026-11-09T08:46:10.136+03:00",
+      "updated_iso": "2026-11-09T08:53:38.443+03:00",
       "reacted_iso": "2026-11-09T08:34:24.431+03:00",
       "work_started_at": "2026-11-09T05:45:41.658Z",
       "deadline_at": "2026-11-09 10:00",
