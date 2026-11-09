@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794223683,
-  "updated_at": "2026-11-09T14:28:03.322211+03:00",
+  "sync_seq": 1794223899,
+  "updated_at": "2026-11-09T14:31:39.851507+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -65,7 +65,8 @@
     "новая учетка, настройка подключения": "44175",
     "помощь с лисом": "44176",
     "кф-калуга (эрс ошибка при отправке)": "44177",
-    "ип яковлев алексей николаевич (ремонт ккт атол 30ф)": "44178"
+    "ип яковлев алексей николаевич (ремонт ккт атол 30ф)": "44178",
+    "буэнос падел тверь (у нас проблема с ключом эцп по буэнос падел. токен перестал работать)": "44179"
   },
   "deleted_ids": [
     "44116",
@@ -75,6 +76,55 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44179,
+      "title": "Буэнос Падел Тверь (у нас проблема с ключом ЭЦП по Буэнос Падел. Токен перестал работать)",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-09 14:31",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 207,
+      "company_name": "БУЭНОС ПАДЕЛ ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
+      "coexecutors": [
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 14:31",
+      "created_iso": "2026-11-09T14:31:34.366+03:00",
+      "updated_iso": "2026-11-09T14:31:37.873+03:00",
+      "reacted_iso": "2026-11-09T14:31:37.860+03:00",
+      "work_started_at": "2026-11-09T14:31:37.873+03:00",
+      "deadline_at": "2026-11-09 15:30",
+      "deadline": "2026-11-09 15:30",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44178,
       "title": "ИП ЯКОВЛЕВ АЛЕКСЕЙ НИКОЛАЕВИЧ (ремонт ККТ Атол 30Ф)",
@@ -1434,63 +1484,6 @@
         },
         {
           "author": "Никулин Д. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44144,
-      "title": "Помощь с принтером",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-09 09:53",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 210,
-      "company_name": "Клиника Фомина Тюмень",
-      "entity_name": "Без объекта",
-      "assignee_id": "12",
-      "assignee_name": "Боровитин Е. С.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 10,
-      "spent_by_employee": {
-        "12": 10
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 09:53",
-      "created_iso": "2026-11-09T09:53:57.243+03:00",
-      "updated_iso": "2026-11-09T09:54:09.526+03:00",
-      "reacted_iso": "2026-11-09T09:54:01.451+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 10:53",
-      "deadline": "2026-11-09 10:53",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        },
-        {
-          "author": "Боровитин Е. С.",
           "time": "",
           "text": ".",
           "is_public": true
