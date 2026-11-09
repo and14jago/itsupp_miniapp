@@ -634,6 +634,55 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44195,
+      "title": "Не могу зайти на удаленку",
+      "description": "Не могу зайти на удаленку",
+      "timeline_summary": "Создана: 2026-11-09 17:48",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 41,
+      "company_name": "КЛИНИКА ФОМИНА ТВЕРЬ ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "9",
+      "assignee_name": "Нарыжнев Н. С.",
+      "coexecutors": [
+        "8",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 17:48",
+      "created_iso": "2026-11-09T17:48:25.803+03:00",
+      "updated_iso": "2026-11-09T17:48:29.136+03:00",
+      "reacted_iso": "2026-11-09T17:48:29.121+03:00",
+      "work_started_at": "2026-11-09T17:48:29.136+03:00",
+      "deadline_at": "2026-11-10 09:47",
+      "deadline": "2026-11-10 09:47",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Нарыжнев Н. С.",
+          "time": "",
+          "text": "Не могу зайти на удаленку",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44193,
       "title": "Учетка, настройка удаленного доступа",
       "description": "Учетка, настройка удаленного доступа",
