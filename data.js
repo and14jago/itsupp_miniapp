@@ -635,7 +635,7 @@ window.ITSUPP_DATA = {
   "initialTasks": [
     {
       "id": 44174,
-      "title": "скан",
+      "title": "Настройка скана",
       "description": "скан",
       "timeline_summary": "Создана: 2026-11-09 12:54",
       "status_code": "working",
@@ -666,9 +666,9 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-09 12:54",
       "created_iso": "2026-11-09T12:54:59.714+03:00",
-      "updated_iso": "2026-11-09T12:55:03.698+03:00",
+      "updated_iso": "2026-11-09T13:10:06.060+03:00",
       "reacted_iso": "2026-11-09T12:55:03.679+03:00",
-      "work_started_at": "2026-11-09T12:55:03.698+03:00",
+      "work_started_at": "2026-11-09T13:10:06.060+03:00",
       "deadline_at": "2026-11-09 13:54",
       "deadline": "2026-11-09 13:54",
       "due_bucket": "today",
@@ -676,7 +676,7 @@ window.ITSUPP_DATA = {
         {
           "author": "Нарыжнев Н. С.",
           "time": "",
-          "text": "скан",
+          "text": "Настройка скана",
           "is_public": true
         }
       ],
