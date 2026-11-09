@@ -638,9 +638,9 @@ window.ITSUPP_DATA = {
       "title": "КФ-Белгород (ошибка сканера в 1С МДЛП)",
       "description": "",
       "timeline_summary": "Создана: 2026-11-09 15:25",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -666,13 +666,20 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-09 15:25",
       "created_iso": "2026-11-09T15:25:52.206+03:00",
-      "updated_iso": "2026-11-09T15:25:52.266+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
+      "updated_iso": "2026-11-09T15:25:56.048+03:00",
+      "reacted_iso": "2026-11-09T15:25:56.032+03:00",
+      "work_started_at": "2026-11-09T15:25:56.048+03:00",
+      "deadline_at": "2026-11-09 16:24",
+      "deadline": "2026-11-09 16:24",
       "due_bucket": "today",
-      "comments": [],
+      "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        }
+      ],
       "_syncedToPortal": true
     },
     {
