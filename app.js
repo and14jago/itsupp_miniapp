@@ -1380,6 +1380,7 @@
   // =========================================================
   // ЭКРАН 1: СБЕР FACE ID / TOUCH ID + 5-ЗНАЧНЫЙ КОД ДОСТУПА
   // =========================================================
+  var BYPASS_LOGIN_ON_ENTRY = true;
   var pinBuffer = "";
   var pinChangeMode = false;
   var bm = tg && tg.BiometricManager ? tg.BiometricManager : null;
@@ -1417,7 +1418,7 @@
     try {
       bm.init(function () {
         updateBiometricLabels();
-        if (bioPrefs.enabled && bioPrefs.autoPrompt) {
+        if (!BYPASS_LOGIN_ON_ENTRY && bioPrefs.enabled && bioPrefs.autoPrompt) {
           triggerBiometricLogin();
         }
       });
@@ -4765,6 +4766,14 @@
   document.getElementById("btn-lock-now").addEventListener("click", function () {
     lockToLoginScreen();
   });
+
+  // Bypass login/ID screen on entry on the fly (keep all screen-login functions intact)
+  if (BYPASS_LOGIN_ON_ENTRY) {
+    document.getElementById("bio-modal").classList.add("hidden");
+    document.getElementById("screen-login").classList.remove("active");
+    document.getElementById("screen-app").classList.add("active");
+    renderAllAppViews();
+  }
 
   // =========================================================
   // ЕЖЕМИНУТНАЯ ДВУСТОРОННЯЯ СИНХРОНИЗАЦИЯ ИЗМЕНЁННЫХ ЭЛЕМЕНТОВ С ПОРТАЛОМ
