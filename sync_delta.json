@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794220989,
-  "updated_at": "2026-11-09T13:43:09.944341+03:00",
+  "sync_seq": 1794221564,
+  "updated_at": "2026-11-09T13:52:44.883837+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -62,7 +62,8 @@
     "список продления офд": "44173",
     "скан": "44174",
     "настройка скана": "44174",
-    "новая учетка, настройка подключения": "44175"
+    "новая учетка, настройка подключения": "44175",
+    "помощь с лисом": "44176"
   },
   "deleted_ids": [
     "44116",
@@ -72,6 +73,63 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44176,
+      "title": "Помощь с лисом",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-09 13:52",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 52,
+      "company_name": "Медикал Геномикс ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 120,
+      "spent_by_employee": {
+        "12": 120
+      },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 13:52",
+      "created_iso": "2026-11-09T13:52:19.591+03:00",
+      "updated_iso": "2026-11-09T13:52:29.746+03:00",
+      "reacted_iso": "2026-11-09T13:52:23.003+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-09 14:51",
+      "deadline": "2026-11-09 14:51",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        },
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44175,
       "title": "Новая учетка, настройка подключения",
@@ -1425,63 +1483,6 @@
           "author": "Кукушкина А. А.",
           "time": "",
           "text": "делаю",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44141,
-      "title": "Новые учетки",
-      "description": "Новые учетки",
-      "timeline_summary": "Создана: 2026-11-09 09:27",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 176,
-      "company_name": "Медсанчасть №14 ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "9",
-      "assignee_name": "Нарыжнев Н. С.",
-      "coexecutors": [
-        "8",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 7,
-      "spent_by_employee": {
-        "9": 7
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 09:27",
-      "created_iso": "2026-11-09T09:27:46.448+03:00",
-      "updated_iso": "2026-11-09T09:34:43.816+03:00",
-      "reacted_iso": "2026-11-09T09:27:49.447+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 10:26",
-      "deadline": "2026-11-09 10:26",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "решено",
-          "is_public": true
-        },
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "Новые учетки",
           "is_public": true
         }
       ],
