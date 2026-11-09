@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794206505,
-  "updated_at": "2026-11-09T09:41:45.500106+03:00",
+  "sync_seq": 1794206536,
+  "updated_at": "2026-11-09T09:42:16.252806+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -37,7 +37,8 @@
     "проверить нагрузку - перезапустить службу 1с - щербакова ws222": "44139",
     "помощь с впнами": "44140",
     "новые учетки": "44141",
-    "почта проверить входящие": "44142"
+    "почта проверить входящие": "44142",
+    "установка эцп": "44143"
   },
   "deleted_ids": [
     "44116",
@@ -47,6 +48,56 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44143,
+      "title": "Установка эцп",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-09 09:42",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 41,
+      "company_name": "КЛИНИКА ФОМИНА ТВЕРЬ ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "5",
+      "assignee_name": "Старцев Е. А.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 09:42",
+      "created_iso": "2026-11-09T09:42:01.260+03:00",
+      "updated_iso": "2026-11-09T09:42:04.890+03:00",
+      "reacted_iso": "2026-11-09T09:42:04.866+03:00",
+      "work_started_at": "2026-11-09T09:42:04.890+03:00",
+      "deadline_at": "2026-11-09 10:41",
+      "deadline": "2026-11-09 10:41",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Старцев Е. А.",
+          "time": "",
+          "text": "й",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44142,
       "title": "почта проверить входящие",
@@ -1433,63 +1484,6 @@
       "deadline": "2026-11-11 18:00",
       "due_bucket": "today",
       "comments": [],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44112,
-      "title": "Удаление 1с, ovpn, логов",
-      "description": ".",
-      "timeline_summary": "Создана: 2026-11-06 17:36",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 112,
-      "company_name": "КЛИНИКА ФОМИНА ДОЛГОРУКОВСКАЯ ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "11",
-      "assignee_name": "Никулин Д. С.",
-      "coexecutors": [
-        "8",
-        "9",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 25,
-      "spent_by_employee": {
-        "11": 25
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-06 17:36",
-      "created_iso": "2026-11-06T17:36:33.557+03:00",
-      "updated_iso": "2026-11-06T17:45:32.908+03:00",
-      "reacted_iso": "2026-11-06T17:45:14.595+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 09:44",
-      "deadline": "2026-11-09 09:44",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Никулин Д. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        },
-        {
-          "author": "Никулин Д. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        }
-      ],
       "_syncedToPortal": true
     }
   ]
