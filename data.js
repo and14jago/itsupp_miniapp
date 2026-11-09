@@ -634,48 +634,6 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
-      "id": 44178,
-      "title": "ИП ЯКОВЛЕВ АЛЕКСЕЙ НИКОЛАЕВИЧ (ремонт ККТ Атол 30Ф)",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-09 14:18",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 63,
-      "company_name": "Услуга ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 14:18",
-      "created_iso": "2026-11-09T14:18:50.860+03:00",
-      "updated_iso": "2026-11-09T14:18:50.924+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
-      "due_bucket": "today",
-      "comments": [],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44177,
       "title": "КФ-Калуга (ЭРС ошибка при отправке)",
       "description": "",
