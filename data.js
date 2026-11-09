@@ -683,55 +683,6 @@ window.ITSUPP_DATA = {
       "_syncedToPortal": true
     },
     {
-      "id": 44179,
-      "title": "Буэнос Падел Тверь (у нас проблема с ключом ЭЦП по Буэнос Падел. Токен перестал работать)",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-09 14:31",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 207,
-      "company_name": "БУЭНОС ПАДЕЛ ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 14:31",
-      "created_iso": "2026-11-09T14:31:34.366+03:00",
-      "updated_iso": "2026-11-09T14:31:37.873+03:00",
-      "reacted_iso": "2026-11-09T14:31:37.860+03:00",
-      "work_started_at": "2026-11-09T14:31:37.873+03:00",
-      "deadline_at": "2026-11-09 15:30",
-      "deadline": "2026-11-09 15:30",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44166,
       "title": "Проверить/заполнить 71",
       "description": "Поступило обращение клиента: Проверить/заполнить 71. Требуется провести диагностику и выполнить необходимые работы для устранения проблемы.",
