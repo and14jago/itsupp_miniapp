@@ -833,56 +833,6 @@ window.ITSUPP_DATA = {
       "_syncedToPortal": true
     },
     {
-      "id": 44147,
-      "title": "Ульчновск проверить анкету",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-09 10:25",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "7",
-      "assignee_name": "Кукушкина А. А.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 10:25",
-      "created_iso": "2026-11-09T10:25:54.103+03:00",
-      "updated_iso": "2026-11-09T10:26:24.705+03:00",
-      "reacted_iso": "2026-11-09T10:26:24.684+03:00",
-      "work_started_at": "2026-11-09T10:26:24.705+03:00",
-      "deadline_at": "2026-11-09 11:25",
-      "deadline": "2026-11-09 11:25",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "делаю",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44142,
       "title": "почта проверить входящие",
       "description": "",
