@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794253585,
-  "updated_at": "2026-11-09T22:46:25.638146+03:00",
+  "sync_seq": 1794258098,
+  "updated_at": "2026-11-10T00:01:38.817647+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -82,7 +82,8 @@
     "тонус ленина 53 (настроить вариант расчёта налогово по умолчанию ндс в том числе)": "44194",
     "не могу зайти на удаленку": "44195",
     "активация office": "44196",
-    "элма 400 ошибка": "44197"
+    "элма 400 ошибка": "44197",
+    "оплата до 15 числа каждого месяца": "44199"
   },
   "deleted_ids": [
     "44116",
@@ -92,6 +93,49 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44199,
+      "title": "Оплата до 15 числа каждого месяца",
+      "description": "1. ИТ-Импульс\n2. Завгородний С.\n3. Смартком\n4. Бюро автоматизации\n5. Нугуманов Н.\n6. Панов Н.\n7. Пугачев А. - не сделано пп\n8. Агафонов Е.\n9. Шершнев - проверить оплаты нам от заказчиков, чтоб мы оплатили\n10. Старков проверить оплаты нам от заказчиков, чтоб мы оплатили\n11. ИТ-Софт проверить оплаты нам от заказчиков, чтоб мы оплатили",
+      "timeline_summary": "Создана: 2026-11-10 00:01",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "",
+      "assignee_name": "Не назначен",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 00:01",
+      "created_iso": "2026-11-10T00:01:29.661+03:00",
+      "updated_iso": "2026-11-10T00:01:29.738+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
     {
       "id": 44198,
       "title": "Элма 400 ошибка",
@@ -1437,63 +1481,6 @@
           "author": "Нарыжнев Н. С.",
           "time": "",
           "text": "Новая учетка, настройка подключения",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44174,
-      "title": "Настройка скана",
-      "description": "скан",
-      "timeline_summary": "Создана: 2026-11-09 12:54",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 162,
-      "company_name": "КЛИНИКА ФОМИНА ПЕРМЬ ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "9",
-      "assignee_name": "Нарыжнев Н. С.",
-      "coexecutors": [
-        "8",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 16,
-      "spent_by_employee": {
-        "9": 16
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 12:54",
-      "created_iso": "2026-11-09T12:54:59.714+03:00",
-      "updated_iso": "2026-11-09T13:10:25.656+03:00",
-      "reacted_iso": "2026-11-09T12:55:03.679+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 13:54",
-      "deadline": "2026-11-09 13:54",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "решено",
-          "is_public": true
-        },
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "Настройка скана",
           "is_public": true
         }
       ],
