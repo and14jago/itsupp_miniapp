@@ -634,55 +634,6 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
-      "id": 44183,
-      "title": "КФ-Белгород (ошибка сканера в 1С МДЛП)",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-09 15:25",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 98,
-      "company_name": "КЛИНИКА ФОМИНА БЕЛГОРОД ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 15:25",
-      "created_iso": "2026-11-09T15:25:52.206+03:00",
-      "updated_iso": "2026-11-09T15:25:56.048+03:00",
-      "reacted_iso": "2026-11-09T15:25:56.032+03:00",
-      "work_started_at": "2026-11-09T15:25:56.048+03:00",
-      "deadline_at": "2026-11-09 16:24",
-      "deadline": "2026-11-09 16:24",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44182,
       "title": "Буэнос Падел Ульяновск регистрация касс",
       "description": "",

@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794228707,
-  "updated_at": "2026-11-09T15:51:47.165609+03:00",
+  "sync_seq": 1794229003,
+  "updated_at": "2026-11-09T15:56:43.276636+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -85,9 +85,9 @@
       "title": "КФ-Белгород (ошибка сканера в 1С МДЛП)",
       "description": "",
       "timeline_summary": "Создана: 2026-11-09 15:25",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -105,21 +105,29 @@
         "6"
       ],
       "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
+      "spent_minutes": 20,
+      "spent_by_employee": {
+        "8": 20
+      },
       "tracked_work_seconds": 0,
       "work_by_employee": {},
       "timer_paused": false,
       "billing_flag": "none",
       "created_at": "2026-11-09 15:25",
       "created_iso": "2026-11-09T15:25:52.206+03:00",
-      "updated_iso": "2026-11-09T15:25:56.048+03:00",
+      "updated_iso": "2026-11-09T15:56:38.131+03:00",
       "reacted_iso": "2026-11-09T15:25:56.032+03:00",
-      "work_started_at": "2026-11-09T15:25:56.048+03:00",
+      "work_started_at": "",
       "deadline_at": "2026-11-09 16:24",
       "deadline": "2026-11-09 16:24",
       "due_bucket": "today",
       "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        },
         {
           "author": "Быков М. В.",
           "time": "",
