@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794229515,
-  "updated_at": "2026-11-09T16:05:15.791010+03:00",
+  "sync_seq": 1794229545,
+  "updated_at": "2026-11-09T16:05:45.740557+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -46,7 +46,7 @@
     "обучал даню как пользоваться таблицей": "44148",
     "алексей, помощь с переносом узи нна диск": "44149",
     "алексей, помощь с переносом узи на диск": "44149",
-    "помощь с эцп": "44150",
+    "помощь с эцп": "44167",
     "тонус энгельса (консультация по егаис)": "44151",
     "тонус энгельса касса 1 (ошибка тпг)": "44152",
     "тестирование пе оператора на можайского": "44153",
@@ -71,7 +71,8 @@
     "акопян счет на фронтол": "44180",
     "буэнос падел ульяновск регистрация касс": "44182",
     "кф-белгород (ошибка сканера в 1с мдлп)": "44183",
-    "сбор технической информации мг": "44184"
+    "сбор технической информации мг": "44184",
+    "установка принтера hp": "44185"
   },
   "deleted_ids": [
     "44116",
@@ -81,6 +82,63 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44185,
+      "title": "Установка принтера hp",
+      "description": "Установил принтер на 3 этаже",
+      "timeline_summary": "Создана: 2026-11-09 16:05",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 41,
+      "company_name": "КЛИНИКА ФОМИНА ТВЕРЬ ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "11",
+      "assignee_name": "Никулин Д. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 40,
+      "spent_by_employee": {
+        "11": 40
+      },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 16:05",
+      "created_iso": "2026-11-09T16:05:24.072+03:00",
+      "updated_iso": "2026-11-09T16:05:34.417+03:00",
+      "reacted_iso": "2026-11-09T16:05:27.681+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-09 17:04",
+      "deadline": "2026-11-09 17:04",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Никулин Д. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        },
+        {
+          "author": "Никулин Д. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44184,
       "title": "Сбор технической информации МГ",
@@ -1435,63 +1493,6 @@
           "author": "Быков М. В.",
           "time": "",
           "text": "+",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44150,
-      "title": "Помощь с эцп",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-09 10:43",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 149,
-      "company_name": "КЛИНИКА ФОМИНА МИЧУРИНСКИЙ ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "12",
-      "assignee_name": "Боровитин Е. С.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 70,
-      "spent_by_employee": {
-        "12": 70
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 10:43",
-      "created_iso": "2026-11-09T10:43:07.676+03:00",
-      "updated_iso": "2026-11-09T15:00:15.406+03:00",
-      "reacted_iso": "2026-11-09T10:43:15.985+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 11:42",
-      "deadline": "2026-11-09 11:42",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        },
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
           "is_public": true
         }
       ],
