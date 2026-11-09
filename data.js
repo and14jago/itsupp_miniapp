@@ -634,6 +634,55 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44141,
+      "title": "Новые учетки",
+      "description": "Новые учетки",
+      "timeline_summary": "Создана: 2026-11-09 09:27",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 176,
+      "company_name": "Медсанчасть №14 ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "9",
+      "assignee_name": "Нарыжнев Н. С.",
+      "coexecutors": [
+        "8",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 09:27",
+      "created_iso": "2026-11-09T09:27:46.448+03:00",
+      "updated_iso": "2026-11-09T09:27:49.463+03:00",
+      "reacted_iso": "2026-11-09T09:27:49.447+03:00",
+      "work_started_at": "2026-11-09T09:27:49.463+03:00",
+      "deadline_at": "2026-11-09 10:26",
+      "deadline": "2026-11-09 10:26",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Нарыжнев Н. С.",
+          "time": "",
+          "text": "Новые учетки",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44138,
       "title": "Белтрус счет на замену ФН",
       "description": "",
