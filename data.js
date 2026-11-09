@@ -634,6 +634,48 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44169,
+      "title": "Не работает",
+      "description": "Не работает",
+      "timeline_summary": "Создана: 2026-11-09 11:29",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "9",
+      "assignee_name": "Нарыжнев Н. С.",
+      "coexecutors": [
+        "8",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 11:29",
+      "created_iso": "2026-11-09T11:29:20.845+03:00",
+      "updated_iso": "2026-11-09T11:29:20.907+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44166,
       "title": "Проверить/заполнить 71",
       "description": "Поступило обращение клиента: Проверить/заполнить 71. Требуется провести диагностику и выполнить необходимые работы для устранения проблемы.",
