@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794232346,
-  "updated_at": "2026-11-09T16:52:26.296796+03:00",
+  "sync_seq": 1794232615,
+  "updated_at": "2026-11-09T16:56:55.379072+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -85,6 +85,63 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44190,
+      "title": "Помощь с эцп",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-09 16:56",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 52,
+      "company_name": "Медикал Геномикс ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 30,
+      "spent_by_employee": {
+        "12": 30
+      },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 16:56",
+      "created_iso": "2026-11-09T16:56:41.571+03:00",
+      "updated_iso": "2026-11-09T16:56:51.355+03:00",
+      "reacted_iso": "2026-11-09T16:56:44.651+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-09 17:55",
+      "deadline": "2026-11-09 17:55",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        },
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44189,
       "title": "работа на сервере",
@@ -1441,63 +1498,6 @@
           "author": "Нарыжнев Н. С.",
           "time": "",
           "text": "ТО",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44155,
-      "title": "Тонус Советский (не загружается накладная ЕГАИС город 77)",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-09 10:58",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 15,
-      "company_name": "Тонус ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 30,
-      "spent_by_employee": {
-        "8": 30
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 10:58",
-      "created_iso": "2026-11-09T10:58:20.122+03:00",
-      "updated_iso": "2026-11-09T11:33:10.696+03:00",
-      "reacted_iso": "2026-11-09T10:58:24.423+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 11:57",
-      "deadline": "2026-11-09 11:57",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
-          "is_public": true
-        },
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
           "is_public": true
         }
       ],
