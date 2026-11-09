@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794206943,
-  "updated_at": "2026-11-09T09:49:03.579024+03:00",
+  "sync_seq": 1794207252,
+  "updated_at": "2026-11-09T09:54:12.520792+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -38,7 +38,8 @@
     "помощь с впнами": "44140",
     "новые учетки": "44141",
     "почта проверить входящие": "44142",
-    "установка эцп": "44143"
+    "установка эцп": "44143",
+    "помощь с принтером": "44144"
   },
   "deleted_ids": [
     "44116",
@@ -48,6 +49,63 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44144,
+      "title": "Помощь с принтером",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-09 09:53",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 210,
+      "company_name": "Клиника Фомина Тюмень",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 10,
+      "spent_by_employee": {
+        "12": 10
+      },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 09:53",
+      "created_iso": "2026-11-09T09:53:57.243+03:00",
+      "updated_iso": "2026-11-09T09:54:09.526+03:00",
+      "reacted_iso": "2026-11-09T09:54:01.451+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-09 10:53",
+      "deadline": "2026-11-09 10:53",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        },
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44143,
       "title": "Установка эцп",
