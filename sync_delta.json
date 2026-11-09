@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794203628,
-  "updated_at": "2026-11-09T08:53:48.404206+03:00",
+  "sync_seq": 1794204137,
+  "updated_at": "2026-11-09T09:02:17.047987+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -31,7 +31,8 @@
     "тест app 3": "44133",
     "обслуживание бд 1с 7.21 & 7.31": "44134",
     "систематические алобы на тормоза в 1с каждое утро": "44135",
-    "1с дает ошибку при обмене с элма error 500": "44136"
+    "1с дает ошибку при обмене с элма error 500": "44136",
+    "починить опенвпн на удаленке. энидеск 1776160043": "44137"
   },
   "deleted_ids": [
     "44116",
@@ -41,6 +42,52 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44137,
+      "title": "починить опенвпн на удаленке. энидеск 1776160043",
+      "description": "починить опенвпн на удаленке. энидеск 1776160043",
+      "timeline_summary": "Создана: 2026-11-09 09:01",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 52,
+      "company_name": "Медикал Геномикс ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "",
+      "assignee_name": "Не назначен",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6",
+        "331"
+      ],
+      "control_by": [
+        "331"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 09:01",
+      "created_iso": "2026-11-09T09:01:54.356+03:00",
+      "updated_iso": "2026-11-09T09:01:54.436+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
     {
       "id": 44136,
       "title": "1С дает ошибку при обмене с элма error 500",
@@ -1425,63 +1472,6 @@
           "author": "Боровитин Е. С.",
           "time": "",
           "text": ".",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44106,
-      "title": "КФ-Тула кабинет 101 (не печатает принтер на двух сторонах)",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-06 15:48",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 173,
-      "company_name": "КЛИНИКА ФОМИНА ТУЛА ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 20,
-      "spent_by_employee": {
-        "8": 20
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-06 15:48",
-      "created_iso": "2026-11-06T15:48:28.777+03:00",
-      "updated_iso": "2026-11-06T16:18:05.579+03:00",
-      "reacted_iso": "2026-11-06T15:48:32.459+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-06 16:47",
-      "deadline": "2026-11-06 16:47",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
-          "is_public": true
-        },
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
           "is_public": true
         }
       ],

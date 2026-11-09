@@ -634,6 +634,52 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44137,
+      "title": "починить опенвпн на удаленке. энидеск 1776160043",
+      "description": "починить опенвпн на удаленке. энидеск 1776160043",
+      "timeline_summary": "Создана: 2026-11-09 09:01",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 52,
+      "company_name": "Медикал Геномикс ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "",
+      "assignee_name": "Не назначен",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6",
+        "331"
+      ],
+      "control_by": [
+        "331"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 09:01",
+      "created_iso": "2026-11-09T09:01:54.356+03:00",
+      "updated_iso": "2026-11-09T09:01:54.436+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44136,
       "title": "1С дает ошибку при обмене с элма error 500",
       "description": "1С дает ошибку при обмене с элма error 500",
