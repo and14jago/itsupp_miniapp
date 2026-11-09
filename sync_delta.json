@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794229545,
-  "updated_at": "2026-11-09T16:05:45.740557+03:00",
+  "sync_seq": 1794229576,
+  "updated_at": "2026-11-09T16:06:16.081905+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -72,7 +72,8 @@
     "буэнос падел ульяновск регистрация касс": "44182",
     "кф-белгород (ошибка сканера в 1с мдлп)": "44183",
     "сбор технической информации мг": "44184",
-    "установка принтера hp": "44185"
+    "установка принтера hp": "44185",
+    "помощь с телевизором mi": "44186"
   },
   "deleted_ids": [
     "44116",
@@ -82,6 +83,55 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44186,
+      "title": "Помощь с телевизором mi",
+      "description": ".",
+      "timeline_summary": "Создана: 2026-11-09 16:06",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 195,
+      "company_name": "КЛИНИКА ФОМИНА ГОСПИТАЛЬ ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "11",
+      "assignee_name": "Никулин Д. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 16:06",
+      "created_iso": "2026-11-09T16:06:07.362+03:00",
+      "updated_iso": "2026-11-09T16:06:10.562+03:00",
+      "reacted_iso": "2026-11-09T16:06:10.542+03:00",
+      "work_started_at": "2026-11-09T16:06:10.562+03:00",
+      "deadline_at": "2026-11-09 17:05",
+      "deadline": "2026-11-09 17:05",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Никулин Д. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44185,
       "title": "Установка принтера hp",
@@ -1421,63 +1471,6 @@
       "created_iso": "2026-11-09T10:47:52.717+03:00",
       "updated_iso": "2026-11-09T10:54:50.748+03:00",
       "reacted_iso": "2026-11-09T10:47:56.406+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 11:46",
-      "deadline": "2026-11-09 11:46",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
-          "is_public": true
-        },
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44151,
-      "title": "Тонус Энгельса (консультация по ЕГАИС)",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-09 10:47",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 15,
-      "company_name": "Тонус ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 20,
-      "spent_by_employee": {
-        "8": 20
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 10:47",
-      "created_iso": "2026-11-09T10:47:04.271+03:00",
-      "updated_iso": "2026-11-09T10:47:23.269+03:00",
-      "reacted_iso": "2026-11-09T10:47:14.058+03:00",
       "work_started_at": "",
       "deadline_at": "2026-11-09 11:46",
       "deadline": "2026-11-09 11:46",
