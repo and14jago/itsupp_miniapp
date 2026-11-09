@@ -635,7 +635,7 @@ window.ITSUPP_DATA = {
   "initialTasks": [
     {
       "id": 44169,
-      "title": "Не работает",
+      "title": "Не могу зайти в личный кабинет на закупках",
       "description": "Не работает",
       "timeline_summary": "Создана: 2026-11-09 11:29",
       "status_code": "working",
@@ -666,9 +666,9 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-09 11:29",
       "created_iso": "2026-11-09T11:29:20.845+03:00",
-      "updated_iso": "2026-11-09T11:29:24.519+03:00",
+      "updated_iso": "2026-11-09T11:32:46.232+03:00",
       "reacted_iso": "2026-11-09T11:29:24.501+03:00",
-      "work_started_at": "2026-11-09T11:29:24.519+03:00",
+      "work_started_at": "2026-11-09T11:32:46.232+03:00",
       "deadline_at": "2026-11-09 12:28",
       "deadline": "2026-11-09 12:28",
       "due_bucket": "today",
@@ -676,7 +676,7 @@ window.ITSUPP_DATA = {
         {
           "author": "Нарыжнев Н. С.",
           "time": "",
-          "text": "Не работает",
+          "text": "Не могу зайти в личный кабинет на закупках",
           "is_public": true
         }
       ],
