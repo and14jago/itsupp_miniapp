@@ -634,6 +634,55 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44184,
+      "title": "Сбор технической информации МГ",
+      "description": ".",
+      "timeline_summary": "Создана: 2026-11-09 16:04",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 52,
+      "company_name": "Медикал Геномикс ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "11",
+      "assignee_name": "Никулин Д. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 16:04",
+      "created_iso": "2026-11-09T16:04:42.281+03:00",
+      "updated_iso": "2026-11-09T16:04:45.588+03:00",
+      "reacted_iso": "2026-11-09T16:04:45.575+03:00",
+      "work_started_at": "2026-11-09T16:04:45.588+03:00",
+      "deadline_at": "2026-11-09 17:03",
+      "deadline": "2026-11-09 17:03",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Никулин Д. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44182,
       "title": "Буэнос Падел Ульяновск регистрация касс",
       "description": "",
