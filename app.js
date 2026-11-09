@@ -15,7 +15,7 @@
     for (var i = 0; i < links.length; i++) {
       var href = links[i].getAttribute("href") || "";
       if (href.indexOf("styles.css") !== -1) {
-        links[i].setAttribute("href", "./styles.css?v=20261108-18&_t=" + Date.now());
+        links[i].setAttribute("href", "./styles.css?v=20261109-01&_t=" + Date.now());
       }
     }
   }

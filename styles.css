@@ -2504,3 +2504,15 @@ html[data-theme="dark"] .status-closed { background: #252b33; border-color: #495
   font-size: 13px;
   border-radius: 10px;
 }
+
+.task-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.task-title-row .task-title { flex: 1 1 auto; min-width: 0; }
+.task-edit-pencil { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface-alt); color: var(--text-secondary); font-size: 13px; line-height: 1; cursor: pointer; flex-shrink: 0; }
+.task-inline-editor { display: flex; align-items: flex-start; gap: 8px; padding: 8px; border: 1.5px solid var(--sber-green); border-radius: 10px; background: var(--surface-alt); }
+.task-inline-fields { display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto; min-width: 0; }
+.task-inline-input { padding: 6px 10px !important; font-size: 13.5px !important; font-weight: 700 !important; }
+.task-inline-textarea { min-height: 44px !important; padding: 6px 10px !important; font-size: 12.5px !important; line-height: 1.35 !important; }
+.task-inline-actions { display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
+.task-edit-circle { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; font-weight: 800; line-height: 1; cursor: pointer; }
+.task-edit-confirm { border: 1px solid #21a038; background: #21a038; color: #ffffff; }
+.task-edit-cancel { border: 1px solid var(--border-strong); background: var(--surface); color: var(--text-secondary); }
