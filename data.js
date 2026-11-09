@@ -1088,55 +1088,6 @@ window.ITSUPP_DATA = {
       "_syncedToPortal": true
     },
     {
-      "id": 44155,
-      "title": "Тонус Советский (не загружается накладная ЕГАИС город 77)",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-09 10:58",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 15,
-      "company_name": "Тонус ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 10:58",
-      "created_iso": "2026-11-09T10:58:20.122+03:00",
-      "updated_iso": "2026-11-09T10:58:24.445+03:00",
-      "reacted_iso": "2026-11-09T10:58:24.423+03:00",
-      "work_started_at": "2026-11-09T10:58:24.445+03:00",
-      "deadline_at": "2026-11-09 11:57",
-      "deadline": "2026-11-09 11:57",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44153,
       "title": "Тестирование ПЕ оператора на Можайского",
       "description": "Комп протестирован 2000₽ за потраченное время. Освободил С, протестировал LAN оживил на сколько возможно. Рекомендация - установка ssd 256, переоо но с системы на ssd (Kingston/samsung)",
