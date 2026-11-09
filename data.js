@@ -684,60 +684,6 @@ window.ITSUPP_DATA = {
       "_syncedToPortal": true
     },
     {
-      "id": 44137,
-      "title": "починить опенвпн на удаленке. энидеск 1776160043",
-      "description": "починить опенвпн на удаленке. энидеск 1776160043",
-      "timeline_summary": "Создана: 2026-11-09 09:01",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 52,
-      "company_name": "Медикал Геномикс ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "12",
-      "assignee_name": "Боровитин Е. С.",
-      "coexecutors": [],
-      "observers": [
-        "6",
-        "331"
-      ],
-      "control_by": [
-        "331"
-      ],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 09:01",
-      "created_iso": "2026-11-09T09:01:54.356+03:00",
-      "updated_iso": "2026-11-09T09:24:46.772+03:00",
-      "reacted_iso": "2026-11-09T09:24:46.760+03:00",
-      "work_started_at": "2026-11-09T09:24:46.772+03:00",
-      "deadline_at": "2026-11-09 10:23",
-      "deadline": "2026-11-09 10:23",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        },
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "Автоматически назначен Быков Максим Владимирович. @itsupp_task_bot",
-          "is_public": false
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44136,
       "title": "1С дает ошибку при обмене с элма error 500",
       "description": "1С дает ошибку при обмене с элма error 500",
