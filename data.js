@@ -638,9 +638,9 @@ window.ITSUPP_DATA = {
       "title": "список продления ОФД",
       "description": "",
       "timeline_summary": "Создана: 2026-11-09 12:22",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -667,13 +667,20 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-09 12:22",
       "created_iso": "2026-11-09T12:22:24.439+03:00",
-      "updated_iso": "2026-11-09T12:22:24.519+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
+      "updated_iso": "2026-11-09T12:22:33.188+03:00",
+      "reacted_iso": "2026-11-09T12:22:33.175+03:00",
+      "work_started_at": "2026-11-09T12:22:33.188+03:00",
+      "deadline_at": "2026-11-09 13:21",
+      "deadline": "2026-11-09 13:21",
       "due_bucket": "today",
-      "comments": [],
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "делаю",
+          "is_public": true
+        }
+      ],
       "_syncedToPortal": true
     },
     {
