@@ -686,55 +686,6 @@ window.ITSUPP_DATA = {
       "_syncedToPortal": true
     },
     {
-      "id": 44152,
-      "title": "Тонус Энгельса касса 1 (ошибка ТПГ)",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-09 10:47",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 15,
-      "company_name": "Тонус ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 10:47",
-      "created_iso": "2026-11-09T10:47:52.717+03:00",
-      "updated_iso": "2026-11-09T10:47:56.423+03:00",
-      "reacted_iso": "2026-11-09T10:47:56.406+03:00",
-      "work_started_at": "2026-11-09T10:47:56.423+03:00",
-      "deadline_at": "2026-11-09 11:46",
-      "deadline": "2026-11-09 11:46",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44149,
       "title": "Алексей, помощь с переносом УЗИ на диск",
       "description": "Алексей, помощь с переносом УЗИ нна диск",
