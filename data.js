@@ -743,13 +743,9 @@ window.ITSUPP_DATA = {
       "company_id": 52,
       "company_name": "Медикал Геномикс ООО",
       "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
+      "assignee_id": "9",
+      "assignee_name": "Нарыжнев Н. С.",
+      "coexecutors": [],
       "observers": [
         "6",
         "331"
@@ -765,7 +761,7 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-09 09:01",
       "created_iso": "2026-11-09T09:01:54.356+03:00",
-      "updated_iso": "2026-11-09T09:12:40.973+03:00",
+      "updated_iso": "2026-11-09T09:18:40.911+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
