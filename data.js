@@ -634,6 +634,56 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44154,
+      "title": "Ульяновск в офд добавить",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-09 10:54",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "7",
+      "assignee_name": "Кукушкина А. А.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 10:54",
+      "created_iso": "2026-11-09T10:54:52.693+03:00",
+      "updated_iso": "2026-11-09T10:55:06.076+03:00",
+      "reacted_iso": "2026-11-09T10:55:06.054+03:00",
+      "work_started_at": "2026-11-09T10:55:06.076+03:00",
+      "deadline_at": "2026-11-09 11:54",
+      "deadline": "2026-11-09 11:54",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "делаю",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44153,
       "title": "Тестирование ПЕ оператора на Можайского",
       "description": "Комп протестирован 2000₽ за потраченное время. Освободил С, протестировал LAN оживил на сколько возможно. Рекомендация - установка ssd 256, переоо но с системы на ssd (Kingston/samsung)",

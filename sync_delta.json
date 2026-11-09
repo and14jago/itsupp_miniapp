@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794210892,
-  "updated_at": "2026-11-09T10:54:52.200484+03:00",
+  "sync_seq": 1794210922,
+  "updated_at": "2026-11-09T10:55:22.387976+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -49,7 +49,8 @@
     "помощь с эцп": "44150",
     "тонус энгельса (консультация по егаис)": "44151",
     "тонус энгельса касса 1 (ошибка тпг)": "44152",
-    "тестирование пе оператора на можайского": "44153"
+    "тестирование пе оператора на можайского": "44153",
+    "ульяновск в офд добавить": "44154"
   },
   "deleted_ids": [
     "44116",
@@ -59,6 +60,56 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44154,
+      "title": "Ульяновск в офд добавить",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-09 10:54",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "7",
+      "assignee_name": "Кукушкина А. А.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 10:54",
+      "created_iso": "2026-11-09T10:54:52.693+03:00",
+      "updated_iso": "2026-11-09T10:55:06.076+03:00",
+      "reacted_iso": "2026-11-09T10:55:06.054+03:00",
+      "work_started_at": "2026-11-09T10:55:06.076+03:00",
+      "deadline_at": "2026-11-09 11:54",
+      "deadline": "2026-11-09 11:54",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "делаю",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44153,
       "title": "Тестирование ПЕ оператора на Можайского",
@@ -1436,66 +1487,6 @@
           "author": "Кукушкина А. А.",
           "time": "",
           "text": "????? ? ?????? (Mini App)",
-          "is_public": false
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44129,
-      "title": "Разработка портала",
-      "description": "Разработка портала\n—\nАвтор (инженер): Стрелкин М. В.\nИсточник: Mini App (@itsupp_task_bot)",
-      "timeline_summary": "Создана: 2026-11-08 18:59",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "1",
-      "assignee_name": "Стрелкин М. В.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 36,
-      "spent_by_employee": {
-        "1": 36
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-08 18:59",
-      "created_iso": "2026-11-08T18:59:19.913+03:00",
-      "updated_iso": "2026-11-08T19:50:49.550+03:00",
-      "reacted_iso": "2026-11-08T19:28:13.184+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 10:00",
-      "deadline": "2026-11-09 10:00",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "?????? ????? Mini App",
-          "is_public": false
-        },
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "Статус «Выполняю» (Mini App)",
           "is_public": false
         }
       ],
