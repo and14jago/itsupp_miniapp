@@ -634,6 +634,58 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44153,
+      "title": "Тестирование ПЕ оператора на Можайского",
+      "description": "Комп протестирован 2000₽ за потраченное время. Освободил С, протестировал LAN оживил на сколько возможно. Рекомендация - установка ssd 256, переоо но с системы на ssd (Kingston/samsung)",
+      "timeline_summary": "Создана: 2026-11-09 10:52",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 76,
+      "company_name": "Форс ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "1",
+      "assignee_name": "Стрелкин М. В.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 10:52",
+      "created_iso": "2026-11-09T10:52:40.871+03:00",
+      "updated_iso": "2026-11-09T10:52:54.275+03:00",
+      "reacted_iso": "2026-11-09T10:52:54.258+03:00",
+      "work_started_at": "2026-11-09T10:52:54.275+03:00",
+      "deadline_at": "2026-11-09 11:51",
+      "deadline": "2026-11-09 11:51",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "Начал выполнение (таймер запущен)",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44152,
       "title": "Тонус Энгельса касса 1 (ошибка ТПГ)",
       "description": "",

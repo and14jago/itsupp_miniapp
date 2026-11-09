@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794210508,
-  "updated_at": "2026-11-09T10:48:28.512035+03:00",
+  "sync_seq": 1794210778,
+  "updated_at": "2026-11-09T10:52:58.080862+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -48,7 +48,8 @@
     "алексей, помощь с переносом узи на диск": "44149",
     "помощь с эцп": "44150",
     "тонус энгельса (консультация по егаис)": "44151",
-    "тонус энгельса касса 1 (ошибка тпг)": "44152"
+    "тонус энгельса касса 1 (ошибка тпг)": "44152",
+    "тестирование пе оператора на можайского": "44153"
   },
   "deleted_ids": [
     "44116",
@@ -58,6 +59,58 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44153,
+      "title": "Тестирование ПЕ оператора на Можайского",
+      "description": "Комп протестирован 2000₽ за потраченное время. Освободил С, протестировал LAN оживил на сколько возможно. Рекомендация - установка ssd 256, переоо но с системы на ssd (Kingston/samsung)",
+      "timeline_summary": "Создана: 2026-11-09 10:52",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 76,
+      "company_name": "Форс ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "1",
+      "assignee_name": "Стрелкин М. В.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 10:52",
+      "created_iso": "2026-11-09T10:52:40.871+03:00",
+      "updated_iso": "2026-11-09T10:52:54.275+03:00",
+      "reacted_iso": "2026-11-09T10:52:54.258+03:00",
+      "work_started_at": "2026-11-09T10:52:54.275+03:00",
+      "deadline_at": "2026-11-09 11:51",
+      "deadline": "2026-11-09 11:51",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "Начал выполнение (таймер запущен)",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44152,
       "title": "Тонус Энгельса касса 1 (ошибка ТПГ)",
@@ -1412,66 +1465,6 @@
       "created_iso": "2026-11-08T18:59:19.913+03:00",
       "updated_iso": "2026-11-08T19:50:49.550+03:00",
       "reacted_iso": "2026-11-08T19:28:13.184+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 10:00",
-      "deadline": "2026-11-09 10:00",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "?????? ????? Mini App",
-          "is_public": false
-        },
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "Статус «Выполняю» (Mini App)",
-          "is_public": false
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44128,
-      "title": "Разработка мини app",
-      "description": "Разработка мини app\n—\nАвтор (инженер): Стрелкин М. В.\nИсточник: Mini App (@itsupp_task_bot)",
-      "timeline_summary": "Создана: 2026-11-08 18:59",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "1",
-      "assignee_name": "Стрелкин М. В.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 66,
-      "spent_by_employee": {
-        "1": 66
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-08 18:59",
-      "created_iso": "2026-11-08T18:59:18.999+03:00",
-      "updated_iso": "2026-11-08T19:50:50.908+03:00",
-      "reacted_iso": "2026-11-08T19:28:14.072+03:00",
       "work_started_at": "",
       "deadline_at": "2026-11-09 10:00",
       "deadline": "2026-11-09 10:00",
