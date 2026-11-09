@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794212175,
-  "updated_at": "2026-11-09T11:16:15.328569+03:00",
+  "sync_seq": 1794212737,
+  "updated_at": "2026-11-09T11:25:37.072650+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -63,6 +63,63 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44167,
+      "title": "Помощь с эцп",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-09 11:25",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 179,
+      "company_name": "Ленинский (ЦЕНТР ПОТОКА МСК-ЛЕНИНСКИЙ ООО)",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 20,
+      "spent_by_employee": {
+        "12": 20
+      },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-09 11:25",
+      "created_iso": "2026-11-09T11:25:18.949+03:00",
+      "updated_iso": "2026-11-09T11:25:31.069+03:00",
+      "reacted_iso": "2026-11-09T11:25:23.189+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-09 12:24",
+      "deadline": "2026-11-09 12:24",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        },
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44156,
       "title": "ТО",
@@ -1418,72 +1475,6 @@
           "author": "Кукушкина А. А.",
           "time": "",
           "text": "Выполнено в портале ITSUPP",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44132,
-      "title": "Тест мини апп 2",
-      "description": "Тест мини апп 2\n—\nАвтор (инженер): Стрелкин М. В.\nИсточник: Mini App (@itsupp_task_bot)",
-      "timeline_summary": "Создана: 2026-11-08 19:07",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "1",
-      "assignee_name": "Стрелкин М. В.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 35,
-      "spent_by_employee": {
-        "1": 35
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-08 19:07",
-      "created_iso": "2026-11-08T19:07:37.607+03:00",
-      "updated_iso": "2026-11-08T19:50:44.117+03:00",
-      "reacted_iso": "2026-11-08T19:13:24.769+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 10:00",
-      "deadline": "2026-11-09 10:00",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "?????? ????? Mini App",
-          "is_public": false
-        },
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "Смена статуса через @itsupp_task_bot | user=ITSUPP Admin | контакт=@MikhailStrelkin",
-          "is_public": false
-        },
-        {
-          "author": "Стрелкин М. В.",
-          "time": "",
-          "text": "W",
           "is_public": true
         }
       ],
