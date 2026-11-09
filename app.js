@@ -266,6 +266,8 @@
     "delegation_chain",
     "control_by",
     "billing_flag",
+    "last_bell_hour",
+    "last_timer_alert_at",
     "updated_iso"
   ];
 
@@ -623,6 +625,15 @@
         cm: String(raw.cm || raw.content || raw.comment || "").slice(0, 350),
         pub: Boolean(raw.pub != null ? raw.pub : raw.public),
         au: parseInt(raw.au || raw.author_id, 10) || 1
+      };
+    }
+    if (kind === "timer_alert") {
+      return {
+        op: "timer_alert",
+        id: issueId,
+        aid: parseInt(raw.aid || raw.assignee_id, 10) || 1,
+        hr: parseInt(raw.hr || raw.hours, 10) || 1,
+        ws: parseInt(raw.ws != null ? raw.ws : raw.work_seconds, 10) || 3600
       };
     }
     return raw;
@@ -2708,6 +2719,7 @@
       task.timer_paused = false;
       task.work_owner_id = String(task.assignee_id || currentEmp.id);
       task.work_started_at = new Date().toISOString();
+      task.last_bell_hour = Math.floor((st.ownWorkSec || 0) / 3600);
       lockUserStatusOnTask(task, "working", "Выполняю");
       task.status_history.push({
         time: new Date().toTimeString().slice(0, 8),
@@ -2734,8 +2746,10 @@
     task.status_history = Array.isArray(task.status_history) ? task.status_history : [];
     if (code === "working") {
       if (task.status_code !== "working" || task.timer_paused || !task.work_started_at) {
+        var baseSt = getTaskTimingStats(task);
         task.work_started_at = new Date().toISOString();
         task.work_owner_id = String(task.assignee_id || currentEmp.id);
+        task.last_bell_hour = Math.floor((baseSt.ownWorkSec || 0) / 3600);
       }
       task.timer_paused = false;
       task.status_history.push({
