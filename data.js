@@ -634,55 +634,6 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
-      "id": 44249,
-      "title": "Настройка пк",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-10 15:28",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 180,
-      "company_name": "МСЧ 14",
-      "entity_name": "Без объекта",
-      "assignee_id": "12",
-      "assignee_name": "Боровитин Е. С.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 15:28",
-      "created_iso": "2026-11-10T15:28:53.202+03:00",
-      "updated_iso": "2026-11-10T15:28:58.277+03:00",
-      "reacted_iso": "2026-11-10T15:28:58.266+03:00",
-      "work_started_at": "2026-11-10T15:28:58.277+03:00",
-      "deadline_at": "2026-11-10 16:27",
-      "deadline": "2026-11-10 16:27",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44248,
       "title": "Белтрус 7-ая Слобода (ЛМ ЧЗ)",
       "description": "",
