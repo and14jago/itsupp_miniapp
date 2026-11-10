@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794289253,
-  "updated_at": "2026-11-10T08:40:53.288473+03:00",
+  "sync_seq": 1794289526,
+  "updated_at": "2026-11-10T08:45:26.142272+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -88,7 +88,8 @@
     "не могу зайти на сервер": "44201",
     "проблема с сфр": "44202",
     "не работает мис": "44203",
-    "не открываются фото на сервере": "44204"
+    "не открываются фото на сервере": "44204",
+    "восстановление данных из бекапа": "44205"
   },
   "deleted_ids": [
     "44116",
@@ -98,6 +99,55 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44205,
+      "title": "Восстановление данных из бекапа",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 08:45",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 168,
+      "company_name": "ООО \"Клиника Фомина Уфа\" (ЦМТ)",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 08:45",
+      "created_iso": "2026-11-10T08:45:02.623+03:00",
+      "updated_iso": "2026-11-10T08:45:06.661+03:00",
+      "reacted_iso": "2026-11-10T08:45:06.650+03:00",
+      "work_started_at": "2026-11-10T08:45:06.661+03:00",
+      "deadline_at": "2026-11-10 10:00",
+      "deadline": "2026-11-10 10:00",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44204,
       "title": "Не открываются фото на сервере",
@@ -1386,64 +1436,6 @@
           "author": "Нарыжнев Н. С.",
           "time": "",
           "text": "Проблема с ФСС\nустановка ФСС, настройка поиск подписей.",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44180,
-      "title": "Акопян счет на Фронтол",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-09 14:34",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "7",
-      "assignee_name": "Кукушкина А. А.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 6,
-      "spent_by_employee": {
-        "7": 6
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 14:34",
-      "created_iso": "2026-11-09T14:34:58.915+03:00",
-      "updated_iso": "2026-11-09T14:55:39.507+03:00",
-      "reacted_iso": "2026-11-09T14:35:08.059+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 15:34",
-      "deadline": "2026-11-09 15:34",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "сделано",
-          "is_public": true
-        },
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "делаю",
           "is_public": true
         }
       ],
