@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794315440,
-  "updated_at": "2026-11-10T15:57:20.792113+03:00",
+  "sync_seq": 1794316660,
+  "updated_at": "2026-11-10T16:17:40.864143+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -126,7 +126,8 @@
     "настройка пк": "44249",
     "установка нового рабочего места + перенос рабочего места + диагностика двух компьютеров + настройка принтера на пк": "44250",
     "чистка кэша 1с": "44251",
-    "нахожусь в филиале на 1905 года. меняли блок на компьютер...": "44252"
+    "нахожусь в филиале на 1905 года. меняли блок на компьютер...": "44252",
+    "помощь с контур страхование": "44253"
   },
   "deleted_ids": [
     "44116",
@@ -136,6 +137,64 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44253,
+      "title": "Помощь с контур страхование",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 16:16",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 98,
+      "company_name": "КЛИНИКА ФОМИНА БЕЛГОРОД ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "13",
+      "assignee_name": "Кочнов И. И.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 5,
+      "spent_by_employee": {
+        "13": 5
+      },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 16:16",
+      "created_iso": "2026-11-10T16:16:06.109+03:00",
+      "updated_iso": "2026-11-10T16:16:16.560+03:00",
+      "reacted_iso": "2026-11-10T16:16:09.938+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-10 17:15",
+      "deadline": "2026-11-10 17:15",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кочнов И. И.",
+          "time": "",
+          "text": "Помощь с контур страхование",
+          "is_public": true
+        },
+        {
+          "author": "Кочнов И. И.",
+          "time": "",
+          "text": "Помощь с контур страхование",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44252,
       "title": "Нахожусь в филиале на 1905 года. Меняли блок на компьютер...",
@@ -1421,60 +1480,6 @@
           "time": "",
           "text": "+",
           "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44228,
-      "title": "Добрый день, необходимо создать почту рабочую для нового...",
-      "description": "Добрый день, необходимо создать почту рабочую для нового сотрудника\nАтылина Дарья Александровна",
-      "timeline_summary": "Создана: 2026-11-10 12:39",
-      "status_code": "asya1c",
-      "status_name": "Отклонена",
-      "status_color": "#329bad",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 52,
-      "company_name": "Медикал Геномикс ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "",
-      "assignee_name": "Не назначен",
-      "coexecutors": [],
-      "observers": [
-        "6",
-        "324"
-      ],
-      "control_by": [
-        "324"
-      ],
-      "spent_minutes": 5,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 12:39",
-      "created_iso": "2026-11-10T12:39:22.223+03:00",
-      "updated_iso": "2026-11-10T14:06:29.890+03:00",
-      "reacted_iso": "2026-11-10T14:06:29.712+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-10 15:05",
-      "deadline": "2026-11-10 15:05",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "не актуально",
-          "is_public": true
-        },
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "Автоматически назначен Быков Максим Владимирович. @itsupp_task_bot",
-          "is_public": false
         }
       ],
       "_syncedToPortal": true
