@@ -1184,10 +1184,9 @@ window.ITSUPP_DATA = {
       "company_id": 30,
       "company_name": "Сервис-Про ООО",
       "entity_name": "Без объекта",
-      "assignee_id": "",
-      "assignee_name": "Не назначен",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
       "coexecutors": [
-        "8",
         "9",
         "11",
         "12"
@@ -1206,13 +1205,20 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-11 00:33",
       "created_iso": "2026-11-11T00:33:23.647+03:00",
-      "updated_iso": "2026-11-11T00:33:23.705+03:00",
+      "updated_iso": "2026-11-11T00:45:02.545+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
       "deadline": "Без срока",
       "due_bucket": "today",
-      "comments": [],
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "Автоматически назначен Быков Максим Владимирович. @itsupp_task_bot",
+          "is_public": false
+        }
+      ],
       "_syncedToPortal": true
     },
     {
@@ -1229,10 +1235,9 @@ window.ITSUPP_DATA = {
       "company_id": 30,
       "company_name": "Сервис-Про ООО",
       "entity_name": "Без объекта",
-      "assignee_id": "",
-      "assignee_name": "Не назначен",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
       "coexecutors": [
-        "8",
         "9",
         "11",
         "12"
@@ -1251,13 +1256,20 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-11 00:33",
       "created_iso": "2026-11-11T00:33:23.156+03:00",
-      "updated_iso": "2026-11-11T00:33:23.249+03:00",
+      "updated_iso": "2026-11-11T00:45:07.181+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
       "deadline": "Без срока",
       "due_bucket": "today",
-      "comments": [],
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "Автоматически назначен Быков Максим Владимирович. @itsupp_task_bot",
+          "is_public": false
+        }
+      ],
       "_syncedToPortal": true
     },
     {
