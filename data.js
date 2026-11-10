@@ -887,55 +887,6 @@ window.ITSUPP_DATA = {
       "_syncedToPortal": true
     },
     {
-      "id": 44201,
-      "title": "не могу зайти на сервер",
-      "description": "не могу зайти на сервер",
-      "timeline_summary": "Создана: 2026-11-10 08:29",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 168,
-      "company_name": "ООО \"Клиника Фомина Уфа\" (ЦМТ)",
-      "entity_name": "Без объекта",
-      "assignee_id": "9",
-      "assignee_name": "Нарыжнев Н. С.",
-      "coexecutors": [
-        "8",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 08:29",
-      "created_iso": "2026-11-10T08:29:19.025+03:00",
-      "updated_iso": "2026-11-10T08:29:22.755+03:00",
-      "reacted_iso": "2026-11-10T08:29:22.734+03:00",
-      "work_started_at": "2026-11-10T08:29:22.755+03:00",
-      "deadline_at": "2026-11-10 10:00",
-      "deadline": "2026-11-10 10:00",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "не могу зайти на сервер",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44199,
       "title": "Оплата до 15 числа каждого месяца",
       "description": "1. ИТ-Импульс\n2. Завгородний С.\n3. Смартком\n4. Бюро автоматизации\n5. Нугуманов Н.\n6. Панов Н.\n7. Пугачев А. - не сделано пп\n8. Агафонов Е.\n9. Шершнев - проверить оплаты нам от заказчиков, чтоб мы оплатили\n10. Старков проверить оплаты нам от заказчиков, чтоб мы оплатили\n11. ИТ-Софт проверить оплаты нам от заказчиков, чтоб мы оплатили",
