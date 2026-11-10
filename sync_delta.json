@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794346430,
-  "updated_at": "2026-11-11T00:33:50.422977+03:00",
+  "sync_seq": 1794346464,
+  "updated_at": "2026-11-11T00:34:24.335734+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -149,7 +149,8 @@
     "e2e-в работе mwb7ipd1": "44270",
     "e2e-новая mwb7ipd1": "44269",
     "e2e-секрет клиента b mwb7ipd1": "44268",
-    "e2e-заявка клиента a mwb7ipd1": "44267"
+    "e2e-заявка клиента a mwb7ipd1": "44267",
+    "e2e-readonly-ad8922b78bb6eefbcac62653-created": "44276"
   },
   "deleted_ids": [
     "44116",
@@ -159,6 +160,51 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44276,
+      "title": "e2e-readonly-ad8922b78bb6eefbcac62653-created",
+      "description": "Synthetic create HTTP positive control",
+      "timeline_summary": "Создана: 2026-11-11 00:34",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "",
+      "assignee_name": "Не назначен",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-11 00:34",
+      "created_iso": "2026-11-11T00:34:24.136+03:00",
+      "updated_iso": "2026-11-11T00:34:24.194+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
     {
       "id": 44275,
       "title": "e2e-закрытая mwb7ipd1",
@@ -1417,64 +1463,6 @@
           "time": "",
           "text": "Автоматически назначен Быков Максим Владимирович. @itsupp_task_bot",
           "is_public": false
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44251,
-      "title": "Чистка кэша 1с",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-10 15:38",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 180,
-      "company_name": "МСЧ 14",
-      "entity_name": "Без объекта",
-      "assignee_id": "13",
-      "assignee_name": "Кочнов И. И.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 5,
-      "spent_by_employee": {
-        "13": 5
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 15:38",
-      "created_iso": "2026-11-10T15:38:50.048+03:00",
-      "updated_iso": "2026-11-10T15:38:58.961+03:00",
-      "reacted_iso": "2026-11-10T15:38:53.089+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-10 16:37",
-      "deadline": "2026-11-10 16:37",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кочнов И. И.",
-          "time": "",
-          "text": "Чистка кэша 1с",
-          "is_public": true
-        },
-        {
-          "author": "Кочнов И. И.",
-          "time": "",
-          "text": "Чистка кэша 1с",
-          "is_public": true
         }
       ],
       "_syncedToPortal": true
