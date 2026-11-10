@@ -638,9 +638,9 @@ window.ITSUPP_DATA = {
       "title": "Не могу войти удаленно. Впн не работает. Запуск не...",
       "description": "Не могу войти удаленно. Впн не работает. Запуск не помогает. Внутренний 229, ruDesktop 251 897 684.",
       "timeline_summary": "Создана: 2026-11-10 09:03",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
+      "status_code": "work",
+      "status_name": "Принял",
+      "status_color": "#605cb8",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -670,13 +670,20 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-10 09:03",
       "created_iso": "2026-11-10T09:03:01.855+03:00",
-      "updated_iso": "2026-11-10T09:03:02.030+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
+      "updated_iso": "2026-11-10T09:03:26.667+03:00",
+      "reacted_iso": "2026-11-10T09:03:26.646+03:00",
+      "work_started_at": "2026-11-10T09:03:26.667+03:00",
       "deadline_at": "Без срока",
       "deadline": "Без срока",
       "due_bucket": "today",
-      "comments": [],
+      "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        }
+      ],
       "_syncedToPortal": true
     },
     {
