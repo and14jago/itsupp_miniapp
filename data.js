@@ -717,13 +717,19 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-10 15:42",
       "created_iso": "2026-11-10T15:42:04.087+03:00",
-      "updated_iso": "2026-11-10T16:52:11.781+03:00",
+      "updated_iso": "2026-11-10T16:57:04.037+03:00",
       "reacted_iso": "2026-11-10T16:50:46.415+03:00",
-      "work_started_at": "2026-11-10T16:52:11.781+03:00",
+      "work_started_at": "2026-11-10T16:57:04.037+03:00",
       "deadline_at": "Без срока",
       "deadline": "Без срока",
       "due_bucket": "today",
       "comments": [
+        {
+          "author": "- I.",
+          "time": "",
+          "text": "Где его взять?\nГде взять логин и пароль?",
+          "is_public": true
+        },
         {
           "author": "Быков М. В.",
           "time": "",
