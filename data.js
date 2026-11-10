@@ -638,9 +638,9 @@ window.ITSUPP_DATA = {
       "title": "проверить отправку доков",
       "description": "",
       "timeline_summary": "Создана: 2026-11-10 13:07",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -667,13 +667,20 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-10 13:07",
       "created_iso": "2026-11-10T13:07:22.902+03:00",
-      "updated_iso": "2026-11-10T13:07:22.972+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
+      "updated_iso": "2026-11-10T13:07:32.264+03:00",
+      "reacted_iso": "2026-11-10T13:07:32.247+03:00",
+      "work_started_at": "2026-11-10T13:07:32.264+03:00",
+      "deadline_at": "2026-11-10 14:06",
+      "deadline": "2026-11-10 14:06",
       "due_bucket": "today",
-      "comments": [],
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "делаю",
+          "is_public": true
+        }
+      ],
       "_syncedToPortal": true
     },
     {
