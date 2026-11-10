@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794298009,
-  "updated_at": "2026-11-10T11:06:49.246899+03:00",
+  "sync_seq": 1794298042,
+  "updated_at": "2026-11-10T11:07:22.307199+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -119,9 +119,9 @@
       "title": "Обновление сертификатов мдлп",
       "description": "",
       "timeline_summary": "Создана: 2026-11-10 11:06",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -140,21 +140,29 @@
         "6"
       ],
       "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
+      "spent_minutes": 15,
+      "spent_by_employee": {
+        "5": 15
+      },
       "tracked_work_seconds": 0,
       "work_by_employee": {},
       "timer_paused": false,
       "billing_flag": "none",
       "created_at": "2026-11-10 11:06",
       "created_iso": "2026-11-10T11:06:40.943+03:00",
-      "updated_iso": "2026-11-10T11:06:47.745+03:00",
+      "updated_iso": "2026-11-10T11:06:56.965+03:00",
       "reacted_iso": "2026-11-10T11:06:47.729+03:00",
-      "work_started_at": "2026-11-10T11:06:47.745+03:00",
+      "work_started_at": "",
       "deadline_at": "2026-11-10 12:05",
       "deadline": "2026-11-10 12:05",
       "due_bucket": "today",
       "comments": [
+        {
+          "author": "Старцев Е. А.",
+          "time": "",
+          "text": "й",
+          "is_public": true
+        },
         {
           "author": "Старцев Е. А.",
           "time": "",
