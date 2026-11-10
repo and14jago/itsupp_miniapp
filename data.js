@@ -669,7 +669,7 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-10 12:39",
       "created_iso": "2026-11-10T12:39:22.223+03:00",
-      "updated_iso": "2026-11-10T12:49:55.493+03:00",
+      "updated_iso": "2026-11-10T12:49:57.501+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
