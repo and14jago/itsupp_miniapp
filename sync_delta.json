@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794294521,
-  "updated_at": "2026-11-10T10:08:41.647915+03:00",
+  "sync_seq": 1794295019,
+  "updated_at": "2026-11-10T10:16:59.416104+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -95,7 +95,8 @@
     "отключение учеток": "44208",
     "проверить заказы в 1с по госпиталю, удалить лишнее и актуализировать реализации": "44209",
     "белтрус 4-ая слобода (настройка pos-клавиатуры и сканера)": "44210",
-    "настройка рдп на мак буке": "44211"
+    "настройка рдп на мак буке": "44211",
+    "ип алавердян клин (не корректно закрыта смена)": "44212"
   },
   "deleted_ids": [
     "44116",
@@ -105,6 +106,55 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44212,
+      "title": "ИП Алавердян Клин (не корректно закрыта смена)",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 10:16",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 171,
+      "company_name": "Алавердян Д.К. ИП",
+      "entity_name": "Без объекта",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
+      "coexecutors": [
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 10:16",
+      "created_iso": "2026-11-10T10:16:34.582+03:00",
+      "updated_iso": "2026-11-10T10:16:38.465+03:00",
+      "reacted_iso": "2026-11-10T10:16:38.441+03:00",
+      "work_started_at": "2026-11-10T10:16:38.465+03:00",
+      "deadline_at": "2026-11-10 11:15",
+      "deadline": "2026-11-10 11:15",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44211,
       "title": "Настройка рдп на мак буке",
@@ -1423,75 +1473,6 @@
           "author": "Никулин Д. С.",
           "time": "",
           "text": ".",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44187,
-      "title": "Новая учетка, настройка  подключения",
-      "description": "Новая учетка, настройка  подключения",
-      "timeline_summary": "Создана: 2026-11-09 16:41",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 98,
-      "company_name": "КЛИНИКА ФОМИНА БЕЛГОРОД ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "9",
-      "assignee_name": "Нарыжнев Н. С.",
-      "coexecutors": [
-        "8",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 10,
-      "spent_by_employee": {
-        "9": 10
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 16:41",
-      "created_iso": "2026-11-09T16:41:36.633+03:00",
-      "updated_iso": "2026-11-10T09:37:42.365+03:00",
-      "reacted_iso": "2026-11-09T16:41:39.964+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-10 09:04",
-      "deadline": "2026-11-10 09:04",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "решено",
-          "is_public": true
-        },
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "настройка удаленного доступа",
-          "is_public": true
-        },
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "не отвечают",
-          "is_public": true
-        },
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "Новая учетка, настройка  подключения",
           "is_public": true
         }
       ],
