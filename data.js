@@ -634,6 +634,55 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44233,
+      "title": "Буэнос Падел Тверь Валентина (скопировать ЭЦП и настроить TG Proxy)",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 13:23",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 207,
+      "company_name": "БУЭНОС ПАДЕЛ ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
+      "coexecutors": [
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 13:23",
+      "created_iso": "2026-11-10T13:23:14.422+03:00",
+      "updated_iso": "2026-11-10T13:23:18.727+03:00",
+      "reacted_iso": "2026-11-10T13:23:18.709+03:00",
+      "work_started_at": "2026-11-10T13:23:18.727+03:00",
+      "deadline_at": "2026-11-10 14:22",
+      "deadline": "2026-11-10 14:22",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44231,
       "title": "проверить отправку доков",
       "description": "",
