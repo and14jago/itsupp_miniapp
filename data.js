@@ -634,6 +634,55 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44254,
+      "title": "Помощь со сканом",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 16:27",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 180,
+      "company_name": "МСЧ 14",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 16:27",
+      "created_iso": "2026-11-10T16:27:29.155+03:00",
+      "updated_iso": "2026-11-10T16:27:32.567+03:00",
+      "reacted_iso": "2026-11-10T16:27:32.550+03:00",
+      "work_started_at": "2026-11-10T16:27:32.567+03:00",
+      "deadline_at": "2026-11-10 17:26",
+      "deadline": "2026-11-10 17:26",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44252,
       "title": "Нахожусь в филиале на 1905 года. Меняли блок на компьютер...",
       "description": "Нахожусь в филиале на 1905 года. Меняли блок на компьютере. Теперь не можем зайти в Гугл - там были все пароли. Как узнать?\nНе нужно",

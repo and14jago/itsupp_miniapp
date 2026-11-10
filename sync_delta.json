@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794316660,
-  "updated_at": "2026-11-10T16:17:40.864143+03:00",
+  "sync_seq": 1794317253,
+  "updated_at": "2026-11-10T16:27:33.596040+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -127,7 +127,8 @@
     "установка нового рабочего места + перенос рабочего места + диагностика двух компьютеров + настройка принтера на пк": "44250",
     "чистка кэша 1с": "44251",
     "нахожусь в филиале на 1905 года. меняли блок на компьютер...": "44252",
-    "помощь с контур страхование": "44253"
+    "помощь с контур страхование": "44253",
+    "помощь со сканом": "44254"
   },
   "deleted_ids": [
     "44116",
@@ -137,6 +138,55 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44254,
+      "title": "Помощь со сканом",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 16:27",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 180,
+      "company_name": "МСЧ 14",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 16:27",
+      "created_iso": "2026-11-10T16:27:29.155+03:00",
+      "updated_iso": "2026-11-10T16:27:32.567+03:00",
+      "reacted_iso": "2026-11-10T16:27:32.550+03:00",
+      "work_started_at": "2026-11-10T16:27:32.567+03:00",
+      "deadline_at": "2026-11-10 17:26",
+      "deadline": "2026-11-10 17:26",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44253,
       "title": "Помощь с контур страхование",
@@ -1423,63 +1473,6 @@
           "time": "",
           "text": "Автоматически назначен Быков Максим Владимирович. @itsupp_task_bot",
           "is_public": false
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44229,
-      "title": "КФ-Ленинский (В 302 не печатает принтер)",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-10 13:01",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 179,
-      "company_name": "Ленинский (ЦЕНТР ПОТОКА МСК-ЛЕНИНСКИЙ ООО)",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 15,
-      "spent_by_employee": {
-        "8": 15
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 13:01",
-      "created_iso": "2026-11-10T13:01:22.440+03:00",
-      "updated_iso": "2026-11-10T13:19:03.320+03:00",
-      "reacted_iso": "2026-11-10T13:01:26.115+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-10 14:00",
-      "deadline": "2026-11-10 14:00",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
-          "is_public": true
-        },
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
-          "is_public": true
         }
       ],
       "_syncedToPortal": true
