@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794291628,
-  "updated_at": "2026-11-10T09:20:28.058831+03:00",
+  "sync_seq": 1794291661,
+  "updated_at": "2026-11-10T09:21:01.722642+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -90,7 +90,8 @@
     "не работает мис": "44203",
     "не открываются фото на сервере": "44204",
     "восстановление данных из бекапа": "44205",
-    "не могу войти удаленно. впн не работает. запуск не...": "44206"
+    "не могу войти удаленно. впн не работает. запуск не...": "44206",
+    "микрюкова регина аликовна уфа оператор кц. не работает 1с уфа": "44207"
   },
   "deleted_ids": [
     "44116",
@@ -100,6 +101,55 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44207,
+      "title": "Микрюкова Регина Аликовна уфа оператор кц. не работает 1с уфа",
+      "description": "Микрюкова Регина Аликовна уфа оператор кц. не работает 1с уфа",
+      "timeline_summary": "Создана: 2026-11-10 09:20",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 168,
+      "company_name": "ООО \"Клиника Фомина Уфа\" (ЦМТ)",
+      "entity_name": "Без объекта",
+      "assignee_id": "9",
+      "assignee_name": "Нарыжнев Н. С.",
+      "coexecutors": [
+        "8",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 09:20",
+      "created_iso": "2026-11-10T09:20:48.993+03:00",
+      "updated_iso": "2026-11-10T09:20:52.269+03:00",
+      "reacted_iso": "2026-11-10T09:20:52.242+03:00",
+      "work_started_at": "2026-11-10T09:20:52.269+03:00",
+      "deadline_at": "2026-11-10 10:19",
+      "deadline": "2026-11-10 10:19",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Нарыжнев Н. С.",
+          "time": "",
+          "text": "Микрюкова Регина Аликовна уфа оператор кц. не работает 1с уфа",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44206,
       "title": "Не могу войти удаленно. Впн не работает. Запуск не...",
@@ -485,11 +535,7 @@
       "entity_name": "Без объекта",
       "assignee_id": "8",
       "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
+      "coexecutors": [],
       "observers": [
         "6"
       ],
@@ -502,7 +548,7 @@
       "billing_flag": "none",
       "created_at": "2026-11-10 00:01",
       "created_iso": "2026-11-10T00:01:29.661+03:00",
-      "updated_iso": "2026-11-10T00:12:26.493+03:00",
+      "updated_iso": "2026-11-10T09:20:55.728+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
@@ -1413,64 +1459,6 @@
           "author": "Быков М. В.",
           "time": "",
           "text": "+",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44182,
-      "title": "Буэнос Падел Ульяновск регистрация касс",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-09 15:00",
-      "status_code": "delayed",
-      "status_name": "Отложена",
-      "status_color": "#ffc926",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "7",
-      "assignee_name": "Кукушкина А. А.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 40,
-      "spent_by_employee": {
-        "7": 40
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 15:00",
-      "created_iso": "2026-11-09T15:00:07.559+03:00",
-      "updated_iso": "2026-11-09T15:51:33.070+03:00",
-      "reacted_iso": "2026-11-09T15:02:08.268+03:00",
-      "work_started_at": "",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "откладываем, адрес не дает в налоговой ввести",
-          "is_public": true
-        },
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "делаю",
           "is_public": true
         }
       ],
