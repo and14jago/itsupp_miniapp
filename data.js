@@ -634,56 +634,6 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
-      "id": 44265,
-      "title": "Перенос гис омс с одного компьютера на другой",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-10 23:27",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 98,
-      "company_name": "КЛИНИКА ФОМИНА БЕЛГОРОД ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "13",
-      "assignee_name": "Кочнов И. И.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 23:27",
-      "created_iso": "2026-11-10T23:27:13.711+03:00",
-      "updated_iso": "2026-11-10T23:27:17.318+03:00",
-      "reacted_iso": "2026-11-10T23:27:17.305+03:00",
-      "work_started_at": "2026-11-10T23:27:17.318+03:00",
-      "deadline_at": "2026-11-11 10:00",
-      "deadline": "2026-11-11 10:00",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кочнов И. И.",
-          "time": "",
-          "text": "Перенос гис омс с одного компьютера на другой",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44263,
       "title": "Питер реализация в 1с + отправить в клинику",
       "description": "",
