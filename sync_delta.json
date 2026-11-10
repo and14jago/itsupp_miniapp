@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794308139,
-  "updated_at": "2026-11-10T13:55:39.505438+03:00",
+  "sync_seq": 1794308678,
+  "updated_at": "2026-11-10T14:04:38.566726+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -116,7 +116,8 @@
     "проверить отправку доков": "44231",
     "помощь с ккт": "44232",
     "буэнос падел тверь валентина (скопировать эцп и настроить tg proxy)": "44233",
-    "помощь с 1с": "44234"
+    "помощь с 1с": "44234",
+    "ип мамедов рубин (операторский пк нет интернета)": "44235"
   },
   "deleted_ids": [
     "44116",
@@ -126,6 +127,55 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44235,
+      "title": "ИП Мамедов Рубин (операторский ПК нет интернета)",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 14:04",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 32,
+      "company_name": "Мамедов А.А. ИП Семейный стиль",
+      "entity_name": "Без объекта",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
+      "coexecutors": [
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 14:04",
+      "created_iso": "2026-11-10T14:04:21.095+03:00",
+      "updated_iso": "2026-11-10T14:04:24.529+03:00",
+      "reacted_iso": "2026-11-10T14:04:24.515+03:00",
+      "work_started_at": "2026-11-10T14:04:24.529+03:00",
+      "deadline_at": "2026-11-10 15:03",
+      "deadline": "2026-11-10 15:03",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44234,
       "title": "Помощь с 1с",
@@ -1475,63 +1525,6 @@
           "author": "Боровитин Е. С.",
           "time": "",
           "text": ".",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44210,
-      "title": "Белтрус 4-ая Слобода (настройка pos-клавиатуры и сканера)",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-10 09:44",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 26,
-      "company_name": "Белтрус ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 20,
-      "spent_by_employee": {
-        "8": 20
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 09:44",
-      "created_iso": "2026-11-10T09:44:54.169+03:00",
-      "updated_iso": "2026-11-10T10:02:13.103+03:00",
-      "reacted_iso": "2026-11-10T09:44:58.348+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-10 10:43",
-      "deadline": "2026-11-10 10:43",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
-          "is_public": true
-        },
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
           "is_public": true
         }
       ],

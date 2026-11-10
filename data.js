@@ -634,6 +634,55 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44235,
+      "title": "ИП Мамедов Рубин (операторский ПК нет интернета)",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 14:04",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 32,
+      "company_name": "Мамедов А.А. ИП Семейный стиль",
+      "entity_name": "Без объекта",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
+      "coexecutors": [
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 14:04",
+      "created_iso": "2026-11-10T14:04:21.095+03:00",
+      "updated_iso": "2026-11-10T14:04:24.529+03:00",
+      "reacted_iso": "2026-11-10T14:04:24.515+03:00",
+      "work_started_at": "2026-11-10T14:04:24.529+03:00",
+      "deadline_at": "2026-11-10 15:03",
+      "deadline": "2026-11-10 15:03",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44231,
       "title": "проверить отправку доков",
       "description": "",
