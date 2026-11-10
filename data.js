@@ -684,55 +684,6 @@ window.ITSUPP_DATA = {
       "_syncedToPortal": true
     },
     {
-      "id": 44256,
-      "title": "КФ-Нижний Новгород (Коллеги, установите, пожалуйста, общую папку и 1с общий)",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-10 16:47",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 205,
-      "company_name": "ООО \"Клиника Фомина Нижний Новгород\"",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 16:47",
-      "created_iso": "2026-11-10T16:47:27.282+03:00",
-      "updated_iso": "2026-11-10T16:47:30.918+03:00",
-      "reacted_iso": "2026-11-10T16:47:30.898+03:00",
-      "work_started_at": "2026-11-10T16:47:30.918+03:00",
-      "deadline_at": "2026-11-10 17:46",
-      "deadline": "2026-11-10 17:46",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44252,
       "title": "Нахожусь в филиале на 1905 года. Меняли блок на компьютер...",
       "description": "Нахожусь в филиале на 1905 года. Меняли блок на компьютере. Теперь не можем зайти в Гугл - там были все пароли. Как узнать?\nНе нужно",
