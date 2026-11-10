@@ -634,6 +634,51 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44204,
+      "title": "Не открываются фото на сервере",
+      "description": "Перестали открываться файлы с фото на сервере, ни в каком приложении не открываются",
+      "timeline_summary": "Создана: 2026-11-10 08:40",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 39,
+      "company_name": "Никагаз ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "",
+      "assignee_name": "Не назначен",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "280"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 08:40",
+      "created_iso": "2026-11-10T08:40:51.254+03:00",
+      "updated_iso": "2026-11-10T08:40:51.358+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44203,
       "title": "Не работает мис",
       "description": "Не работает мис\nНе грузится заявка",
