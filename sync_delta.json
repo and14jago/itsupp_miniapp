@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794325245,
-  "updated_at": "2026-11-10T18:40:45.038184+03:00",
+  "sync_seq": 1794325464,
+  "updated_at": "2026-11-10T18:44:24.824484+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -1147,9 +1147,9 @@
       "title": "Проверить/заполнить 71 и подбить факультатив",
       "description": "Поступило обращение клиента: Отчитаться о заполнении 71 Андрею. Требуется провести диагностику и выполнить необходимые работы для устранения проблемы.",
       "timeline_summary": "Создана: 2026-11-10 14:53",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
+      "status_code": "delayed",
+      "status_name": "Отложена",
+      "status_color": "#ffc926",
       "priority": "normal",
       "type_code": "inner",
       "type_name": "Внутренняя",
@@ -1173,13 +1173,19 @@
       "billing_flag": "none",
       "created_at": "2026-11-10 14:53",
       "created_iso": "2026-11-10T14:53:43.844+03:00",
-      "updated_iso": "2026-11-10T17:36:30.411+03:00",
+      "updated_iso": "2026-11-10T18:44:06.836+03:00",
       "reacted_iso": "2026-11-10T15:05:07.699+03:00",
-      "work_started_at": "2026-11-10T17:36:30.411+03:00",
-      "deadline_at": "2026-11-11 09:35",
-      "deadline": "2026-11-11 09:35",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
       "due_bucket": "today",
       "comments": [
+        {
+          "author": "Малышев А. С.",
+          "time": "",
+          "text": "71ый подбил",
+          "is_public": true
+        },
         {
           "author": "Малышев А. С.",
           "time": "",
