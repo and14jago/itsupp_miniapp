@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794301310,
-  "updated_at": "2026-11-10T12:01:50.904145+03:00",
+  "sync_seq": 1794302062,
+  "updated_at": "2026-11-10T12:14:22.293949+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -107,7 +107,8 @@
     "обновление сертификатов мдлп": "44220",
     "помощь с рдп": "44222",
     "кф-пермь омс (настроить доступ в согаз)": "44223",
-    "проблема с пк на спартака, перенос данных на коноплянникова с аппарата узи": "44224"
+    "проблема с пк на спартака, перенос данных на коноплянникова с аппарата узи": "44224",
+    "настройка рдп и создание почты": "44225"
   },
   "deleted_ids": [
     "44116",
@@ -117,6 +118,55 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44225,
+      "title": "Настройка рдп и создание почты",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 12:14",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 41,
+      "company_name": "КЛИНИКА ФОМИНА ТВЕРЬ ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 12:14",
+      "created_iso": "2026-11-10T12:14:11.519+03:00",
+      "updated_iso": "2026-11-10T12:14:16.187+03:00",
+      "reacted_iso": "2026-11-10T12:14:16.163+03:00",
+      "work_started_at": "2026-11-10T12:14:16.187+03:00",
+      "deadline_at": "2026-11-10 13:13",
+      "deadline": "2026-11-10 13:13",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44224,
       "title": "Проблема с ПК на Спартака, перенос данных на коноплянникова с аппарата УЗИ",
@@ -1448,63 +1498,6 @@
           "author": "Нарыжнев Н. С.",
           "time": "",
           "text": "не могу зайти на сервер",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44200,
-      "title": "У нас в папке обмен комсомольская исчезли документы в папке электронный документооборот. Во всех филиалах.",
-      "description": "У нас в папке обмен комсомольская исчезли документы в папке электронный документооборот. Во всех филиалах.",
-      "timeline_summary": "Создана: 2026-11-10 07:41",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 168,
-      "company_name": "ООО \"Клиника Фомина Уфа\" (ЦМТ)",
-      "entity_name": "Без объекта",
-      "assignee_id": "9",
-      "assignee_name": "Нарыжнев Н. С.",
-      "coexecutors": [
-        "8",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 60,
-      "spent_by_employee": {
-        "9": 60
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 07:41",
-      "created_iso": "2026-11-10T07:41:01.782+03:00",
-      "updated_iso": "2026-11-10T09:09:41.756+03:00",
-      "reacted_iso": "2026-11-10T07:41:05.497+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-10 10:00",
-      "deadline": "2026-11-10 10:00",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "решено, Егор развернул с бэкапа",
-          "is_public": true
-        },
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "У нас в папке обмен комсомольская исчезли документы в папке электронный документооборот. Во всех филиалах.",
           "is_public": true
         }
       ],
