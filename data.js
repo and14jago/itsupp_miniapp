@@ -638,9 +638,9 @@ window.ITSUPP_DATA = {
       "title": "Не могу войти удаленно. Впн не работает. Запуск не...",
       "description": "Не могу войти удаленно. Впн не работает. Запуск не помогает. Внутренний 229, ruDesktop 251 897 684.",
       "timeline_summary": "Создана: 2026-11-10 09:03",
-      "status_code": "work",
-      "status_name": "Принял",
-      "status_color": "#605cb8",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -670,13 +670,19 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-10 09:03",
       "created_iso": "2026-11-10T09:03:01.855+03:00",
-      "updated_iso": "2026-11-10T09:03:26.667+03:00",
+      "updated_iso": "2026-11-10T09:19:35.326+03:00",
       "reacted_iso": "2026-11-10T09:03:26.646+03:00",
-      "work_started_at": "2026-11-10T09:03:26.667+03:00",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
+      "work_started_at": "2026-11-10T09:19:35.326+03:00",
+      "deadline_at": "2026-11-10 10:18",
+      "deadline": "2026-11-10 10:18",
       "due_bucket": "today",
       "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        },
         {
           "author": "Быков М. В.",
           "time": "",
@@ -752,9 +758,7 @@ window.ITSUPP_DATA = {
       "assignee_id": "8",
       "assignee_name": "Быков М. В.",
       "coexecutors": [
-        "9",
-        "11",
-        "12"
+        "9"
       ],
       "observers": [
         "6"
@@ -770,7 +774,7 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-10 08:40",
       "created_iso": "2026-11-10T08:40:51.254+03:00",
-      "updated_iso": "2026-11-10T08:51:12.786+03:00",
+      "updated_iso": "2026-11-10T09:19:54.601+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
@@ -1037,9 +1041,9 @@ window.ITSUPP_DATA = {
       "title": "Новая учетка, настройка  подключения",
       "description": "Новая учетка, настройка  подключения",
       "timeline_summary": "Создана: 2026-11-09 16:41",
-      "status_code": "delayed",
-      "status_name": "Отложена",
-      "status_color": "#ffc926",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -1065,13 +1069,19 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-09 16:41",
       "created_iso": "2026-11-09T16:41:36.633+03:00",
-      "updated_iso": "2026-11-09T17:54:42.638+03:00",
+      "updated_iso": "2026-11-10T09:19:44.198+03:00",
       "reacted_iso": "2026-11-09T16:41:39.964+03:00",
-      "work_started_at": "",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
+      "work_started_at": "2026-11-10T09:19:44.198+03:00",
+      "deadline_at": "2026-11-10 09:04",
+      "deadline": "2026-11-10 09:04",
       "due_bucket": "today",
       "comments": [
+        {
+          "author": "Нарыжнев Н. С.",
+          "time": "",
+          "text": "настройка удаленного доступа",
+          "is_public": true
+        },
         {
           "author": "Нарыжнев Н. С.",
           "time": "",
