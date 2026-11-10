@@ -692,13 +692,12 @@ window.ITSUPP_DATA = {
       "company_id": 30,
       "company_name": "Сервис-Про ООО",
       "entity_name": "Без объекта",
-      "assignee_id": "",
-      "assignee_name": "Не назначен",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
       "coexecutors": [
         "8",
         "9",
-        "11",
-        "12"
+        "11"
       ],
       "observers": [
         "6"
@@ -714,7 +713,7 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-10 14:53",
       "created_iso": "2026-11-10T14:53:43.425+03:00",
-      "updated_iso": "2026-11-10T14:53:43.508+03:00",
+      "updated_iso": "2026-11-10T14:56:06.488+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
@@ -737,8 +736,8 @@ window.ITSUPP_DATA = {
       "company_id": 30,
       "company_name": "Сервис-Про ООО",
       "entity_name": "Без объекта",
-      "assignee_id": "1",
-      "assignee_name": "Стрелкин М. В.",
+      "assignee_id": "11",
+      "assignee_name": "Никулин Д. С.",
       "coexecutors": [
         "8",
         "9",
@@ -758,7 +757,7 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-10 14:53",
       "created_iso": "2026-11-10T14:53:42.933+03:00",
-      "updated_iso": "2026-11-10T14:55:46.612+03:00",
+      "updated_iso": "2026-11-10T14:55:52.355+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
