@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794313805,
-  "updated_at": "2026-11-10T15:30:05.582493+03:00",
+  "sync_seq": 1794314291,
+  "updated_at": "2026-11-10T15:38:11.118109+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -123,7 +123,8 @@
     "д.н,и (добрый день. сможет кто нибудь подключиться к кассе в продуктах и добавить жигалковскую е.а. кассиром (если она уже есть там, то посмотреть её номер)": "44246",
     "проблема с пк": "44247",
     "белтрус 7-ая слобода (лм чз)": "44248",
-    "настройка пк": "44249"
+    "настройка пк": "44249",
+    "установка нового рабочего места + перенос рабочего места + диагностика двух компьютеров + настройка принтера на пк": "44250"
   },
   "deleted_ids": [
     "44116",
@@ -133,6 +134,64 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44250,
+      "title": "Установка нового рабочего места + перенос рабочего места + диагностика двух компьютеров + настройка принтера на пк",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 15:37",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 69,
+      "company_name": "УК КДФ",
+      "entity_name": "Без объекта",
+      "assignee_id": "13",
+      "assignee_name": "Кочнов И. И.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 140,
+      "spent_by_employee": {
+        "13": 140
+      },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 15:37",
+      "created_iso": "2026-11-10T15:37:47.393+03:00",
+      "updated_iso": "2026-11-10T15:37:56.991+03:00",
+      "reacted_iso": "2026-11-10T15:37:50.201+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-10 16:36",
+      "deadline": "2026-11-10 16:36",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кочнов И. И.",
+          "time": "",
+          "text": "Установка нового рабочего места + перенос рабочего места + диагностика двух компьютеров + настройка принтера на пк",
+          "is_public": true
+        },
+        {
+          "author": "Кочнов И. И.",
+          "time": "",
+          "text": "Установка нового рабочего места + перенос рабочего места + диагностика двух компьютеров + настройка принтера на пк",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44249,
       "title": "Настройка пк",
@@ -1392,63 +1451,6 @@
       "work_started_at": "",
       "deadline_at": "2026-11-10 13:27",
       "deadline": "2026-11-10 13:27",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        },
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44225,
-      "title": "Настройка рдп и создание почты",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-10 12:14",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 41,
-      "company_name": "КЛИНИКА ФОМИНА ТВЕРЬ ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "12",
-      "assignee_name": "Боровитин Е. С.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 30,
-      "spent_by_employee": {
-        "12": 30
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 12:14",
-      "created_iso": "2026-11-10T12:14:11.519+03:00",
-      "updated_iso": "2026-11-10T12:14:24.029+03:00",
-      "reacted_iso": "2026-11-10T12:14:16.163+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-10 13:13",
-      "deadline": "2026-11-10 13:13",
       "due_bucket": "today",
       "comments": [
         {
