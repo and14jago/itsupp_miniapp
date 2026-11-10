@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794311647,
-  "updated_at": "2026-11-10T14:54:07.179391+03:00",
+  "sync_seq": 1794311683,
+  "updated_at": "2026-11-10T14:54:43.938925+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -367,8 +367,8 @@
       "company_id": 30,
       "company_name": "Сервис-Про ООО",
       "entity_name": "Без объекта",
-      "assignee_id": "",
-      "assignee_name": "Не назначен",
+      "assignee_id": "7",
+      "assignee_name": "Кукушкина А. А.",
       "coexecutors": [
         "8",
         "9",
@@ -378,9 +378,7 @@
       "observers": [
         "6"
       ],
-      "control_by": [
-        "7"
-      ],
+      "control_by": [],
       "spent_minutes": 0,
       "spent_by_employee": {},
       "tracked_work_seconds": 0,
@@ -389,7 +387,7 @@
       "billing_flag": "none",
       "created_at": "2026-11-10 14:53",
       "created_iso": "2026-11-10T14:53:41.656+03:00",
-      "updated_iso": "2026-11-10T14:53:41.721+03:00",
+      "updated_iso": "2026-11-10T14:54:41.211+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
@@ -412,8 +410,8 @@
       "company_id": 30,
       "company_name": "Сервис-Про ООО",
       "entity_name": "Без объекта",
-      "assignee_id": "",
-      "assignee_name": "Не назначен",
+      "assignee_id": "13",
+      "assignee_name": "Кочнов И. И.",
       "coexecutors": [
         "8",
         "9",
@@ -434,7 +432,7 @@
       "billing_flag": "none",
       "created_at": "2026-11-10 14:53",
       "created_iso": "2026-11-10T14:53:41.264+03:00",
-      "updated_iso": "2026-11-10T14:53:41.321+03:00",
+      "updated_iso": "2026-11-10T14:54:35.657+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
@@ -457,8 +455,8 @@
       "company_id": 30,
       "company_name": "Сервис-Про ООО",
       "entity_name": "Без объекта",
-      "assignee_id": "",
-      "assignee_name": "Не назначен",
+      "assignee_id": "10",
+      "assignee_name": "Валеткин Л. А.",
       "coexecutors": [
         "8",
         "9",
@@ -479,7 +477,7 @@
       "billing_flag": "none",
       "created_at": "2026-11-10 14:53",
       "created_iso": "2026-11-10T14:53:40.904+03:00",
-      "updated_iso": "2026-11-10T14:53:40.968+03:00",
+      "updated_iso": "2026-11-10T14:54:30.813+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
@@ -502,8 +500,8 @@
       "company_id": 30,
       "company_name": "Сервис-Про ООО",
       "entity_name": "Без объекта",
-      "assignee_id": "",
-      "assignee_name": "Не назначен",
+      "assignee_id": "5",
+      "assignee_name": "Старцев Е. А.",
       "coexecutors": [
         "8",
         "9",
@@ -524,7 +522,7 @@
       "billing_flag": "none",
       "created_at": "2026-11-10 14:53",
       "created_iso": "2026-11-10T14:53:40.515+03:00",
-      "updated_iso": "2026-11-10T14:53:40.579+03:00",
+      "updated_iso": "2026-11-10T14:54:21.153+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
