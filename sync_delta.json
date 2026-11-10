@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794293588,
-  "updated_at": "2026-11-10T09:53:08.973521+03:00",
+  "sync_seq": 1794293995,
+  "updated_at": "2026-11-10T09:59:55.435987+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -318,9 +318,9 @@
       "title": "Микрюкова Регина Аликовна уфа оператор кц. не работает 1с уфа",
       "description": "Микрюкова Регина Аликовна уфа оператор кц. не работает 1с уфа",
       "timeline_summary": "Создана: 2026-11-10 09:20",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -338,17 +338,19 @@
         "6"
       ],
       "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
+      "spent_minutes": 30,
+      "spent_by_employee": {
+        "9": 30
+      },
       "tracked_work_seconds": 0,
       "work_by_employee": {},
       "timer_paused": false,
       "billing_flag": "none",
       "created_at": "2026-11-10 09:20",
       "created_iso": "2026-11-10T09:20:48.993+03:00",
-      "updated_iso": "2026-11-10T09:20:52.269+03:00",
+      "updated_iso": "2026-11-10T09:59:35.064+03:00",
       "reacted_iso": "2026-11-10T09:20:52.242+03:00",
-      "work_started_at": "2026-11-10T09:20:52.269+03:00",
+      "work_started_at": "",
       "deadline_at": "2026-11-10 10:19",
       "deadline": "2026-11-10 10:19",
       "due_bucket": "today",
@@ -356,7 +358,13 @@
         {
           "author": "Нарыжнев Н. С.",
           "time": "",
-          "text": "Микрюкова Регина Аликовна уфа оператор кц. не работает 1с уфа",
+          "text": "решено",
+          "is_public": true
+        },
+        {
+          "author": "Нарыжнев Н. С.",
+          "time": "",
+          "text": "Микрюкова Регина Аликовна уфа оператор кц. не работает 1с уфа\nПереход на другой сервер\nНастройка удаленного доступа, добавление баз\nПоиск пароля",
           "is_public": true
         }
       ],
