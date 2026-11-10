@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794313772,
-  "updated_at": "2026-11-10T15:29:32.762831+03:00",
+  "sync_seq": 1794313805,
+  "updated_at": "2026-11-10T15:30:05.582493+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -1377,9 +1377,9 @@
         "6"
       ],
       "control_by": [],
-      "spent_minutes": 100,
+      "spent_minutes": 120,
       "spent_by_employee": {
-        "12": 100
+        "12": 120
       },
       "tracked_work_seconds": 0,
       "work_by_employee": {},
@@ -1387,7 +1387,7 @@
       "billing_flag": "none",
       "created_at": "2026-11-10 12:28",
       "created_iso": "2026-11-10T12:28:51.148+03:00",
-      "updated_iso": "2026-11-10T14:23:03.568+03:00",
+      "updated_iso": "2026-11-10T15:29:41.177+03:00",
       "reacted_iso": "2026-11-10T12:28:53.994+03:00",
       "work_started_at": "",
       "deadline_at": "2026-11-10 13:27",
