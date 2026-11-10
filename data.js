@@ -898,51 +898,6 @@ window.ITSUPP_DATA = {
       "_syncedToPortal": true
     },
     {
-      "id": 44239,
-      "title": "Отчитаться о заполнении 71 Андрею",
-      "description": "Поступило обращение клиента: Отчитаться о заполнении 71 Андрею. Требуется провести диагностику и выполнить необходимые работы для устранения проблемы.",
-      "timeline_summary": "Создана: 2026-11-10 14:53",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
-      "priority": "normal",
-      "type_code": "inner",
-      "type_name": "Внутренняя",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "13",
-      "assignee_name": "Кочнов И. И.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 14:53",
-      "created_iso": "2026-11-10T14:53:41.264+03:00",
-      "updated_iso": "2026-11-10T14:54:35.657+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
-      "due_bucket": "today",
-      "comments": [],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44238,
       "title": "Отчитаться о заполнении 71 Андрею",
       "description": "Поступило обращение клиента: Отчитаться о заполнении 71 Андрею. Требуется провести диагностику и выполнить необходимые работы для устранения проблемы.",
