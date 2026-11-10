@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794319698,
-  "updated_at": "2026-11-10T17:08:18.617937+03:00",
+  "sync_seq": 1794319731,
+  "updated_at": "2026-11-10T17:08:51.468615+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -147,9 +147,9 @@
       "title": "Копирование подписи",
       "description": "",
       "timeline_summary": "Создана: 2026-11-10 17:08",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -168,21 +168,29 @@
         "6"
       ],
       "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
+      "spent_minutes": 10,
+      "spent_by_employee": {
+        "13": 10
+      },
       "tracked_work_seconds": 0,
       "work_by_employee": {},
       "timer_paused": false,
       "billing_flag": "none",
       "created_at": "2026-11-10 17:08",
       "created_iso": "2026-11-10T17:08:00.271+03:00",
-      "updated_iso": "2026-11-10T17:08:03.553+03:00",
+      "updated_iso": "2026-11-10T17:08:39.981+03:00",
       "reacted_iso": "2026-11-10T17:08:03.538+03:00",
-      "work_started_at": "2026-11-10T17:08:03.553+03:00",
+      "work_started_at": "",
       "deadline_at": "2026-11-11 09:07",
       "deadline": "2026-11-11 09:07",
       "due_bucket": "today",
       "comments": [
+        {
+          "author": "Кочнов И. И.",
+          "time": "",
+          "text": "Копирование подписи",
+          "is_public": true
+        },
         {
           "author": "Кочнов И. И.",
           "time": "",
