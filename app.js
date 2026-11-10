@@ -3534,12 +3534,12 @@
     modalBodyEl.appendChild(respBadge);
 
     var portalReasons = [
-      { code: "spam", text: "🚫 Спам / рассылка / не заявка" },
-      { code: "dup", text: "🔁 Дубликат заявки" },
-      { code: "other", text: "🏢 Не в эту службу" },
-      { code: "scope", text: "📋 Вне зоны поддержки" },
-      { code: "info", text: "💬 Только консультация" },
-      { code: "err", text: "❌ Ошибочное обращение" }
+      { code: "other", text: "Не в эту службу / отдел" },
+      { code: "spam", text: "Спам / рассылка" },
+      { code: "dup", text: "Дубликат заявки" },
+      { code: "scope", text: "Вне зоны поддержки" },
+      { code: "err", text: "Ошибочное обращение" },
+      { code: "noneed", text: "Пропала необходимость" }
     ];
     var selectedReason = portalReasons[0].text;
 
@@ -3655,6 +3655,10 @@
     modalBodyEl.appendChild(reasonLabel);
 
     var reasonsGrid = el("div", "assignee-grid");
+    reasonsGrid.style.display = "grid";
+    reasonsGrid.style.gridTemplateColumns = "repeat(3, minmax(0, 1fr))";
+    reasonsGrid.style.gridAutoRows = "1fr";
+    reasonsGrid.style.gap = "6px";
     portalReasons.forEach(function (pr) {
       var b = el(
         "button",
@@ -3662,6 +3666,17 @@
         pr.text
       );
       b.type = "button";
+      b.style.width = "100%";
+      b.style.height = "100%";
+      b.style.minHeight = "44px";
+      b.style.padding = "6px 8px";
+      b.style.fontSize = "12px";
+      b.style.lineHeight = "1.2";
+      b.style.whiteSpace = "normal";
+      b.style.textAlign = "center";
+      b.style.display = "flex";
+      b.style.alignItems = "center";
+      b.style.justifyContent = "center";
       b.addEventListener("click", function () {
         selectedReason = pr.text;
         executeReject("", pr.text);
