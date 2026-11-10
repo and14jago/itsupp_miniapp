@@ -27,6 +27,34 @@
   });
 
   var DATA = window.ITSUPP_DATA || { companies: [], employees: [], initialTasks: [] };
+  if (Array.isArray(DATA.employees)) {
+    var portalExtraStaff = [
+      {
+        id: "17",
+        name: "Царева Наталья Николаевна",
+        short: "Царева Н. Н.",
+        dept: "Бухгалтерия",
+        role: "accountant",
+        email: "n.tsareva@itsupp.com",
+        tg_id: "0"
+      },
+      {
+        id: "22",
+        name: "Лисовский Александр Владимирович",
+        short: "Лисовский А. В.",
+        dept: "Технический отдел",
+        role: "engineer",
+        email: "a.lisovsky@itsupp.com",
+        tg_id: "0"
+      }
+    ];
+    portalExtraStaff.forEach(function (st) {
+      var exists = DATA.employees.some(function (e) {
+        return String(e.id) === st.id || String(e.name || "").toLowerCase().indexOf(st.name.split(" ")[0].toLowerCase()) !== -1;
+      });
+      if (!exists) DATA.employees.push(st);
+    });
+  }
   var STORAGE_KEY_STATE = "itsupp_miniapp_state_v5";
   var STORAGE_KEY_TASK_OVERRIDES = "itsupp_miniapp_task_overrides_v1";
   var STORAGE_KEY_SYNC_QUEUE = "itsupp_miniapp_sync_queue_v2";
@@ -2408,6 +2436,11 @@
       })
     );
     moreGrid.appendChild(
+      makeActionBtn("📤 Поделиться / По всем каналам", "btn-work", function () {
+        openShareTaskModal(task);
+      })
+    );
+    moreGrid.appendChild(
       makeActionBtn("Скопировать ссылку", "", function () {
         copyIssueLink(task.id);
       })
@@ -3126,6 +3159,101 @@
       } catch (_e) {}
     }
     window.open(url, "_blank", "noopener,noreferrer");
+  }
+
+  function openShareTaskModal(task) {
+    openActionModal("📤 Поделиться задачей #" + task.id);
+    var assignee = getEmployeeById(task.assignee_id);
+    var portalUrl = "https://itsupp.com/tickets/" + encodeURIComponent(task.id);
+    var shareText = "Заявка #" + task.id + ": " + (task.title || "") + "\nКлиент: " + (task.company_name || "Сервис-Про ООО") + "\nИсполнитель: " + (assignee ? assignee.short : (task.assignee_name || "Не назначен"));
+    var stack = el("div", "assignee-grid");
+
+    var btnAll = el("button", "btn-primary-full", "🚀 Отправить по всем каналам (Email + TG + 🔔)");
+    btnAll.type = "button";
+    btnAll.addEventListener("click", function () {
+      hapticNotify("success");
+      if (typeof fetch === "function") {
+        fetch("https://itsupp.com/api/tickets-notify-all-channels", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            ticketId: String(task.id),
+            number: Number(task.id) || String(task.id),
+            subject: task.title || "",
+            description: task.description || task.title || "",
+            assigneeId: String(task.assignee_id || ""),
+            assigneeName: assignee ? assignee.name : (task.assignee_name || ""),
+            clientName: task.company_name || "Сервис-Про ООО",
+            mode: "notify_all"
+          })
+        }).catch(function () {});
+      }
+      closeActionModal();
+      updateBellBadge();
+      showToast("🚀 Отправлено по всем каналам (Email + TG + 🔔)");
+    });
+    stack.appendChild(btnAll);
+
+    var btnNative = el("button", "btn-secondary-full", "📱 Системное меню «Поделиться» (iPhone / ОС)");
+    btnNative.type = "button";
+    btnNative.addEventListener("click", function () {
+      if (navigator.share) {
+        navigator.share({ title: "Заявка #" + task.id, text: shareText, url: portalUrl }).catch(function () {});
+      } else {
+        copyIssueLink(task.id);
+      }
+    });
+    stack.appendChild(btnNative);
+
+    var btnTg = el("button", "btn-secondary-full", "✈️ Отправить в Telegram");
+    btnTg.type = "button";
+    btnTg.addEventListener("click", function () {
+      var u = "https://t.me/share/url?url=" + encodeURIComponent(portalUrl) + "&text=" + encodeURIComponent(shareText);
+      if (tg && typeof tg.openTelegramLink === "function") {
+        try { tg.openTelegramLink(u); return; } catch (_e) {}
+      }
+      window.open(u, "_blank", "noopener,noreferrer");
+    });
+    stack.appendChild(btnTg);
+
+    var btnWa = el("button", "btn-secondary-full", "💬 Отправить в WhatsApp");
+    btnWa.type = "button";
+    btnWa.addEventListener("click", function () {
+      window.open("https://wa.me/?text=" + encodeURIComponent(shareText + "\n" + portalUrl), "_blank", "noopener,noreferrer");
+    });
+    stack.appendChild(btnWa);
+
+    var btnEmail = el("button", "btn-secondary-full", "✉️ Отправить на Email");
+    btnEmail.type = "button";
+    btnEmail.addEventListener("click", function () {
+      window.location.href = "mailto:?subject=" + encodeURIComponent("Заявка #" + task.id + ": " + (task.title || "")) + "&body=" + encodeURIComponent(shareText + "\n\n" + portalUrl);
+    });
+    stack.appendChild(btnEmail);
+
+    var btnVcf = el("button", "btn-secondary-full", "👤 Добавить контакт (.vcf)");
+    btnVcf.type = "button";
+    btnVcf.addEventListener("click", function () {
+      var vcard = "BEGIN:VCARD\r\nVERSION:3.0\r\nFN:" + (task.company_name || "Клиент") + " (Заявка #" + task.id + ")\r\nORG:" + (task.company_name || "Сервис-Про ООО") + "\r\nNOTE:" + (task.title || "") + "\r\nURL:" + portalUrl + "\r\nEND:VCARD";
+      var blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "contact-ticket-" + task.id + ".vcf";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      showToast("👤 Контакт (.vcf) сформирован");
+    });
+    stack.appendChild(btnVcf);
+
+    var btnChat = el("button", "btn-secondary-full", "🔔 Напомнить исполнителю в чат");
+    btnChat.type = "button";
+    btnChat.addEventListener("click", function () {
+      closeActionModal();
+      nudgeAssignee(task);
+    });
+    stack.appendChild(btnChat);
+
+    modalBodyEl.appendChild(stack);
   }
 
   function copyIssueLink(issueId) {
@@ -4271,7 +4399,7 @@
     }
 
     var finalTitle = rawTitle || rawDesc.split("\n")[0].slice(0, 120);
-    var finalDesc = rawDesc || rawTitle;
+    var finalDesc = rawDesc || ("Поступило обращение клиента: " + finalTitle + ". Требуется провести диагностику и выполнить необходимые работы для устранения проблемы.");
     if (Array.isArray(createDraft.files) && createDraft.files.length > 0) {
       finalDesc += "\n\n📎 Прикреплённые файлы (" + createDraft.files.length + "): " + createDraft.files.join(", ");
     }
@@ -4282,7 +4410,7 @@
       targetEmployees = DATA.employees.filter(function (emp) {
         if (String(emp.id) === "4" || String(emp.id) === "14") return false;
         if (createDraft.assigneeId === "group:engineers") {
-          return ["5", "8", "9", "10", "11", "12", "13"].indexOf(String(emp.id)) !== -1;
+          return ["5", "8", "9", "10", "11", "12", "13", "22"].indexOf(String(emp.id)) !== -1;
         }
         return true;
       });
