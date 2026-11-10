@@ -634,6 +634,51 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44247,
+      "title": "Проблема с ПК",
+      "description": "Поступило обращение клиента: Проблема с ПК. Требуется провести диагностику и выполнить необходимые работы для устранения проблемы.",
+      "timeline_summary": "Создана: 2026-11-10 15:04",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "",
+      "assignee_name": "Не назначен",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 15:04",
+      "created_iso": "2026-11-10T15:04:53.799+03:00",
+      "updated_iso": "2026-11-10T15:04:53.856+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44246,
       "title": "Д.Н,И (Добрый день. Сможет кто нибудь подключиться к кассе в продуктах и добавить Жигалковскую Е.А. кассиром (если она уже есть там, то посмотреть её номер)",
       "description": "",
@@ -687,9 +732,9 @@ window.ITSUPP_DATA = {
       "title": "Проверить/заполнить 71 и подбить факультатив",
       "description": "Поступило обращение клиента: Отчитаться о заполнении 71 Андрею. Требуется провести диагностику и выполнить необходимые работы для устранения проблемы.",
       "timeline_summary": "Создана: 2026-11-10 14:53",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
+      "status_code": "work",
+      "status_name": "Принял",
+      "status_color": "#605cb8",
       "priority": "normal",
       "type_code": "inner",
       "type_name": "Внутренняя",
@@ -718,13 +763,20 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-10 14:53",
       "created_iso": "2026-11-10T14:53:43.844+03:00",
-      "updated_iso": "2026-11-10T14:57:11.798+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
+      "updated_iso": "2026-11-10T15:05:07.735+03:00",
+      "reacted_iso": "2026-11-10T15:05:07.699+03:00",
+      "work_started_at": "2026-11-10T15:05:07.735+03:00",
       "deadline_at": "Без срока",
       "deadline": "Без срока",
       "due_bucket": "today",
-      "comments": [],
+      "comments": [
+        {
+          "author": "Малышев А. С.",
+          "time": "",
+          "text": "принял",
+          "is_public": true
+        }
+      ],
       "_syncedToPortal": true
     },
     {
