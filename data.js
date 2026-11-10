@@ -635,7 +635,7 @@ window.ITSUPP_DATA = {
   "initialTasks": [
     {
       "id": 44213,
-      "title": "Доабвил пароль на раб стол",
+      "title": "Добавил пароль на раб стол",
       "description": "Доабвил пароль на раб стол",
       "timeline_summary": "Создана: 2026-11-10 10:18",
       "status_code": "working",
@@ -666,9 +666,9 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-10 10:18",
       "created_iso": "2026-11-10T10:18:51.509+03:00",
-      "updated_iso": "2026-11-10T10:18:54.548+03:00",
+      "updated_iso": "2026-11-10T10:19:07.340+03:00",
       "reacted_iso": "2026-11-10T10:18:54.530+03:00",
-      "work_started_at": "2026-11-10T10:18:54.548+03:00",
+      "work_started_at": "2026-11-10T10:19:07.340+03:00",
       "deadline_at": "2026-11-10 11:17",
       "deadline": "2026-11-10 11:17",
       "due_bucket": "today",
@@ -676,7 +676,7 @@ window.ITSUPP_DATA = {
         {
           "author": "Нарыжнев Н. С.",
           "time": "",
-          "text": "Доабвил пароль на раб стол",
+          "text": "Добавил пароль на раб стол",
           "is_public": true
         }
       ],
