@@ -686,55 +686,6 @@ window.ITSUPP_DATA = {
       "_syncedToPortal": true
     },
     {
-      "id": 44227,
-      "title": "Белтрус 7-ая Слобода (продление ЭЦП через Тензор, положить свежее МЧД, пере выпустить RSA сертификат)",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-10 12:32",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 26,
-      "company_name": "Белтрус ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 12:32",
-      "created_iso": "2026-11-10T12:32:04.172+03:00",
-      "updated_iso": "2026-11-10T12:32:08.485+03:00",
-      "reacted_iso": "2026-11-10T12:32:08.455+03:00",
-      "work_started_at": "2026-11-10T12:32:08.485+03:00",
-      "deadline_at": "2026-11-10 13:31",
-      "deadline": "2026-11-10 13:31",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44224,
       "title": "Проблема с ПК на Спартака, перенос данных на коноплянникова с аппарата УЗИ",
       "description": "Проблема с ПК на Спартака, перенос данных на коноплянникова с аппарата УЗИ",
