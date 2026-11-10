@@ -634,6 +634,51 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44252,
+      "title": "Нахожусь в филиале на 1905 года. Меняли блок на компьютер...",
+      "description": "Нахожусь в филиале на 1905 года. Меняли блок на компьютере. Теперь не можем зайти в Гугл - там были все пароли. Как узнать?\nНе нужно",
+      "timeline_summary": "Создана: 2026-11-10 15:42",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 0,
+      "company_name": "Без компании",
+      "entity_name": "Без объекта",
+      "assignee_id": "",
+      "assignee_name": "Не назначен",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "371"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 15:42",
+      "created_iso": "2026-11-10T15:42:04.087+03:00",
+      "updated_iso": "2026-11-10T15:42:04.142+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44248,
       "title": "Белтрус 7-ая Слобода (ЛМ ЧЗ)",
       "description": "",

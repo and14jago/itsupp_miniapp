@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794314357,
-  "updated_at": "2026-11-10T15:39:17.678489+03:00",
+  "sync_seq": 1794314550,
+  "updated_at": "2026-11-10T15:42:30.629849+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -125,7 +125,8 @@
     "белтрус 7-ая слобода (лм чз)": "44248",
     "настройка пк": "44249",
     "установка нового рабочего места + перенос рабочего места + диагностика двух компьютеров + настройка принтера на пк": "44250",
-    "чистка кэша 1с": "44251"
+    "чистка кэша 1с": "44251",
+    "нахожусь в филиале на 1905 года. меняли блок на компьютер...": "44252"
   },
   "deleted_ids": [
     "44116",
@@ -135,6 +136,51 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44252,
+      "title": "Нахожусь в филиале на 1905 года. Меняли блок на компьютер...",
+      "description": "Нахожусь в филиале на 1905 года. Меняли блок на компьютере. Теперь не можем зайти в Гугл - там были все пароли. Как узнать?\nНе нужно",
+      "timeline_summary": "Создана: 2026-11-10 15:42",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 0,
+      "company_name": "Без компании",
+      "entity_name": "Без объекта",
+      "assignee_id": "",
+      "assignee_name": "Не назначен",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "371"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 15:42",
+      "created_iso": "2026-11-10T15:42:04.087+03:00",
+      "updated_iso": "2026-11-10T15:42:04.142+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
     {
       "id": 44251,
       "title": "Чистка кэша 1с",
@@ -1415,63 +1461,6 @@
           "time": "",
           "text": "Автоматически назначен Быков Максим Владимирович. @itsupp_task_bot",
           "is_public": false
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44227,
-      "title": "Белтрус 7-ая Слобода (продление ЭЦП через Тензор, положить свежее МЧД, пере выпустить RSA сертификат)",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-10 12:32",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 26,
-      "company_name": "Белтрус ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 30,
-      "spent_by_employee": {
-        "8": 30
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 12:32",
-      "created_iso": "2026-11-10T12:32:04.172+03:00",
-      "updated_iso": "2026-11-10T13:00:56.821+03:00",
-      "reacted_iso": "2026-11-10T12:32:08.455+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-10 13:31",
-      "deadline": "2026-11-10 13:31",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
-          "is_public": true
-        },
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
-          "is_public": true
         }
       ],
       "_syncedToPortal": true
