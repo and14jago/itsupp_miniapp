@@ -634,62 +634,6 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
-      "id": 44257,
-      "title": "Новосибирск зайти в фнс",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-10 17:03",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "7",
-      "assignee_name": "Кукушкина А. А.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 17:03",
-      "created_iso": "2026-11-10T17:03:03.066+03:00",
-      "updated_iso": "2026-11-10T18:10:21.801+03:00",
-      "reacted_iso": "2026-11-10T17:04:47.538+03:00",
-      "work_started_at": "2026-11-10T18:10:21.801+03:00",
-      "deadline_at": "2026-11-11 09:59",
-      "deadline": "2026-11-11 09:59",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "+",
-          "is_public": true
-        },
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "Ознакомление с заявкой (30 мин) · Время: списано 30 мин (по таймеру: 30 мин, По договору (Обычная))",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44252,
       "title": "Нахожусь в филиале на 1905 года. Меняли блок на компьютер...",
       "description": "Нахожусь в филиале на 1905 года. Меняли блок на компьютере. Теперь не можем зайти в Гугл - там были все пароли. Как узнать?\nНе нужно",
