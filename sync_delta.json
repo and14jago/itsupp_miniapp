@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794311683,
-  "updated_at": "2026-11-10T14:54:43.938925+03:00",
+  "sync_seq": 1794311718,
+  "updated_at": "2026-11-10T14:55:18.370591+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -281,7 +281,6 @@
       "assignee_name": "Не назначен",
       "coexecutors": [
         "8",
-        "9",
         "11",
         "12"
       ],
@@ -299,7 +298,7 @@
       "billing_flag": "none",
       "created_at": "2026-11-10 14:53",
       "created_iso": "2026-11-10T14:53:42.470+03:00",
-      "updated_iso": "2026-11-10T14:53:42.574+03:00",
+      "updated_iso": "2026-11-10T14:55:16.672+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
@@ -322,10 +321,9 @@
       "company_id": 30,
       "company_name": "Сервис-Про ООО",
       "entity_name": "Без объекта",
-      "assignee_id": "",
-      "assignee_name": "Не назначен",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
       "coexecutors": [
-        "8",
         "9",
         "11",
         "12"
@@ -344,7 +342,7 @@
       "billing_flag": "none",
       "created_at": "2026-11-10 14:53",
       "created_iso": "2026-11-10T14:53:42.065+03:00",
-      "updated_iso": "2026-11-10T14:53:42.136+03:00",
+      "updated_iso": "2026-11-10T14:55:05.199+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
