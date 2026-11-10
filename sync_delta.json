@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794305074,
-  "updated_at": "2026-11-10T13:04:34.323369+03:00",
+  "sync_seq": 1794305107,
+  "updated_at": "2026-11-10T13:05:07.015344+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -111,7 +111,8 @@
     "настройка рдп и создание почты": "44225",
     "белтрус 7-ая слобода (продление эцп через тензор, положить свежее мчд, пере выпустить rsa сертификат)": "44227",
     "добрый день, необходимо создать почту рабочую для нового...": "44228",
-    "кф-ленинский (в 302 не печатает принтер)": "44229"
+    "кф-ленинский (в 302 не печатает принтер)": "44229",
+    "в пятницу 13.11 на базановой необходимо переставить...": "44230"
   },
   "deleted_ids": [
     "44116",
@@ -121,6 +122,52 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44230,
+      "title": "В пятницу 13.11 на Базановой необходимо переставить...",
+      "description": "В пятницу 13.11 на Базановой необходимо переставить компьютеры на новые места с подключением",
+      "timeline_summary": "Создана: 2026-11-10 13:04",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 52,
+      "company_name": "Медикал Геномикс ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "",
+      "assignee_name": "Не назначен",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6",
+        "324"
+      ],
+      "control_by": [
+        "324"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 13:04",
+      "created_iso": "2026-11-10T13:04:43.870+03:00",
+      "updated_iso": "2026-11-10T13:04:43.968+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
     {
       "id": 44229,
       "title": "КФ-Ленинский (В 302 не печатает принтер)",
@@ -1451,63 +1498,6 @@
           "author": "Быков М. В.",
           "time": "",
           "text": "+",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44205,
-      "title": "Восстановление данных из бекапа",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-10 08:45",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 168,
-      "company_name": "ООО \"Клиника Фомина Уфа\" (ЦМТ)",
-      "entity_name": "Без объекта",
-      "assignee_id": "12",
-      "assignee_name": "Боровитин Е. С.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 30,
-      "spent_by_employee": {
-        "12": 30
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 08:45",
-      "created_iso": "2026-11-10T08:45:02.623+03:00",
-      "updated_iso": "2026-11-10T09:23:29.608+03:00",
-      "reacted_iso": "2026-11-10T08:45:06.650+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-10 10:00",
-      "deadline": "2026-11-10 10:00",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        },
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
           "is_public": true
         }
       ],
