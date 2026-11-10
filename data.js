@@ -767,13 +767,19 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-10 08:40",
       "created_iso": "2026-11-10T08:40:51.254+03:00",
-      "updated_iso": "2026-11-10T09:20:01.915+03:00",
-      "reacted_iso": "",
+      "updated_iso": "2026-11-10T10:07:15.502+03:00",
+      "reacted_iso": "2026-11-10T10:07:15.082+03:00",
       "work_started_at": "",
       "deadline_at": "Без срока",
       "deadline": "Без срока",
       "due_bucket": "today",
       "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "нужен анидеск",
+          "is_public": true
+        },
         {
           "author": "Кукушкина А. А.",
           "time": "",
