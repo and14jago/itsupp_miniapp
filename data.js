@@ -638,9 +638,9 @@ window.ITSUPP_DATA = {
       "title": "Проверить заказы в 1С по Госпиталю, удалить лишнее и актуализировать реализации",
       "description": "",
       "timeline_summary": "Создана: 2026-11-10 09:36",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
       "priority": "normal",
       "type_code": "000004",
       "type_name": "В бухгалтерию",
@@ -662,13 +662,20 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-10 09:36",
       "created_iso": "2026-11-10T09:36:50.104+03:00",
-      "updated_iso": "2026-11-10T09:36:50.109+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
+      "updated_iso": "2026-11-10T09:37:00.190+03:00",
+      "reacted_iso": "2026-11-10T09:37:00.164+03:00",
+      "work_started_at": "2026-11-10T09:37:00.190+03:00",
       "deadline_at": "2026-11-10 17:00",
       "deadline": "2026-11-10 17:00",
       "due_bucket": "today",
-      "comments": [],
+      "comments": [
+        {
+          "author": "Малышев А. С.",
+          "time": "",
+          "text": "Начал",
+          "is_public": false
+        }
+      ],
       "_syncedToPortal": true
     },
     {
@@ -1068,67 +1075,6 @@ window.ITSUPP_DATA = {
           "author": "Кукушкина А. А.",
           "time": "",
           "text": "Статус «Выполняю» (Mini App портала) · Время: списано 5 мин (по таймеру: 5 мин, По договору (Обычная))",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44187,
-      "title": "Новая учетка, настройка  подключения",
-      "description": "Новая учетка, настройка  подключения",
-      "timeline_summary": "Создана: 2026-11-09 16:41",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 98,
-      "company_name": "КЛИНИКА ФОМИНА БЕЛГОРОД ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "9",
-      "assignee_name": "Нарыжнев Н. С.",
-      "coexecutors": [
-        "8",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 16:41",
-      "created_iso": "2026-11-09T16:41:36.633+03:00",
-      "updated_iso": "2026-11-10T09:19:44.198+03:00",
-      "reacted_iso": "2026-11-09T16:41:39.964+03:00",
-      "work_started_at": "2026-11-10T09:19:44.198+03:00",
-      "deadline_at": "2026-11-10 09:04",
-      "deadline": "2026-11-10 09:04",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "настройка удаленного доступа",
-          "is_public": true
-        },
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "не отвечают",
-          "is_public": true
-        },
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "Новая учетка, настройка  подключения",
           "is_public": true
         }
       ],
