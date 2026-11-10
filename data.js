@@ -634,6 +634,48 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44217,
+      "title": "Помощь с эцп",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 10:47",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 41,
+      "company_name": "КЛИНИКА ФОМИНА ТВЕРЬ ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 10:47",
+      "created_iso": "2026-11-10T10:47:58.810+03:00",
+      "updated_iso": "2026-11-10T10:47:58.880+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44216,
       "title": "Сервис-ПРО (регистрация ККТ Ульяновск)",
       "description": "",

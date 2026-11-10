@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794296235,
-  "updated_at": "2026-11-10T10:37:15.718350+03:00",
+  "sync_seq": 1794296879,
+  "updated_at": "2026-11-10T10:47:59.731037+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -46,7 +46,7 @@
     "обучал даню как пользоваться таблицей": "44148",
     "алексей, помощь с переносом узи нна диск": "44149",
     "алексей, помощь с переносом узи на диск": "44149",
-    "помощь с эцп": "44190",
+    "помощь с эцп": "44217",
     "тонус энгельса (консультация по егаис)": "44151",
     "тонус энгельса касса 1 (ошибка тпг)": "44152",
     "тестирование пе оператора на можайского": "44153",
@@ -111,6 +111,48 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44217,
+      "title": "Помощь с эцп",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 10:47",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 41,
+      "company_name": "КЛИНИКА ФОМИНА ТВЕРЬ ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 10:47",
+      "created_iso": "2026-11-10T10:47:58.810+03:00",
+      "updated_iso": "2026-11-10T10:47:58.880+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
     {
       "id": 44216,
       "title": "Сервис-ПРО (регистрация ККТ Ульяновск)",
@@ -1420,63 +1462,6 @@
           "author": "Нарыжнев Н. С.",
           "time": "",
           "text": "Учетка, настройка удаленного доступа",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44192,
-      "title": "Установка драйвера принтера",
-      "description": ".",
-      "timeline_summary": "Создана: 2026-11-09 17:16",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 174,
-      "company_name": "Щербатова Юлия Евгеньевна (Студио 13)",
-      "entity_name": "Без объекта",
-      "assignee_id": "11",
-      "assignee_name": "Никулин Д. С.",
-      "coexecutors": [
-        "8",
-        "9",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 5,
-      "spent_by_employee": {
-        "11": 5
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 17:16",
-      "created_iso": "2026-11-09T17:16:29.553+03:00",
-      "updated_iso": "2026-11-09T17:16:39.289+03:00",
-      "reacted_iso": "2026-11-09T17:16:32.832+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-10 09:15",
-      "deadline": "2026-11-10 09:15",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Никулин Д. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        },
-        {
-          "author": "Никулин Д. С.",
-          "time": "",
-          "text": ".",
           "is_public": true
         }
       ],
