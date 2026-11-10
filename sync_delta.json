@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794298267,
-  "updated_at": "2026-11-10T11:11:07.917063+03:00",
+  "sync_seq": 1794299071,
+  "updated_at": "2026-11-10T11:24:31.515131+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -82,7 +82,7 @@
     "тонус ленина 53 (настроить вариант расчёта налогово по умолчанию ндс в том числе)": "44194",
     "не могу зайти на удаленку": "44195",
     "активация office": "44196",
-    "элма 400 ошибка": "44197",
+    "элма 400 ошибка": "44198",
     "оплата до 15 числа каждого месяца": "44199",
     "у нас в папке обмен комсомольская исчезли документы в папке электронный документооборот. во всех филиалах.": "44200",
     "не могу зайти на сервер": "44201",
@@ -104,7 +104,8 @@
     "сервис-про (регистрация ккт ульяновск)": "44216",
     "настройка бекапов": "44218",
     "тонус советская касса 2 (настроить второй сканер)": "44219",
-    "обновление сертификатов мдлп": "44220"
+    "обновление сертификатов мдлп": "44220",
+    "помощь с рдп": "44222"
   },
   "deleted_ids": [
     "44116",
@@ -114,6 +115,55 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44222,
+      "title": "Помощь с рдп",
+      "description": "Отвалился маршрут",
+      "timeline_summary": "Создана: 2026-11-10 11:24",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 205,
+      "company_name": "ООО \"Клиника Фомина Нижний Новгород\"",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 11:24",
+      "created_iso": "2026-11-10T11:24:27.776+03:00",
+      "updated_iso": "2026-11-10T11:24:31.199+03:00",
+      "reacted_iso": "2026-11-10T11:24:31.187+03:00",
+      "work_started_at": "2026-11-10T11:24:31.199+03:00",
+      "deadline_at": "2026-11-10 12:23",
+      "deadline": "2026-11-10 12:23",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44221,
       "title": "почта проверить входящие",
@@ -1424,58 +1474,6 @@
       "deadline": "Без срока",
       "due_bucket": "today",
       "comments": [],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44197,
-      "title": "Элма 400 ошибка",
-      "description": "Элма 400 ошибка",
-      "timeline_summary": "Создана: 2026-11-09 22:46",
-      "status_code": "work",
-      "status_name": "Принял",
-      "status_color": "#605cb8",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 69,
-      "company_name": "УК КДФ",
-      "entity_name": "Без объекта",
-      "assignee_id": "1",
-      "assignee_name": "Стрелкин М. В.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 22:46",
-      "created_iso": "2026-11-09T22:46:03.764+03:00",
-      "updated_iso": "2026-11-09T22:46:10.028+03:00",
-      "reacted_iso": "2026-11-09T22:46:10.009+03:00",
-      "work_started_at": "2026-11-09T22:46:10.028+03:00",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "Статус «Выполняю» (Mini App портала) · Время: списано 5 мин (по таймеру: 5 мин, По договору (Обычная))",
-          "is_public": true
-        }
-      ],
       "_syncedToPortal": true
     },
     {
