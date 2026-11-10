@@ -812,13 +812,19 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-10 09:03",
       "created_iso": "2026-11-10T09:03:01.855+03:00",
-      "updated_iso": "2026-11-10T09:22:57.187+03:00",
+      "updated_iso": "2026-11-10T10:37:15.039+03:00",
       "reacted_iso": "2026-11-10T09:03:26.646+03:00",
-      "work_started_at": "2026-11-10T09:22:57.187+03:00",
+      "work_started_at": "2026-11-10T10:37:15.039+03:00",
       "deadline_at": "2026-11-10 10:18",
       "deadline": "2026-11-10 10:18",
       "due_bucket": "today",
       "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "удалось?",
+          "is_public": true
+        },
         {
           "author": "Быков М. В.",
           "time": "",
