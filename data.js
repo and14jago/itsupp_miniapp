@@ -738,57 +738,6 @@ window.ITSUPP_DATA = {
       "_syncedToPortal": true
     },
     {
-      "id": 44244,
-      "title": "Отчитаться о заполнении 71 Андрею",
-      "description": "Поступило обращение клиента: Отчитаться о заполнении 71 Андрею. Требуется провести диагностику и выполнить необходимые работы для устранения проблемы.",
-      "timeline_summary": "Создана: 2026-11-10 14:53",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "inner",
-      "type_name": "Внутренняя",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "12",
-      "assignee_name": "Боровитин Е. С.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 14:53",
-      "created_iso": "2026-11-10T14:53:43.425+03:00",
-      "updated_iso": "2026-11-10T15:18:29.930+03:00",
-      "reacted_iso": "2026-11-10T15:18:29.913+03:00",
-      "work_started_at": "2026-11-10T15:18:29.930+03:00",
-      "deadline_at": "2026-11-10 16:17",
-      "deadline": "2026-11-10 16:17",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": "Заполнил",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44243,
       "title": "Отчитаться о заполнении 71 Андрею",
       "description": "Поступило обращение клиента: Отчитаться о заполнении 71 Андрею. Требуется провести диагностику и выполнить необходимые работы для устранения проблемы.",
