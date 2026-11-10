@@ -3667,7 +3667,7 @@
       { code: "dup", text: "Дубликат заявки" },
       { code: "scope", text: "Вне зоны поддержки" },
       { code: "err", text: "Ошибочное обращение" },
-      { code: "noneed", text: "Пропала необходимость" }
+      { code: "noneed", text: "Запрос неактуален" }
     ];
     var selectedReason = portalReasons[0].text;
 
