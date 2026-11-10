@@ -683,63 +683,6 @@ window.ITSUPP_DATA = {
       "_syncedToPortal": true
     },
     {
-      "id": 44247,
-      "title": "Проблема с ПК",
-      "description": "Поступило обращение клиента: Проблема с ПК. Требуется провести диагностику и выполнить необходимые работы для устранения проблемы.",
-      "timeline_summary": "Создана: 2026-11-10 15:04",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "1",
-      "assignee_name": "Стрелкин М. В.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 7,
-      "spent_by_employee": {
-        "1": 7
-      },
-      "tracked_work_seconds": 873,
-      "work_by_employee": {
-        "8": 434,
-        "1": 439
-      },
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 15:04",
-      "created_iso": "2026-11-10T15:04:53.799+03:00",
-      "updated_iso": "2026-11-10T15:12:33.598+03:00",
-      "reacted_iso": "2026-11-10T15:12:32.253+03:00",
-      "work_started_at": "2026-11-10T12:12:29.997Z",
-      "deadline_at": "2026-11-10 16:11",
-      "deadline": "2026-11-10 16:11",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "Статус «Выполняю» (Mini App)",
-          "is_public": false
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44245,
       "title": "Проверить/заполнить 71 и подбить факультатив",
       "description": "Поступило обращение клиента: Отчитаться о заполнении 71 Андрею. Требуется провести диагностику и выполнить необходимые работы для устранения проблемы.",
