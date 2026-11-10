@@ -719,13 +719,20 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-10 13:04",
       "created_iso": "2026-11-10T13:04:43.870+03:00",
-      "updated_iso": "2026-11-10T13:15:12.477+03:00",
+      "updated_iso": "2026-11-10T13:15:14.862+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
       "deadline": "Без срока",
       "due_bucket": "today",
-      "comments": [],
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "Автоматически назначен Быков Максим Владимирович. @itsupp_task_bot",
+          "is_public": false
+        }
+      ],
       "_syncedToPortal": true
     },
     {
