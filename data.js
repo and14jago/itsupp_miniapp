@@ -743,12 +743,7 @@ window.ITSUPP_DATA = {
       "entity_name": "Без объекта",
       "assignee_id": "6",
       "assignee_name": "Малышев А. С.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
+      "coexecutors": [],
       "observers": [
         "6"
       ],
@@ -763,9 +758,9 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-10 14:53",
       "created_iso": "2026-11-10T14:53:43.844+03:00",
-      "updated_iso": "2026-11-10T15:05:07.735+03:00",
+      "updated_iso": "2026-11-10T15:05:48.078+03:00",
       "reacted_iso": "2026-11-10T15:05:07.699+03:00",
-      "work_started_at": "2026-11-10T15:05:07.735+03:00",
+      "work_started_at": "2026-11-10T15:05:48.078+03:00",
       "deadline_at": "Без срока",
       "deadline": "Без срока",
       "due_bucket": "today",
