@@ -634,6 +634,56 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44220,
+      "title": "Обновление сертификатов мдлп",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 11:06",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 202,
+      "company_name": "Клиника Фомина Саратов",
+      "entity_name": "Без объекта",
+      "assignee_id": "5",
+      "assignee_name": "Старцев Е. А.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 11:06",
+      "created_iso": "2026-11-10T11:06:40.943+03:00",
+      "updated_iso": "2026-11-10T11:06:47.745+03:00",
+      "reacted_iso": "2026-11-10T11:06:47.729+03:00",
+      "work_started_at": "2026-11-10T11:06:47.745+03:00",
+      "deadline_at": "2026-11-10 12:05",
+      "deadline": "2026-11-10 12:05",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Старцев Е. А.",
+          "time": "",
+          "text": "й",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44219,
       "title": "Тонус Советская касса 2 (настроить второй сканер)",
       "description": "",
