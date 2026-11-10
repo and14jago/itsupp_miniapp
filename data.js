@@ -634,6 +634,55 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44219,
+      "title": "Тонус Советская касса 2 (настроить второй сканер)",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 11:04",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 15,
+      "company_name": "Тонус ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
+      "coexecutors": [
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 11:04",
+      "created_iso": "2026-11-10T11:04:59.598+03:00",
+      "updated_iso": "2026-11-10T11:05:03.330+03:00",
+      "reacted_iso": "2026-11-10T11:05:03.314+03:00",
+      "work_started_at": "2026-11-10T11:05:03.330+03:00",
+      "deadline_at": "2026-11-10 12:04",
+      "deadline": "2026-11-10 12:04",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44214,
       "title": "Новая уч.запись настройка макбука, настройка удаленного рабочего доступа",
       "description": "Новая уч.запись настройка макбука, настройка удаленного рабочего доступа",
