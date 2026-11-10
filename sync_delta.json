@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794305745,
-  "updated_at": "2026-11-10T13:15:45.788461+03:00",
+  "sync_seq": 1794305938,
+  "updated_at": "2026-11-10T13:18:58.547013+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -113,7 +113,8 @@
     "добрый день, необходимо создать почту рабочую для нового...": "44228",
     "кф-ленинский (в 302 не печатает принтер)": "44229",
     "в пятницу 13.11 на базановой необходимо переставить...": "44230",
-    "проверить отправку доков": "44231"
+    "проверить отправку доков": "44231",
+    "помощь с ккт": "44232"
   },
   "deleted_ids": [
     "44116",
@@ -123,6 +124,55 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44232,
+      "title": "Помощь с ккт",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 13:18",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 41,
+      "company_name": "КЛИНИКА ФОМИНА ТВЕРЬ ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 13:18",
+      "created_iso": "2026-11-10T13:18:56.026+03:00",
+      "updated_iso": "2026-11-10T13:18:59.120+03:00",
+      "reacted_iso": "2026-11-10T13:18:59.088+03:00",
+      "work_started_at": "2026-11-10T13:18:59.120+03:00",
+      "deadline_at": "2026-11-10 14:17",
+      "deadline": "2026-11-10 14:17",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44231,
       "title": "проверить отправку доков",
@@ -1434,63 +1484,6 @@
           "author": "Боровитин Е. С.",
           "time": "",
           "text": "/",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44207,
-      "title": "Микрюкова Регина Аликовна уфа оператор кц. не работает 1с уфа",
-      "description": "Микрюкова Регина Аликовна уфа оператор кц. не работает 1с уфа",
-      "timeline_summary": "Создана: 2026-11-10 09:20",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 168,
-      "company_name": "ООО \"Клиника Фомина Уфа\" (ЦМТ)",
-      "entity_name": "Без объекта",
-      "assignee_id": "9",
-      "assignee_name": "Нарыжнев Н. С.",
-      "coexecutors": [
-        "8",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 30,
-      "spent_by_employee": {
-        "9": 30
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 09:20",
-      "created_iso": "2026-11-10T09:20:48.993+03:00",
-      "updated_iso": "2026-11-10T09:59:35.064+03:00",
-      "reacted_iso": "2026-11-10T09:20:52.242+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-10 10:19",
-      "deadline": "2026-11-10 10:19",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "решено",
-          "is_public": true
-        },
-        {
-          "author": "Нарыжнев Н. С.",
-          "time": "",
-          "text": "Микрюкова Регина Аликовна уфа оператор кц. не работает 1с уфа\nПереход на другой сервер\nНастройка удаленного доступа, добавление баз\nПоиск пароля",
           "is_public": true
         }
       ],
