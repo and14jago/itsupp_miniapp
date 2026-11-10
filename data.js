@@ -634,6 +634,55 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44224,
+      "title": "Проблема с ПК на Спартака, перенос данных на коноплянникова с аппарата УЗИ",
+      "description": "Проблема с ПК на Спартака, перенос данных на коноплянникова с аппарата УЗИ",
+      "timeline_summary": "Создана: 2026-11-10 11:38",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 41,
+      "company_name": "КЛИНИКА ФОМИНА ТВЕРЬ ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "9",
+      "assignee_name": "Нарыжнев Н. С.",
+      "coexecutors": [
+        "8",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 11:38",
+      "created_iso": "2026-11-10T11:38:17.784+03:00",
+      "updated_iso": "2026-11-10T11:38:27.919+03:00",
+      "reacted_iso": "2026-11-10T11:38:27.894+03:00",
+      "work_started_at": "2026-11-10T11:38:27.919+03:00",
+      "deadline_at": "2026-11-10 12:38",
+      "deadline": "2026-11-10 12:38",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Нарыжнев Н. С.",
+          "time": "",
+          "text": "Проблема с ПК на Спартака, перенос данных на коноплянникова с аппарата УЗИ",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44223,
       "title": "КФ-Пермь ОМС (настроить доступ в Согаз)",
       "description": "",
