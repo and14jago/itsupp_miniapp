@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794295863,
-  "updated_at": "2026-11-10T10:31:03.857481+03:00",
+  "sync_seq": 1794296175,
+  "updated_at": "2026-11-10T10:36:15.884072+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -100,7 +100,8 @@
     "доабвил пароль на раб стол": "44213",
     "добавил пароль на раб стол": "44213",
     "новая уч.запись настройка макбука, настройка удаленного рабочего доступа": "44214",
-    "создание впн учеток": "44215"
+    "создание впн учеток": "44215",
+    "сервис-про (регистрация ккт ульяновск)": "44216"
   },
   "deleted_ids": [
     "44116",
@@ -110,6 +111,55 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44216,
+      "title": "Сервис-ПРО (регистрация ККТ Ульяновск)",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 10:34",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
+      "coexecutors": [
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 10:34",
+      "created_iso": "2026-11-10T10:34:56.563+03:00",
+      "updated_iso": "2026-11-10T10:35:00.456+03:00",
+      "reacted_iso": "2026-11-10T10:35:00.435+03:00",
+      "work_started_at": "2026-11-10T10:35:00.456+03:00",
+      "deadline_at": "2026-11-10 11:34",
+      "deadline": "2026-11-10 11:34",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44215,
       "title": "Создание впн учеток",
@@ -279,9 +329,9 @@
       "title": "ИП Алавердян Клин (не корректно закрыта смена)",
       "description": "",
       "timeline_summary": "Создана: 2026-11-10 10:16",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -299,21 +349,29 @@
         "6"
       ],
       "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
+      "spent_minutes": 20,
+      "spent_by_employee": {
+        "8": 20
+      },
       "tracked_work_seconds": 0,
       "work_by_employee": {},
       "timer_paused": false,
       "billing_flag": "none",
       "created_at": "2026-11-10 10:16",
       "created_iso": "2026-11-10T10:16:34.582+03:00",
-      "updated_iso": "2026-11-10T10:16:38.465+03:00",
+      "updated_iso": "2026-11-10T10:35:24.053+03:00",
       "reacted_iso": "2026-11-10T10:16:38.441+03:00",
-      "work_started_at": "2026-11-10T10:16:38.465+03:00",
+      "work_started_at": "",
       "deadline_at": "2026-11-10 11:15",
       "deadline": "2026-11-10 11:15",
       "due_bucket": "today",
       "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        },
         {
           "author": "Быков М. В.",
           "time": "",
@@ -1413,63 +1471,6 @@
           "author": "Никулин Д. С.",
           "time": "",
           "text": ".",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44191,
-      "title": "Сервис-ПРО (заполнить и подписать акты для оптравки ФН от КонуептСтрой)",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-09 16:59",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 30,
-      "spent_by_employee": {
-        "8": 30
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 16:59",
-      "created_iso": "2026-11-09T16:59:47.033+03:00",
-      "updated_iso": "2026-11-09T16:59:57.673+03:00",
-      "reacted_iso": "2026-11-09T16:59:50.850+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 17:58",
-      "deadline": "2026-11-09 17:58",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
-          "is_public": true
-        },
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
           "is_public": true
         }
       ],

@@ -634,6 +634,55 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44216,
+      "title": "Сервис-ПРО (регистрация ККТ Ульяновск)",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 10:34",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
+      "coexecutors": [
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 10:34",
+      "created_iso": "2026-11-10T10:34:56.563+03:00",
+      "updated_iso": "2026-11-10T10:35:00.456+03:00",
+      "reacted_iso": "2026-11-10T10:35:00.435+03:00",
+      "work_started_at": "2026-11-10T10:35:00.456+03:00",
+      "deadline_at": "2026-11-10 11:34",
+      "deadline": "2026-11-10 11:34",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44214,
       "title": "Новая уч.запись настройка макбука, настройка удаленного рабочего доступа",
       "description": "Новая уч.запись настройка макбука, настройка удаленного рабочего доступа",
@@ -677,55 +726,6 @@ window.ITSUPP_DATA = {
           "author": "Нарыжнев Н. С.",
           "time": "",
           "text": "Новая уч.запись настройка макбука, настройка удаленного рабочего доступа",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44212,
-      "title": "ИП Алавердян Клин (не корректно закрыта смена)",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-10 10:16",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 171,
-      "company_name": "Алавердян Д.К. ИП",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 10:16",
-      "created_iso": "2026-11-10T10:16:34.582+03:00",
-      "updated_iso": "2026-11-10T10:16:38.465+03:00",
-      "reacted_iso": "2026-11-10T10:16:38.441+03:00",
-      "work_started_at": "2026-11-10T10:16:38.465+03:00",
-      "deadline_at": "2026-11-10 11:15",
-      "deadline": "2026-11-10 11:15",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
           "is_public": true
         }
       ],
