@@ -638,9 +638,9 @@ window.ITSUPP_DATA = {
       "title": "Д.Н,И (Добрый день. Сможет кто нибудь подключиться к кассе в продуктах и добавить Жигалковскую Е.А. кассиром (если она уже есть там, то посмотреть её номер)",
       "description": "",
       "timeline_summary": "Создана: 2026-11-10 15:04",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -666,13 +666,20 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-10 15:04",
       "created_iso": "2026-11-10T15:04:17.181+03:00",
-      "updated_iso": "2026-11-10T15:04:17.235+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
+      "updated_iso": "2026-11-10T15:04:20.540+03:00",
+      "reacted_iso": "2026-11-10T15:04:20.521+03:00",
+      "work_started_at": "2026-11-10T15:04:20.540+03:00",
+      "deadline_at": "2026-11-10 16:03",
+      "deadline": "2026-11-10 16:03",
       "due_bucket": "today",
-      "comments": [],
+      "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        }
+      ],
       "_syncedToPortal": true
     },
     {
