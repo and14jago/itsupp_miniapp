@@ -634,55 +634,6 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
-      "id": 44232,
-      "title": "Помощь с ккт",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-10 13:18",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 41,
-      "company_name": "КЛИНИКА ФОМИНА ТВЕРЬ ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "12",
-      "assignee_name": "Боровитин Е. С.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 13:18",
-      "created_iso": "2026-11-10T13:18:56.026+03:00",
-      "updated_iso": "2026-11-10T13:18:59.120+03:00",
-      "reacted_iso": "2026-11-10T13:18:59.088+03:00",
-      "work_started_at": "2026-11-10T13:18:59.120+03:00",
-      "deadline_at": "2026-11-10 14:17",
-      "deadline": "2026-11-10 14:17",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44231,
       "title": "проверить отправку доков",
       "description": "",
@@ -780,55 +731,6 @@ window.ITSUPP_DATA = {
           "time": "",
           "text": "Автоматически назначен Быков Максим Владимирович. @itsupp_task_bot",
           "is_public": false
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44229,
-      "title": "КФ-Ленинский (В 302 не печатает принтер)",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-10 13:01",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 179,
-      "company_name": "Ленинский (ЦЕНТР ПОТОКА МСК-ЛЕНИНСКИЙ ООО)",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 13:01",
-      "created_iso": "2026-11-10T13:01:22.440+03:00",
-      "updated_iso": "2026-11-10T13:01:26.127+03:00",
-      "reacted_iso": "2026-11-10T13:01:26.115+03:00",
-      "work_started_at": "2026-11-10T13:01:26.127+03:00",
-      "deadline_at": "2026-11-10 14:00",
-      "deadline": "2026-11-10 14:00",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
-          "is_public": true
         }
       ],
       "_syncedToPortal": true
