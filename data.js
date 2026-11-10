@@ -741,55 +741,6 @@ window.ITSUPP_DATA = {
       "_syncedToPortal": true
     },
     {
-      "id": 44205,
-      "title": "Восстановление данных из бекапа",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-10 08:45",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 168,
-      "company_name": "ООО \"Клиника Фомина Уфа\" (ЦМТ)",
-      "entity_name": "Без объекта",
-      "assignee_id": "12",
-      "assignee_name": "Боровитин Е. С.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 08:45",
-      "created_iso": "2026-11-10T08:45:02.623+03:00",
-      "updated_iso": "2026-11-10T08:45:06.661+03:00",
-      "reacted_iso": "2026-11-10T08:45:06.650+03:00",
-      "work_started_at": "2026-11-10T08:45:06.661+03:00",
-      "deadline_at": "2026-11-10 10:00",
-      "deadline": "2026-11-10 10:00",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44204,
       "title": "Не открываются фото на сервере",
       "description": "Перестали открываться файлы с фото на сервере, ни в каком приложении не открываются",
