@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794304907,
-  "updated_at": "2026-11-10T13:01:47.078426+03:00",
+  "sync_seq": 1794305074,
+  "updated_at": "2026-11-10T13:04:34.323369+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -561,9 +561,9 @@
       "title": "почта проверить входящие",
       "description": "",
       "timeline_summary": "Создана: 2026-11-10 11:10",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
+      "status_code": "delayed",
+      "status_name": "Отложена",
+      "status_color": "#ffc926",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -590,13 +590,19 @@
       "billing_flag": "none",
       "created_at": "2026-11-10 11:10",
       "created_iso": "2026-11-10T11:10:32.426+03:00",
-      "updated_iso": "2026-11-10T11:10:43.659+03:00",
+      "updated_iso": "2026-11-10T13:04:19.938+03:00",
       "reacted_iso": "2026-11-10T11:10:43.639+03:00",
-      "work_started_at": "2026-11-10T11:10:43.659+03:00",
-      "deadline_at": "2026-11-10 12:09",
-      "deadline": "2026-11-10 12:09",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
       "due_bucket": "today",
       "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "отлож",
+          "is_public": true
+        },
         {
           "author": "Кукушкина А. А.",
           "time": "",
