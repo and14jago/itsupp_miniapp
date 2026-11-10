@@ -638,9 +638,9 @@ window.ITSUPP_DATA = {
       "title": "Новосибирск зайти в фнс",
       "description": "",
       "timeline_summary": "Создана: 2026-11-10 17:03",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
+      "status_code": "work",
+      "status_name": "Принял",
+      "status_color": "#605cb8",
       "priority": "normal",
       "type_code": "service",
       "type_name": "Обслуживание",
@@ -667,13 +667,20 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-10 17:03",
       "created_iso": "2026-11-10T17:03:03.066+03:00",
-      "updated_iso": "2026-11-10T17:03:03.145+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
+      "updated_iso": "2026-11-10T17:04:47.564+03:00",
+      "reacted_iso": "2026-11-10T17:04:47.538+03:00",
+      "work_started_at": "2026-11-10T17:04:47.564+03:00",
       "deadline_at": "Без срока",
       "deadline": "Без срока",
       "due_bucket": "today",
-      "comments": [],
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "Ознакомление с заявкой (30 мин) · Время: списано 30 мин (по таймеру: 30 мин, По договору (Обычная))",
+          "is_public": true
+        }
+      ],
       "_syncedToPortal": true
     },
     {
