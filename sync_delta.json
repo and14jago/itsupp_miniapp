@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794314324,
-  "updated_at": "2026-11-10T15:38:44.161087+03:00",
+  "sync_seq": 1794314357,
+  "updated_at": "2026-11-10T15:39:17.678489+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -124,7 +124,8 @@
     "проблема с пк": "44247",
     "белтрус 7-ая слобода (лм чз)": "44248",
     "настройка пк": "44249",
-    "установка нового рабочего места + перенос рабочего места + диагностика двух компьютеров + настройка принтера на пк": "44250"
+    "установка нового рабочего места + перенос рабочего места + диагностика двух компьютеров + настройка принтера на пк": "44250",
+    "чистка кэша 1с": "44251"
   },
   "deleted_ids": [
     "44116",
@@ -134,6 +135,64 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44251,
+      "title": "Чистка кэша 1с",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 15:38",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 180,
+      "company_name": "МСЧ 14",
+      "entity_name": "Без объекта",
+      "assignee_id": "13",
+      "assignee_name": "Кочнов И. И.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 5,
+      "spent_by_employee": {
+        "13": 5
+      },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 15:38",
+      "created_iso": "2026-11-10T15:38:50.048+03:00",
+      "updated_iso": "2026-11-10T15:38:58.961+03:00",
+      "reacted_iso": "2026-11-10T15:38:53.089+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-10 16:37",
+      "deadline": "2026-11-10 16:37",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кочнов И. И.",
+          "time": "",
+          "text": "Чистка кэша 1с",
+          "is_public": true
+        },
+        {
+          "author": "Кочнов И. И.",
+          "time": "",
+          "text": "Чистка кэша 1с",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44250,
       "title": "Установка нового рабочего места + перенос рабочего места + диагностика двух компьютеров + настройка принтера на пк",
@@ -1412,63 +1471,6 @@
           "author": "Быков М. В.",
           "time": "",
           "text": "+",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44226,
-      "title": "Работа на сервере",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-10 12:28",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 52,
-      "company_name": "Медикал Геномикс ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "12",
-      "assignee_name": "Боровитин Е. С.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 120,
-      "spent_by_employee": {
-        "12": 120
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 12:28",
-      "created_iso": "2026-11-10T12:28:51.148+03:00",
-      "updated_iso": "2026-11-10T15:29:41.177+03:00",
-      "reacted_iso": "2026-11-10T12:28:53.994+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-10 13:27",
-      "deadline": "2026-11-10 13:27",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        },
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
           "is_public": true
         }
       ],
