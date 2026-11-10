@@ -755,11 +755,9 @@ window.ITSUPP_DATA = {
       "company_id": 39,
       "company_name": "Никагаз ООО",
       "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9"
-      ],
+      "assignee_id": "9",
+      "assignee_name": "Нарыжнев Н. С.",
+      "coexecutors": [],
       "observers": [
         "6"
       ],
@@ -774,7 +772,7 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-10 08:40",
       "created_iso": "2026-11-10T08:40:51.254+03:00",
-      "updated_iso": "2026-11-10T09:19:54.601+03:00",
+      "updated_iso": "2026-11-10T09:20:01.915+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
