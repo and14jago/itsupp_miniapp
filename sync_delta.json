@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794346464,
-  "updated_at": "2026-11-11T00:34:24.335734+03:00",
+  "sync_seq": 1794346525,
+  "updated_at": "2026-11-11T00:35:25.568704+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -150,7 +150,10 @@
     "e2e-новая mwb7ipd1": "44269",
     "e2e-секрет клиента b mwb7ipd1": "44268",
     "e2e-заявка клиента a mwb7ipd1": "44267",
-    "e2e-readonly-ad8922b78bb6eefbcac62653-created": "44276"
+    "e2e-readonly-ad8922b78bb6eefbcac62653-created": "44276",
+    "e2e-cabinet-write-edb6569a926ab334f314b04c-browser-phone": "44279",
+    "e2e-cabinet-write-869a7e3b3d1c899b9b22e3ea-created": "44278",
+    "e2e-token-cfa4c2416f12c9e1cb1983a0-created": "44277"
   },
   "deleted_ids": [
     "44116",
@@ -160,6 +163,141 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44279,
+      "title": "e2e-cabinet-write-edb6569a926ab334f314b04c-browser-phone",
+      "description": "Synthetic real HTTP browser journey",
+      "timeline_summary": "Создана: 2026-11-11 00:35",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "",
+      "assignee_name": "Не назначен",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-11 00:35",
+      "created_iso": "2026-11-11T00:35:18.639+03:00",
+      "updated_iso": "2026-11-11T00:35:18.693+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44278,
+      "title": "e2e-cabinet-write-869a7e3b3d1c899b9b22e3ea-created",
+      "description": "Synthetic cabinet lifecycle",
+      "timeline_summary": "Создана: 2026-11-11 00:35",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "",
+      "assignee_name": "Не назначен",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-11 00:35",
+      "created_iso": "2026-11-11T00:35:09.972+03:00",
+      "updated_iso": "2026-11-11T00:35:10.038+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44277,
+      "title": "e2e-token-cfa4c2416f12c9e1cb1983a0-created",
+      "description": "Synthetic personal token acceptance",
+      "timeline_summary": "Создана: 2026-11-11 00:34",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "",
+      "assignee_name": "Не назначен",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-11 00:34",
+      "created_iso": "2026-11-11T00:34:57.982+03:00",
+      "updated_iso": "2026-11-11T00:34:58.041+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
     {
       "id": 44276,
       "title": "e2e-readonly-ad8922b78bb6eefbcac62653-created",
@@ -1273,196 +1411,6 @@
           "time": "",
           "text": "+",
           "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44254,
-      "title": "Помощь со сканом",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-10 16:27",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 180,
-      "company_name": "МСЧ 14",
-      "entity_name": "Без объекта",
-      "assignee_id": "12",
-      "assignee_name": "Боровитин Е. С.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 30,
-      "spent_by_employee": {
-        "12": 30
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 16:27",
-      "created_iso": "2026-11-10T16:27:29.155+03:00",
-      "updated_iso": "2026-11-10T17:14:12.353+03:00",
-      "reacted_iso": "2026-11-10T16:27:32.550+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-10 17:26",
-      "deadline": "2026-11-10 17:26",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        },
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44253,
-      "title": "Помощь с контур страхование",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-10 16:16",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 98,
-      "company_name": "КЛИНИКА ФОМИНА БЕЛГОРОД ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "13",
-      "assignee_name": "Кочнов И. И.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 5,
-      "spent_by_employee": {
-        "13": 5
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 16:16",
-      "created_iso": "2026-11-10T16:16:06.109+03:00",
-      "updated_iso": "2026-11-10T16:16:16.560+03:00",
-      "reacted_iso": "2026-11-10T16:16:09.938+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-10 17:15",
-      "deadline": "2026-11-10 17:15",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кочнов И. И.",
-          "time": "",
-          "text": "Помощь с контур страхование",
-          "is_public": true
-        },
-        {
-          "author": "Кочнов И. И.",
-          "time": "",
-          "text": "Помощь с контур страхование",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44252,
-      "title": "Нахожусь в филиале на 1905 года. Меняли блок на компьютер...",
-      "description": "Нахожусь в филиале на 1905 года. Меняли блок на компьютере. Теперь не можем зайти в Гугл - там были все пароли. Как узнать?\nНе нужно",
-      "timeline_summary": "Создана: 2026-11-10 15:42",
-      "status_code": "work",
-      "status_name": "Принял",
-      "status_color": "#605cb8",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 0,
-      "company_name": "Без компании",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "371"
-      ],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 15:42",
-      "created_iso": "2026-11-10T15:42:04.087+03:00",
-      "updated_iso": "2026-11-10T18:00:14.255+03:00",
-      "reacted_iso": "2026-11-10T16:50:46.415+03:00",
-      "work_started_at": "2026-11-10T18:00:14.255+03:00",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "со старого ПК вероятно\nпопросить инженера кто менял ПК",
-          "is_public": true
-        },
-        {
-          "author": "- I.",
-          "time": "",
-          "text": "Где его взять?\nГде взять логин и пароль?",
-          "is_public": true
-        },
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "нужно авторизоваться в гугл аккаунте\nвсё вкладки и пароли подтянет",
-          "is_public": true
-        },
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
-          "is_public": true
-        },
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "Автоматически назначен Быков Максим Владимирович. @itsupp_task_bot",
-          "is_public": false
         }
       ],
       "_syncedToPortal": true
