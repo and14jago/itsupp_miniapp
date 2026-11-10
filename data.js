@@ -803,54 +803,6 @@ window.ITSUPP_DATA = {
       "_syncedToPortal": true
     },
     {
-      "id": 44228,
-      "title": "Добрый день, необходимо создать почту рабочую для нового...",
-      "description": "Добрый день, необходимо создать почту рабочую для нового сотрудника\nАтылина Дарья Александровна",
-      "timeline_summary": "Создана: 2026-11-10 12:39",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 52,
-      "company_name": "Медикал Геномикс ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "",
-      "assignee_name": "Не назначен",
-      "coexecutors": [],
-      "observers": [
-        "6",
-        "324"
-      ],
-      "control_by": [
-        "324"
-      ],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 12:39",
-      "created_iso": "2026-11-10T12:39:22.223+03:00",
-      "updated_iso": "2026-11-10T14:05:07.748+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "Автоматически назначен Быков Максим Владимирович. @itsupp_task_bot",
-          "is_public": false
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44224,
       "title": "Проблема с ПК на Спартака, перенос данных на коноплянникова с аппарата УЗИ",
       "description": "Проблема с ПК на Спартака, перенос данных на коноплянникова с аппарата УЗИ",
