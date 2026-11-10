@@ -634,55 +634,6 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
-      "id": 44222,
-      "title": "Помощь с рдп",
-      "description": "Отвалился маршрут",
-      "timeline_summary": "Создана: 2026-11-10 11:24",
-      "status_code": "working",
-      "status_name": "Выполняю",
-      "status_color": "#5cb89b",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 205,
-      "company_name": "ООО \"Клиника Фомина Нижний Новгород\"",
-      "entity_name": "Без объекта",
-      "assignee_id": "12",
-      "assignee_name": "Боровитин Е. С.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-10 11:24",
-      "created_iso": "2026-11-10T11:24:27.776+03:00",
-      "updated_iso": "2026-11-10T11:24:31.199+03:00",
-      "reacted_iso": "2026-11-10T11:24:31.187+03:00",
-      "work_started_at": "2026-11-10T11:24:31.199+03:00",
-      "deadline_at": "2026-11-10 12:23",
-      "deadline": "2026-11-10 12:23",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Боровитин Е. С.",
-          "time": "",
-          "text": ".",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
       "id": 44221,
       "title": "почта проверить входящие",
       "description": "",
