@@ -647,10 +647,9 @@ window.ITSUPP_DATA = {
       "company_id": 52,
       "company_name": "Медикал Геномикс ООО",
       "entity_name": "Без объекта",
-      "assignee_id": "",
-      "assignee_name": "Не назначен",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
       "coexecutors": [
-        "8",
         "9",
         "11",
         "12"
@@ -670,13 +669,20 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-10 12:39",
       "created_iso": "2026-11-10T12:39:22.223+03:00",
-      "updated_iso": "2026-11-10T12:39:22.319+03:00",
+      "updated_iso": "2026-11-10T12:49:55.493+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
       "deadline": "Без срока",
       "due_bucket": "today",
-      "comments": [],
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "Автоматически назначен Быков Максим Владимирович. @itsupp_task_bot",
+          "is_public": false
+        }
+      ],
       "_syncedToPortal": true
     },
     {
