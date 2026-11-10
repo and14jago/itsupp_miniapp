@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794349059,
-  "updated_at": "2026-11-11T01:17:39.042534+03:00",
+  "sync_seq": 1794349091,
+  "updated_at": "2026-11-11T01:18:11.404896+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -301,210 +301,6 @@
       "created_at": "2026-11-11 00:33",
       "created_iso": "2026-11-11T00:33:25.403+03:00",
       "updated_iso": "2026-11-11T00:44:42.110+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "Автоматически назначен Быков Максим Владимирович. @itsupp_task_bot",
-          "is_public": false
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44271,
-      "title": "e2e-ждёт клиента mwb7ipd1",
-      "description": "e2e:mwb7ipd1: ждёт клиента",
-      "timeline_summary": "Создана: 2026-11-11 00:33",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-11 00:33",
-      "created_iso": "2026-11-11T00:33:24.947+03:00",
-      "updated_iso": "2026-11-11T00:44:47.531+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "Автоматически назначен Быков Максим Владимирович. @itsupp_task_bot",
-          "is_public": false
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44270,
-      "title": "e2e-в работе mwb7ipd1",
-      "description": "e2e:mwb7ipd1: в работе",
-      "timeline_summary": "Создана: 2026-11-11 00:33",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-11 00:33",
-      "created_iso": "2026-11-11T00:33:24.367+03:00",
-      "updated_iso": "2026-11-11T00:44:52.486+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "Автоматически назначен Быков Максим Владимирович. @itsupp_task_bot",
-          "is_public": false
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44269,
-      "title": "e2e-новая mwb7ipd1",
-      "description": "e2e:mwb7ipd1: новая",
-      "timeline_summary": "Создана: 2026-11-11 00:33",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-11 00:33",
-      "created_iso": "2026-11-11T00:33:23.977+03:00",
-      "updated_iso": "2026-11-11T00:44:57.367+03:00",
-      "reacted_iso": "",
-      "work_started_at": "",
-      "deadline_at": "Без срока",
-      "deadline": "Без срока",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кукушкина А. А.",
-          "time": "",
-          "text": "Автоматически назначен Быков Максим Владимирович. @itsupp_task_bot",
-          "is_public": false
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44268,
-      "title": "e2e-секрет клиента B mwb7ipd1",
-      "description": "e2e:mwb7ipd1: заявка B",
-      "timeline_summary": "Создана: 2026-11-11 00:33",
-      "status_code": "opened",
-      "status_name": "Открыта",
-      "status_color": "#ff8522",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 30,
-      "company_name": "Сервис-Про ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [
-        "7"
-      ],
-      "spent_minutes": 0,
-      "spent_by_employee": {},
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-11 00:33",
-      "created_iso": "2026-11-11T00:33:23.647+03:00",
-      "updated_iso": "2026-11-11T00:45:02.545+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
@@ -1488,6 +1284,305 @@
           "author": "Кочнов И. И.",
           "time": "",
           "text": "Установка нового рабочего места + перенос рабочего места + диагностика двух компьютеров + настройка принтера на пк",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44249,
+      "title": "Настройка пк",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 15:28",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 180,
+      "company_name": "МСЧ 14",
+      "entity_name": "Без объекта",
+      "assignee_id": "12",
+      "assignee_name": "Боровитин Е. С.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 20,
+      "spent_by_employee": {
+        "12": 20
+      },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 15:28",
+      "created_iso": "2026-11-10T15:28:53.202+03:00",
+      "updated_iso": "2026-11-10T15:29:06.183+03:00",
+      "reacted_iso": "2026-11-10T15:28:58.266+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-10 16:27",
+      "deadline": "2026-11-10 16:27",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        },
+        {
+          "author": "Боровитин Е. С.",
+          "time": "",
+          "text": ".",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44248,
+      "title": "Белтрус 7-ая Слобода (ЛМ ЧЗ)",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 15:26",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 26,
+      "company_name": "Белтрус ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
+      "coexecutors": [
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 25,
+      "spent_by_employee": {
+        "8": 25
+      },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 15:26",
+      "created_iso": "2026-11-10T15:26:26.470+03:00",
+      "updated_iso": "2026-11-10T15:57:18.818+03:00",
+      "reacted_iso": "2026-11-10T15:26:30.017+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-10 16:25",
+      "deadline": "2026-11-10 16:25",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        },
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44247,
+      "title": "Проблема с ПК",
+      "description": "Поступило обращение клиента: Проблема с ПК. Требуется провести диагностику и выполнить необходимые работы для устранения проблемы.",
+      "timeline_summary": "Создана: 2026-11-10 15:04",
+      "status_code": "closed",
+      "status_name": "Закрыта",
+      "status_color": "#8e9eb3",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "1",
+      "assignee_name": "Стрелкин М. В.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 17,
+      "spent_by_employee": {
+        "1": 17
+      },
+      "tracked_work_seconds": 873,
+      "work_by_employee": {
+        "8": 434,
+        "1": 439
+      },
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 15:04",
+      "created_iso": "2026-11-10T15:04:53.799+03:00",
+      "updated_iso": "2026-11-10T16:56:43.435+03:00",
+      "reacted_iso": "2026-11-10T15:12:32.253+03:00",
+      "work_started_at": "2026-11-10T12:12:29.997Z",
+      "deadline_at": "2026-11-10 16:11",
+      "deadline": "2026-11-10 16:11",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "Закрыть",
+          "is_public": true
+        },
+        {
+          "author": "Стрелкин М. В.",
+          "time": "",
+          "text": "й",
+          "is_public": true
+        },
+        {
+          "author": "Кукушкина А. А.",
+          "time": "",
+          "text": "Статус «Выполняю» (Mini App)",
+          "is_public": false
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44246,
+      "title": "Д.Н,И (Добрый день. Сможет кто нибудь подключиться к кассе в продуктах и добавить Жигалковскую Е.А. кассиром (если она уже есть там, то посмотреть её номер)",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 15:04",
+      "status_code": "completed",
+      "status_name": "Решена",
+      "status_color": "#5cb85c",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 95,
+      "company_name": "Д.Н.И. ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
+      "coexecutors": [
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 5,
+      "spent_by_employee": {
+        "8": 5
+      },
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 15:04",
+      "created_iso": "2026-11-10T15:04:17.181+03:00",
+      "updated_iso": "2026-11-10T15:12:09.333+03:00",
+      "reacted_iso": "2026-11-10T15:04:20.521+03:00",
+      "work_started_at": "",
+      "deadline_at": "2026-11-10 16:03",
+      "deadline": "2026-11-10 16:03",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        },
+        {
+          "author": "Быков М. В.",
+          "time": "",
+          "text": "+",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
+      "id": 44245,
+      "title": "Проверить/заполнить 71 и подбить факультатив",
+      "description": "Поступило обращение клиента: Отчитаться о заполнении 71 Андрею. Требуется провести диагностику и выполнить необходимые работы для устранения проблемы.",
+      "timeline_summary": "Создана: 2026-11-10 14:53",
+      "status_code": "delayed",
+      "status_name": "Отложена",
+      "status_color": "#ffc926",
+      "priority": "normal",
+      "type_code": "inner",
+      "type_name": "Внутренняя",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "6",
+      "assignee_name": "Малышев А. С.",
+      "coexecutors": [],
+      "observers": [
+        "6"
+      ],
+      "control_by": [
+        "7"
+      ],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 14:53",
+      "created_iso": "2026-11-10T14:53:43.844+03:00",
+      "updated_iso": "2026-11-10T18:44:06.836+03:00",
+      "reacted_iso": "2026-11-10T15:05:07.699+03:00",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Малышев А. С.",
+          "time": "",
+          "text": "71ый подбил",
+          "is_public": true
+        },
+        {
+          "author": "Малышев А. С.",
+          "time": "",
+          "text": "начал",
+          "is_public": true
+        },
+        {
+          "author": "Малышев А. С.",
+          "time": "",
+          "text": "принял",
           "is_public": true
         }
       ],
