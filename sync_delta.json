@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794288571,
-  "updated_at": "2026-11-10T08:29:31.643379+03:00",
+  "sync_seq": 1794288604,
+  "updated_at": "2026-11-10T08:30:04.882799+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -85,7 +85,8 @@
     "элма 400 ошибка": "44197",
     "оплата до 15 числа каждого месяца": "44199",
     "у нас в папке обмен комсомольская исчезли документы в папке электронный документооборот. во всех филиалах.": "44200",
-    "не могу зайти на сервер": "44201"
+    "не могу зайти на сервер": "44201",
+    "проблема с сфр": "44202"
   },
   "deleted_ids": [
     "44116",
@@ -95,6 +96,55 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44202,
+      "title": "Проблема с СФР",
+      "description": "Проблема с СФР",
+      "timeline_summary": "Создана: 2026-11-10 08:29",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 168,
+      "company_name": "ООО \"Клиника Фомина Уфа\" (ЦМТ)",
+      "entity_name": "Без объекта",
+      "assignee_id": "9",
+      "assignee_name": "Нарыжнев Н. С.",
+      "coexecutors": [
+        "8",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 08:29",
+      "created_iso": "2026-11-10T08:29:34.973+03:00",
+      "updated_iso": "2026-11-10T08:29:38.006+03:00",
+      "reacted_iso": "2026-11-10T08:29:37.994+03:00",
+      "work_started_at": "2026-11-10T08:29:38.006+03:00",
+      "deadline_at": "2026-11-10 10:00",
+      "deadline": "2026-11-10 10:00",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Нарыжнев Н. С.",
+          "time": "",
+          "text": "Проблема с СФР",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
     {
       "id": 44201,
       "title": "не могу зайти на сервер",
@@ -1404,63 +1454,6 @@
       "work_started_at": "",
       "deadline_at": "2026-11-09 15:17",
       "deadline": "2026-11-09 15:17",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
-          "is_public": true
-        },
-        {
-          "author": "Быков М. В.",
-          "time": "",
-          "text": "+",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44177,
-      "title": "КФ-Калуга (ЭРС ошибка при отправке)",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-09 14:14",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 78,
-      "company_name": "КЛИНИКА ФОМИНА КАЛУГА ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "8",
-      "assignee_name": "Быков М. В.",
-      "coexecutors": [
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 15,
-      "spent_by_employee": {
-        "8": 15
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 14:14",
-      "created_iso": "2026-11-09T14:14:37.218+03:00",
-      "updated_iso": "2026-11-09T14:27:39.764+03:00",
-      "reacted_iso": "2026-11-09T14:14:41.259+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-09 15:13",
-      "deadline": "2026-11-09 15:13",
       "due_bucket": "today",
       "comments": [
         {

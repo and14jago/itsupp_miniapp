@@ -634,6 +634,55 @@ window.ITSUPP_DATA = {
   ],
   "initialTasks": [
     {
+      "id": 44202,
+      "title": "Проблема с СФР",
+      "description": "Проблема с СФР",
+      "timeline_summary": "Создана: 2026-11-10 08:29",
+      "status_code": "working",
+      "status_name": "Выполняю",
+      "status_color": "#5cb89b",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 168,
+      "company_name": "ООО \"Клиника Фомина Уфа\" (ЦМТ)",
+      "entity_name": "Без объекта",
+      "assignee_id": "9",
+      "assignee_name": "Нарыжнев Н. С.",
+      "coexecutors": [
+        "8",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 08:29",
+      "created_iso": "2026-11-10T08:29:34.973+03:00",
+      "updated_iso": "2026-11-10T08:29:38.006+03:00",
+      "reacted_iso": "2026-11-10T08:29:37.994+03:00",
+      "work_started_at": "2026-11-10T08:29:38.006+03:00",
+      "deadline_at": "2026-11-10 10:00",
+      "deadline": "2026-11-10 10:00",
+      "due_bucket": "today",
+      "comments": [
+        {
+          "author": "Нарыжнев Н. С.",
+          "time": "",
+          "text": "Проблема с СФР",
+          "is_public": true
+        }
+      ],
+      "_syncedToPortal": true
+    },
+    {
       "id": 44201,
       "title": "не могу зайти на сервер",
       "description": "не могу зайти на сервер",
