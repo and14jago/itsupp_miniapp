@@ -827,10 +827,9 @@ window.ITSUPP_DATA = {
       "company_id": 30,
       "company_name": "Сервис-Про ООО",
       "entity_name": "Без объекта",
-      "assignee_id": "",
-      "assignee_name": "Не назначен",
+      "assignee_id": "8",
+      "assignee_name": "Быков М. В.",
       "coexecutors": [
-        "8",
         "9",
         "11",
         "12"
@@ -849,7 +848,7 @@ window.ITSUPP_DATA = {
       "billing_flag": "none",
       "created_at": "2026-11-11 00:33",
       "created_iso": "2026-11-11T00:33:26.764+03:00",
-      "updated_iso": "2026-11-11T00:33:26.850+03:00",
+      "updated_iso": "2026-11-11T00:44:24.245+03:00",
       "reacted_iso": "",
       "work_started_at": "",
       "deadline_at": "Без срока",
