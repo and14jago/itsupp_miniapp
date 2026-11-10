@@ -1,6 +1,6 @@
 {
-  "sync_seq": 1794298042,
-  "updated_at": "2026-11-10T11:07:22.307199+03:00",
+  "sync_seq": 1794298234,
+  "updated_at": "2026-11-10T11:10:34.748331+03:00",
   "id_map": {},
   "title_map": {
     "тест мини апп 2": "44132",
@@ -37,7 +37,7 @@
     "проверить нагрузку - перезапустить службу 1с - щербакова ws222": "44139",
     "помощь с впнами": "44140",
     "новые учетки": "44141",
-    "почта проверить входящие": "44142",
+    "почта проверить входящие": "44221",
     "установка эцп": "44143",
     "помощь с принтером": "44144",
     "то пк": "44145",
@@ -114,6 +114,49 @@
     "44124"
   ],
   "tasks": [
+    {
+      "id": 44221,
+      "title": "почта проверить входящие",
+      "description": "",
+      "timeline_summary": "Создана: 2026-11-10 11:10",
+      "status_code": "opened",
+      "status_name": "Открыта",
+      "status_color": "#ff8522",
+      "priority": "normal",
+      "type_code": "service",
+      "type_name": "Обслуживание",
+      "company_id": 30,
+      "company_name": "Сервис-Про ООО",
+      "entity_name": "Без объекта",
+      "assignee_id": "7",
+      "assignee_name": "Кукушкина А. А.",
+      "coexecutors": [
+        "8",
+        "9",
+        "11",
+        "12"
+      ],
+      "observers": [
+        "6"
+      ],
+      "control_by": [],
+      "spent_minutes": 0,
+      "spent_by_employee": {},
+      "tracked_work_seconds": 0,
+      "work_by_employee": {},
+      "timer_paused": false,
+      "billing_flag": "none",
+      "created_at": "2026-11-10 11:10",
+      "created_iso": "2026-11-10T11:10:32.426+03:00",
+      "updated_iso": "2026-11-10T11:10:32.502+03:00",
+      "reacted_iso": "",
+      "work_started_at": "",
+      "deadline_at": "Без срока",
+      "deadline": "Без срока",
+      "due_bucket": "today",
+      "comments": [],
+      "_syncedToPortal": true
+    },
     {
       "id": 44220,
       "title": "Обновление сертификатов мдлп",
@@ -1423,64 +1466,6 @@
           "author": "Кукушкина А. А.",
           "time": "",
           "text": "Статус «Выполняю» (Mini App портала) · Время: списано 5 мин (по таймеру: 5 мин, По договору (Обычная))",
-          "is_public": true
-        }
-      ],
-      "_syncedToPortal": true
-    },
-    {
-      "id": 44196,
-      "title": "Активация office",
-      "description": "",
-      "timeline_summary": "Создана: 2026-11-09 21:25",
-      "status_code": "completed",
-      "status_name": "Решена",
-      "status_color": "#5cb85c",
-      "priority": "normal",
-      "type_code": "service",
-      "type_name": "Обслуживание",
-      "company_id": 120,
-      "company_name": "КЛИНИКА ФОМИНА ПЕНЗА ООО",
-      "entity_name": "Без объекта",
-      "assignee_id": "13",
-      "assignee_name": "Кочнов И. И.",
-      "coexecutors": [
-        "8",
-        "9",
-        "11",
-        "12"
-      ],
-      "observers": [
-        "6"
-      ],
-      "control_by": [],
-      "spent_minutes": 5,
-      "spent_by_employee": {
-        "13": 5
-      },
-      "tracked_work_seconds": 0,
-      "work_by_employee": {},
-      "timer_paused": false,
-      "billing_flag": "none",
-      "created_at": "2026-11-09 21:25",
-      "created_iso": "2026-11-09T21:25:00.592+03:00",
-      "updated_iso": "2026-11-09T21:26:05.464+03:00",
-      "reacted_iso": "2026-11-09T21:25:12.859+03:00",
-      "work_started_at": "",
-      "deadline_at": "2026-11-10 10:00",
-      "deadline": "2026-11-10 10:00",
-      "due_bucket": "today",
-      "comments": [
-        {
-          "author": "Кочнов И. И.",
-          "time": "",
-          "text": "Активация office",
-          "is_public": true
-        },
-        {
-          "author": "Кочнов И. И.",
-          "time": "",
-          "text": "Активация office",
           "is_public": true
         }
       ],
