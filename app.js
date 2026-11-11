@@ -252,6 +252,99 @@
     );
   }
 
+  function taskNumAndTitle(task, maxTitleLen) {
+    if (!task) return "";
+    var t = safeText(task.title || "", maxTitleLen || 80);
+    return "#" + task.id + (t ? " — " + t : "");
+  }
+
+  function formatDotDateTimeMsk(val, fallbackDate) {
+    var pad2 = function (n) { return n < 10 ? "0" + n : String(n); };
+    if (val) {
+      var s = String(val).trim();
+      var m1 = s.match(/^(\d{4})-(\d{2})-(\d{2})[T\s]+(\d{2}:\d{2})/);
+      if (m1 && s.indexOf("Z") === -1 && s.indexOf("+") === -1) {
+        return m1[3] + "." + m1[2] + "." + m1[1] + " " + m1[4];
+      }
+      var m2 = s.match(/^(\d{2})\.(\d{2})\.(\d{4})\s+(\d{2}:\d{2})/);
+      if (m2) {
+        return m2[1] + "." + m2[2] + "." + m2[3] + " " + m2[4];
+      }
+      var parsed = new Date(s);
+      if (!isNaN(parsed.getTime())) {
+        var msk = new Date(parsed.getTime() + 3 * 3600 * 1000);
+        return (
+          pad2(msk.getUTCDate()) +
+          "." +
+          pad2(msk.getUTCMonth() + 1) +
+          "." +
+          msk.getUTCFullYear() +
+          " " +
+          pad2(msk.getUTCHours()) +
+          ":" +
+          pad2(msk.getUTCMinutes())
+        );
+      }
+    }
+    var fb = fallbackDate instanceof Date && !isNaN(fallbackDate.getTime()) ? fallbackDate : new Date();
+    var fbMsk = new Date(fb.getTime() + 3 * 3600 * 1000);
+    return (
+      pad2(fbMsk.getUTCDate()) +
+      "." +
+      pad2(fbMsk.getUTCMonth() + 1) +
+      "." +
+      fbMsk.getUTCFullYear() +
+      " " +
+      pad2(fbMsk.getUTCHours()) +
+      ":" +
+      pad2(fbMsk.getUTCMinutes())
+    );
+  }
+
+  function buildTelegramShareCardParts(task) {
+    var assignee = getEmployeeById(task.assignee_id);
+    var assigneeFullName = assignee ? assignee.name : (task.assignee_name || "Не назначен");
+    var statusMap = {
+      opened: "🆕 Открытая",
+      work: "⚙️ Принята",
+      working: "⚙️ В работе",
+      delayed: "⏸ Отложенная",
+      resend: "↪️ Делегирована",
+      restart: "🔄 На доработку",
+      completed: "✅ Решена",
+      closed: "🔒 Закрыта",
+      asya1c: "🚫 Отклонена"
+    };
+    var statusLabel = statusMap[task.status_code] || ("🆕 " + (task.status_name || "Открытая"));
+    var createdMs = parseTaskDateMs(task.created_iso || task.created_at) || Date.now();
+    var createdStr = formatDotDateTimeMsk(task.created_at || task.created_iso, new Date(createdMs));
+    var dueStr = formatDotDateTimeMsk(
+      task.deadline_at && /\d{2}:\d{2}/.test(String(task.deadline_at)) && /\d{4}|\d{2}\.\d{2}/.test(String(task.deadline_at))
+        ? task.deadline_at
+        : "",
+      new Date(createdMs + 3600 * 1000)
+    );
+    var siteStr = (!task.entity_name || task.entity_name === "Без объекта") ? "—" : task.entity_name;
+    var firstLine = "📌 №" + task.id + " · " + statusLabel;
+    var restLines = [
+      task.title || ("Задача №" + task.id),
+      "Плановая дата решения: " + dueStr,
+      "Создана: " + createdStr,
+      "Открыта: " + createdStr,
+      "🏢 Компания: " + (task.company_name || "Сервис-Про ООО"),
+      "📍 Объект обслуживания: " + siteStr,
+      "👤 Исполнитель: " + assigneeFullName,
+      "Открыть в Okdesk: https://565.okdesk.ru/issues/" + encodeURIComponent(task.id) + " | Обновить в боте: https://t.me/itsupp_task_bot?start=task_" + encodeURIComponent(task.id) + " | На портале: https://portal.itsupp.com/tickets/" + encodeURIComponent(task.id),
+      "",
+      "✋ ЗАБРАТЬ ЗАДАЧУ НА ИСПОЛНЕНИЕ: https://t.me/itsupp_task_bot?start=claim_" + encodeURIComponent(task.id)
+    ].join("\n");
+    return {
+      firstLine: firstLine,
+      restLines: restLines,
+      fullText: firstLine + "\n" + restLines
+    };
+  }
+
   function getEmployeeById(id) {
     var s = String(id || "");
     for (var i = 0; i < DATA.employees.length; i++) {
@@ -2103,14 +2196,23 @@
     topRow.appendChild(statusWrap);
     card.appendChild(topRow);
 
-    // 2. Заголовок + карандашик редактирования темы и описания + свёрнутое описание
+    // 2. Заголовок (#номер — тема) + карандашик редактирования + кнопка Поделиться + свёрнутое описание
     var titleRow = el("div", "task-title-row");
-    var titleEl = el("div", "task-title", task.title);
+    var titleEl = el("div", "task-title", "#" + task.id + " — " + (task.title || ""));
     var editPencilBtn = el("button", "task-edit-pencil", "✏️");
     editPencilBtn.type = "button";
     editPencilBtn.title = "Исправить тему и описание задачи";
+    var quickShareBtn = el("button", "task-edit-pencil", "📤");
+    quickShareBtn.type = "button";
+    quickShareBtn.title = "Поделиться задачей / Отправить по всем каналам";
+    quickShareBtn.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      hapticImpact("light");
+      openShareTaskModal(task);
+    });
     titleRow.appendChild(titleEl);
     titleRow.appendChild(editPencilBtn);
+    titleRow.appendChild(quickShareBtn);
     card.appendChild(titleRow);
 
     var inlineEditorBox = el("div", "task-inline-editor hidden");
@@ -2212,7 +2314,7 @@
       task.title = nextSubj;
       task.description = nextDesc;
       task.updated_iso = new Date().toISOString();
-      titleEl.textContent = nextSubj;
+      titleEl.textContent = "#" + task.id + " — " + nextSubj;
       rawBody = nextDesc;
       hasBody = Boolean(rawBody && rawBody !== nextSubj);
       bodyDiv.textContent = hasBody ? rawBody : (task.timeline_summary || "В теле заявки указана только тема: «" + nextSubj + "».");
@@ -2446,6 +2548,12 @@
       })
     );
 
+    primaryBar.appendChild(
+      makeActionBtn("📤 Поделиться", "", function () {
+        openShareTaskModal(task);
+      })
+    );
+
     var btnMoreToggle = el("button", "task-btn task-btn-more", "Ещё ▾");
     btnMoreToggle.type = "button";
     btnMoreToggle.addEventListener("click", function () {
@@ -2473,15 +2581,15 @@
     if (!task) return;
     var stats = tst || getTaskTimingStats(task);
     var assigneeEmp = getEmployeeById(task.assignee_id) || currentEmp;
-    openActionModal("⏰ Таймер включён уже " + hoursDone + " ч · #" + task.id);
+    openActionModal("⏰ Таймер " + hoursDone + " ч · " + taskNumAndTitle(task, 70));
 
     var alertBanner = el(
       "div",
       "glass-card",
       "🔔 Оповещение исполнителю (" +
         assigneeEmp.short +
-        "): таймер по задаче #" +
-        task.id +
+        "): таймер по задаче " +
+        taskNumAndTitle(task, 90) +
         " непрерывно включён уже " +
         hoursDone +
         " ч (" +
@@ -2494,7 +2602,7 @@
 
     var detailsCard = el("div", "glass-card");
     var rows = [
-      ["Задача", "#" + task.id + " — " + (task.title || "")],
+      ["Задача", taskNumAndTitle(task, 120)],
       ["Клиент", task.company_name || "Без компании"],
       ["Исполнитель", assigneeEmp.name || assigneeEmp.short],
       ["Время по таймеру", formatDurationSec(stats.ownWorkSec || stats.workSec, true) + " (идёт ⏱)"],
@@ -2515,7 +2623,7 @@
     btnContinue.addEventListener("click", function () {
       hapticImpact("light");
       closeActionModal();
-      showToast("⏱ Таймер по #" + task.id + " продолжает идти (следующее оповещение через 1 ч)");
+      showToast("⏱ Таймер по " + taskNumAndTitle(task, 50) + " продолжает идти");
     });
     actionsStack.appendChild(btnContinue);
 
@@ -2537,7 +2645,14 @@
     });
     actionsStack.appendChild(btnSolveNow);
 
-    var btnJumpTask = el("button", "btn-secondary-full", "📍 Перейти к карточке задачи #" + task.id);
+    var btnShareNow = el("button", "btn-secondary-full", "📤 Поделиться задачей / По всем каналам");
+    btnShareNow.type = "button";
+    btnShareNow.addEventListener("click", function () {
+      openShareTaskModal(task);
+    });
+    actionsStack.appendChild(btnShareNow);
+
+    var btnJumpTask = el("button", "btn-secondary-full", "📍 Перейти к задаче " + taskNumAndTitle(task, 60));
     btnJumpTask.type = "button";
     btnJumpTask.addEventListener("click", function () {
       closeActionModal();
@@ -2646,7 +2761,7 @@
   // --- Модальное окно смены статуса прямо с кнопки статуса на карточке ---
   function openStatusTransitionModal(task) {
     var curMeta = STATUS_META[task.status_code] || { label: task.status_name || "Открыта", cls: "status-opened" };
-    openActionModal("Статус заявки #" + task.id);
+    openActionModal("Статус · " + taskNumAndTitle(task, 70));
 
     var tStats = getTaskTimingStats(task);
     modalBodyEl.appendChild(
@@ -2688,7 +2803,7 @@
 
   // --- Модальное окно «⏱ История таймера и этапов» (разбивка времени по каждому исполнителю при передачах) ---
   function openTaskTimerHistoryModal(task) {
-    openActionModal("⏱ Таймер и этапы · #" + task.id);
+    openActionModal("⏱ Таймер и этапы · " + taskNumAndTitle(task, 65));
     var tStats = getTaskTimingStats(task);
     var waitSec = Math.max(0, tStats.sysSec - tStats.totalWorkSec);
     var timerMins = Math.round(tStats.totalWorkSec / 60);
@@ -3081,7 +3196,7 @@
     saveState();
     renderTasksView();
 
-    openActionModal("🔔 Уведомление в Telegram · #" + task.id);
+    openActionModal("🔔 Уведомление в TG · " + taskNumAndTitle(task, 65));
     modalBodyEl.appendChild(
       el(
         "p",
@@ -3097,18 +3212,30 @@
     );
 
     var msgPreview = el("div", "task-desc-body");
-    msgPreview.textContent =
-      "🔔 Напоминание о заявке #" +
-      task.id +
-      "\nТема: " +
-      task.title +
-      "\nСтатус: " +
-      (STATUS_META[task.status_code] ? STATUS_META[task.status_code].label : task.status_name) +
-      "\nКлиент: " +
-      (task.company_name || "Без компании") +
-      "\nИсполнитель: " +
-      (assignee ? assignee.short : "Не назначен");
+    msgPreview.style.whiteSpace = "pre-wrap";
+    msgPreview.textContent = buildTelegramShareCardParts(task).fullText;
     modalBodyEl.appendChild(msgPreview);
+
+    if (typeof fetch === "function") {
+      fetch("https://itsupp.com/api/tickets-notify-all-channels", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ticketId: String(task.id),
+          number: Number(task.id) || String(task.id),
+          subject: task.title || "",
+          description: task.description || task.title || "",
+          assigneeId: String(task.assignee_id || ""),
+          assigneeName: assignee ? assignee.name : (task.assignee_name || ""),
+          clientName: task.company_name || "Сервис-Про ООО",
+          siteName: (!task.entity_name || task.entity_name === "Без объекта") ? "—" : task.entity_name,
+          statusName: task.status_name || "Открытая",
+          createdAt: task.created_at || task.created_iso || "",
+          dueAt: task.deadline_at || "",
+          mode: "remind_chat"
+        })
+      }).catch(function () {});
+    }
 
     var kbTitle = el("div", "form-label", "4 кнопки сообщения в Telegram:");
     modalBodyEl.appendChild(kbTitle);
@@ -3162,10 +3289,17 @@
   }
 
   function openShareTaskModal(task) {
-    openActionModal("📤 Поделиться задачей #" + task.id);
+    openActionModal("📤 Поделиться · " + taskNumAndTitle(task, 70));
     var assignee = getEmployeeById(task.assignee_id);
-    var portalUrl = "https://itsupp.com/tickets/" + encodeURIComponent(task.id);
-    var shareText = "Заявка #" + task.id + ": " + (task.title || "") + "\nКлиент: " + (task.company_name || "Сервис-Про ООО") + "\nИсполнитель: " + (assignee ? assignee.short : (task.assignee_name || "Не назначен"));
+    var portalUrl = "https://portal.itsupp.com/tickets/" + encodeURIComponent(task.id);
+    var cardParts = buildTelegramShareCardParts(task);
+    var shareText = cardParts.fullText;
+    var previewCard = el("div", "task-desc-body");
+    previewCard.style.whiteSpace = "pre-wrap";
+    previewCard.style.marginBottom = "10px";
+    previewCard.style.fontSize = "12px";
+    previewCard.textContent = shareText;
+    modalBodyEl.appendChild(previewCard);
     var stack = el("div", "assignee-grid");
 
     var btnAll = el("button", "btn-primary-full", "🚀 Отправить по всем каналам (Email + TG + 🔔)");
@@ -3198,7 +3332,7 @@
     btnNative.type = "button";
     btnNative.addEventListener("click", function () {
       if (navigator.share) {
-        navigator.share({ title: "Заявка #" + task.id, text: shareText, url: portalUrl }).catch(function () {});
+        navigator.share({ title: cardParts.firstLine, text: shareText }).catch(function () {});
       } else {
         copyIssueLink(task.id);
       }
@@ -3208,7 +3342,7 @@
     var btnTg = el("button", "btn-secondary-full", "✈️ Отправить в Telegram");
     btnTg.type = "button";
     btnTg.addEventListener("click", function () {
-      var u = "https://t.me/share/url?url=" + encodeURIComponent(portalUrl) + "&text=" + encodeURIComponent(shareText);
+      var u = "https://t.me/share/url?url=" + encodeURIComponent(cardParts.firstLine) + "&text=" + encodeURIComponent(cardParts.restLines);
       if (tg && typeof tg.openTelegramLink === "function") {
         try { tg.openTelegramLink(u); return; } catch (_e) {}
       }
@@ -3219,14 +3353,14 @@
     var btnWa = el("button", "btn-secondary-full", "💬 Отправить в WhatsApp");
     btnWa.type = "button";
     btnWa.addEventListener("click", function () {
-      window.open("https://wa.me/?text=" + encodeURIComponent(shareText + "\n" + portalUrl), "_blank", "noopener,noreferrer");
+      window.open("https://wa.me/?text=" + encodeURIComponent(shareText), "_blank", "noopener,noreferrer");
     });
     stack.appendChild(btnWa);
 
     var btnEmail = el("button", "btn-secondary-full", "✉️ Отправить на Email");
     btnEmail.type = "button";
     btnEmail.addEventListener("click", function () {
-      window.location.href = "mailto:?subject=" + encodeURIComponent("Заявка #" + task.id + ": " + (task.title || "")) + "&body=" + encodeURIComponent(shareText + "\n\n" + portalUrl);
+      window.location.href = "mailto:?subject=" + encodeURIComponent(cardParts.firstLine + " — " + (task.title || "")) + "&body=" + encodeURIComponent(shareText);
     });
     stack.appendChild(btnEmail);
 
@@ -3298,7 +3432,7 @@
 
   // 1. Калькулятор списания времени + сравнение с реальным временем по таймеру
   function openSpentTimeCalculatorModal(task) {
-    openActionModal("Решить и списать время · #" + task.id);
+    openActionModal("Решить и списать время · " + taskNumAndTitle(task, 60));
     var tStats = getTaskTimingStats(task);
     var timerMins = Math.max(1, Math.round(tStats.ownWorkSec / 60));
     var addedMins = tStats.ownWorkSec >= 60 ? timerMins : 15;
@@ -3420,7 +3554,7 @@
 
   // 2. Модальное окно «Отложить»
   function openPostponeModal(task) {
-    openActionModal("Отложить заявку #" + task.id);
+    openActionModal("Отложить · " + taskNumAndTitle(task, 65));
 
     var quickSlots = [
       { label: "Завтра 10:00 · +5 мин", deadline: "Завтра 10:00", addMins: 5, bucket: "upcoming" },
@@ -3486,7 +3620,7 @@
 
   // 3. Модальное окно «Передать / Делегировать» (фиксирует время предыдущего исполнителя, останавливает таймер и переводит в «Делегирована»)
   function openDelegateModal(task) {
-    openActionModal("Передать заявку #" + task.id);
+    openActionModal("Передать · " + taskNumAndTitle(task, 65));
     var keepControl = true;
 
     var ctrlBtn = el("button", "btn-secondary-full", "✓ Оставить у себя на контроле (CONTROL)");
@@ -3903,7 +4037,7 @@
 
       var btnRow = el("div", "assignee-grid");
 
-      var btnJump = el("button", "btn-primary-full", "📍 Перейти к задаче #" + t.id);
+      var btnJump = el("button", "btn-primary-full", "📍 Перейти к " + taskNumAndTitle(t, 60));
       btnJump.type = "button";
       btnJump.addEventListener("click", function () {
         closeActionModal();
@@ -3929,6 +4063,13 @@
       });
       btnRow.appendChild(btnPause);
 
+      var btnShareBell = el("button", "btn-secondary-full", "📤 Поделиться задачей");
+      btnShareBell.type = "button";
+      btnShareBell.addEventListener("click", function () {
+        openShareTaskModal(t);
+      });
+      btnRow.appendChild(btnShareBell);
+
       card.appendChild(btnRow);
       modalBodyEl.appendChild(card);
     });
@@ -3936,7 +4077,7 @@
 
   // 4. Подтверждение «Забрать чужую задачу»
   function openTakeConfirmModal(task) {
-    openActionModal("Забрать заявку #" + task.id + "?");
+    openActionModal("Забрать " + taskNumAndTitle(task, 65) + "?");
     var assignee = getEmployeeById(task.assignee_id);
     modalBodyEl.appendChild(
       el(
@@ -3961,7 +4102,7 @@
   // 5. Модальное окно «Комментарий / Написать заявителю» (публичный ответ клиенту или внутренний комментарий + скрепочка 📎)
   function openCommentModal(task, defaultPublic) {
     var isPublic = Boolean(defaultPublic);
-    openActionModal((isPublic ? "💬 Ответ заявителю · #" : "Комментарий к #") + task.id);
+    openActionModal((isPublic ? "💬 Ответ заявителю · " : "Комментарий · ") + taskNumAndTitle(task, 60));
 
     var modeRow = el("div", "segmented-row");
     function renderModeSwitch() {
@@ -4079,7 +4220,7 @@
     btnSend.type = "button";
 
     function updateModalLabels() {
-      modalTitleEl.textContent = (isPublic ? "💬 Ответ заявителю · #" : "Комментарий к #") + task.id;
+      modalTitleEl.textContent = (isPublic ? "💬 Ответ заявителю · " : "Комментарий · ") + taskNumAndTitle(task, 60);
       input.placeholder = isPublic
         ? "Напишите сообщение заявителю (" + (task.company_name || "клиенту") + ") — уйдёт в Okdesk / Telegram / Email…"
         : "Введите внутренний комментарий для сотрудников ИТ…";
