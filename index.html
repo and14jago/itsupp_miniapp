@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru" xml:lang="ru" data-theme="light">
 <head>
   <meta charset="UTF-8" />
@@ -10,60 +10,60 @@
       http-equiv="Content-Security-Policy"
       content="default-src 'none'; script-src 'self' https://telegram.org; style-src 'self'; img-src 'self' data: blob: https://t.me https://*.telesco.pe; connect-src 'self' https://n8n.itsupp.com https://portal.itsupp.com https://*.itsupp.com https://raw.githubusercontent.com; font-src 'none'; object-src 'none'; media-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none';"
     />
-  <title>ITSUPP — Рабочий кабинет</title>
+  <title>ITSUPP вЂ” Р Р°Р±РѕС‡РёР№ РєР°Р±РёРЅРµС‚</title>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <link rel="stylesheet" href="./styles.css?v=20261111-03" />
+  <link rel="stylesheet" href="./styles.css?v=20261112-01" />
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body lang="ru">
   <div class="app-shell">
-    <!-- Скрытые input для выбора фото/камеры/файла на экране входа -->
+    <!-- РЎРєСЂС‹С‚С‹Рµ input РґР»СЏ РІС‹Р±РѕСЂР° С„РѕС‚Рѕ/РєР°РјРµСЂС‹/С„Р°Р№Р»Р° РЅР° СЌРєСЂР°РЅРµ РІС…РѕРґР° -->
     <input id="login-avatar-input" type="file" accept="image/*" class="hidden" />
     <input id="login-camera-input" type="file" accept="image/*" capture="user" class="hidden" />
     <input id="login-file-input" type="file" accept="image/*,.svg,.png,.jpg,.jpeg,.webp,.ico" class="hidden" />
 
     <!-- =========================================================
-         ЭКРАН 1: ВХОД КАК В СБЕРЕ (FACE ID / TOUCH ID + 5-ЗНАЧНЫЙ КОД)
+         Р­РљР РђРќ 1: Р’РҐРћР” РљРђРљ Р’ РЎР‘Р•Р Р• (FACE ID / TOUCH ID + 5-Р—РќРђР§РќР«Р™ РљРћР”)
          ========================================================= -->
-    <section id="screen-login" class="screen" aria-label="Вход в приложение">
+    <section id="screen-login" class="screen" aria-label="Р’С…РѕРґ РІ РїСЂРёР»РѕР¶РµРЅРёРµ">
       <div class="sber-login-wrap">
         <div class="sber-top-bar hidden">
           <div class="sber-Brand hidden">
             <span class="sber-brand-dot"></span>
             <span class="sber-brand-title">ITSUPP ID</span>
           </div>
-          <div class="theme-switcher" role="group" aria-label="Тема оформления">
-            <button type="button" class="theme-btn" data-theme-mode="light" title="Дневная тема">☀️</button>
-            <button type="button" class="theme-btn" data-theme-mode="dark" title="Ночная тема">🌙</button>
-            <button type="button" class="theme-btn active" data-theme-mode="auto" title="Авто">Авто</button>
+          <div class="theme-switcher" role="group" aria-label="РўРµРјР° РѕС„РѕСЂРјР»РµРЅРёСЏ">
+            <button type="button" class="theme-btn" data-theme-mode="light" title="Р”РЅРµРІРЅР°СЏ С‚РµРјР°">вЂпёЏ</button>
+            <button type="button" class="theme-btn" data-theme-mode="dark" title="РќРѕС‡РЅР°СЏ С‚РµРјР°">рџЊ™</button>
+            <button type="button" class="theme-btn active" data-theme-mode="auto" title="РђРІС‚Рѕ">РђРІС‚Рѕ</button>
           </div>
           <div class="top-bar-right">
-            <button id="btn-login-more" type="button" class="top-circle-btn" title="Меню и фото/логотип" aria-label="Меню">⋯</button>
-            <button id="btn-login-close" type="button" class="top-circle-btn" title="Закрыть" aria-label="Закрыть">✕</button>
+            <button id="btn-login-more" type="button" class="top-circle-btn" title="РњРµРЅСЋ Рё С„РѕС‚Рѕ/Р»РѕРіРѕС‚РёРї" aria-label="РњРµРЅСЋ">в‹Ї</button>
+            <button id="btn-login-close" type="button" class="top-circle-btn" title="Р—Р°РєСЂС‹С‚СЊ" aria-label="Р—Р°РєСЂС‹С‚СЊ">вњ•</button>
           </div>
         </div>
 
         <div class="sber-profile-block">
-          <button type="button" id="btn-avatar-upload" class="sber-avatar-wrap" title="Нажмите, чтобы установить фото или лого">
+          <button type="button" id="btn-avatar-upload" class="sber-avatar-wrap" title="РќР°Р¶РјРёС‚Рµ, С‡С‚РѕР±С‹ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ С„РѕС‚Рѕ РёР»Рё Р»РѕРіРѕ">
             <div id="user-avatar" class="sber-avatar">MS</div>
-            <div id="avatar-edit-badge" class="sber-avatar-badge" title="Редактировать фото или лого">
+            <div id="avatar-edit-badge" class="sber-avatar-badge" title="Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ С„РѕС‚Рѕ РёР»Рё Р»РѕРіРѕ">
               <svg class="pencil-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
                 <path d="m15 5 4 4" />
               </svg>
             </div>
           </button>
-          <div id="login-greeting" class="sber-greeting hidden">Добрый вечер</div>
+          <div id="login-greeting" class="sber-greeting hidden">Р”РѕР±СЂС‹Р№ РІРµС‡РµСЂ</div>
           <div id="user-name" class="sber-user-name">Mikhail Strelkin</div>
-          <div id="user-sub" class="sber-user-sub hidden">Профиль Telegram</div>
-          <button type="button" id="btn-avatar-hint" class="avatar-upload-link hidden">Загрузить фото / лого</button>
+          <div id="user-sub" class="sber-user-sub hidden">РџСЂРѕС„РёР»СЊ Telegram</div>
+          <button type="button" id="btn-avatar-hint" class="avatar-upload-link hidden">Р—Р°РіСЂСѓР·РёС‚СЊ С„РѕС‚Рѕ / Р»РѕРіРѕ</button>
         </div>
 
         <div class="sber-pin-section">
-          <div id="pin-prompt" class="sber-pin-label hidden">Введите код доступа или войдите по биометрии</div>
-          <div id="pin-dots" class="sber-pin-dots" role="status" aria-label="Индикатор кода доступа">
+          <div id="pin-prompt" class="sber-pin-label hidden">Р’РІРµРґРёС‚Рµ РєРѕРґ РґРѕСЃС‚СѓРїР° РёР»Рё РІРѕР№РґРёС‚Рµ РїРѕ Р±РёРѕРјРµС‚СЂРёРё</div>
+          <div id="pin-dots" class="sber-pin-dots" role="status" aria-label="РРЅРґРёРєР°С‚РѕСЂ РєРѕРґР° РґРѕСЃС‚СѓРїР°">
             <span class="pin-dot"></span>
             <span class="pin-dot"></span>
             <span class="pin-dot"></span>
@@ -73,7 +73,7 @@
           <div id="pin-hint" class="sber-pin-hint hidden"></div>
         </div>
 
-        <div class="sber-keypad" role="group" aria-label="Клавиатура ввода кода">
+        <div class="sber-keypad" role="group" aria-label="РљР»Р°РІРёР°С‚СѓСЂР° РІРІРѕРґР° РєРѕРґР°">
           <button type="button" class="key-btn" data-digit="1"><span class="key-num">1</span></button>
           <button type="button" class="key-btn" data-digit="2"><span class="key-num">2</span><span class="key-abc">ABC</span></button>
           <button type="button" class="key-btn" data-digit="3"><span class="key-num">3</span><span class="key-abc">DEF</span></button>
@@ -83,8 +83,8 @@
           <button type="button" class="key-btn" data-digit="7"><span class="key-num">7</span><span class="key-abc">PQRS</span></button>
           <button type="button" class="key-btn" data-digit="8"><span class="key-num">8</span><span class="key-abc">TUV</span></button>
           <button type="button" class="key-btn" data-digit="9"><span class="key-num">9</span><span class="key-abc">WXYZ</span></button>
-          <button type="button" id="btn-pin-reset" class="key-btn key-back-btn" aria-label="Стереть">
-            <span id="icon-key-back" class="key-back-glyph">⌫</span>
+          <button type="button" id="btn-pin-reset" class="key-btn key-back-btn" aria-label="РЎС‚РµСЂРµС‚СЊ">
+            <span id="icon-key-back" class="key-back-glyph">вЊ«</span>
           </button>
           <button type="button" class="key-btn" data-digit="0"><span class="key-num">0</span></button>
           <button type="button" id="btn-key-right" class="key-btn key-bio" aria-label="Face ID / Touch ID">
@@ -113,64 +113,64 @@
               <path d="M12 9.5v3.5h-1" />
               <path d="M9.5 15.5c1.3 1.2 3.7 1.2 5 0" />
             </svg>
-            <span id="btn-bio-label">Войти по Face ID / Touch ID</span>
+            <span id="btn-bio-label">Р’РѕР№С‚Рё РїРѕ Face ID / Touch ID</span>
           </button>
         </div>
       </div>
     </section>
 
     <!-- =========================================================
-         ЭКРАН 2: ОСНОВНОЙ ИНТЕРФЕЙС БОТА @itsupp_task_bot В MINI APP
+         Р­РљР РђРќ 2: РћРЎРќРћР’РќРћР™ РРќРўР•Р Р¤Р•Р™РЎ Р‘РћРўРђ @itsupp_task_bot Р’ MINI APP
          ========================================================= -->
-    <section id="screen-app" class="screen active" aria-label="Рабочий кабинет ITSUPP">
-      <!-- Компактная двухрядная шапка: справа кружок с 3 точками (⋯) и правее крестик (✕) = закрыть -->
+    <section id="screen-app" class="screen active" aria-label="Р Р°Р±РѕС‡РёР№ РєР°Р±РёРЅРµС‚ ITSUPP">
+      <!-- РљРѕРјРїР°РєС‚РЅР°СЏ РґРІСѓС…СЂСЏРґРЅР°СЏ С€Р°РїРєР°: СЃРїСЂР°РІР° РєСЂСѓР¶РѕРє СЃ 3 С‚РѕС‡РєР°РјРё (в‹Ї) Рё РїСЂР°РІРµРµ РєСЂРµСЃС‚РёРє (вњ•) = Р·Р°РєСЂС‹С‚СЊ -->
       <header class="app-header">
         <div class="header-top">
-          <div id="btn-switch-emp" class="emp-chip" title="Профиль сотрудника">
-            <span id="app-emp-avatar" class="emp-chip-avatar">МС</span>
+          <div id="btn-switch-emp" class="emp-chip" title="РџСЂРѕС„РёР»СЊ СЃРѕС‚СЂСѓРґРЅРёРєР°">
+            <span id="app-emp-avatar" class="emp-chip-avatar">РњРЎ</span>
             <span class="emp-chip-info">
-              <span id="app-emp-name" class="emp-chip-name">Стрелкин М.</span>
-              <span id="app-emp-role" class="emp-chip-sub">Админ · ID 1</span>
+              <span id="app-emp-name" class="emp-chip-name">РЎС‚СЂРµР»РєРёРЅ Рњ.</span>
+              <span id="app-emp-role" class="emp-chip-sub">РђРґРјРёРЅ В· ID 1</span>
             </span>
           </div>
 
           <div class="header-actions">
-            <div class="theme-switcher" role="group" aria-label="Тема оформления">
-              <button type="button" class="theme-btn" data-theme-mode="light" title="День">☀️</button>
-              <button type="button" class="theme-btn" data-theme-mode="dark" title="Ночь">🌙</button>
-              <button type="button" class="theme-btn active" data-theme-mode="auto" title="Авто">Авто</button>
+            <div class="theme-switcher" role="group" aria-label="РўРµРјР° РѕС„РѕСЂРјР»РµРЅРёСЏ">
+              <button type="button" class="theme-btn" data-theme-mode="light" title="Р”РµРЅСЊ">вЂпёЏ</button>
+              <button type="button" class="theme-btn" data-theme-mode="dark" title="РќРѕС‡СЊ">рџЊ™</button>
+              <button type="button" class="theme-btn active" data-theme-mode="auto" title="РђРІС‚Рѕ">РђРІС‚Рѕ</button>
             </div>
-            <button id="btn-top-bell" type="button" class="top-circle-btn bell-btn" title="Оповещения по задачам с таймером" aria-label="Оповещения">
-              <span>🔔</span>
+            <button id="btn-top-bell" type="button" class="top-circle-btn bell-btn" title="РћРїРѕРІРµС‰РµРЅРёСЏ РїРѕ Р·Р°РґР°С‡Р°Рј СЃ С‚Р°Р№РјРµСЂРѕРј" aria-label="РћРїРѕРІРµС‰РµРЅРёСЏ">
+              <span>рџ””</span>
               <span id="bell-badge" class="bell-badge hidden">0</span>
             </button>
-            <button id="btn-top-more" type="button" class="top-circle-btn" title="Меню действий" aria-label="Меню">⋯</button>
-            <button id="btn-top-close" type="button" class="top-circle-btn" title="Закрыть приложение" aria-label="Закрыть">✕</button>
-            <!-- Скрытые прокси-кнопки для сохранения обратной совместимости обработчиков -->
-            <button id="btn-top-refresh" type="button" class="top-circle-btn" title="Обновить задачи вручную (авто каждую минуту)" aria-label="Обновить задачи">🔄</button>
-            <button id="btn-top-bot" type="button" class="icon-btn hidden" title="В чат бота">💬</button>
-            <button id="btn-top-lock" type="button" class="icon-btn hidden" title="Заблокировать">🔒</button>
+            <button id="btn-top-more" type="button" class="top-circle-btn" title="РњРµРЅСЋ РґРµР№СЃС‚РІРёР№" aria-label="РњРµРЅСЋ">в‹Ї</button>
+            <button id="btn-top-close" type="button" class="top-circle-btn" title="Р—Р°РєСЂС‹С‚СЊ РїСЂРёР»РѕР¶РµРЅРёРµ" aria-label="Р—Р°РєСЂС‹С‚СЊ">вњ•</button>
+            <!-- РЎРєСЂС‹С‚С‹Рµ РїСЂРѕРєСЃРё-РєРЅРѕРїРєРё РґР»СЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ РѕР±СЂР°С‚РЅРѕР№ СЃРѕРІРјРµСЃС‚РёРјРѕСЃС‚Рё РѕР±СЂР°Р±РѕС‚С‡РёРєРѕРІ -->
+            <button id="btn-top-refresh" type="button" class="top-circle-btn" title="РћР±РЅРѕРІРёС‚СЊ Р·Р°РґР°С‡Рё РІСЂСѓС‡РЅСѓСЋ (Р°РІС‚Рѕ РєР°Р¶РґСѓСЋ РјРёРЅСѓС‚Сѓ)" aria-label="РћР±РЅРѕРІРёС‚СЊ Р·Р°РґР°С‡Рё">рџ”„</button>
+            <button id="btn-top-bot" type="button" class="icon-btn hidden" title="Р’ С‡Р°С‚ Р±РѕС‚Р°">рџ’¬</button>
+            <button id="btn-top-lock" type="button" class="icon-btn hidden" title="Р—Р°Р±Р»РѕРєРёСЂРѕРІР°С‚СЊ">рџ”’</button>
           </div>
         </div>
 
         <div class="header-status-strip">
           <button id="btn-strip-fresh" type="button" class="status-pill pill-on">
             <span id="strip-fresh-dot" class="status-dot"></span>
-            <span id="strip-fresh-text">Оповещение: ВКЛ</span>
+            <span id="strip-fresh-text">РћРїРѕРІРµС‰РµРЅРёРµ: Р’РљР›</span>
           </button>
           <button id="btn-strip-duty" type="button" class="status-pill">
-            <span id="strip-duty-text">Дежурный: Быков М. В.</span>
+            <span id="strip-duty-text">Р”РµР¶СѓСЂРЅС‹Р№: Р‘С‹РєРѕРІ Рњ. Р’.</span>
           </button>
         </div>
       </header>
 
-      <!-- Контентные вкладки -->
+      <!-- РљРѕРЅС‚РµРЅС‚РЅС‹Рµ РІРєР»Р°РґРєРё -->
       <main class="app-main">
-        <!-- ВКЛАДКА 1: ЗАДАЧИ И ПОИСК -->
+        <!-- Р’РљР›РђР”РљРђ 1: Р—РђР”РђР§Р Р РџРћРРЎРљ -->
         <div id="view-tasks" class="app-view active">
-          <!-- Поиск (Enter закрывает клавиатуру, по умолчанию русская раскладка) -->
+          <!-- РџРѕРёСЃРє (Enter Р·Р°РєСЂС‹РІР°РµС‚ РєР»Р°РІРёР°С‚СѓСЂСѓ, РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ СЂСѓСЃСЃРєР°СЏ СЂР°СЃРєР»Р°РґРєР°) -->
           <div id="search-box-wrap" class="search-bar-wrap">
-            <span class="search-icon">🔎</span>
+            <span class="search-icon">рџ”Ћ</span>
             <input
               id="task-search-input"
               type="text"
@@ -182,61 +182,61 @@
               autocorrect="on"
               spellcheck="true"
               class="search-input"
-              placeholder="Поиск по #номеру, клиенту, объекту…"
+              placeholder="РџРѕРёСЃРє РїРѕ #РЅРѕРјРµСЂСѓ, РєР»РёРµРЅС‚Сѓ, РѕР±СЉРµРєС‚СѓвЂ¦"
             />
-            <button id="btn-search-clear" type="button" class="search-clear hidden">✕</button>
-            <button id="btn-search-refresh" type="button" class="btn-search-refresh" title="Обновить задачи вручную (авто каждую минуту)">🔄 Обновить</button>
+            <button id="btn-search-clear" type="button" class="search-clear hidden">вњ•</button>
+            <button id="btn-search-refresh" type="button" class="btn-search-refresh" title="РћР±РЅРѕРІРёС‚СЊ Р·Р°РґР°С‡Рё РІСЂСѓС‡РЅСѓСЋ (Р°РІС‚Рѕ РєР°Р¶РґСѓСЋ РјРёРЅСѓС‚Сѓ)">рџ”„ РћР±РЅРѕРІРёС‚СЊ</button>
           </div>
 
-          <!-- Фильтры разделов: «Все» слева, все 5 кнопок гарантированно влезают в экран -->
+          <!-- Р¤РёР»СЊС‚СЂС‹ СЂР°Р·РґРµР»РѕРІ: В«Р’СЃРµВ» СЃР»РµРІР°, РІСЃРµ 5 РєРЅРѕРїРѕРє РіР°СЂР°РЅС‚РёСЂРѕРІР°РЅРЅРѕ РІР»РµР·Р°СЋС‚ РІ СЌРєСЂР°РЅ -->
           <div class="scope-tabs" role="tablist">
             <button type="button" class="scope-tab active" data-scope="all">
-              Все <span id="cnt-all" class="scope-badge">0</span>
+              Р’СЃРµ <span id="cnt-all" class="scope-badge">0</span>
             </button>
             <button type="button" class="scope-tab" data-scope="mine">
-              Мои <span id="cnt-mine" class="scope-badge">0</span>
+              РњРѕРё <span id="cnt-mine" class="scope-badge">0</span>
             </button>
             <button type="button" class="scope-tab" data-scope="control">
-              Контр. <span id="cnt-control" class="scope-badge">0</span>
+              РљРѕРЅС‚СЂ. <span id="cnt-control" class="scope-badge">0</span>
             </button>
             <button type="button" class="scope-tab" data-scope="today">
-              Сегод. <span id="cnt-today" class="scope-badge">0</span>
+              РЎРµРіРѕРґ. <span id="cnt-today" class="scope-badge">0</span>
             </button>
             <button type="button" class="scope-tab" data-scope="overdue">
-              Срок <span id="cnt-overdue" class="scope-badge badge-danger">0</span>
+              РЎСЂРѕРє <span id="cnt-overdue" class="scope-badge badge-danger">0</span>
             </button>
           </div>
 
-          <!-- Фильтр по статусу: только активные статусы (без Закрыта / Отклонена / Решена) -->
+          <!-- Р¤РёР»СЊС‚СЂ РїРѕ СЃС‚Р°С‚СѓСЃСѓ: С‚РѕР»СЊРєРѕ Р°РєС‚РёРІРЅС‹Рµ СЃС‚Р°С‚СѓСЃС‹ (Р±РµР· Р—Р°РєСЂС‹С‚Р° / РћС‚РєР»РѕРЅРµРЅР° / Р РµС€РµРЅР°) -->
           <div class="status-filter-row">
-            <button type="button" class="status-chip active" data-status="all">Все</button>
-            <button type="button" class="status-chip" data-status="opened">Открыт.</button>
-            <button type="button" class="status-chip" data-status="work">Принят.</button>
-            <button type="button" class="status-chip" data-status="working">В раб.</button>
-            <button type="button" class="status-chip" data-status="delayed">Отлож.</button>
+            <button type="button" class="status-chip active" data-status="all">Р’СЃРµ</button>
+            <button type="button" class="status-chip" data-status="opened">РћС‚РєСЂС‹С‚.</button>
+            <button type="button" class="status-chip" data-status="work">РџСЂРёРЅСЏС‚.</button>
+            <button type="button" class="status-chip" data-status="working">Р’ СЂР°Р±.</button>
+            <button type="button" class="status-chip" data-status="delayed">РћС‚Р»РѕР¶.</button>
           </div>
 
-          <!-- Список карточек задач (в хронологическом порядке: сверху новые) -->
+          <!-- РЎРїРёСЃРѕРє РєР°СЂС‚РѕС‡РµРє Р·Р°РґР°С‡ (РІ С…СЂРѕРЅРѕР»РѕРіРёС‡РµСЃРєРѕРј РїРѕСЂСЏРґРєРµ: СЃРІРµСЂС…Сѓ РЅРѕРІС‹Рµ) -->
           <div id="tasks-list" class="tasks-list"></div>
         </div>
 
-        <!-- ВКЛАДКА 2: МАСТЕР СОЗДАНИЯ ЗАДАЧИ (КОМПАКТНЫЙ ЭКРАН БЕЗ ПЕРЕКРЫТИЯ КЛАВИАТУРОЙ) -->
+        <!-- Р’РљР›РђР”РљРђ 2: РњРђРЎРўР•Р  РЎРћР—Р”РђРќРРЇ Р—РђР”РђР§Р (РљРћРњРџРђРљРўРќР«Р™ Р­РљР РђРќ Р‘Р•Р— РџР•Р Р•РљР Р«РўРРЇ РљР›РђР’РРђРўРЈР РћР™) -->
         <div id="view-create" class="app-view">
           <div class="section-card create-card-compact">
-            <!-- Шаг 1: Направление (сразу наверху без лишних заголовков) -->
+            <!-- РЁР°Рі 1: РќР°РїСЂР°РІР»РµРЅРёРµ (СЃСЂР°Р·Сѓ РЅР°РІРµСЂС…Сѓ Р±РµР· Р»РёС€РЅРёС… Р·Р°РіРѕР»РѕРІРєРѕРІ) -->
             <div class="segmented-row create-seg-compact">
-              <button type="button" class="seg-btn active" data-create-type="service">🛠 Техподдержка</button>
-              <button type="button" class="seg-btn" data-create-type="000004">📊 Бухгалтерия</button>
+              <button type="button" class="seg-btn active" data-create-type="service">рџ›  РўРµС…РїРѕРґРґРµСЂР¶РєР°</button>
+              <button type="button" class="seg-btn" data-create-type="000004">рџ“Љ Р‘СѓС…РіР°Р»С‚РµСЂРёСЏ</button>
             </div>
 
-            <!-- Шаг 2: Клиент (в одну компактную строку) -->
+            <!-- РЁР°Рі 2: РљР»РёРµРЅС‚ (РІ РѕРґРЅСѓ РєРѕРјРїР°РєС‚РЅСѓСЋ СЃС‚СЂРѕРєСѓ) -->
             <div class="create-row-compact">
               <div class="selected-client-banner create-client-compact" id="create-selected-client">
                 <div class="create-client-inline">
-                  <span class="create-inline-lbl">Клиент:</span>
-                  <span id="create-client-name" class="selected-client-name">Сервис-Про ООО (ID 30)</span>
+                  <span class="create-inline-lbl">РљР»РёРµРЅС‚:</span>
+                  <span id="create-client-name" class="selected-client-name">РЎРµСЂРІРёСЃ-РџСЂРѕ РћРћРћ (ID 30)</span>
                 </div>
-                <button type="button" id="btn-create-change-client" class="btn-mini create-btn-mini">Сменить</button>
+                <button type="button" id="btn-create-change-client" class="btn-mini create-btn-mini">РЎРјРµРЅРёС‚СЊ</button>
               </div>
               <div id="create-client-picker" class="client-picker-box hidden">
                 <input
@@ -250,13 +250,13 @@
                   autocorrect="on"
                   spellcheck="true"
                   class="form-input create-input-compact"
-                  placeholder="Название клиента или ID…"
+                  placeholder="РќР°Р·РІР°РЅРёРµ РєР»РёРµРЅС‚Р° РёР»Рё IDвЂ¦"
                 />
                 <div id="create-client-results" class="client-results-list"></div>
               </div>
             </div>
 
-            <!-- Шаг 3: Объект обслуживания (показывается ТОЛЬКО если у выбранного клиента есть объекты обслуживания) -->
+            <!-- РЁР°Рі 3: РћР±СЉРµРєС‚ РѕР±СЃР»СѓР¶РёРІР°РЅРёСЏ (РїРѕРєР°Р·С‹РІР°РµС‚СЃСЏ РўРћР›Р¬РљРћ РµСЃР»Рё Сѓ РІС‹Р±СЂР°РЅРЅРѕРіРѕ РєР»РёРµРЅС‚Р° РµСЃС‚СЊ РѕР±СЉРµРєС‚С‹ РѕР±СЃР»СѓР¶РёРІР°РЅРёСЏ) -->
             <div id="create-entity-group" class="create-row-compact hidden">
               <div id="create-entity-chips" class="preset-chips create-entity-chips"></div>
               <div class="entity-row">
@@ -271,13 +271,13 @@
                   autocorrect="on"
                   spellcheck="true"
                   class="form-input create-input-compact"
-                  placeholder="Объект обслуживания…"
+                  placeholder="РћР±СЉРµРєС‚ РѕР±СЃР»СѓР¶РёРІР°РЅРёСЏвЂ¦"
                 />
-                <button type="button" id="btn-skip-entity" class="btn-mini create-btn-mini">Без объекта</button>
+                <button type="button" id="btn-skip-entity" class="btn-mini create-btn-mini">Р‘РµР· РѕР±СЉРµРєС‚Р°</button>
               </div>
             </div>
 
-            <!-- Шаг 4: Тема и Описание заявки в верхней половине экрана (видны над клавиатурой; Enter переводит курсор дальше) -->
+            <!-- РЁР°Рі 4: РўРµРјР° Рё РћРїРёСЃР°РЅРёРµ Р·Р°СЏРІРєРё РІ РІРµСЂС…РЅРµР№ РїРѕР»РѕРІРёРЅРµ СЌРєСЂР°РЅР° (РІРёРґРЅС‹ РЅР°Рґ РєР»Р°РІРёР°С‚СѓСЂРѕР№; Enter РїРµСЂРµРІРѕРґРёС‚ РєСѓСЂСЃРѕСЂ РґР°Р»СЊС€Рµ) -->
             <div class="create-row-compact">
               <input
                 id="create-title-input"
@@ -290,7 +290,7 @@
                 autocorrect="on"
                 spellcheck="true"
                 class="form-input create-input-compact"
-                placeholder="Тема заявки (суть проблемы)…"
+                placeholder="РўРµРјР° Р·Р°СЏРІРєРё (СЃСѓС‚СЊ РїСЂРѕР±Р»РµРјС‹)вЂ¦"
               />
             </div>
 
@@ -306,75 +306,75 @@
                 spellcheck="true"
                 class="form-textarea create-textarea-compact"
                 rows="2"
-                placeholder="Описание заявки (необязательно, если заполнена тема)…"
+                placeholder="РћРїРёСЃР°РЅРёРµ Р·Р°СЏРІРєРё (РЅРµРѕР±СЏР·Р°С‚РµР»СЊРЅРѕ, РµСЃР»Рё Р·Р°РїРѕР»РЅРµРЅР° С‚РµРјР°)вЂ¦"
               ></textarea>
             </div>
 
-            <!-- Шаг 5: Исполнитель (выпадающий список как статус заявки, по умолчанию выбран текущий пользователь) + Файлы -->
+            <!-- РЁР°Рі 5: РСЃРїРѕР»РЅРёС‚РµР»СЊ (РІС‹РїР°РґР°СЋС‰РёР№ СЃРїРёСЃРѕРє РєР°Рє СЃС‚Р°С‚СѓСЃ Р·Р°СЏРІРєРё, РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РІС‹Р±СЂР°РЅ С‚РµРєСѓС‰РёР№ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ) + Р¤Р°Р№Р»С‹ -->
             <div class="create-assignee-files-row">
               <div class="create-assignee-inline">
-                <span class="create-inline-lbl">Исполнитель:</span>
+                <span class="create-inline-lbl">РСЃРїРѕР»РЅРёС‚РµР»СЊ:</span>
                 <div class="create-assignee-popover-wrap" id="create-assignee-wrap">
                   <button type="button" id="btn-create-assignee-pill" class="create-assignee-pill">
                     <span class="status-dot" style="background: var(--sber-green);"></span>
-                    <span id="create-assignee-label">Я (Стрелкин М. В.)</span>
-                    <span class="emp-chip-caret">▾</span>
+                    <span id="create-assignee-label">РЇ (РЎС‚СЂРµР»РєРёРЅ Рњ. Р’.)</span>
+                    <span class="emp-chip-caret">в–ѕ</span>
                   </button>
                   <div id="create-assignee-popover" class="create-assignee-popover hidden"></div>
                 </div>
               </div>
 
               <label class="attach-btn create-attach-compact">
-                📎 <span id="create-files-count">Файлы: 0/5</span>
+                рџ“Ћ <span id="create-files-count">Р¤Р°Р№Р»С‹: 0/5</span>
                 <input id="create-file-input" type="file" multiple accept="image/*,.pdf,.txt,.doc,.docx,.xls,.xlsx" class="hidden" />
               </label>
             </div>
             <div id="create-files-list" class="attach-chips"></div>
-            <!-- Скрытый контейнер для обратной совместимости -->
+            <!-- РЎРєСЂС‹С‚С‹Р№ РєРѕРЅС‚РµР№РЅРµСЂ РґР»СЏ РѕР±СЂР°С‚РЅРѕР№ СЃРѕРІРјРµСЃС‚РёРјРѕСЃС‚Рё -->
             <div id="create-assignee-grid" class="hidden"></div>
 
-            <!-- Шаг 6: Списание времени (в одну компактную полосу) -->
+            <!-- РЁР°Рі 6: РЎРїРёСЃР°РЅРёРµ РІСЂРµРјРµРЅРё (РІ РѕРґРЅСѓ РєРѕРјРїР°РєС‚РЅСѓСЋ РїРѕР»РѕСЃСѓ) -->
             <div class="create-spent-row">
-              <span class="create-inline-lbl">Время:</span>
+              <span class="create-inline-lbl">Р’СЂРµРјСЏ:</span>
               <div id="create-spent-grid" class="preset-chips create-spent-chips">
-                <button type="button" class="preset-chip" data-create-spent="5">5м</button>
-                <button type="button" class="preset-chip active" data-create-spent="10">10м</button>
-                <button type="button" class="preset-chip" data-create-spent="15">15м</button>
-                <button type="button" class="preset-chip" data-create-spent="20">20м</button>
-                <button type="button" class="preset-chip" data-create-spent="30">30м</button>
-                <button type="button" class="preset-chip" data-create-spent="45">45м</button>
-                <button type="button" class="preset-chip" data-create-spent="60">1ч</button>
+                <button type="button" class="preset-chip" data-create-spent="5">5Рј</button>
+                <button type="button" class="preset-chip active" data-create-spent="10">10Рј</button>
+                <button type="button" class="preset-chip" data-create-spent="15">15Рј</button>
+                <button type="button" class="preset-chip" data-create-spent="20">20Рј</button>
+                <button type="button" class="preset-chip" data-create-spent="30">30Рј</button>
+                <button type="button" class="preset-chip" data-create-spent="45">45Рј</button>
+                <button type="button" class="preset-chip" data-create-spent="60">1С‡</button>
               </div>
             </div>
 
             <div class="create-actions-row">
-              <button type="button" id="btn-submit-create" class="btn-primary-full create-submit-btn">Создать заявку</button>
-              <button type="button" id="btn-reset-create" class="btn-secondary-full create-reset-btn">Очистить</button>
+              <button type="button" id="btn-submit-create" class="btn-primary-full create-submit-btn">РЎРѕР·РґР°С‚СЊ Р·Р°СЏРІРєСѓ</button>
+              <button type="button" id="btn-reset-create" class="btn-secondary-full create-reset-btn">РћС‡РёСЃС‚РёС‚СЊ</button>
             </div>
           </div>
         </div>
 
-        <!-- ВКЛАДКА 3: AI 500 (ГОЛОСОВОЕ СОЗДАНИЕ И КОРРЕКТИРОВКА) -->
+        <!-- Р’РљР›РђР”РљРђ 3: AI 500 (Р“РћР›РћРЎРћР’РћР• РЎРћР—Р”РђРќРР• Р РљРћР Р Р•РљРўРР РћР’РљРђ) -->
         <div id="view-ai500" class="app-view">
           <div class="section-card">
             <div class="section-head">
-              <h2>AI 500 — Голосовой ввод</h2>
+              <h2>AI 500 вЂ” Р“РѕР»РѕСЃРѕРІРѕР№ РІРІРѕРґ</h2>
               <span class="section-tag">ASR + NLP</span>
             </div>
             <p class="section-desc">
-              Надиктуйте или вставьте текст — AI 500 определит клиента, сотрудника, время и оформит карточку.
+              РќР°РґРёРєС‚СѓР№С‚Рµ РёР»Рё РІСЃС‚Р°РІСЊС‚Рµ С‚РµРєСЃС‚ вЂ” AI 500 РѕРїСЂРµРґРµР»РёС‚ РєР»РёРµРЅС‚Р°, СЃРѕС‚СЂСѓРґРЅРёРєР°, РІСЂРµРјСЏ Рё РѕС„РѕСЂРјРёС‚ РєР°СЂС‚РѕС‡РєСѓ.
             </p>
 
             <div class="voice-controls">
               <button type="button" id="btn-voice-record" class="btn-voice-mic">
-                <span id="voice-mic-icon" class="mic-icon">🎙</span>
-                <span id="voice-mic-label">Начать запись голоса</span>
+                <span id="voice-mic-icon" class="mic-icon">рџЋ™</span>
+                <span id="voice-mic-label">РќР°С‡Р°С‚СЊ Р·Р°РїРёСЃСЊ РіРѕР»РѕСЃР°</span>
               </button>
-              <button type="button" id="btn-voice-demo" class="btn-mini">Пример</button>
+              <button type="button" id="btn-voice-demo" class="btn-mini">РџСЂРёРјРµСЂ</button>
             </div>
 
             <div class="form-group">
-              <label class="form-label">Текст для разбора</label>
+              <label class="form-label">РўРµРєСЃС‚ РґР»СЏ СЂР°Р·Р±РѕСЂР°</label>
               <textarea
                 id="ai500-input"
                 lang="ru"
@@ -385,190 +385,190 @@
                 spellcheck="true"
                 class="form-textarea"
                 rows="3"
-                placeholder="Например: Клиника Фомина Тверь не работает касса АТОЛ на ресепшене назначить на Быкова списать 15 минут…"
+                placeholder="РќР°РїСЂРёРјРµСЂ: РљР»РёРЅРёРєР° Р¤РѕРјРёРЅР° РўРІРµСЂСЊ РЅРµ СЂР°Р±РѕС‚Р°РµС‚ РєР°СЃСЃР° РђРўРћР› РЅР° СЂРµСЃРµРїС€РµРЅРµ РЅР°Р·РЅР°С‡РёС‚СЊ РЅР° Р‘С‹РєРѕРІР° СЃРїРёСЃР°С‚СЊ 15 РјРёРЅСѓС‚вЂ¦"
               ></textarea>
             </div>
 
             <div class="ai-actions-row">
-              <button type="button" id="btn-ai500-parse" class="btn-primary-full">Разобрать через AI 500</button>
+              <button type="button" id="btn-ai500-parse" class="btn-primary-full">Р Р°Р·РѕР±СЂР°С‚СЊ С‡РµСЂРµР· AI 500</button>
             </div>
 
             <div id="ai500-preview" class="ai-preview-box hidden">
-              <div class="ai-preview-title">Результат разбора</div>
-              <div class="ai-kv"><span>Клиент:</span> <strong id="ai-res-client">—</strong></div>
-              <div class="ai-kv"><span>Направление:</span> <strong id="ai-res-type">—</strong></div>
-              <div class="ai-kv"><span>Исполнитель:</span> <strong id="ai-res-assignee">—</strong></div>
-              <div class="ai-kv"><span>Списание времени:</span> <strong id="ai-res-spent">—</strong></div>
-              <div class="ai-kv"><span>Заголовок:</span> <strong id="ai-res-title">—</strong></div>
-              <div class="ai-kv"><span>Описание:</span> <span id="ai-res-desc">—</span></div>
+              <div class="ai-preview-title">Р РµР·СѓР»СЊС‚Р°С‚ СЂР°Р·Р±РѕСЂР°</div>
+              <div class="ai-kv"><span>РљР»РёРµРЅС‚:</span> <strong id="ai-res-client">вЂ”</strong></div>
+              <div class="ai-kv"><span>РќР°РїСЂР°РІР»РµРЅРёРµ:</span> <strong id="ai-res-type">вЂ”</strong></div>
+              <div class="ai-kv"><span>РСЃРїРѕР»РЅРёС‚РµР»СЊ:</span> <strong id="ai-res-assignee">вЂ”</strong></div>
+              <div class="ai-kv"><span>РЎРїРёСЃР°РЅРёРµ РІСЂРµРјРµРЅРё:</span> <strong id="ai-res-spent">вЂ”</strong></div>
+              <div class="ai-kv"><span>Р—Р°РіРѕР»РѕРІРѕРє:</span> <strong id="ai-res-title">вЂ”</strong></div>
+              <div class="ai-kv"><span>РћРїРёСЃР°РЅРёРµ:</span> <span id="ai-res-desc">вЂ”</span></div>
               <div class="form-actions">
-                <button type="button" id="btn-ai500-create" class="btn-primary-full">Создать эту заявку</button>
-                <button type="button" id="btn-ai500-to-wizard" class="btn-secondary-full">Открыть в мастере создания</button>
+                <button type="button" id="btn-ai500-create" class="btn-primary-full">РЎРѕР·РґР°С‚СЊ СЌС‚Сѓ Р·Р°СЏРІРєСѓ</button>
+                <button type="button" id="btn-ai500-to-wizard" class="btn-secondary-full">РћС‚РєСЂС‹С‚СЊ РІ РјР°СЃС‚РµСЂРµ СЃРѕР·РґР°РЅРёСЏ</button>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- ВКЛАДКА 4: МОЙ РЕЗУЛЬТАТ / ВСЕХ ПОСМОТРЕТЬ / СТАТУС -->
+        <!-- Р’РљР›РђР”РљРђ 4: РњРћР™ Р Р•Р—РЈР›Р¬РўРђРў / Р’РЎР•РҐ РџРћРЎРњРћРўР Р•РўР¬ / РЎРўРђРўРЈРЎ -->
         <div id="view-results" class="app-view">
           <div class="segmented-row results-switch">
-            <button type="button" class="seg-btn active" data-res-tab="mine">Мой результат</button>
-            <button type="button" class="seg-btn" data-res-tab="all">Отдел</button>
-            <button type="button" class="seg-btn" data-res-tab="status">Статус</button>
+            <button type="button" class="seg-btn active" data-res-tab="mine">РњРѕР№ СЂРµР·СѓР»СЊС‚Р°С‚</button>
+            <button type="button" class="seg-btn" data-res-tab="all">РћС‚РґРµР»</button>
+            <button type="button" class="seg-btn" data-res-tab="status">РЎС‚Р°С‚СѓСЃ</button>
           </div>
 
-          <!-- Панель: Мой результат -->
+          <!-- РџР°РЅРµР»СЊ: РњРѕР№ СЂРµР·СѓР»СЊС‚Р°С‚ -->
           <div id="res-panel-mine" class="res-panel active">
             <div class="kpi-grid">
               <div class="kpi-card">
                 <div class="kpi-val" id="kpi-my-active">0</div>
-                <div class="kpi-lbl">В работе</div>
+                <div class="kpi-lbl">Р’ СЂР°Р±РѕС‚Рµ</div>
               </div>
               <div class="kpi-card">
                 <div class="kpi-val" id="kpi-my-solved">0</div>
-                <div class="kpi-lbl">Решено</div>
+                <div class="kpi-lbl">Р РµС€РµРЅРѕ</div>
               </div>
               <div class="kpi-card">
-                <div class="kpi-val" id="kpi-my-minutes">0м</div>
-                <div class="kpi-lbl">Списано времени</div>
+                <div class="kpi-val" id="kpi-my-minutes">0Рј</div>
+                <div class="kpi-lbl">РЎРїРёСЃР°РЅРѕ РІСЂРµРјРµРЅРё</div>
               </div>
               <div class="kpi-card">
                 <div class="kpi-val" id="kpi-my-control">0</div>
-                <div class="kpi-lbl">На контроле</div>
+                <div class="kpi-lbl">РќР° РєРѕРЅС‚СЂРѕР»Рµ</div>
               </div>
             </div>
             <div class="section-card">
-              <h3>Детализация трудозатрат</h3>
+              <h3>Р”РµС‚Р°Р»РёР·Р°С†РёСЏ С‚СЂСѓРґРѕР·Р°С‚СЂР°С‚</h3>
               <div id="my-results-breakdown" class="breakdown-list"></div>
             </div>
           </div>
 
-          <!-- Панель: Всех посмотреть! -->
+          <!-- РџР°РЅРµР»СЊ: Р’СЃРµС… РїРѕСЃРјРѕС‚СЂРµС‚СЊ! -->
           <div id="res-panel-all" class="res-panel">
             <div class="section-card">
-              <h3>Сводка по сотрудникам отдела</h3>
+              <h3>РЎРІРѕРґРєР° РїРѕ СЃРѕС‚СЂСѓРґРЅРёРєР°Рј РѕС‚РґРµР»Р°</h3>
               <div id="all-results-list" class="emp-stats-list"></div>
             </div>
           </div>
 
-          <!-- Панель: Статус системы -->
+          <!-- РџР°РЅРµР»СЊ: РЎС‚Р°С‚СѓСЃ СЃРёСЃС‚РµРјС‹ -->
           <div id="res-panel-status" class="res-panel">
             <div class="section-card">
-              <h3>Статус контура ITSUPP</h3>
+              <h3>РЎС‚Р°С‚СѓСЃ РєРѕРЅС‚СѓСЂР° ITSUPP</h3>
               <div class="sys-status-list" id="sys-status-list"></div>
             </div>
           </div>
         </div>
 
-        <!-- ВКЛАДКА 5: ЕЩЁ (РАСШИРЕННОЕ МЕНЮ БОТА + НАСТРОЙКИ СБЕР БИОМЕТРИИ И ТЕМЫ) -->
+        <!-- Р’РљР›РђР”РљРђ 5: Р•Р©РЃ (Р РђРЎРЁРР Р•РќРќРћР• РњР•РќР® Р‘РћРўРђ + РќРђРЎРўР РћР™РљР РЎР‘Р•Р  Р‘РРћРњР•РўР РР Р РўР•РњР«) -->
         <div id="view-more" class="app-view">
           <div class="section-card">
-            <h3>Тема оформления</h3>
-            <p class="section-desc">Переключение между светлой дневной, тёмной ночной и автоматической системной темой.</p>
+            <h3>РўРµРјР° РѕС„РѕСЂРјР»РµРЅРёСЏ</h3>
+            <p class="section-desc">РџРµСЂРµРєР»СЋС‡РµРЅРёРµ РјРµР¶РґСѓ СЃРІРµС‚Р»РѕР№ РґРЅРµРІРЅРѕР№, С‚С‘РјРЅРѕР№ РЅРѕС‡РЅРѕР№ Рё Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕР№ СЃРёСЃС‚РµРјРЅРѕР№ С‚РµРјРѕР№.</p>
             <div class="segmented-row">
-              <button type="button" class="seg-btn" data-theme-mode="light">☀️ День</button>
-              <button type="button" class="seg-btn" data-theme-mode="dark">🌙 Ночь</button>
-              <button type="button" class="seg-btn active" data-theme-mode="auto">🌗 Авто</button>
+              <button type="button" class="seg-btn" data-theme-mode="light">вЂпёЏ Р”РµРЅСЊ</button>
+              <button type="button" class="seg-btn" data-theme-mode="dark">рџЊ™ РќРѕС‡СЊ</button>
+              <button type="button" class="seg-btn active" data-theme-mode="auto">рџЊ— РђРІС‚Рѕ</button>
             </div>
           </div>
 
           <div class="section-card">
-            <h3>Разделы и действия</h3>
+            <h3>Р Р°Р·РґРµР»С‹ Рё РґРµР№СЃС‚РІРёСЏ</h3>
             <div class="more-menu-grid">
-              <button type="button" class="more-action-btn" data-more-cmd="alltasks">Все задачи отдела</button>
-              <button type="button" class="more-action-btn" data-more-cmd="results">Мой результат</button>
-              <button type="button" class="more-action-btn" data-more-cmd="status">Статус системы</button>
-              <button type="button" class="more-action-btn" data-more-cmd="today">Задачи на сегодня</button>
-              <button type="button" class="more-action-btn" data-more-cmd="overdue">Просроченные задачи</button>
-              <button type="button" class="more-action-btn" data-more-cmd="duty" id="btn-more-duty">Дежурный: Быков М. В.</button>
-              <button type="button" class="more-action-btn warn" data-more-cmd="wipe">Очистить кэш задач</button>
-              <button type="button" class="more-action-btn danger" data-more-cmd="selfdestruct">Самоуничтожение</button>
+              <button type="button" class="more-action-btn" data-more-cmd="alltasks">Р’СЃРµ Р·Р°РґР°С‡Рё РѕС‚РґРµР»Р°</button>
+              <button type="button" class="more-action-btn" data-more-cmd="results">РњРѕР№ СЂРµР·СѓР»СЊС‚Р°С‚</button>
+              <button type="button" class="more-action-btn" data-more-cmd="status">РЎС‚Р°С‚СѓСЃ СЃРёСЃС‚РµРјС‹</button>
+              <button type="button" class="more-action-btn" data-more-cmd="today">Р—Р°РґР°С‡Рё РЅР° СЃРµРіРѕРґРЅСЏ</button>
+              <button type="button" class="more-action-btn" data-more-cmd="overdue">РџСЂРѕСЃСЂРѕС‡РµРЅРЅС‹Рµ Р·Р°РґР°С‡Рё</button>
+              <button type="button" class="more-action-btn" data-more-cmd="duty" id="btn-more-duty">Р”РµР¶СѓСЂРЅС‹Р№: Р‘С‹РєРѕРІ Рњ. Р’.</button>
+              <button type="button" class="more-action-btn warn" data-more-cmd="wipe">РћС‡РёСЃС‚РёС‚СЊ РєСЌС€ Р·Р°РґР°С‡</button>
+              <button type="button" class="more-action-btn danger" data-more-cmd="selfdestruct">РЎР°РјРѕСѓРЅРёС‡С‚РѕР¶РµРЅРёРµ</button>
             </div>
           </div>
 
-          <!-- Клавиатура команд бота -->
+          <!-- РљР»Р°РІРёР°С‚СѓСЂР° РєРѕРјР°РЅРґ Р±РѕС‚Р° -->
           <div class="section-card">
             <div class="bot-menu-header">
-              <span class="bot-menu-title">Клавиатура команд @itsupp_task_bot</span>
-              <button id="btn-toggle-bot-kb" type="button" class="bot-menu-collapse">Развернуть ▾</button>
+              <span class="bot-menu-title">РљР»Р°РІРёР°С‚СѓСЂР° РєРѕРјР°РЅРґ @itsupp_task_bot</span>
+              <button id="btn-toggle-bot-kb" type="button" class="bot-menu-collapse">Р Р°Р·РІРµСЂРЅСѓС‚СЊ в–ѕ</button>
             </div>
             <div id="bot-menu-grid" class="bot-menu-grid hidden">
               <div class="bot-kb-row">
-                <button type="button" class="bot-kb-btn" data-menu-cmd="mytasks">📋 Мои задачи</button>
-                <button type="button" class="bot-kb-btn bot-kb-accent" data-menu-cmd="create_task">➕ Создать задачу</button>
+                <button type="button" class="bot-kb-btn" data-menu-cmd="mytasks">рџ“‹ РњРѕРё Р·Р°РґР°С‡Рё</button>
+                <button type="button" class="bot-kb-btn bot-kb-accent" data-menu-cmd="create_task">вћ• РЎРѕР·РґР°С‚СЊ Р·Р°РґР°С‡Сѓ</button>
               </div>
               <div class="bot-kb-row">
-                <button type="button" class="bot-kb-btn" data-menu-cmd="refresh_tasks">🔄 Обновить задачи</button>
-                <button type="button" class="bot-kb-btn" data-menu-cmd="search">🔎 Поиск</button>
+                <button type="button" class="bot-kb-btn" data-menu-cmd="refresh_tasks">рџ”„ РћР±РЅРѕРІРёС‚СЊ Р·Р°РґР°С‡Рё</button>
+                <button type="button" class="bot-kb-btn" data-menu-cmd="search">рџ”Ћ РџРѕРёСЃРє</button>
               </div>
               <div class="bot-kb-row">
                 <button type="button" id="btn-kb-fresh" class="bot-kb-btn bot-kb-wide" data-menu-cmd="fresh_toggle">
-                  🔔 Оповещение о новых задачах: ВКЛ
+                  рџ”” РћРїРѕРІРµС‰РµРЅРёРµ Рѕ РЅРѕРІС‹С… Р·Р°РґР°С‡Р°С…: Р’РљР›
                 </button>
               </div>
               <div class="bot-kb-row">
-                <button type="button" class="bot-kb-btn" data-menu-cmd="ai500">🎙 AI 500</button>
-                <button type="button" class="bot-kb-btn" data-menu-cmd="more">⋯ Ещё</button>
+                <button type="button" class="bot-kb-btn" data-menu-cmd="ai500">рџЋ™ AI 500</button>
+                <button type="button" class="bot-kb-btn" data-menu-cmd="more">в‹Ї Р•С‰С‘</button>
               </div>
             </div>
           </div>
 
           <div class="section-card">
-            <h3>Безопасность (Face ID / Touch ID и код)</h3>
+            <h3>Р‘РµР·РѕРїР°СЃРЅРѕСЃС‚СЊ (Face ID / Touch ID Рё РєРѕРґ)</h3>
             <div class="bio-settings-list">
               <div class="bio-setting-row">
                 <div>
-                  <div class="bio-setting-title">Вход по Face ID / Touch ID</div>
-                  <div id="bio-status-desc" class="bio-setting-sub">Проверка статуса BiometricManager…</div>
+                  <div class="bio-setting-title">Р’С…РѕРґ РїРѕ Face ID / Touch ID</div>
+                  <div id="bio-status-desc" class="bio-setting-sub">РџСЂРѕРІРµСЂРєР° СЃС‚Р°С‚СѓСЃР° BiometricManagerвЂ¦</div>
                 </div>
-                <button type="button" id="btn-toggle-bio-enabled" class="toggle-pill on">ВКЛ</button>
+                <button type="button" id="btn-toggle-bio-enabled" class="toggle-pill on">Р’РљР›</button>
               </div>
               <div class="bio-setting-row">
                 <div>
-                  <div class="bio-setting-title">Автозапрос при открытии</div>
-                  <div class="bio-setting-sub">Сразу открывать сканер биометрии на входе</div>
+                  <div class="bio-setting-title">РђРІС‚РѕР·Р°РїСЂРѕСЃ РїСЂРё РѕС‚РєСЂС‹С‚РёРё</div>
+                  <div class="bio-setting-sub">РЎСЂР°Р·Сѓ РѕС‚РєСЂС‹РІР°С‚СЊ СЃРєР°РЅРµСЂ Р±РёРѕРјРµС‚СЂРёРё РЅР° РІС…РѕРґРµ</div>
                 </div>
-                <button type="button" id="btn-toggle-bio-auto" class="toggle-pill on">ВКЛ</button>
+                <button type="button" id="btn-toggle-bio-auto" class="toggle-pill on">Р’РљР›</button>
               </div>
               <div class="bio-setting-actions">
-                <button type="button" id="btn-test-bio" class="btn-secondary-full">Проверить Face ID / Touch ID</button>
-                <button type="button" id="btn-change-pin" class="btn-secondary-full">Сменить 5-значный код входа</button>
-                <button type="button" id="btn-lock-now" class="btn-secondary-full">Заблокировать экран</button>
+                <button type="button" id="btn-test-bio" class="btn-secondary-full">РџСЂРѕРІРµСЂРёС‚СЊ Face ID / Touch ID</button>
+                <button type="button" id="btn-change-pin" class="btn-secondary-full">РЎРјРµРЅРёС‚СЊ 5-Р·РЅР°С‡РЅС‹Р№ РєРѕРґ РІС…РѕРґР°</button>
+                <button type="button" id="btn-lock-now" class="btn-secondary-full">Р—Р°Р±Р»РѕРєРёСЂРѕРІР°С‚СЊ СЌРєСЂР°РЅ</button>
               </div>
             </div>
           </div>
         </div>
       </main>
 
-      <!-- Нижняя панель навигации -->
-      <nav class="bottom-nav" aria-label="Нижняя навигация">
+      <!-- РќРёР¶РЅСЏСЏ РїР°РЅРµР»СЊ РЅР°РІРёРіР°С†РёРё -->
+      <nav class="bottom-nav" aria-label="РќРёР¶РЅСЏСЏ РЅР°РІРёРіР°С†РёСЏ">
         <button type="button" class="nav-tab active" data-nav="tasks">
-          <span class="nav-icon">📋</span>
-          <span class="nav-lbl">Задачи</span>
+          <span class="nav-icon">рџ“‹</span>
+          <span class="nav-lbl">Р—Р°РґР°С‡Рё</span>
         </button>
         <button type="button" class="nav-tab" data-nav="create">
-          <span class="nav-icon">➕</span>
-          <span class="nav-lbl">Создать</span>
+          <span class="nav-icon">вћ•</span>
+          <span class="nav-lbl">РЎРѕР·РґР°С‚СЊ</span>
         </button>
         <button type="button" class="nav-tab hidden" data-nav="ai500">
-          <span class="nav-icon">🎙</span>
+          <span class="nav-icon">рџЋ™</span>
           <span class="nav-lbl">AI 500</span>
         </button>
         <button type="button" class="nav-tab" data-nav="results">
-          <span class="nav-icon">📊</span>
-          <span class="nav-lbl">Итоги</span>
+          <span class="nav-icon">рџ“Љ</span>
+          <span class="nav-lbl">РС‚РѕРіРё</span>
         </button>
         <button type="button" class="nav-tab" data-nav="more">
-          <span class="nav-icon">⋯</span>
-          <span class="nav-lbl">Ещё</span>
+          <span class="nav-icon">в‹Ї</span>
+          <span class="nav-lbl">Р•С‰С‘</span>
         </button>
       </nav>
     </section>
 
     <!-- =========================================================
-         МОДАЛЬНОЕ ОКНО 1: СБЕР FACE ID / TOUCH ID СКАНЕР
+         РњРћР”РђР›Р¬РќРћР• РћРљРќРћ 1: РЎР‘Р•Р  FACE ID / TOUCH ID РЎРљРђРќР•Р 
          ========================================================= -->
-    <div id="bio-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-label="Биометрическая проверка">
+    <div id="bio-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-label="Р‘РёРѕРјРµС‚СЂРёС‡РµСЃРєР°СЏ РїСЂРѕРІРµСЂРєР°">
       <div class="bio-sheet">
         <div class="bio-sheet-handle"></div>
         <div id="bio-scanner-box" class="bio-scanner-box scanning">
@@ -584,15 +584,15 @@
           </svg>
         </div>
         <div id="bio-modal-title" class="bio-modal-title">Face ID / Touch ID</div>
-        <div id="bio-modal-sub" class="bio-modal-sub">Выполняется проверка биометрии…</div>
-        <button id="btn-bio-cancel" type="button" class="btn-secondary-full">Отмена (ввести код)</button>
+        <div id="bio-modal-sub" class="bio-modal-sub">Р’С‹РїРѕР»РЅСЏРµС‚СЃСЏ РїСЂРѕРІРµСЂРєР° Р±РёРѕРјРµС‚СЂРёРёвЂ¦</div>
+        <button id="btn-bio-cancel" type="button" class="btn-secondary-full">РћС‚РјРµРЅР° (РІРІРµСЃС‚Рё РєРѕРґ)</button>
       </div>
     </div>
 
     <!-- =========================================================
-         КОНТЕКСТНОЕ МЕНЮ ФОТО / ЛОГОТИПА (МЕДИАТЕКА / СНИМОК / ФАЙЛ / ЛОГО)
+         РљРћРќРўР•РљРЎРўРќРћР• РњР•РќР® Р¤РћРўРћ / Р›РћР“РћРўРРџРђ (РњР•Р”РРђРўР•РљРђ / РЎРќРРњРћРљ / Р¤РђР™Р› / Р›РћР“Рћ)
          ========================================================= -->
-    <div id="avatar-menu-modal" class="ios-popover-backdrop hidden" role="dialog" aria-modal="true" aria-label="Выбор фото или логотипа">
+    <div id="avatar-menu-modal" class="ios-popover-backdrop hidden" role="dialog" aria-modal="true" aria-label="Р’С‹Р±РѕСЂ С„РѕС‚Рѕ РёР»Рё Р»РѕРіРѕС‚РёРїР°">
       <div class="ios-popover-menu">
         <button type="button" id="btn-avatar-src-gallery" class="ios-popover-item">
           <svg class="ios-popover-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -601,49 +601,49 @@
             <circle cx="8" cy="10" r="1.5" />
             <path d="m18 14-3.5-3.5L6 18" />
           </svg>
-          <span>Медиатека</span>
+          <span>РњРµРґРёР°С‚РµРєР°</span>
         </button>
         <button type="button" id="btn-avatar-src-camera" class="ios-popover-item">
           <svg class="ios-popover-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
             <circle cx="12" cy="13" r="3.5" />
           </svg>
-          <span>Сделать снимок</span>
+          <span>РЎРґРµР»Р°С‚СЊ СЃРЅРёРјРѕРє</span>
         </button>
         <button type="button" id="btn-avatar-src-file" class="ios-popover-item">
           <svg class="ios-popover-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
           </svg>
-          <span>Выбрать файл</span>
+          <span>Р’С‹Р±СЂР°С‚СЊ С„Р°Р№Р»</span>
         </button>
         <button type="button" id="btn-avatar-src-logo" class="ios-popover-item">
           <svg class="ios-popover-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
             <path d="m9 12 2 2 4-4" />
           </svg>
-          <span>Установить лого</span>
+          <span>РЈСЃС‚Р°РЅРѕРІРёС‚СЊ Р»РѕРіРѕ</span>
         </button>
       </div>
     </div>
 
     <!-- =========================================================
-         МОДАЛЬНОЕ ОКНО 2: ДЕТАЛЬНОЕ ДЕЙСТВИЕ ПО ЗАДАЧЕ
+         РњРћР”РђР›Р¬РќРћР• РћРљРќРћ 2: Р”Р•РўРђР›Р¬РќРћР• Р”Р•Р™РЎРўР’РР• РџРћ Р—РђР”РђР§Р•
          ========================================================= -->
     <div id="action-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
       <div class="action-sheet">
         <div class="action-sheet-header">
-          <h3 id="modal-title">Действие</h3>
-          <button id="btn-modal-close" type="button" class="modal-close-btn">✕</button>
+          <h3 id="modal-title">Р”РµР№СЃС‚РІРёРµ</h3>
+          <button id="btn-modal-close" type="button" class="modal-close-btn">вњ•</button>
         </div>
         <div id="modal-body" class="action-sheet-body"></div>
       </div>
     </div>
 
-    <!-- Всплывающее уведомление (Toast) -->
+    <!-- Р’СЃРїР»С‹РІР°СЋС‰РµРµ СѓРІРµРґРѕРјР»РµРЅРёРµ (Toast) -->
     <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
   </div>
 
-  <script src="./data.js?v=20261111-03"></script>
-  <script src="./app.js?v=20261111-03"></script>
+  <script src="./data.js?v=20261112-01"></script>
+  <script src="./app.js?v=20261112-01"></script>
 </body>
 </html>
