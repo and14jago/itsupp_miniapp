@@ -883,42 +883,87 @@
 
     var item = q[0];
     var normPayload = normalizeSyncPayload(item.payload) || item.payload;
-    var rawJson = JSON.stringify(normPayload);
-    var posts = [];
-    if (rawJson.length <= 420) {
-      posts.push({
-        chat_id: item.chat_id,
-        message_id: 1,
-        schedule_cleanup: false,
-        verified: true,
-        text: "MINIAPP_OP:" + rawJson
-      });
-    } else {
-      var chunkSize = 360;
-      var totalParts = Math.ceil(rawJson.length / chunkSize);
-      for (var pIdx = 0; pIdx < totalParts; pIdx++) {
-        var slice = rawJson.slice(pIdx * chunkSize, (pIdx + 1) * chunkSize);
+    var portalDirectPromise = fetch(SYNC_PORTAL_LIVE_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        op: normPayload ? normPayload.op : "",
+        task_id: normPayload ? (normPayload.id || normPayload.lid || "") : "",
+        payload: normPayload
+      })
+    })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .catch(function () { return null; });
+
+    var chain = portalDirectPromise.then(function (portalRes) {
+      if (portalRes && portalRes.ok) {
+        normPayload = Object.assign({}, normPayload, { applied: 1 });
+        if (normPayload.op === "create" && normPayload.lid && portalRes.id) {
+          var newId = parseInt(portalRes.id, 10);
+          var oldLid = String(normPayload.lid);
+          if (newId > 0 && String(newId) !== oldLid) {
+            var meta = loadSyncMeta();
+            meta.idMap[oldLid] = newId;
+            meta.syncedLocalIds[oldLid] = true;
+            saveSyncMeta(meta);
+            (state.tasks || []).forEach(function (tk) {
+              if (tk && String(tk.id) === oldLid) {
+                tk.id = newId;
+                tk._syncedToPortal = true;
+              }
+            });
+            if (String(state.activeTaskId || "") === oldLid) {
+              state.activeTaskId = newId;
+            }
+            var qRem = loadSyncQueue();
+            qRem.forEach(function (qi) {
+              if (qi && qi.payload && String(qi.payload.id || "") === oldLid) {
+                qi.payload.id = String(newId);
+              }
+            });
+            saveSyncQueue(qRem);
+            saveState();
+            if (typeof renderAllAppViews === "function") renderAllAppViews();
+          }
+        }
+      }
+      var rawJson = JSON.stringify(normPayload);
+      var posts = [];
+      if (rawJson.length <= 420) {
         posts.push({
           chat_id: item.chat_id,
-          message_id: pIdx + 1,
+          message_id: 1,
           schedule_cleanup: false,
           verified: true,
-          text: "MINIAPP_PART:" + totalParts + ":" + (pIdx + 1) + ":" + slice
+          text: "MINIAPP_OP:" + rawJson
         });
+      } else {
+        var chunkSize = 360;
+        var totalParts = Math.ceil(rawJson.length / chunkSize);
+        for (var pIdx = 0; pIdx < totalParts; pIdx++) {
+          var slice = rawJson.slice(pIdx * chunkSize, (pIdx + 1) * chunkSize);
+          posts.push({
+            chat_id: item.chat_id,
+            message_id: pIdx + 1,
+            schedule_cleanup: false,
+            verified: true,
+            text: "MINIAPP_PART:" + totalParts + ":" + (pIdx + 1) + ":" + slice
+          });
+        }
       }
-    }
-
-    var chain = Promise.resolve();
-    posts.forEach(function (postBody) {
-      chain = chain.then(function () {
-        return fetch(SYNC_TRACK_URL, {
-          method: "POST",
-          mode: "no-cors",
-          keepalive: true,
-          headers: { "Content-Type": "text/plain;charset=UTF-8" },
-          body: JSON.stringify(postBody)
+      var subChain = Promise.resolve();
+      posts.forEach(function (postBody) {
+        subChain = subChain.then(function () {
+          return fetch(SYNC_TRACK_URL, {
+            method: "POST",
+            mode: "no-cors",
+            keepalive: true,
+            headers: { "Content-Type": "text/plain;charset=UTF-8" },
+            body: JSON.stringify(postBody)
+          }).catch(function () {});
         });
       });
+      return subChain;
     });
 
     chain
@@ -938,7 +983,7 @@
         } else {
           setTimeout(function () {
             syncWithPortalDelta(false);
-          }, 3500);
+          }, 1200);
         }
       })
       .catch(function () {
@@ -1060,19 +1105,12 @@
         // Если пользователь явно установил статус в Mini App (_userStatusCode), он НЕ меняется сам по себе:
         // принимаем только терминальное закрытие на портале спустя >= 3 минут после локального действия.
         var recentLocalTs = Math.max(localMutationGuardTs[tid] || 0, existing._userStatusAt || 0);
-        var guarded = Date.now() - recentLocalTs < 180000;
+        var hasPendingLocalOp = loadSyncQueue().some(function (qi) {
+          return qi && qi.payload && String(qi.payload.id || qi.payload.lid || "") === tid;
+        });
+        var guarded = hasPendingLocalOp || (!delta._manual && Date.now() - recentLocalTs < 4000);
         if (dt.status_code && dt.status_code !== existing.status_code) {
-          var localTerm =
-            existing.status_code === "asya1c" ||
-            existing.status_code === "completed" ||
-            existing.status_code === "closed";
-          var remoteTerm =
-            dt.status_code === "asya1c" ||
-            dt.status_code === "completed" ||
-            dt.status_code === "closed";
-          var isRevertToOpened = dt.status_code === "opened" && existing.status_code !== "opened";
-
-          if (!isRevertToOpened && !localTerm && !guarded) {
+          if (!guarded) {
             existing.status_code = dt.status_code;
             existing.status_name = dt.status_name || existing.status_name;
             if (existing._userStatusCode) {
@@ -1193,9 +1231,15 @@
     Promise.all([pLive, pRaw, pLocal])
       .then(function (results) {
         isSyncingDelta = false;
-        var candidates = results.filter(Boolean);
+        var live = results[0];
+        var candidates = (live && Array.isArray(live.tasks) && live.tasks.length > 0)
+          ? [live]
+          : results.filter(Boolean);
         var totalChanged = 0;
-        candidates.forEach(function (cand) { totalChanged += applyPortalDelta(cand); });
+        candidates.forEach(function (cand) {
+          if (manual) cand._manual = true;
+          totalChanged += applyPortalDelta(cand);
+        });
         var best = candidates[0] || null;
         if (best) best._preAppliedChanged = totalChanged;
         if (!best) return;
