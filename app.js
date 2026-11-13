@@ -2602,8 +2602,15 @@
       })
     );
     moreGrid.appendChild(
-      makeActionBtn("Открыть на портале", "", function () {
+      makeActionBtn("🟠 Открыть в Okdesk", "", function () {
         openIssueInOkdesk(task.id);
+      })
+    );
+    moreGrid.appendChild(
+      makeActionBtn("🌐 Открыть на портале", "", function () {
+        var portalUrl = "https://portal.itsupp.com/tickets/" + encodeURIComponent(task.id);
+        if (tg && typeof tg.openLink === "function") { try { tg.openLink(portalUrl); return; } catch (_e) {} }
+        window.open(portalUrl, "_blank", "noopener,noreferrer");
       })
     );
     moreGrid.appendChild(
