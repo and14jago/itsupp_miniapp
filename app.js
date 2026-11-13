@@ -2878,6 +2878,20 @@
         ? "+" + formatMinutes(diffMins) + " сверх таймера"
         : "-" + formatMinutes(Math.abs(diffMins)) + " меньше таймера";
 
+    var topicCard = el("div", "glass-card");
+    var topicTitle = el("div", "task-desc-body", "?? " + (task.title || ("?????? ?" + (task.number || task.id || ""))));
+    topicTitle.style.fontWeight = "700";
+    topicTitle.style.fontSize = "13.5px";
+    topicCard.appendChild(topicTitle);
+    var compLabel = task.company_name || task.company;
+    if (compLabel) {
+      var topicClient = el("div", "task-desc-body", "?? " + compLabel);
+      topicClient.style.fontSize = "12px";
+      topicClient.style.opacity = "0.78";
+      topicClient.style.marginTop = "2px";
+      topicCard.appendChild(topicClient);
+    }
+    modalBodyEl.appendChild(topicCard);
     var summaryCard = el("div", "glass-card");
     var rows = [
       ["В системе (с момента создания)", formatDurationSec(tStats.sysSec, false)],
