@@ -729,10 +729,20 @@
         wsa: String(raw.wsa || raw.work_started_at || "").slice(0, 32),
         bf: String(raw.bf || raw.billing_flag || "none"),
         aid: parseInt(raw.aid || raw.assignee_id, 10) || 1,
-        dl: String(raw.dl || raw.deadline || "").slice(0, 60),
+        dl: String(raw.delay_to || raw.dl || raw.deadline || "").slice(0, 60),
         cm: String(raw.cm || raw.comment || "Статус изменён в Mini App").slice(0, 220),
         blm: String(raw.blm || raw.blacklist_mode || ""),
         blt: String(raw.blt || raw.blacklist_target || "")
+      };
+    }
+    if (kind === "update_meta") {
+      return {
+        op: "update_meta",
+        id: issueId,
+        company_id: raw.company_id != null ? String(raw.company_id) : "",
+        service_object_id: raw.service_object_id != null ? String(raw.service_object_id) : "",
+        assignee_id: raw.assignee_id != null ? String(raw.assignee_id) : "",
+        department_group: String(raw.department_group || "").slice(0, 80)
       };
     }
     if (kind === "assign") {
@@ -2235,28 +2245,31 @@
       }
     });
 
+    var topRight = el("div", "task-top-right");
+    var topShareBtn = el("button", "task-share-top-btn", "📤 Поделиться");
+    topShareBtn.type = "button";
+    topShareBtn.title = "Поделиться задачей / Отправить по всем каналам";
+    topShareBtn.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      hapticImpact("light");
+      openShareTaskModal(task);
+    });
+    topRight.appendChild(topShareBtn);
+
     statusWrap.appendChild(statusBtn);
     statusWrap.appendChild(inlinePopover);
-    topRow.appendChild(statusWrap);
+    topRight.appendChild(statusWrap);
+    topRow.appendChild(topRight);
     card.appendChild(topRow);
 
-    // 2. Заголовок (#номер — тема) + карандашик редактирования + кнопка Поделиться + свёрнутое описание
+    // 2. Заголовок (#номер — тема) + карандашик редактирования + свёрнутое описание
     var titleRow = el("div", "task-title-row");
     var titleEl = el("div", "task-title", "#" + task.id + " — " + (task.title || ""));
     var editPencilBtn = el("button", "task-edit-pencil", "✏️");
     editPencilBtn.type = "button";
     editPencilBtn.title = "Исправить тему и описание задачи";
-    var quickShareBtn = el("button", "task-edit-pencil", "📤");
-    quickShareBtn.type = "button";
-    quickShareBtn.title = "Поделиться задачей / Отправить по всем каналам";
-    quickShareBtn.addEventListener("click", function (ev) {
-      ev.stopPropagation();
-      hapticImpact("light");
-      openShareTaskModal(task);
-    });
     titleRow.appendChild(titleEl);
     titleRow.appendChild(editPencilBtn);
-    titleRow.appendChild(quickShareBtn);
     card.appendChild(titleRow);
 
     var inlineEditorBox = el("div", "task-inline-editor hidden");
@@ -2412,11 +2425,23 @@
       .join(", ");
 
     var metaGrid = el("div", "task-meta-grid");
+    var metaPencilBtn = el("button", "meta-edit-pencil", "✏️");
+    metaPencilBtn.type = "button";
+    metaPencilBtn.title = "Изменить фирму, подразделение и исполнителя";
+    metaPencilBtn.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      hapticImpact("light");
+      openEditMetaModal(task);
+    });
+    metaGrid.appendChild(metaPencilBtn);
+    var assigneeFullLabel =
+      (assigneeEmp ? assigneeEmp.short : (task.assignee_name || "Не назначен")) +
+      (task.department_group ? " · " + task.department_group : "");
     var items = [
       ["Создана", task.created_at || "—"],
       ["Клиент", task.company_name || task.company || "—"],
       ["Объект", task.entity_name || task.object || "Без объекта"],
-      ["Исполнитель", assigneeEmp ? assigneeEmp.short : (task.assignee_name || "Не назначен")],
+      ["Исполнитель", assigneeFullLabel],
       ["Срок SLA", task.deadline_at || task.deadline || "Без срока"]
     ];
     if (coexecNames) {
@@ -2589,12 +2614,6 @@
     moreGrid.appendChild(
       makeActionBtn("Скопировать ссылку", "", function () {
         copyIssueLink(task.id);
-      })
-    );
-
-    primaryBar.appendChild(
-      makeActionBtn("📤 Поделиться", "", function () {
-        openShareTaskModal(task);
       })
     );
 
@@ -3596,70 +3615,238 @@
     modalBodyEl.appendChild(btnOk);
   }
 
+  function openEditMetaModal(task) {
+    openActionModal("✏️ Данные заявки · #" + task.id);
+
+    var searchInput = el("input", "form-input");
+    searchInput.type = "text";
+    searchInput.placeholder = "Поиск фирмы...";
+    searchInput.style.marginBottom = "6px";
+
+    var compSelect = el("select", "form-select");
+    compSelect.style.marginBottom = "10px";
+    var allCompanies = Array.isArray(DATA.companies) ? DATA.companies : [];
+    function renderCompanyOptions(filterText) {
+      var prevVal = compSelect.value || String(task.company_id || "");
+      compSelect.innerHTML = "";
+      var emptyOpt = document.createElement("option");
+      emptyOpt.value = "";
+      emptyOpt.textContent = "— Без изменения —";
+      compSelect.appendChild(emptyOpt);
+      var q = String(filterText || "").trim().toLowerCase();
+      allCompanies.forEach(function (c) {
+        if (!q || String(c.name || "").toLowerCase().indexOf(q) >= 0) {
+          var o = document.createElement("option");
+          o.value = String(c.id);
+          o.textContent = String(c.name || "Клиент #" + c.id);
+          if (String(c.id) === prevVal) o.selected = true;
+          compSelect.appendChild(o);
+        }
+      });
+    }
+    renderCompanyOptions("");
+    searchInput.addEventListener("input", function () {
+      renderCompanyOptions(searchInput.value);
+    });
+
+    var deptSelect = el("select", "form-select");
+    deptSelect.style.marginBottom = "10px";
+    ["Технический отдел", "1С / Бухгалтерия", "Кассы / Оборудование", "Монтаж / Выезд"].forEach(function (d) {
+      var o = document.createElement("option");
+      o.value = d;
+      o.textContent = d;
+      if ((task.department_group || "Технический отдел") === d) o.selected = true;
+      deptSelect.appendChild(o);
+    });
+
+    var assSelect = el("select", "form-select");
+    assSelect.style.marginBottom = "12px";
+    var emptyAss = document.createElement("option");
+    emptyAss.value = "";
+    emptyAss.textContent = "Не назначен";
+    assSelect.appendChild(emptyAss);
+    (DATA.employees || []).forEach(function (emp) {
+      var nm = String(emp.name || emp.short || "").toLowerCase();
+      if (nm.indexOf("супервизор") >= 0 || nm === "supervisor") return;
+      var o = document.createElement("option");
+      o.value = String(emp.id);
+      o.textContent = String(emp.name || emp.short);
+      if (String(emp.id) === String(task.assignee_id || "")) o.selected = true;
+      assSelect.appendChild(o);
+    });
+
+    modalBodyEl.appendChild(el("div", "form-label", "Фирма (клиент):"));
+    modalBodyEl.appendChild(searchInput);
+    modalBodyEl.appendChild(compSelect);
+    modalBodyEl.appendChild(el("div", "form-label", "Подразделение:"));
+    modalBodyEl.appendChild(deptSelect);
+    modalBodyEl.appendChild(el("div", "form-label", "Исполнитель:"));
+    modalBodyEl.appendChild(assSelect);
+
+    var saveBtn = el("button", "btn-primary-full", "✓ Сохранить изменения");
+    saveBtn.type = "button";
+    saveBtn.addEventListener("click", function () {
+      hapticNotify("success");
+      var cid = compSelect.value;
+      var cObj = allCompanies.find(function (c) { return String(c.id) === String(cid); });
+      if (cObj) {
+        task.company_id = cObj.id;
+        task.company_name = cObj.name;
+      }
+      var aid = assSelect.value;
+      var empObj = getEmployeeById(aid);
+      if (empObj) {
+        task.assignee_id = empObj.id;
+        task.assignee_name = empObj.short || empObj.name;
+      } else if (aid === "") {
+        task.assignee_id = "";
+        task.assignee_name = "Не назначен";
+      }
+      task.department_group = deptSelect.value;
+      saveState();
+      enqueueSyncOp({
+        op: "update_meta",
+        issue_id: String(task.id),
+        company_id: cid || "",
+        assignee_id: aid || "",
+        department_group: deptSelect.value,
+        actor_id: String(currentEmp.id),
+        actor_name: currentEmp.short
+      });
+      closeActionModal();
+      renderTasksView();
+      showToast("✓ Данные заявки #" + task.id + " обновлены");
+    });
+    modalBodyEl.appendChild(saveBtn);
+  }
+
   // 2. Модальное окно «Отложить»
   function openPostponeModal(task) {
     openActionModal("Отложить · " + taskNumAndTitle(task, 65));
 
+    function toMskInput(ms) {
+      return new Date(ms + 3 * 3600 * 1000).toISOString().slice(0, 16);
+    }
+
+    var selectedSlot = { label: "Через 1 час", deadline: "Сегодня (+1 час)", addMins: 0, bucket: "today" };
     var quickSlots = [
-      { label: "Завтра 10:00 · +5 мин", deadline: "Завтра 10:00", addMins: 5, bucket: "upcoming" },
-      { label: "Послезавтра 10:00 · +5 мин", deadline: "Послезавтра 10:00", addMins: 5, bucket: "upcoming" },
-      { label: "Через 7 дней 10:00 · +5 мин", deadline: "Через 7 дней 10:00", addMins: 5, bucket: "upcoming" },
-      { label: "Через 20 минут", deadline: "Сегодня (+20 мин)", addMins: 0, bucket: "today" },
-      { label: "Через 40 минут", deadline: "Сегодня (+40 мин)", addMins: 0, bucket: "today" },
-      { label: "Через 1 час", deadline: "Сегодня (+1 час)", addMins: 0, bucket: "today" }
+      { label: "Через 20 мин", deadline: "Сегодня (+20 мин)", addMins: 0, hrs: 1 / 3, bucket: "today" },
+      { label: "Через 40 мин", deadline: "Сегодня (+40 мин)", addMins: 0, hrs: 2 / 3, bucket: "today" },
+      { label: "Через 1 час", deadline: "Сегодня (+1 час)", addMins: 0, hrs: 1, bucket: "today" },
+      { label: "Завтра 10:00 · +5м", deadline: "Завтра 10:00", addMins: 5, hrs: 24, bucket: "upcoming" },
+      { label: "Послезавтра · +5м", deadline: "Послезавтра 10:00", addMins: 5, hrs: 48, bucket: "upcoming" },
+      { label: "Через 7 дней · +5м", deadline: "Через 7 дней 10:00", addMins: 5, hrs: 168, bucket: "upcoming" }
     ];
 
+    modalBodyEl.appendChild(el("div", "form-label", "Отложить до даты и времени (МСК):"));
+    var slotsWrap = el("div", "postpone-chips-grid");
+    var dtInput = el("input", "form-input");
+    dtInput.type = "datetime-local";
+    dtInput.value = toMskInput(Date.now() + 3600 * 1000);
+    dtInput.style.marginBottom = "10px";
+
+    var slotButtons = [];
     quickSlots.forEach(function (sl) {
-      var b = el("button", "btn-secondary-full", sl.label);
-      b.type = "button";
-      b.addEventListener("click", function () {
-        hapticNotify("success");
-        var prevStats = getTaskTimingStats(task);
-        var prevEmp = getEmployeeById(task.assignee_id) || currentEmp;
-        stopTaskWorkTimerIfRunning(task);
-        task.timer_paused = false;
-        task.work_started_at = "";
-        lockUserStatusOnTask(task, "delayed", "Отложена");
-        task.deadline = sl.deadline;
-        task.deadline_at = sl.deadline;
-        task.due_bucket = sl.bucket;
-        if (sl.addMins > 0) {
-          task.spent_minutes = (parseInt(task.spent_minutes, 10) || 0) + sl.addMins;
-          task.spent_by_employee = task.spent_by_employee || {};
-          task.spent_by_employee[String(prevEmp.id)] =
-            (parseInt(task.spent_by_employee[String(prevEmp.id)], 10) || 0) + sl.addMins;
-        }
-        task.status_history = Array.isArray(task.status_history) ? task.status_history : [];
-        task.status_history.push({
-          time: new Date().toTimeString().slice(0, 8),
-          label:
-            "⏳ Отложена (" +
-            sl.deadline +
-            ") · таймер стоп (" +
-            prevEmp.short +
-            ": " +
-            formatDurationSec(prevStats.ownWorkSec, true) +
-            ")"
-        });
-        saveState();
-        enqueueSyncOp({
-          op: "status",
-          issue_id: String(task.id),
-          status_code: "delayed",
-          assignee_id: String(task.assignee_id || currentEmp.id),
-          spent_minutes: sl.addMins || 0,
-          deadline: sl.deadline,
-          comment: "Отложена (" + sl.deadline + ")",
-          actor_id: String(currentEmp.id),
-          actor_name: currentEmp.short
-        });
-        closeActionModal();
-        renderTasksView();
-        updateBellBadge();
-        showToast("Заявка #" + task.id + " отложена (" + sl.deadline + ")");
+      var chip = el("button", "chip-pill" + (sl.label === "Через 1 час" ? " active" : ""), sl.label);
+      chip.type = "button";
+      chip.addEventListener("click", function () {
+        selectedSlot = sl;
+        dtInput.value = toMskInput(Date.now() + sl.hrs * 3600 * 1000);
+        slotButtons.forEach(function (btn) { btn.classList.remove("active"); });
+        chip.classList.add("active");
       });
-      modalBodyEl.appendChild(b);
+      slotButtons.push(chip);
+      slotsWrap.appendChild(chip);
     });
+    modalBodyEl.appendChild(slotsWrap);
+    modalBodyEl.appendChild(dtInput);
+
+    modalBodyEl.appendChild(el("div", "form-label", "Причина откладывания (пишется в Историю):"));
+    var reasonPresetsWrap = el("div", "postpone-chips-grid");
+    var reasonInput = el("textarea", "form-input");
+    reasonInput.rows = 2;
+    reasonInput.placeholder = "Укажите причину (например: ждём оплату счёта / клиента)...";
+    reasonInput.style.marginBottom = "12px";
+
+    var reasonPresetButtons = [];
+    [
+      "Ждём клиента",
+      "Ждём оплату счёта / закупку",
+      "Ждём материалы / доступы",
+      "Ждём подрядчика",
+      "Запланировано на это время"
+    ].forEach(function (presetText) {
+      var rc = el("button", "chip-pill", presetText);
+      rc.type = "button";
+      rc.addEventListener("click", function () {
+        reasonInput.value = presetText;
+        reasonPresetButtons.forEach(function (btn) { btn.classList.remove("active"); });
+        rc.classList.add("active");
+      });
+      reasonPresetButtons.push(rc);
+      reasonPresetsWrap.appendChild(rc);
+    });
+    modalBodyEl.appendChild(reasonPresetsWrap);
+    modalBodyEl.appendChild(reasonInput);
+
+    var submitBtn = el("button", "btn-primary-full", "⏳ Отложить заявку");
+    submitBtn.type = "button";
+    submitBtn.addEventListener("click", function () {
+      hapticNotify("success");
+      var targetIso = new Date(Date.now() + 3600 * 1000).toISOString();
+      if (dtInput.value) {
+        var parsedDt = new Date(dtInput.value + ":00+03:00");
+        if (!isNaN(parsedDt.getTime())) targetIso = parsedDt.toISOString();
+      }
+      var cleanReason = String(reasonInput.value || "").trim();
+      var displayDeadline = dtInput.value ? dtInput.value.replace("T", " ") : selectedSlot.deadline;
+      var prevStats = getTaskTimingStats(task);
+      var prevEmp = getEmployeeById(task.assignee_id) || currentEmp;
+      stopTaskWorkTimerIfRunning(task);
+      task.timer_paused = false;
+      task.work_started_at = "";
+      lockUserStatusOnTask(task, "delayed", "Отложена");
+      task.deadline = displayDeadline;
+      task.deadline_at = displayDeadline;
+      task.due_bucket = selectedSlot.bucket;
+      if (selectedSlot.addMins > 0) {
+        task.spent_minutes = (parseInt(task.spent_minutes, 10) || 0) + selectedSlot.addMins;
+        task.spent_by_employee = task.spent_by_employee || {};
+        task.spent_by_employee[String(prevEmp.id)] =
+          (parseInt(task.spent_by_employee[String(prevEmp.id)], 10) || 0) + selectedSlot.addMins;
+      }
+      task.status_history = Array.isArray(task.status_history) ? task.status_history : [];
+      task.status_history.push({
+        time: new Date().toTimeString().slice(0, 8),
+        label:
+          "⏳ Отложена (" +
+          displayDeadline +
+          (cleanReason ? ": " + cleanReason : "") +
+          ") · таймер стоп (" +
+          prevEmp.short +
+          ": " +
+          formatDurationSec(prevStats.ownWorkSec, true) +
+          ")"
+      });
+      saveState();
+      enqueueSyncOp({
+        op: "status",
+        issue_id: String(task.id),
+        status_code: "delayed",
+        assignee_id: String(task.assignee_id || currentEmp.id),
+        spent_minutes: selectedSlot.addMins || 0,
+        deadline: targetIso,
+        delay_to: targetIso,
+        comment: cleanReason ? "Отложена (" + displayDeadline + "): " + cleanReason : "Отложена (" + displayDeadline + ")",
+        actor_id: String(currentEmp.id),
+        actor_name: currentEmp.short
+      });
+      closeActionModal();
+      renderTasksView();
+      updateBellBadge();
+      showToast("Заявка #" + task.id + " отложена (" + displayDeadline + ")");
+    });
+    modalBodyEl.appendChild(submitBtn);
   }
 
   // 3. Модальное окно «Передать / Делегировать» (фиксирует время предыдущего исполнителя, останавливает таймер и переводит в «Делегирована»)
