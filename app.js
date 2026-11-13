@@ -3329,7 +3329,14 @@
     var b1 = el("button", "btn-secondary-full", "🌐 Открыть на портале");
     b1.type = "button";
     b1.addEventListener("click", function () {
-      openIssueInOkdesk(task.id);
+      var portalUrl = "https://portal.itsupp.com/tickets/" + encodeURIComponent(task.id);
+      if (tg && typeof tg.openLink === "function") {
+        try {
+          tg.openLink(portalUrl);
+          return;
+        } catch (_e) {}
+      }
+      window.open(portalUrl, "_blank", "noopener,noreferrer");
     });
     kbGrid.appendChild(b1);
 
@@ -3368,6 +3375,13 @@
         tg.openLink(url);
         return;
       } catch (_e) {}
+    }
+    var isIos = typeof navigator !== "undefined" && /iP(hone|ad|od)/i.test(navigator.userAgent || "");
+    var isStandalone = (typeof navigator !== "undefined" && navigator.standalone === true) ||
+      (typeof window !== "undefined" && window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+    if (isIos && isStandalone) {
+      window.location.href = "x-safari-" + url;
+      return;
     }
     window.open(url, "_blank", "noopener,noreferrer");
   }
